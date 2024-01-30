@@ -68,8 +68,6 @@
     href: whats-new-overview.md
   - name: Release notes
     href: release-notes-azure-cli.md
-  - name: Upcoming breaking changes
-    href: upcoming-breaking-changes.md
   - name: MSAL-based Azure CLI
     href: msal-based-azure-cli.md
     displayName: MSAL, ADAL, authentication, encryption, accessTokens, az account get-access-token, breaking change
@@ -117,9 +115,6 @@
     - name: Configure settings
       href: azure-cli-Configuration.md
       displayName: configure, defaults, environment, variables
-    - name: Work with persisted parameters
-      href: param-persist-howto.md
-      displayName: az config persist-param, az config
   - name: Concepts
     items:
     - name: Query command output
@@ -169,6 +164,22 @@
       href: azure-cli-extension-alias.md
 - name: Tutorials
   items:
+  - name: Learn to use the Azure CLI
+    items:
+      - name: 1 - Welcome to the Azure CLI!
+        href: get-started-tutorial-0-before-you-begin.md
+      - name: 2 - Prepare your environment
+        href: get-started-tutorial-1-prepare-environment.md
+        displayName: az account, az group, az config, az init, random IDs
+      - name: 3 - Learn syntax differences for environments
+        href: get-started-tutorial-2-environment-syntax.md
+        displayName: az storage account, az tag, az rest, az vm list, key value pairs, quoting examples, line continuation
+      - name: 4 - Populate variables for scripts
+        href: get-started-tutorial-3-use-variables.md
+        displayName: jq, cat, az keyvault, az storage account, random IDs
+      - name: 5 - Delete resources using a script
+        href: get-started-tutorial-4-delete-resources.md
+        displayName: for-each, az storage account delete
   - name: Work with service principals
     items:  
       - name: 1 - Create a service principal
@@ -185,7 +196,7 @@
         href: azure-cli-sp-tutorial-6.md
       - name: 7 - Reset credentials
         href: azure-cli-sp-tutorial-7.md
-      - name: 8 - Clenup and Troubleshooting
+      - name: 8 - Cleanup and Troubleshooting
         href: azure-cli-sp-tutorial-8.md
   - name: Create virtual machines
     items:
@@ -203,9 +214,6 @@
         href: azure-cli-vm-tutorial-6.md
       - name: 7 - Summary
         href: azure-cli-vm-tutorial-7.md
-  - name: Use persisted parameters
-    href: param-persist-tutorial.md
-    displayName: az config persist-param, az config
 - name: Samples
   items:
   - name: List A - Z

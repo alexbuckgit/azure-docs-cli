@@ -7,18 +7,14 @@ extensionInformation: >-
   > This reference is part of the **scvmm** extension for the Azure CLI (version 2.15.0 or higher). The extension will automatically install the first time you run an **az scvmm vm nic** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Managing the NICs of Arc for SCVMM Virtual Machine.
-status: Preview
-isPreview: true
-previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+status: GA
 sourceType: Extension
 directCommands:
-- uid: az_scvmm_vm_nic_add(scvmm)
+- uid: az_scvmm_vm_nic_add
   name: az scvmm vm nic add
   summary: |-
     Add a network interface card to a virtual machine.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm nic add --name
@@ -73,13 +69,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not wait for the long-running operation to finish.
-- uid: az_scvmm_vm_nic_delete(scvmm)
+- uid: az_scvmm_vm_nic_delete
   name: az scvmm vm nic delete
   summary: |-
     Delete NICs of a virtual machine.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm nic delete --nics
@@ -113,13 +107,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_scvmm_vm_nic_list(scvmm)
+- uid: az_scvmm_vm_nic_list
   name: az scvmm vm nic list
   summary: |-
     Retrieve the list of NICs present in a VM.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm nic list --resource-group
@@ -137,13 +129,11 @@ directCommands:
     name: --vm-name
     summary: |-
       Name of the virtual machine.
-- uid: az_scvmm_vm_nic_show(scvmm)
+- uid: az_scvmm_vm_nic_show
   name: az scvmm vm nic show
   summary: |-
     Get the details of a NIC present in a VM.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm nic show --name
@@ -166,13 +156,11 @@ directCommands:
     name: --vm-name
     summary: |-
       Name of the virtual machine.
-- uid: az_scvmm_vm_nic_update(scvmm)
+- uid: az_scvmm_vm_nic_update
   name: az scvmm vm nic update
   summary: |-
     Update a NIC of a VM.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm nic update --resource-group
@@ -229,13 +217,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not wait for the long-running operation to finish.
-- uid: az_scvmm_vm_nic_wait(scvmm)
+- uid: az_scvmm_vm_nic_wait
   name: az scvmm vm nic wait
   summary: |-
     Place the CLI in a waiting state until a condition of the vm nic is met.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm nic wait --resource-group
@@ -285,12 +271,12 @@ directCommands:
     summary: |-
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
-- az_scvmm_vm_nic_add(scvmm)
-- az_scvmm_vm_nic_delete(scvmm)
-- az_scvmm_vm_nic_list(scvmm)
-- az_scvmm_vm_nic_show(scvmm)
-- az_scvmm_vm_nic_update(scvmm)
-- az_scvmm_vm_nic_wait(scvmm)
+- az_scvmm_vm_nic_add
+- az_scvmm_vm_nic_delete
+- az_scvmm_vm_nic_list
+- az_scvmm_vm_nic_show
+- az_scvmm_vm_nic_update
+- az_scvmm_vm_nic_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -303,7 +289,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

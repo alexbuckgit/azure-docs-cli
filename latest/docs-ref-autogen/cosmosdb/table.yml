@@ -10,7 +10,7 @@ summary: |-
 status: GA
 sourceType: Core and Extension
 directCommands:
-- uid: az_cosmosdb_table_create()
+- uid: az_cosmosdb_table_create
   name: az cosmosdb table create
   summary: |-
     Create an Table under an Azure Cosmos DB account.
@@ -43,7 +43,7 @@ directCommands:
   - name: --throughput
     summary: |-
       The throughput of Table (RU/s). Default value is 400.
-- uid: az_cosmosdb_table_delete()
+- uid: az_cosmosdb_table_delete
   name: az cosmosdb table delete
   summary: |-
     Delete the Table under an Azure Cosmos DB account.
@@ -73,7 +73,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_cosmosdb_table_exists()
+- uid: az_cosmosdb_table_exists
   name: az cosmosdb table exists
   summary: |-
     Checks if an Azure Cosmos DB table exists.
@@ -97,7 +97,7 @@ directCommands:
     name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_cosmosdb_table_list()
+- uid: az_cosmosdb_table_list
   name: az cosmosdb table list
   summary: |-
     List the Tables under an Azure Cosmos DB account.
@@ -116,8 +116,42 @@ directCommands:
     name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
+- uid: az_cosmosdb_table_restore
+  name: az cosmosdb table restore
+  summary: |-
+    Restore a deleted table within the same account.
+  status: GA
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/cosmosdb/_help.py
+  syntax: >-
+    az cosmosdb table restore --account-name
+                              --resource-group
+                              --table-name
+                              [--restore-timestamp]
+  examples:
+  - summary: |-
+      Restore a deleted table within the same account.
+    syntax: az cosmosdb table restore --resource-group resource_group --account-name database_account_name --table-name name_of_table_needs_to_be_restored --restore-timestamp 2020-07-13T16:03:41+0000
+  requiredParameters:
+  - isRequired: true
+    name: --account-name -a
+    summary: |-
+      Cosmosdb account name.
+  - isRequired: true
+    name: --resource-group -g
+    summary: |-
+      Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
+  - isRequired: true
+    name: --table-name -n
+    summary: |-
+      Name of the CosmosDB Table name.
+  optionalParameters:
+  - name: --restore-timestamp -t
+    summary: |-
+      The timestamp to which the Table needs to be restored to.
 - uid: az_cosmosdb_table_restore(cosmosdb-preview)
   name: az cosmosdb table restore
+  extensionSuffix: cosmosdb-preview
   summary: |-
     Restore a deleted table within the same account.
   status: Preview
@@ -150,7 +184,7 @@ directCommands:
     name: --table-name -n
     summary: |-
       Name of the CosmosDB Table name.
-- uid: az_cosmosdb_table_retrieve-latest-backup-time()
+- uid: az_cosmosdb_table_retrieve-latest-backup-time
   name: az cosmosdb table retrieve-latest-backup-time
   summary: |-
     Retrieves latest restorable timestamp for the given table in given region.
@@ -210,7 +244,7 @@ directCommands:
     name: --table-name -n
     summary: |-
       Name of the CosmosDB Table name.
-- uid: az_cosmosdb_table_show()
+- uid: az_cosmosdb_table_show
   name: az cosmosdb table show
   summary: |-
     Show the details of a Table under an Azure Cosmos DB account.
@@ -235,24 +269,25 @@ directCommands:
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
 commands:
-- az_cosmosdb_table_create()
-- az_cosmosdb_table_delete()
-- az_cosmosdb_table_exists()
-- az_cosmosdb_table_list()
+- az_cosmosdb_table_create
+- az_cosmosdb_table_delete
+- az_cosmosdb_table_exists
+- az_cosmosdb_table_list
 - az_cosmosdb_table_restorable-resource
-- az_cosmosdb_table_restorable-resource_list()
+- az_cosmosdb_table_restorable-resource_list
 - az_cosmosdb_table_restorable-resource_list(cosmosdb-preview)
 - az_cosmosdb_table_restorable-table
-- az_cosmosdb_table_restorable-table_list()
+- az_cosmosdb_table_restorable-table_list
 - az_cosmosdb_table_restorable-table_list(cosmosdb-preview)
+- az_cosmosdb_table_restore
 - az_cosmosdb_table_restore(cosmosdb-preview)
-- az_cosmosdb_table_retrieve-latest-backup-time()
+- az_cosmosdb_table_retrieve-latest-backup-time
 - az_cosmosdb_table_retrieve-latest-backup-time(cosmosdb-preview)
-- az_cosmosdb_table_show()
+- az_cosmosdb_table_show
 - az_cosmosdb_table_throughput
-- az_cosmosdb_table_throughput_migrate()
-- az_cosmosdb_table_throughput_show()
-- az_cosmosdb_table_throughput_update()
+- az_cosmosdb_table_throughput_migrate
+- az_cosmosdb_table_throughput_show
+- az_cosmosdb_table_throughput_update
 globalParameters:
 - name: --debug
   summary: |-
@@ -265,7 +300,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

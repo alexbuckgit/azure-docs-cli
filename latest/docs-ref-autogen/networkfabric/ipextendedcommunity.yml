@@ -4,13 +4,13 @@ name: az networkfabric ipextendedcommunity
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **managednetworkfabric** extension for the Azure CLI (version 2.45.0 or higher). The extension will automatically install the first time you run an **az networkfabric ipextendedcommunity** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **managednetworkfabric** extension for the Azure CLI (version 2.49.0 or higher). The extension will automatically install the first time you run an **az networkfabric ipextendedcommunity** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage Ip Extended Community Resource.
 status: GA
 sourceType: Extension
 directCommands:
-- uid: az_networkfabric_ipextendedcommunity_create(managednetworkfabric)
+- uid: az_networkfabric_ipextendedcommunity_create
   name: az networkfabric ipextendedcommunity create
   summary: |-
     Create a Ip Extended Community resource.
@@ -58,7 +58,7 @@ directCommands:
   - name: --tags
     summary: |-
       Resource tags.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_networkfabric_ipextendedcommunity_delete(managednetworkfabric)
+- uid: az_networkfabric_ipextendedcommunity_delete
   name: az networkfabric ipextendedcommunity delete
   summary: |-
     Delete the Ip Extended Community resource.
@@ -91,7 +91,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkfabric_ipextendedcommunity_list(managednetworkfabric)
+- uid: az_networkfabric_ipextendedcommunity_list
   name: az networkfabric ipextendedcommunity list
   summary: |-
     List all Ip Extended Communities in the provided resource group or subscription.
@@ -109,7 +109,7 @@ directCommands:
   - name: --resource-group -g
     summary: |-
       Name of the resource group.
-- uid: az_networkfabric_ipextendedcommunity_show(managednetworkfabric)
+- uid: az_networkfabric_ipextendedcommunity_show
   name: az networkfabric ipextendedcommunity show
   summary: |-
     Show details of the provided Ip Extended Community resource.
@@ -137,7 +137,52 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkfabric_ipextendedcommunity_wait(managednetworkfabric)
+- uid: az_networkfabric_ipextendedcommunity_update
+  name: az networkfabric ipextendedcommunity update
+  summary: |-
+    Update to update certain properties of the IP Extended Community resource.
+  status: GA
+  sourceType: Extension
+  syntax: >-
+    az networkfabric ipextendedcommunity update [--annotation]
+                                                [--ids]
+                                                [--ip-extended-community-rules]
+                                                [--no-wait {0, 1, f, false, n, no, t, true, y, yes}]
+                                                [--resource-group]
+                                                [--resource-name]
+                                                [--subscription]
+                                                [--tags]
+  examples:
+  - summary: |-
+      Update IP Extended Community
+    syntax: az networkfabric ipextendedcommunity update --resource-group "example-rg" --resource-name "example-ipextendedcommunity" --ip-extended-community-rules "[{action:Permit,sequenceNumber:1234,routeTargets:['1024:219','1001:200']}]"
+  optionalParameters:
+  - name: --annotation
+    summary: |-
+      Description for underlying resource.
+  - name: --ids
+    summary: |-
+      One or more resource IDs (space-delimited). It should be a complete resource ID containing all information of 'Resource Id' arguments. You should provide either --ids or other 'Resource Id' arguments.
+  - name: --ip-extended-community-rules
+    summary: |-
+      List of IP Extended Community Rules.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
+  - name: --no-wait
+    parameterValueGroup: "0, 1, f, false, n, no, t, true, y, yes"
+    summary: |-
+      Do not wait for the long-running operation to finish.
+  - name: --resource-group -g
+    summary: |-
+      Name of the resource group.
+  - name: --resource-name
+    summary: |-
+      Name of the IP Extended Community.
+  - name: --subscription
+    summary: |-
+      Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
+  - name: --tags
+    summary: |-
+      Resource tags  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
+- uid: az_networkfabric_ipextendedcommunity_wait
   name: az networkfabric ipextendedcommunity wait
   summary: |-
     Place the CLI in a waiting state until a condition is met.
@@ -196,11 +241,12 @@ directCommands:
     summary: |-
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
-- az_networkfabric_ipextendedcommunity_create(managednetworkfabric)
-- az_networkfabric_ipextendedcommunity_delete(managednetworkfabric)
-- az_networkfabric_ipextendedcommunity_list(managednetworkfabric)
-- az_networkfabric_ipextendedcommunity_show(managednetworkfabric)
-- az_networkfabric_ipextendedcommunity_wait(managednetworkfabric)
+- az_networkfabric_ipextendedcommunity_create
+- az_networkfabric_ipextendedcommunity_delete
+- az_networkfabric_ipextendedcommunity_list
+- az_networkfabric_ipextendedcommunity_show
+- az_networkfabric_ipextendedcommunity_update
+- az_networkfabric_ipextendedcommunity_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -213,7 +259,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

@@ -10,29 +10,30 @@ summary: |-
 status: GA
 sourceType: Extension
 directCommands:
-- uid: az_connectedvmware_vm_create(connectedvmware)
+- uid: az_connectedvmware_vm_create
   name: az connectedvmware vm create
   summary: |-
-    Create vm in vcenter from existing vm template.
+    Create VMInstance resource.
   status: GA
   sourceType: Extension
   syntax: >-
-    az connectedvmware vm create --custom-location
-                                 --name
-                                 --resource-group
-                                 [--admin-password]
+    az connectedvmware vm create [--admin-password]
                                  [--admin-username]
                                  [--cluster]
+                                 [--custom-location]
                                  [--datastore]
                                  [--disk]
                                  [--host]
                                  [--inventory-item]
                                  [--location]
+                                 [--machine-id]
                                  [--memory-size]
+                                 [--name]
                                  [--nic]
                                  [--no-wait]
                                  [--num-CPUs]
                                  [--num-cores-per-socket]
+                                 [--resource-group]
                                  [--resource-pool]
                                  [--tags]
                                  [--vcenter]
@@ -41,19 +42,18 @@ directCommands:
   - summary: |-
       Create vm
     syntax: az connectedvmware vm create --custom-location "custom location name"                --location "location name" --inventory-item "name or id of the inventory item"                --name "virtual machine name" --resource-group "resource group name"                --vcenter "name or id of the vcenter"
-  requiredParameters:
-  - isRequired: true
-    name: --custom-location -c
-    summary: |-
-      Name or ID of the custom location that will manage this resource.
-  - isRequired: true
-    name: --name -n
-    summary: |-
-      Name of the resource.
-  - isRequired: true
-    name: --resource-group -g
-    summary: |-
-      Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
+  - summary: |-
+      Enable an exiting VM to azure.
+    syntax: az connectedvmware vm create --subscription contoso-sub                --resource-group contoso-rg --location eastus --custom-location contoso-cl                --inventory-item 01234567-0123-0123-0123-0123456789ab --name contoso-vm
+  - summary: |-
+      Link an HCRP Machine to a vCenter in another subscription using the machine id.
+    syntax: az connectedvmware vm create                --machine-id /subscriptions/01234567-0123-0123-0123-0123456789ab/resourceGroups/contoso-rg/providers/Microsoft.HybridCompute/machines/contoso-vm                --vcenter /subscriptions/fedcba98-7654-3210-0123-456789abcdef/resourceGroups/contoso-rg/providers/Microsoft.HybridCompute/vcenters/contoso-vcenter
+  - summary: |-
+      Link an HCRP Machine to a vCenter in another subscription using the machine name.
+    syntax: az connectedvmware vm create                 --resource-group contoso-rg --location eastus --name hcrp-contoso-machine                 --vcenter /subscriptions/fedcba98-7654-3210-0123-456789abcdef/resourceGroups/contoso-rg/providers/Microsoft.HybridCompute/vcenters/contoso-vcenter
+  - summary: |-
+      Link an HCRP Machine to a vCenter in the same subscription and resource group.
+    syntax: az connectedvmware vm create                 --resource-group contoso-rg --location eastus --name hcrp-contoso-machine                 --vcenter contoso-vcenter
   optionalParameters:
   - name: --admin-password
     summary: |-
@@ -64,12 +64,15 @@ directCommands:
   - name: --cluster
     summary: |-
       Name or ID of the cluster for deploying the VM.
+  - name: --custom-location -c
+    summary: |-
+      Name or ID of the custom location that will manage this resource.
   - name: --datastore
     summary: |-
       Name or ID of the datastore for deploying the VM.
   - name: --disk
     summary: |-
-      Disk overrides for the vm. Usage: --disk name=<> disk_size=<> disk_mode=<> controller_key=<> device-key=<> unit_number=<>.
+      Disk overrides for the vm. Usage: --disk name=<> disk-size=<> disk-mode=<> controller-key=<> device-key=<> unit-number=<>.
   - name: --host
     summary: |-
       Name or ID of the host for deploying the VM.
@@ -79,9 +82,15 @@ directCommands:
   - name: --location -l
     summary: |-
       Location. Values from: `az account list-locations`. You can configure the default location using `az configure --defaults location=<location>`.
+  - name: --machine-id -m
+    summary: |-
+      ARM ID of the Microsoft.HybridCompute Machine resource which you want to link to vCenter.
   - name: --memory-size
     summary: |-
       Desired memory size in MBs for the vm.
+  - name: --name -n
+    summary: |-
+      Name of the HCRP Machine resource.
   - name: --nic
     summary: |-
       Network overrides for the vm. Usage: --nic name=<> network=<> nic-type=<> power-on-boot=<> allocation-method=<> ip-address=<> subnet-mask=<> device-key=<> gateway=<command separated list of gateways>.
@@ -95,6 +104,9 @@ directCommands:
   - name: --num-cores-per-socket
     summary: |-
       Number of desired cores per socket for the vm.
+  - name: --resource-group -g
+    summary: |-
+      Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
   - name: --resource-pool
     summary: |-
       Name or ID of the resource pool for deploying the vm.
@@ -107,7 +119,7 @@ directCommands:
   - name: --vm-template
     summary: |-
       Name or ID of the vm template for deploying the vm.
-- uid: az_connectedvmware_vm_delete(connectedvmware)
+- uid: az_connectedvmware_vm_delete
   name: az connectedvmware vm delete
   summary: |-
     Delete vm resource.
@@ -157,7 +169,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_connectedvmware_vm_list(connectedvmware)
+- uid: az_connectedvmware_vm_list
   name: az connectedvmware vm list
   summary: |-
     Retrieve a list of vm of given resource group.
@@ -174,7 +186,7 @@ directCommands:
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_connectedvmware_vm_restart(connectedvmware)
+- uid: az_connectedvmware_vm_restart
   name: az connectedvmware vm restart
   summary: |-
     Restart vm resource.
@@ -207,7 +219,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_connectedvmware_vm_show(connectedvmware)
+- uid: az_connectedvmware_vm_show
   name: az connectedvmware vm show
   summary: |-
     Get details of a vm by id, resource-group, reource pool name or subscription.
@@ -235,7 +247,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_connectedvmware_vm_start(connectedvmware)
+- uid: az_connectedvmware_vm_start
   name: az connectedvmware vm start
   summary: |-
     Start vm resource.
@@ -268,7 +280,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_connectedvmware_vm_stop(connectedvmware)
+- uid: az_connectedvmware_vm_stop
   name: az connectedvmware vm stop
   summary: |-
     Stop vm resource.
@@ -306,7 +318,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_connectedvmware_vm_update(connectedvmware)
+- uid: az_connectedvmware_vm_update
   name: az connectedvmware vm update
   summary: |-
     Update vm resource.
@@ -356,35 +368,35 @@ directCommands:
     summary: |-
       Space-separated tags: key[=value] [key[=value] ...]. Use "" to clear existing tags.
 commands:
-- az_connectedvmware_vm_create(connectedvmware)
-- az_connectedvmware_vm_delete(connectedvmware)
+- az_connectedvmware_vm_create
+- az_connectedvmware_vm_delete
 - az_connectedvmware_vm_disk
-- az_connectedvmware_vm_disk_add(connectedvmware)
-- az_connectedvmware_vm_disk_delete(connectedvmware)
-- az_connectedvmware_vm_disk_list(connectedvmware)
-- az_connectedvmware_vm_disk_show(connectedvmware)
-- az_connectedvmware_vm_disk_update(connectedvmware)
+- az_connectedvmware_vm_disk_add
+- az_connectedvmware_vm_disk_delete
+- az_connectedvmware_vm_disk_list
+- az_connectedvmware_vm_disk_show
+- az_connectedvmware_vm_disk_update
 - az_connectedvmware_vm_extension
-- az_connectedvmware_vm_extension_create(connectedvmware)
-- az_connectedvmware_vm_extension_delete(connectedvmware)
-- az_connectedvmware_vm_extension_list(connectedvmware)
-- az_connectedvmware_vm_extension_show(connectedvmware)
-- az_connectedvmware_vm_extension_update(connectedvmware)
+- az_connectedvmware_vm_extension_create
+- az_connectedvmware_vm_extension_delete
+- az_connectedvmware_vm_extension_list
+- az_connectedvmware_vm_extension_show
+- az_connectedvmware_vm_extension_update
 - az_connectedvmware_vm_guest-agent
-- az_connectedvmware_vm_guest-agent_enable(connectedvmware)
-- az_connectedvmware_vm_guest-agent_show(connectedvmware)
-- az_connectedvmware_vm_list(connectedvmware)
+- az_connectedvmware_vm_guest-agent_enable
+- az_connectedvmware_vm_guest-agent_show
+- az_connectedvmware_vm_list
 - az_connectedvmware_vm_nic
-- az_connectedvmware_vm_nic_add(connectedvmware)
-- az_connectedvmware_vm_nic_delete(connectedvmware)
-- az_connectedvmware_vm_nic_list(connectedvmware)
-- az_connectedvmware_vm_nic_show(connectedvmware)
-- az_connectedvmware_vm_nic_update(connectedvmware)
-- az_connectedvmware_vm_restart(connectedvmware)
-- az_connectedvmware_vm_show(connectedvmware)
-- az_connectedvmware_vm_start(connectedvmware)
-- az_connectedvmware_vm_stop(connectedvmware)
-- az_connectedvmware_vm_update(connectedvmware)
+- az_connectedvmware_vm_nic_add
+- az_connectedvmware_vm_nic_delete
+- az_connectedvmware_vm_nic_list
+- az_connectedvmware_vm_nic_show
+- az_connectedvmware_vm_nic_update
+- az_connectedvmware_vm_restart
+- az_connectedvmware_vm_show
+- az_connectedvmware_vm_start
+- az_connectedvmware_vm_stop
+- az_connectedvmware_vm_update
 globalParameters:
 - name: --debug
   summary: |-
@@ -397,7 +409,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

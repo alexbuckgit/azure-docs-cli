@@ -4,17 +4,21 @@ name: az networkcloud baremetalmachine
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **networkcloud** extension for the Azure CLI (version 2.49.0 or higher). The extension will automatically install the first time you run an **az networkcloud baremetalmachine** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **networkcloud** extension for the Azure CLI (version 2.51.0 or higher). The extension will automatically install the first time you run an **az networkcloud baremetalmachine** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage bare metal machine.
-status: GA
+status: Preview
+isPreview: true
+previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
 sourceType: Extension
 directCommands:
-- uid: az_networkcloud_baremetalmachine_cordon(networkcloud)
+- uid: az_networkcloud_baremetalmachine_cordon
   name: az networkcloud baremetalmachine cordon
   summary: |-
     Cordon the provided bare metal machine's Kubernetes node.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud baremetalmachine cordon [--bare-metal-machine-name]
@@ -49,13 +53,18 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkcloud_baremetalmachine_list(networkcloud)
+- uid: az_networkcloud_baremetalmachine_list
   name: az networkcloud baremetalmachine list
   summary: |-
     List bare metal machines in the provided resource group or subscription.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
-  syntax: az networkcloud baremetalmachine list [--resource-group]
+  syntax: >-
+    az networkcloud baremetalmachine list [--max-items]
+                                          [--next-token]
+                                          [--resource-group]
   examples:
   - summary: |-
       List bare metal machines for resource group
@@ -64,14 +73,22 @@ directCommands:
       List bare metal machines for subscription
     syntax: az networkcloud baremetalmachine list
   optionalParameters:
+  - name: --max-items
+    summary: |-
+      Total number of items to return in the command's output. If the total number of items available is more than the value specified, a token is provided in the command's output. To resume pagination, provide the token value in `--next-token` argument of a subsequent command.
+  - name: --next-token
+    summary: |-
+      Token to specify where to start paginating. This is the token value from a previously truncated response.
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_networkcloud_baremetalmachine_power-off(networkcloud)
+- uid: az_networkcloud_baremetalmachine_power-off
   name: az networkcloud baremetalmachine power-off
   summary: |-
     Power off the provided bare metal machine.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud baremetalmachine power-off [--bare-metal-machine-name]
@@ -106,11 +123,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkcloud_baremetalmachine_reimage(networkcloud)
+- uid: az_networkcloud_baremetalmachine_reimage
   name: az networkcloud baremetalmachine reimage
   summary: |-
     Reimage the provided bare metal machine.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud baremetalmachine reimage [--bare-metal-machine-name]
@@ -139,11 +158,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkcloud_baremetalmachine_replace(networkcloud)
+- uid: az_networkcloud_baremetalmachine_replace
   name: az networkcloud baremetalmachine replace
   summary: |-
     Replace the provided bare metal machine.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud baremetalmachine replace [--bare-metal-machine-name]
@@ -192,11 +213,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkcloud_baremetalmachine_restart(networkcloud)
+- uid: az_networkcloud_baremetalmachine_restart
   name: az networkcloud baremetalmachine restart
   summary: |-
     Restart the provided bare metal machine.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud baremetalmachine restart [--bare-metal-machine-name]
@@ -225,11 +248,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkcloud_baremetalmachine_run-command(networkcloud)
+- uid: az_networkcloud_baremetalmachine_run-command
   name: az networkcloud baremetalmachine run-command
   summary: |-
     Run the command or the script on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud baremetalmachine run-command --limit-time-seconds
@@ -277,11 +302,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkcloud_baremetalmachine_run-data-extract(networkcloud)
+- uid: az_networkcloud_baremetalmachine_run-data-extract
   name: az networkcloud baremetalmachine run-data-extract
   summary: |-
     Run one or more data extractions on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud baremetalmachine run-data-extract --commands
@@ -325,11 +352,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkcloud_baremetalmachine_run-read-command(networkcloud)
+- uid: az_networkcloud_baremetalmachine_run-read-command
   name: az networkcloud baremetalmachine run-read-command
   summary: |-
     Run one or more read-only commands on the provided bare metal machine. The URL to storage account with the command execution results and the command exit code can be retrieved from the operation status API once available.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud baremetalmachine run-read-command --commands
@@ -373,11 +402,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkcloud_baremetalmachine_show(networkcloud)
+- uid: az_networkcloud_baremetalmachine_show
   name: az networkcloud baremetalmachine show
   summary: |-
     Get properties of the provided bare metal machine.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud baremetalmachine show [--bare-metal-machine-name]
@@ -401,11 +432,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkcloud_baremetalmachine_start(networkcloud)
+- uid: az_networkcloud_baremetalmachine_start
   name: az networkcloud baremetalmachine start
   summary: |-
     Start the provided bare metal machine.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud baremetalmachine start [--bare-metal-machine-name]
@@ -434,11 +467,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkcloud_baremetalmachine_uncordon(networkcloud)
+- uid: az_networkcloud_baremetalmachine_uncordon
   name: az networkcloud baremetalmachine uncordon
   summary: |-
     Uncordon the provided bare metal machine's Kubernetes node.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud baremetalmachine uncordon [--bare-metal-machine-name]
@@ -467,11 +502,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkcloud_baremetalmachine_update(networkcloud)
+- uid: az_networkcloud_baremetalmachine_update
   name: az networkcloud baremetalmachine update
   summary: |-
     Update properties of the provided bare metal machine, or update tags associated with the bare metal machine. Properties and tag updates can be done independently.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud baremetalmachine update [--bare-metal-machine-name]
@@ -508,11 +545,13 @@ directCommands:
   - name: --tags
     summary: |-
       The Azure resource tags that will replace the existing ones.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_networkcloud_baremetalmachine_wait(networkcloud)
+- uid: az_networkcloud_baremetalmachine_wait
   name: az networkcloud baremetalmachine wait
   summary: |-
     Place the CLI in a waiting state until a condition is met.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud baremetalmachine wait [--bare-metal-machine-name]
@@ -567,20 +606,20 @@ directCommands:
     summary: |-
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
-- az_networkcloud_baremetalmachine_cordon(networkcloud)
-- az_networkcloud_baremetalmachine_list(networkcloud)
-- az_networkcloud_baremetalmachine_power-off(networkcloud)
-- az_networkcloud_baremetalmachine_reimage(networkcloud)
-- az_networkcloud_baremetalmachine_replace(networkcloud)
-- az_networkcloud_baremetalmachine_restart(networkcloud)
-- az_networkcloud_baremetalmachine_run-command(networkcloud)
-- az_networkcloud_baremetalmachine_run-data-extract(networkcloud)
-- az_networkcloud_baremetalmachine_run-read-command(networkcloud)
-- az_networkcloud_baremetalmachine_show(networkcloud)
-- az_networkcloud_baremetalmachine_start(networkcloud)
-- az_networkcloud_baremetalmachine_uncordon(networkcloud)
-- az_networkcloud_baremetalmachine_update(networkcloud)
-- az_networkcloud_baremetalmachine_wait(networkcloud)
+- az_networkcloud_baremetalmachine_cordon
+- az_networkcloud_baremetalmachine_list
+- az_networkcloud_baremetalmachine_power-off
+- az_networkcloud_baremetalmachine_reimage
+- az_networkcloud_baremetalmachine_replace
+- az_networkcloud_baremetalmachine_restart
+- az_networkcloud_baremetalmachine_run-command
+- az_networkcloud_baremetalmachine_run-data-extract
+- az_networkcloud_baremetalmachine_run-read-command
+- az_networkcloud_baremetalmachine_show
+- az_networkcloud_baremetalmachine_start
+- az_networkcloud_baremetalmachine_uncordon
+- az_networkcloud_baremetalmachine_update
+- az_networkcloud_baremetalmachine_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -593,7 +632,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

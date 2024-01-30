@@ -4,17 +4,21 @@ name: az networkcloud l3network
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **networkcloud** extension for the Azure CLI (version 2.49.0 or higher). The extension will automatically install the first time you run an **az networkcloud l3network** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **networkcloud** extension for the Azure CLI (version 2.51.0 or higher). The extension will automatically install the first time you run an **az networkcloud l3network** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage layer 3 (l3) network.
-status: GA
+status: Preview
+isPreview: true
+previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
 sourceType: Extension
 directCommands:
-- uid: az_networkcloud_l3network_create(networkcloud)
+- uid: az_networkcloud_l3network_create
   name: az networkcloud l3network create
   summary: |-
     Create a new layer 3 (L3) network or update the properties of the existing network.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud l3network create --extended-location
@@ -79,11 +83,13 @@ directCommands:
   - name: --tags
     summary: |-
       Resource tags.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_networkcloud_l3network_delete(networkcloud)
+- uid: az_networkcloud_l3network_delete
   name: az networkcloud l3network delete
   summary: |-
     Delete the provided layer 3 (L3) network.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud l3network delete [--ids]
@@ -117,13 +123,18 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_networkcloud_l3network_list(networkcloud)
+- uid: az_networkcloud_l3network_list
   name: az networkcloud l3network list
   summary: |-
     List layer 3 (L3) networks in the provided resource group or subscription.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
-  syntax: az networkcloud l3network list [--resource-group]
+  syntax: >-
+    az networkcloud l3network list [--max-items]
+                                   [--next-token]
+                                   [--resource-group]
   examples:
   - summary: |-
       List L3 networks for subscription
@@ -132,14 +143,22 @@ directCommands:
       List L3networks for resource group
     syntax: az networkcloud l3network list --resource-group "resourcegroupname"
   optionalParameters:
+  - name: --max-items
+    summary: |-
+      Total number of items to return in the command's output. If the total number of items available is more than the value specified, a token is provided in the command's output. To resume pagination, provide the token value in `--next-token` argument of a subsequent command.
+  - name: --next-token
+    summary: |-
+      Token to specify where to start paginating. This is the token value from a previously truncated response.
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_networkcloud_l3network_show(networkcloud)
+- uid: az_networkcloud_l3network_show
   name: az networkcloud l3network show
   summary: |-
     Get properties of the provided layer 3 (L3) network.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud l3network show [--ids]
@@ -163,11 +182,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkcloud_l3network_update(networkcloud)
+- uid: az_networkcloud_l3network_update
   name: az networkcloud l3network update
   summary: |-
     Update tags associated with the provided layer 3 (L3) network.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud l3network update [--ids]
@@ -195,11 +216,13 @@ directCommands:
   - name: --tags
     summary: |-
       The Azure resource tags that will replace the existing ones.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_networkcloud_l3network_wait(networkcloud)
+- uid: az_networkcloud_l3network_wait
   name: az networkcloud l3network wait
   summary: |-
     Place the CLI in a waiting state until a condition is met.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud l3network wait [--created]
@@ -254,12 +277,12 @@ directCommands:
     summary: |-
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
-- az_networkcloud_l3network_create(networkcloud)
-- az_networkcloud_l3network_delete(networkcloud)
-- az_networkcloud_l3network_list(networkcloud)
-- az_networkcloud_l3network_show(networkcloud)
-- az_networkcloud_l3network_update(networkcloud)
-- az_networkcloud_l3network_wait(networkcloud)
+- az_networkcloud_l3network_create
+- az_networkcloud_l3network_delete
+- az_networkcloud_l3network_list
+- az_networkcloud_l3network_show
+- az_networkcloud_l3network_update
+- az_networkcloud_l3network_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -272,7 +295,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

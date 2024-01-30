@@ -4,17 +4,21 @@ name: az eventgrid system-topic event-subscription
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **eventgrid** extension for the Azure CLI (version 2.0.49 or higher). The extension will automatically install the first time you run an **az eventgrid system-topic event-subscription** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **eventgrid** extension for the Azure CLI (version 2.51.0 or higher). The extension will automatically install the first time you run an **az eventgrid system-topic event-subscription** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage event subscriptions of system topic.
-status: GA
+status: Preview
+isPreview: true
+previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
 sourceType: Extension
 directCommands:
-- uid: az_eventgrid_system-topic_event-subscription_create(eventgrid)
+- uid: az_eventgrid_system-topic_event-subscription_create
   name: az eventgrid system-topic event-subscription create
   summary: |-
     Create a new event subscription for a system topic.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid system-topic event-subscription create --name
@@ -169,11 +173,13 @@ directCommands:
   - name: --subject-ends-with
     summary: |-
       An optional string to filter events for an event subscription based on a suffix. Wildcard characters are not supported.
-- uid: az_eventgrid_system-topic_event-subscription_delete(eventgrid)
+- uid: az_eventgrid_system-topic_event-subscription_delete
   name: az eventgrid system-topic event-subscription delete
   summary: |-
     Delete an event subscription of a system topic.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid system-topic event-subscription delete --name
@@ -198,11 +204,13 @@ directCommands:
     name: --system-topic-name
     summary: |-
       Name of the system topic.
-- uid: az_eventgrid_system-topic_event-subscription_list(eventgrid)
+- uid: az_eventgrid_system-topic_event-subscription_list
   name: az eventgrid system-topic event-subscription list
   summary: |-
     List event subscriptions of a specific system topic.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid system-topic event-subscription list --resource-group
@@ -225,11 +233,13 @@ directCommands:
   - name: --odata-query
     summary: |-
       The query used to filter the results using OData syntax.
-- uid: az_eventgrid_system-topic_event-subscription_show(eventgrid)
+- uid: az_eventgrid_system-topic_event-subscription_show
   name: az eventgrid system-topic event-subscription show
   summary: |-
     Get the details of an event subscription of a system topic.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid system-topic event-subscription show --name
@@ -261,11 +271,13 @@ directCommands:
     parameterValueGroup: "false, true"
     summary: |-
       Specify to indicate whether the full endpoint URL should be returned. True if flag present.
-- uid: az_eventgrid_system-topic_event-subscription_update(eventgrid)
+- uid: az_eventgrid_system-topic_event-subscription_update
   name: az eventgrid system-topic event-subscription update
   summary: |-
     Update an event subscription of a system topic.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid system-topic event-subscription update --name
@@ -369,11 +381,11 @@ directCommands:
     summary: |-
       An optional string to filter events for an event subscription based on a suffix. Wildcard characters are not supported.
 commands:
-- az_eventgrid_system-topic_event-subscription_create(eventgrid)
-- az_eventgrid_system-topic_event-subscription_delete(eventgrid)
-- az_eventgrid_system-topic_event-subscription_list(eventgrid)
-- az_eventgrid_system-topic_event-subscription_show(eventgrid)
-- az_eventgrid_system-topic_event-subscription_update(eventgrid)
+- az_eventgrid_system-topic_event-subscription_create
+- az_eventgrid_system-topic_event-subscription_delete
+- az_eventgrid_system-topic_event-subscription_list
+- az_eventgrid_system-topic_event-subscription_show
+- az_eventgrid_system-topic_event-subscription_update
 globalParameters:
 - name: --debug
   summary: |-
@@ -386,7 +398,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

@@ -1,21 +1,18 @@
 ### YamlMime:AzureCLIGroup
 uid: az_containerapp_ingress_traffic
 name: az containerapp ingress traffic
-extensionInformation: >-
-  > [!NOTE]
-
-  > This reference is part of the **containerapp** extension for the Azure CLI (version 2.45.0 or higher). The extension will automatically install the first time you run an **az containerapp ingress traffic** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Commands to manage traffic-splitting.
 status: GA
-sourceType: Extension
+sourceType: Core
 directCommands:
-- uid: az_containerapp_ingress_traffic_set(containerapp)
+- uid: az_containerapp_ingress_traffic_set
   name: az containerapp ingress traffic set
   summary: |-
     Configure traffic-splitting for a container app.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp ingress traffic set [--ids]
                                         [--label-weight]
@@ -27,16 +24,16 @@ directCommands:
   examples:
   - summary: |-
       Route 100% of a container app's traffic to its latest revision.
-    syntax: az containerapp ingress traffic set -n MyContainerapp -g MyResourceGroup --revision-weight latest=100
+    syntax: az containerapp ingress traffic set -n my-containerapp -g MyResourceGroup --revision-weight latest=100
   - summary: |-
       Split a container app's traffic between two revisions.
-    syntax: az containerapp ingress traffic set -n MyContainerapp -g MyResourceGroup --revision-weight latest=80 MyRevisionName=20
+    syntax: az containerapp ingress traffic set -n my-containerapp -g MyResourceGroup --revision-weight latest=80 MyRevisionName=20
   - summary: |-
       Split a container app's traffic between two labels.
-    syntax: az containerapp ingress traffic set -n MyContainerapp -g MyResourceGroup --label-weight myLabel=80 myLabel2=20
+    syntax: az containerapp ingress traffic set -n my-containerapp -g MyResourceGroup --label-weight myLabel=80 myLabel2=20
   - summary: |-
       Split a container app's traffic between a label and a revision.
-    syntax: az containerapp ingress traffic set -n MyContainerapp -g MyResourceGroup --revision-weight latest=80 --label-weight myLabel=20
+    syntax: az containerapp ingress traffic set -n my-containerapp -g MyResourceGroup --revision-weight latest=80 --label-weight myLabel=20
   optionalParameters:
   - name: --ids
     summary: |-
@@ -61,12 +58,13 @@ directCommands:
       A list of revision weight(s) for the container app. Space-separated values in 'revision_name=weight' format. For latest revision, use 'latest=weight'.
     isDeprecated: true
     deprecateInfo: Option '--traffic-weight' has been deprecated and will be removed in a future release. Use '--revision-weight' instead.
-- uid: az_containerapp_ingress_traffic_show(containerapp)
+- uid: az_containerapp_ingress_traffic_show
   name: az containerapp ingress traffic show
   summary: |-
     Show traffic-splitting configuration for a container app.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp ingress traffic show [--ids]
                                          [--name]
@@ -75,7 +73,7 @@ directCommands:
   examples:
   - summary: |-
       Show a container app's ingress traffic configuration.
-    syntax: az containerapp ingress traffic show -n MyContainerapp -g MyResourceGroup
+    syntax: az containerapp ingress traffic show -n my-containerapp -g MyResourceGroup
   optionalParameters:
   - name: --ids
     summary: |-
@@ -90,8 +88,8 @@ directCommands:
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
 commands:
-- az_containerapp_ingress_traffic_set(containerapp)
-- az_containerapp_ingress_traffic_show(containerapp)
+- az_containerapp_ingress_traffic_set
+- az_containerapp_ingress_traffic_show
 globalParameters:
 - name: --debug
   summary: |-
@@ -104,7 +102,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query
@@ -117,4 +115,5 @@ globalParameters:
   summary: |-
     Increase logging verbosity. Use --debug for full debug logs.
 metadata:
+  ms.date: 11/28/2023
   description: Commands to manage traffic-splitting.

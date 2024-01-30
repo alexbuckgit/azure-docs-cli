@@ -12,7 +12,7 @@ description: |-
 status: GA
 sourceType: Core and Extension
 directCommands:
-- uid: az_eventgrid_event-subscription_create()
+- uid: az_eventgrid_event-subscription_create
   name: az eventgrid event-subscription create
   summary: |-
     Create a new event subscription.
@@ -327,7 +327,9 @@ directCommands:
   extensionSuffix: eventgrid
   summary: |-
     Create a new event subscription.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid event-subscription create --name
@@ -580,7 +582,7 @@ directCommands:
   - name: --subject-ends-with
     summary: |-
       An optional string to filter events for an event subscription based on a suffix. Wildcard characters are not supported.
-- uid: az_eventgrid_event-subscription_delete()
+- uid: az_eventgrid_event-subscription_delete
   name: az eventgrid event-subscription delete
   summary: |-
     Delete an event subscription.
@@ -643,7 +645,9 @@ directCommands:
   extensionSuffix: eventgrid
   summary: |-
     Delete an event subscription.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid event-subscription delete --name
@@ -696,7 +700,7 @@ directCommands:
       For storage account:        --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.Storage/storageaccounts/sa1
       For EventGrid domain:       --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/domains/d1
       For EventGrid domain topic: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/domains/d1/topics/t1.
-- uid: az_eventgrid_event-subscription_list()
+- uid: az_eventgrid_event-subscription_list
   name: az eventgrid event-subscription list
   summary: |-
     List event subscriptions.
@@ -800,7 +804,9 @@ directCommands:
     2. To list by a topic-type (e.g. storage accounts), specify the --topic-type parameter along with --location (e.g. "westus2") parameter. For global topic types (e.g. "Microsoft.Resources.Subscriptions"), specify the location value as "global".
     3. To list all event subscriptions in a region (across all topic types), specify only the --location parameter.
     4. For both #2 and #3 above, to filter only by a resource group, you can additionally specify the --resource-group parameter.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid event-subscription list [--location]
@@ -880,7 +886,7 @@ directCommands:
           --resource-group TestRG --topic-type-name Microsoft.Storage.StorageAccounts --location westus2
       Example 2: List all event subscriptions on Azure subscriptions
           --topic-type-name Microsoft.Resources.Subscriptions --location global.
-- uid: az_eventgrid_event-subscription_show()
+- uid: az_eventgrid_event-subscription_show
   name: az eventgrid event-subscription show
   summary: |-
     Get the details of an event subscription.
@@ -951,7 +957,9 @@ directCommands:
   extensionSuffix: eventgrid
   summary: |-
     Get the details of an event subscription.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid event-subscription show --name
@@ -1000,7 +1008,7 @@ directCommands:
       For storage account:        --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.Storage/storageaccounts/sa1
       For EventGrid domain:       --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/domains/d1
       For EventGrid domain topic: --source-resource-id /subscriptions/{SubID}/resourceGroups/rg1/providers/Microsoft.EventGrid/domains/d1/topics/t1.
-- uid: az_eventgrid_event-subscription_update()
+- uid: az_eventgrid_event-subscription_update
   name: az eventgrid event-subscription update
   summary: |-
     Update an event subscription.
@@ -1206,7 +1214,9 @@ directCommands:
   extensionSuffix: eventgrid
   summary: |-
     Update an event subscription.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid event-subscription update --name
@@ -1361,15 +1371,15 @@ directCommands:
     summary: |-
       An optional string to filter events for an event subscription based on a suffix. Wildcard characters are not supported.
 commands:
-- az_eventgrid_event-subscription_create()
+- az_eventgrid_event-subscription_create
 - az_eventgrid_event-subscription_create(eventgrid)
-- az_eventgrid_event-subscription_delete()
+- az_eventgrid_event-subscription_delete
 - az_eventgrid_event-subscription_delete(eventgrid)
-- az_eventgrid_event-subscription_list()
+- az_eventgrid_event-subscription_list
 - az_eventgrid_event-subscription_list(eventgrid)
-- az_eventgrid_event-subscription_show()
+- az_eventgrid_event-subscription_show
 - az_eventgrid_event-subscription_show(eventgrid)
-- az_eventgrid_event-subscription_update()
+- az_eventgrid_event-subscription_update
 - az_eventgrid_event-subscription_update(eventgrid)
 globalParameters:
 - name: --debug
@@ -1383,7 +1393,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

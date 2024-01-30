@@ -6,7 +6,7 @@ summary: |-
 status: GA
 sourceType: Core
 directCommands:
-- uid: az_batch_account_identity_assign()
+- uid: az_batch_account_identity_assign
   name: az batch account identity assign
   summary: |-
     Add managed identities to an existing batch account.
@@ -41,7 +41,7 @@ directCommands:
   - name: --user-assigned
     summary: |-
       User Assigned Identity ids to be used for batch account. Check out help for more examples.
-- uid: az_batch_account_identity_remove()
+- uid: az_batch_account_identity_remove
   name: az batch account identity remove
   summary: |-
     Remove managed identities from an existing batch account.
@@ -84,10 +84,12 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_batch_account_identity_show()
+- uid: az_batch_account_identity_show
   name: az batch account identity show
   summary: |-
     Display managed identities of a batch account.
+  description: |-
+    [WARNING] The output includes secrets that you must protect. Be sure that you do not include these secrets in your source control. Also verify that no secrets are present in the logs of your command or script. For additional information, see http://aka.ms/clisecrets.
   status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/batch/_help.py
@@ -108,9 +110,9 @@ directCommands:
     summary: |-
       Name of the resource group. If not specified will display currently set account.
 commands:
-- az_batch_account_identity_assign()
-- az_batch_account_identity_remove()
-- az_batch_account_identity_show()
+- az_batch_account_identity_assign
+- az_batch_account_identity_remove
+- az_batch_account_identity_show
 globalParameters:
 - name: --debug
   summary: |-
@@ -123,7 +125,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query
@@ -136,5 +138,5 @@ globalParameters:
   summary: |-
     Increase logging verbosity. Use --debug for full debug logs.
 metadata:
-  ms.date: 07/07/2023
+  ms.date: 11/08/2023
   description: Manage identities of a batch account.

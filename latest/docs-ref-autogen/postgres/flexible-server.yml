@@ -10,7 +10,7 @@ summary: |-
 status: GA
 sourceType: Core and Extension
 directCommands:
-- uid: az_postgres_flexible-server_connect(rdbms-connect)
+- uid: az_postgres_flexible-server_connect
   name: az postgres flexible-server connect
   summary: |-
     Connect to a flexible server.
@@ -47,7 +47,7 @@ directCommands:
       A query to run against the flexible server.
     isDeprecated: true
     deprecateInfo: Argument 'querytext' has been deprecated and will be removed in a future release. Use 'execute' instead.
-- uid: az_postgres_flexible-server_create()
+- uid: az_postgres_flexible-server_create
   name: az postgres flexible-server create
   summary: |-
     Create a PostgreSQL flexible server.
@@ -71,10 +71,12 @@ directCommands:
                                        [--geo-redundant-backup {Disabled, Enabled}]
                                        [--high-availability {Disabled, SameZone, ZoneRedundant}]
                                        [--identity]
+                                       [--iops]
                                        [--key]
                                        [--location]
                                        [--name]
                                        [--password-auth {Disabled, Enabled}]
+                                       [--performance-tier]
                                        [--private-dns-zone]
                                        [--public-access]
                                        [--resource-group]
@@ -82,9 +84,11 @@ directCommands:
                                        [--standby-zone]
                                        [--storage-auto-grow {Disabled, Enabled}]
                                        [--storage-size]
+                                       [--storage-type {PremiumV2_LRS, Premium_LRS}]
                                        [--subnet]
                                        [--subnet-prefixes]
                                        [--tags]
+                                       [--throughput]
                                        [--tier]
                                        [--version]
                                        [--vnet]
@@ -97,8 +101,16 @@ directCommands:
       az postgres flexible-server create --location northeurope --resource-group testGroup \
         --name testserver --admin-user username --admin-password password \
         --sku-name Standard_B1ms --tier Burstable --public-access 153.24.26.117 --storage-size 128 \
-        --tags "key=value" --version 13 --high-availability Enabled --zone 1 \
+        --tags "key=value" --version 13 --high-availability ZoneRedundant --zone 1 \
         --standby-zone 3
+  - summary: |-
+      Create a PostgreSQL flexible server using Premium SSD v2 Disks.
+    syntax: >-
+      # set storage type to "PremiumV2_LRS" and provide values for Storage size (in GiB), IOPS (operations/sec), and Throughput (MB/sec).
+
+      az postgres flexible-server create --location northeurope --resource-group testGroup \
+          --name testserver --admin-user username --admin-password password \
+          --sku-name Standard_B1ms --tier Burstable --storage-type PremiumV2_LRS --storage-size 128 --iops 3000 --throughput 125
   - summary: |-
       Create a PostgreSQL flexible server with default parameters and public access enabled by default.       Resource group, server name, username, password, and default database will be created by CLI
     syntax: az postgres flexible-server create
@@ -252,11 +264,12 @@ directCommands:
 
       az postgres flexible-server create -g testGroup -n testServer --location testLocation --geo-redundant-backup Enabled \
         --key $keyIdentifier --identity testIdentity --backup-key $geoKeyIdentifier --backup-identity geoIdentity
-
-
-      # create flexible server with storage auto-grow as Enabled. Accepted values Enabled / Disabled. Default value for storage auto-grow is "Disabled".
-
-      az postgres flexible-server create -g testGroup -n testServer --location testLocation --storage-auto-grow Enabled
+  - summary: |-
+      Create flexible server with custom storage performance tier. Accepted values "P4", "P6", "P10", "P15", "P20", "P30", \ "P40", "P50", "P60", "P70", "P80". Actual allowed values depend on the --storage-size selection for flexible server creation. \ Default value for storage performance tier depends on the --storage-size selected for flexible server creation.
+    syntax: az postgres flexible-server create -g testGroup -n testServer --location testLocation --performance-tier P15
+  - summary: |-
+      create flexible server with storage auto-grow as Enabled. Accepted values Enabled / Disabled. Default value for storage auto-grow is "Disabled".
+    syntax: az postgres flexible-server create -g testGroup -n testServer --location testLocation --storage-auto-grow Enabled
   optionalParameters:
   - name: --active-directory-auth
     defaultValue: "Disabled"
@@ -270,7 +283,7 @@ directCommands:
     summary: |-
       The password of the administrator. Minimum 8 characters and maximum 128 characters. Password must contain characters from three of the following categories: English uppercase letters, English lowercase letters, numbers, and non-alphanumeric characters.
   - name: --admin-user -u
-    defaultValue: "cruelfalcon5"
+    defaultValue: "coldgoose4"
     summary: |-
       Administrator username for the server. Once set, it cannot be changed.
   - name: --backup-identity
@@ -299,6 +312,9 @@ directCommands:
   - name: --identity
     summary: |-
       The name or resource ID of the user assigned identity for data encryption.
+  - name: --iops
+    summary: |-
+      Value of IOPS in (operations/sec) to be allocated for this server. This value can only be updated if flexible server is using Premium SSD v2 Disks.
   - name: --key
     summary: |-
       The resource ID of the primary keyvault key for data encryption.
@@ -313,6 +329,9 @@ directCommands:
     parameterValueGroup: "Disabled, Enabled"
     summary: |-
       Whether password authentication is enabled.
+  - name: --performance-tier
+    summary: |-
+      Performance tier of the server.
   - name: --private-dns-zone
     summary: |-
       This parameter only applies for a server with private access. The name or id of new or existing private dns zone. You can use the private dns zone from same resource group, different resource group, or different subscription. If you want to use a zone from different resource group or subscription, please provide resource Id. CLI creates a new private dns zone within the same resource group as virtual network if not provided by users.
@@ -338,6 +357,10 @@ directCommands:
     defaultValue: "128"
     summary: |-
       The storage capacity of the server. Minimum is 32 GiB and max is 16 TiB.
+  - name: --storage-type
+    parameterValueGroup: "PremiumV2_LRS, Premium_LRS"
+    summary: |-
+      Storage type for the server. Allowed values are Premium_LRS and PremiumV2_LRS. Default value is Premium_LRS.Must set iops and throughput if using PremiumV2_LRS.
   - name: --subnet
     summary: |-
       Name or resource ID of a new or existing subnet. If you want to use a subnet from different resource group or subscription, please provide resource ID instead of name. Please note that the subnet will be delegated to flexibleServers. After delegation, this subnet cannot be used for any other type of Azure resources.
@@ -347,6 +370,9 @@ directCommands:
   - name: --tags
     summary: |-
       Space-separated tags: key[=value] [key[=value] ...]. Use "" to clear existing tags.
+  - name: --throughput
+    summary: |-
+      Storage throughput in (MB/sec) for the server. This value can only be updated if flexible server is using Premium SSD v2 Disks.
   - name: --tier
     defaultValue: "GeneralPurpose"
     summary: |-
@@ -365,7 +391,7 @@ directCommands:
   - name: --zone -z
     summary: |-
       Availability zone into which to provision the resource.
-- uid: az_postgres_flexible-server_delete()
+- uid: az_postgres_flexible-server_delete
   name: az postgres flexible-server delete
   summary: |-
     Delete a flexible server.
@@ -401,7 +427,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_postgres_flexible-server_execute(rdbms-connect)
+- uid: az_postgres_flexible-server_execute
   name: az postgres flexible-server execute
   summary: |-
     Connect to a flexible server.
@@ -437,7 +463,7 @@ directCommands:
   - name: --querytext -q
     summary: |-
       A query to run against the flexible server.
-- uid: az_postgres_flexible-server_geo-restore()
+- uid: az_postgres_flexible-server_geo-restore
   name: az postgres flexible-server geo-restore
   summary: |-
     Geo-restore a flexible server from backup.
@@ -474,6 +500,11 @@ directCommands:
         --source-server testserver --vnet newVnet --subnet newSubnet \
         --address-prefixes 172.0.0.0/16 --subnet-prefixes 172.0.0.0/24 \
         --private-dns-zone testDNS.postgres.database.azure.com --location newLocation
+  - summary: |-
+      Geo-restore 'testserver' to current point-in-time as a new server 'testserverNew' in a different subscription / resource group. \ Here --restore-group is for the target server's resource group, and --source-server must be passed as resource ID. \ This resource ID can be in a subscription different than the subscription used for az account set.
+    syntax: >-
+      az postgres flexible-server geo-restore --resource-group testGroup --name testserverNew --location newLocation \
+        --source-server /subscriptions/{sourceSubscriptionId}/resourceGroups/{sourceResourceGroup}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{sourceServerName}
   requiredParameters:
   - isRequired: true
     name: --location -l
@@ -539,7 +570,7 @@ directCommands:
   - name: --zone -z
     summary: |-
       Availability zone into which to provision the resource.
-- uid: az_postgres_flexible-server_list()
+- uid: az_postgres_flexible-server_list
   name: az postgres flexible-server list
   summary: |-
     List available flexible servers.
@@ -560,7 +591,7 @@ directCommands:
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_postgres_flexible-server_list-skus()
+- uid: az_postgres_flexible-server_list-skus
   name: az postgres flexible-server list-skus
   summary: |-
     Lists available sku's in the given region.
@@ -572,7 +603,7 @@ directCommands:
     name: --location -l
     summary: |-
       Location. Values from: `az account list-locations`. You can configure the default location using `az configure --defaults location=<location>`.
-- uid: az_postgres_flexible-server_restart()
+- uid: az_postgres_flexible-server_restart
   name: az postgres flexible-server restart
   summary: |-
     Restart a flexible server.
@@ -610,7 +641,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_postgres_flexible-server_restore()
+- uid: az_postgres_flexible-server_restore
   name: az postgres flexible-server restore
   summary: |-
     Restore a flexible server from backup.
@@ -643,6 +674,16 @@ directCommands:
   - summary: |-
       Restore 'testserver' to current point-in-time as a new server 'testserverNew'.
     syntax: az postgres flexible-server restore --resource-group testGroup --name testserverNew --source-server testserver
+  - summary: |-
+      Restore 'testserver' to current point-in-time as a new server 'testserverNew' in a different resource group. \ Here --restore-group is for the target server's resource group, and --source-server must be passed as resource ID.
+    syntax: >-
+      az postgres flexible-server restore --resource-group testGroup --name testserverNew \
+        --source-server /subscriptions/{testSubscription}/resourceGroups/{sourceResourceGroup}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{sourceServerName}
+  - summary: |-
+      Restore 'testserver' to current point-in-time as a new server 'testserverNew' in a different subscription. \ Here --restore-group is for the target server's resource group, and --source-server must be passed as resource ID. \ This resource ID can be in a subscription different than the subscription used for az account set.
+    syntax: >-
+      az postgres flexible-server restore --resource-group testGroup --name testserverNew \
+        --source-server /subscriptions/{sourceSubscriptionId}/resourceGroups/{sourceResourceGroup}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{sourceServerName}
   requiredParameters:
   - isRequired: true
     name: --source-server
@@ -686,7 +727,7 @@ directCommands:
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
   - name: --restore-time
-    defaultValue: "2023-10-12T12:11:17+00:00"
+    defaultValue: "2024-01-30T09:49:59+00:00"
     summary: |-
       The point in time in UTC to restore from (ISO8601 format), e.g., 2017-04-26T02:10:00+00:00The default value is set to current time.
   - name: --subnet
@@ -708,7 +749,7 @@ directCommands:
   - name: --zone -z
     summary: |-
       Availability zone into which to provision the resource.
-- uid: az_postgres_flexible-server_revive-dropped()
+- uid: az_postgres_flexible-server_revive-dropped
   name: az postgres flexible-server revive-dropped
   summary: |-
     Revive a dropped flexible server from backup.
@@ -808,7 +849,7 @@ directCommands:
   - name: --zone -z
     summary: |-
       Availability zone into which to provision the resource.
-- uid: az_postgres_flexible-server_show()
+- uid: az_postgres_flexible-server_show
   name: az postgres flexible-server show
   summary: |-
     Get the details of a flexible server.
@@ -836,7 +877,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_postgres_flexible-server_show-connection-string()
+- uid: az_postgres_flexible-server_show-connection-string
   name: az postgres flexible-server show-connection-string
   summary: |-
     Show the connection strings for a PostgreSQL flexible-server database.
@@ -884,7 +925,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_postgres_flexible-server_start()
+- uid: az_postgres_flexible-server_start
   name: az postgres flexible-server start
   summary: |-
     Start a flexible server.
@@ -917,7 +958,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_postgres_flexible-server_stop()
+- uid: az_postgres_flexible-server_stop
   name: az postgres flexible-server stop
   summary: |-
     Stop a flexible server.
@@ -950,7 +991,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_postgres_flexible-server_update()
+- uid: az_postgres_flexible-server_update
   name: az postgres flexible-server update
   summary: |-
     Update a flexible server.
@@ -967,10 +1008,12 @@ directCommands:
                                        [--high-availability {Disabled, SameZone, ZoneRedundant}]
                                        [--identity]
                                        [--ids]
+                                       [--iops]
                                        [--key]
                                        [--maintenance-window]
                                        [--name]
                                        [--password-auth {Disabled, Enabled}]
+                                       [--performance-tier]
                                        [--private-dns-zone]
                                        [--remove]
                                        [--resource-group]
@@ -981,6 +1024,7 @@ directCommands:
                                        [--storage-size]
                                        [--subscription]
                                        [--tags]
+                                       [--throughput]
                                        [--tier]
                                        [--yes]
   examples:
@@ -1018,6 +1062,15 @@ directCommands:
   - summary: |-
       Update a flexible server's storage to enable / disable storage auto-grow.
     syntax: az postgres flexible-server update --resource-group testGroup --name testserver --storage-auto-grow Enabled
+  - summary: |-
+      Update a flexible server's storage to set custom storage performance tier.
+    syntax: az postgres flexible-server update --resource-group testGroup --name testserver --performance-tier P15
+  - summary: |-
+      Update a flexible server's storage to set IOPS (operations/sec). Server must be using Premium SSD v2 Disks.
+    syntax: az postgres flexible-server update --resource-group testGroup --name testserver --iops 3000
+  - summary: |-
+      Update a flexible server's storage to set Throughput (MB/sec). Server must be using Premium SSD v2 Disks.
+    syntax: az postgres flexible-server update --resource-group testGroup --name testserver --throughput 125
   optionalParameters:
   - name: --active-directory-auth
     parameterValueGroup: "Disabled, Enabled"
@@ -1053,6 +1106,9 @@ directCommands:
   - name: --ids
     summary: |-
       One or more resource IDs (space-delimited). It should be a complete resource ID containing all information of 'Resource Id' arguments. You should provide either --ids or other 'Resource Id' arguments.
+  - name: --iops
+    summary: |-
+      Value of IOPS in (operations/sec) to be allocated for this server. This value can only be updated if flexible server is using Premium SSD v2 Disks.
   - name: --key
     summary: |-
       The resource ID of the primary keyvault key for data encryption.
@@ -1066,6 +1122,9 @@ directCommands:
     parameterValueGroup: "Disabled, Enabled"
     summary: |-
       Whether password authentication is enabled.
+  - name: --performance-tier
+    summary: |-
+      Performance tier of the server.
   - name: --private-dns-zone
     summary: |-
       This parameter only applies for a server with private access. The name or id of new or existing private dns zone. You can use the private dns zone from same resource group, different resource group, or different subscription. If you want to use a zone from different resource group or subscription, please provide resource Id. CLI creates a new private dns zone within the same resource group as virtual network if not provided by users.
@@ -1099,6 +1158,9 @@ directCommands:
   - name: --tags
     summary: |-
       Space-separated tags: key[=value] [key[=value] ...]. Use "" to clear existing tags.
+  - name: --throughput
+    summary: |-
+      Storage throughput in (MB/sec) for the server. This value can only be updated if flexible server is using Premium SSD v2 Disks.
   - name: --tier
     summary: |-
       Compute tier of the server. Accepted values: Burstable, GeneralPurpose, MemoryOptimized.
@@ -1106,14 +1168,14 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_postgres_flexible-server_upgrade()
+- uid: az_postgres_flexible-server_upgrade
   name: az postgres flexible-server upgrade
   summary: |-
     Upgrade the major version of a flexible server.
   status: GA
   sourceType: Core
   syntax: >-
-    az postgres flexible-server upgrade --version {12, 13, 14}
+    az postgres flexible-server upgrade --version {12, 13, 14, 15}
                                         [--ids]
                                         [--name]
                                         [--resource-group]
@@ -1126,7 +1188,7 @@ directCommands:
   requiredParameters:
   - isRequired: true
     name: --version -v
-    parameterValueGroup: "12, 13, 14"
+    parameterValueGroup: "12, 13, 14, 15"
     summary: |-
       Server major version.
   optionalParameters:
@@ -1145,7 +1207,7 @@ directCommands:
   - name: --yes -y
     summary: |-
       Do not prompt for confirmation.
-- uid: az_postgres_flexible-server_wait()
+- uid: az_postgres_flexible-server_wait
   name: az postgres flexible-server wait
   summary: |-
     Wait for the flexible server to satisfy certain conditions.
@@ -1205,64 +1267,77 @@ directCommands:
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
 - az_postgres_flexible-server_ad-admin
-- az_postgres_flexible-server_ad-admin_create()
-- az_postgres_flexible-server_ad-admin_delete()
-- az_postgres_flexible-server_ad-admin_list()
-- az_postgres_flexible-server_ad-admin_show()
-- az_postgres_flexible-server_ad-admin_wait()
+- az_postgres_flexible-server_ad-admin_create
+- az_postgres_flexible-server_ad-admin_delete
+- az_postgres_flexible-server_ad-admin_list
+- az_postgres_flexible-server_ad-admin_show
+- az_postgres_flexible-server_ad-admin_wait
+- az_postgres_flexible-server_advanced-threat-protection-setting
+- az_postgres_flexible-server_advanced-threat-protection-setting_show
+- az_postgres_flexible-server_advanced-threat-protection-setting_update
 - az_postgres_flexible-server_backup
-- az_postgres_flexible-server_backup_list()
-- az_postgres_flexible-server_backup_show()
-- az_postgres_flexible-server_connect(rdbms-connect)
-- az_postgres_flexible-server_create()
+- az_postgres_flexible-server_backup_list
+- az_postgres_flexible-server_backup_show
+- az_postgres_flexible-server_connect
+- az_postgres_flexible-server_create
 - az_postgres_flexible-server_db
-- az_postgres_flexible-server_db_create()
-- az_postgres_flexible-server_db_delete()
-- az_postgres_flexible-server_db_list()
-- az_postgres_flexible-server_db_show()
-- az_postgres_flexible-server_delete()
+- az_postgres_flexible-server_db_create
+- az_postgres_flexible-server_db_delete
+- az_postgres_flexible-server_db_list
+- az_postgres_flexible-server_db_show
+- az_postgres_flexible-server_delete
 - az_postgres_flexible-server_deploy
-- az_postgres_flexible-server_deploy_run()
-- az_postgres_flexible-server_deploy_setup()
-- az_postgres_flexible-server_execute(rdbms-connect)
+- az_postgres_flexible-server_deploy_run
+- az_postgres_flexible-server_deploy_setup
+- az_postgres_flexible-server_execute
 - az_postgres_flexible-server_firewall-rule
-- az_postgres_flexible-server_firewall-rule_create()
-- az_postgres_flexible-server_firewall-rule_delete()
-- az_postgres_flexible-server_firewall-rule_list()
-- az_postgres_flexible-server_firewall-rule_show()
-- az_postgres_flexible-server_firewall-rule_update()
-- az_postgres_flexible-server_geo-restore()
+- az_postgres_flexible-server_firewall-rule_create
+- az_postgres_flexible-server_firewall-rule_delete
+- az_postgres_flexible-server_firewall-rule_list
+- az_postgres_flexible-server_firewall-rule_show
+- az_postgres_flexible-server_firewall-rule_update
+- az_postgres_flexible-server_geo-restore
 - az_postgres_flexible-server_identity
-- az_postgres_flexible-server_identity_assign()
-- az_postgres_flexible-server_identity_list()
-- az_postgres_flexible-server_identity_remove()
-- az_postgres_flexible-server_identity_show()
-- az_postgres_flexible-server_list()
-- az_postgres_flexible-server_list-skus()
+- az_postgres_flexible-server_identity_assign
+- az_postgres_flexible-server_identity_list
+- az_postgres_flexible-server_identity_remove
+- az_postgres_flexible-server_identity_show
+- az_postgres_flexible-server_list
+- az_postgres_flexible-server_list-skus
 - az_postgres_flexible-server_migration
-- az_postgres_flexible-server_migration_check-name-availability()
-- az_postgres_flexible-server_migration_create()
-- az_postgres_flexible-server_migration_list()
-- az_postgres_flexible-server_migration_show()
-- az_postgres_flexible-server_migration_update()
+- az_postgres_flexible-server_migration_check-name-availability
+- az_postgres_flexible-server_migration_create
+- az_postgres_flexible-server_migration_list
+- az_postgres_flexible-server_migration_show
+- az_postgres_flexible-server_migration_update
 - az_postgres_flexible-server_parameter
-- az_postgres_flexible-server_parameter_list()
-- az_postgres_flexible-server_parameter_set()
-- az_postgres_flexible-server_parameter_show()
+- az_postgres_flexible-server_parameter_list
+- az_postgres_flexible-server_parameter_set
+- az_postgres_flexible-server_parameter_show
 - az_postgres_flexible-server_replica
-- az_postgres_flexible-server_replica_create()
-- az_postgres_flexible-server_replica_list()
-- az_postgres_flexible-server_replica_stop-replication()
-- az_postgres_flexible-server_restart()
-- az_postgres_flexible-server_restore()
-- az_postgres_flexible-server_revive-dropped()
-- az_postgres_flexible-server_show()
-- az_postgres_flexible-server_show-connection-string()
-- az_postgres_flexible-server_start()
-- az_postgres_flexible-server_stop()
-- az_postgres_flexible-server_update()
-- az_postgres_flexible-server_upgrade()
-- az_postgres_flexible-server_wait()
+- az_postgres_flexible-server_replica_create
+- az_postgres_flexible-server_replica_list
+- az_postgres_flexible-server_replica_promote
+- az_postgres_flexible-server_replica_stop-replication
+- az_postgres_flexible-server_restart
+- az_postgres_flexible-server_restore
+- az_postgres_flexible-server_revive-dropped
+- az_postgres_flexible-server_server-logs
+- az_postgres_flexible-server_server-logs_download
+- az_postgres_flexible-server_server-logs_list
+- az_postgres_flexible-server_show
+- az_postgres_flexible-server_show-connection-string
+- az_postgres_flexible-server_start
+- az_postgres_flexible-server_stop
+- az_postgres_flexible-server_update
+- az_postgres_flexible-server_upgrade
+- az_postgres_flexible-server_virtual-endpoint
+- az_postgres_flexible-server_virtual-endpoint_create
+- az_postgres_flexible-server_virtual-endpoint_delete
+- az_postgres_flexible-server_virtual-endpoint_list
+- az_postgres_flexible-server_virtual-endpoint_show
+- az_postgres_flexible-server_virtual-endpoint_update
+- az_postgres_flexible-server_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -1275,7 +1350,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

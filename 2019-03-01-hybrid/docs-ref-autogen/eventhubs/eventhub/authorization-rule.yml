@@ -3,18 +3,14 @@ uid: az_eventhubs_eventhub_authorization-rule
 name: az eventhubs eventhub authorization-rule
 summary: |-
   Manage Azure Service Bus Authorizationrule for Eventhub.
-status: Preview
-isPreview: true
-previewOrExperimentalInfo: "Command group 'eventhubs eventhub' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+status: GA
 sourceType: Core
 directCommands:
-- uid: az_eventhubs_eventhub_authorization-rule_create()
+- uid: az_eventhubs_eventhub_authorization-rule_create
   name: az eventhubs eventhub authorization-rule create
   summary: |-
     Create an AuthorizationRule for the specified Event Hub. Creation/update of the AuthorizationRule will take a few seconds to take effect.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'eventhubs eventhub' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/eventhubs/_help.py
   syntax: >-
@@ -48,13 +44,11 @@ directCommands:
   - name: --rights
     summary: |-
       The rights associated with the rule.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_eventhubs_eventhub_authorization-rule_delete()
+- uid: az_eventhubs_eventhub_authorization-rule_delete
   name: az eventhubs eventhub authorization-rule delete
   summary: |-
     Delete an Event Hub AuthorizationRule.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'eventhubs eventhub' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/eventhubs/_help.py
   syntax: >-
@@ -92,13 +86,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_eventhubs_eventhub_authorization-rule_list()
+- uid: az_eventhubs_eventhub_authorization-rule_list
   name: az eventhubs eventhub authorization-rule list
   summary: |-
     List the authorization rules for an Event Hub.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'eventhubs eventhub' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/eventhubs/_help.py
   syntax: >-
@@ -122,13 +114,11 @@ directCommands:
     name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_eventhubs_eventhub_authorization-rule_show()
+- uid: az_eventhubs_eventhub_authorization-rule_show
   name: az eventhubs eventhub authorization-rule show
   summary: |-
     Get an AuthorizationRule for an Event Hub by rule name.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'eventhubs eventhub' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/eventhubs/_help.py
   syntax: >-
@@ -161,13 +151,11 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_eventhubs_eventhub_authorization-rule_update()
+- uid: az_eventhubs_eventhub_authorization-rule_update
   name: az eventhubs eventhub authorization-rule update
   summary: |-
     Update an AuthorizationRule for the specified Event Hub. Creation/update of the AuthorizationRule will take a few seconds to take effect.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'eventhubs eventhub' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/eventhubs/_help.py
   syntax: >-
@@ -222,14 +210,14 @@ directCommands:
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
 commands:
-- az_eventhubs_eventhub_authorization-rule_create()
-- az_eventhubs_eventhub_authorization-rule_delete()
+- az_eventhubs_eventhub_authorization-rule_create
+- az_eventhubs_eventhub_authorization-rule_delete
 - az_eventhubs_eventhub_authorization-rule_keys
-- az_eventhubs_eventhub_authorization-rule_keys_list()
-- az_eventhubs_eventhub_authorization-rule_keys_renew()
-- az_eventhubs_eventhub_authorization-rule_list()
-- az_eventhubs_eventhub_authorization-rule_show()
-- az_eventhubs_eventhub_authorization-rule_update()
+- az_eventhubs_eventhub_authorization-rule_keys_list
+- az_eventhubs_eventhub_authorization-rule_keys_renew
+- az_eventhubs_eventhub_authorization-rule_list
+- az_eventhubs_eventhub_authorization-rule_show
+- az_eventhubs_eventhub_authorization-rule_update
 globalParameters:
 - name: --debug
   summary: |-
@@ -242,7 +230,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

@@ -10,7 +10,7 @@ summary: |-
 status: GA
 sourceType: Core and Extension
 directCommands:
-- uid: az_eventgrid_topic-type_list()
+- uid: az_eventgrid_topic-type_list
   name: az eventgrid topic-type list
   summary: |-
     List registered topic types.
@@ -23,10 +23,12 @@ directCommands:
   extensionSuffix: eventgrid
   summary: |-
     List registered topic types.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: az eventgrid topic-type list
-- uid: az_eventgrid_topic-type_list-event-types()
+- uid: az_eventgrid_topic-type_list-event-types
   name: az eventgrid topic-type list-event-types
   summary: |-
     List the event types supported by a topic type.
@@ -48,7 +50,9 @@ directCommands:
   extensionSuffix: eventgrid
   summary: |-
     List the event types supported by a topic type.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: az eventgrid topic-type list-event-types --name
   examples:
@@ -60,7 +64,7 @@ directCommands:
     name: --name -n
     summary: |-
       Name of the topic type.
-- uid: az_eventgrid_topic-type_show()
+- uid: az_eventgrid_topic-type_show
   name: az eventgrid topic-type show
   summary: |-
     Get the details for a topic type.
@@ -78,7 +82,9 @@ directCommands:
   extensionSuffix: eventgrid
   summary: |-
     Get the details for a topic type.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: az eventgrid topic-type show --name
   requiredParameters:
@@ -87,11 +93,11 @@ directCommands:
     summary: |-
       Name of the topic type.
 commands:
-- az_eventgrid_topic-type_list()
+- az_eventgrid_topic-type_list
 - az_eventgrid_topic-type_list(eventgrid)
-- az_eventgrid_topic-type_list-event-types()
+- az_eventgrid_topic-type_list-event-types
 - az_eventgrid_topic-type_list-event-types(eventgrid)
-- az_eventgrid_topic-type_show()
+- az_eventgrid_topic-type_show
 - az_eventgrid_topic-type_show(eventgrid)
 globalParameters:
 - name: --debug
@@ -105,7 +111,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

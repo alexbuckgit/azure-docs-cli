@@ -4,17 +4,21 @@ name: az networkcloud cluster baremetalmachinekeyset
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **networkcloud** extension for the Azure CLI (version 2.49.0 or higher). The extension will automatically install the first time you run an **az networkcloud cluster baremetalmachinekeyset** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **networkcloud** extension for the Azure CLI (version 2.51.0 or higher). The extension will automatically install the first time you run an **az networkcloud cluster baremetalmachinekeyset** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage cluster's bare metal machine key set.
-status: GA
+status: Preview
+isPreview: true
+previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
 sourceType: Extension
 directCommands:
-- uid: az_networkcloud_cluster_baremetalmachinekeyset_create(networkcloud)
+- uid: az_networkcloud_cluster_baremetalmachinekeyset_create
   name: az networkcloud cluster baremetalmachinekeyset create
   summary: |-
     Create a new bare metal machine key set or update the existing one for the provided cluster.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud cluster baremetalmachinekeyset create --azure-group-id
@@ -33,7 +37,7 @@ directCommands:
   examples:
   - summary: |-
       Create or update bare metal machine key set of cluster
-    syntax: az networkcloud cluster baremetalmachinekeyset create --name "bareMetalMachineKeySetName" --extended-location name="/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName" type="CustomLocation" --location "location" --azure-group-id "f110271b-XXXX-4163-9b99-214d91660f0e" --expiration "2022-12-31T23:59:59.008Z" --jump-hosts-allowed "192.0.2.1" "192.0.2.5" --os-group-name "standardAccessGroup" --privilege-level "Standard" --user-list "[{description:'User description',azureUserName:userABC,sshPublicKey:{keyData:'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWtG2RiEGfXs+RK19UmovAJiIVUbT6YaYc/t5SjWU=admin@vm'}}]" --tags key1="myvalue1" key2="myvalue2" --cluster-name "clusterName" --resource-group "resourceGroupName
+    syntax: az networkcloud cluster baremetalmachinekeyset create --name "bareMetalMachineKeySetName" --extended-location name="/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName" type="CustomLocation" --location "location" --azure-group-id "f110271b-XXXX-4163-9b99-214d91660f0e" --expiration "2022-12-31T23:59:59.008Z" --jump-hosts-allowed "192.0.2.1" "192.0.2.5" --os-group-name "standardAccessGroup" --privilege-level "Standard" --user-list "[{description:'User description',azureUserName:userABC,userPrincipalName:'userABC@myorg.com',sshPublicKey:{keyData:'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWtG2RiEGfXs+RK19UmovAJiIVUbT6YaYc/t5SjWU=admin@vm'}}]" --tags key1="myvalue1" key2="myvalue2" --cluster-name "clusterName" --resource-group "resourceGroupName
   requiredParameters:
   - isRequired: true
     name: --azure-group-id
@@ -86,11 +90,13 @@ directCommands:
   - name: --tags
     summary: |-
       Resource tags.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_networkcloud_cluster_baremetalmachinekeyset_delete(networkcloud)
+- uid: az_networkcloud_cluster_baremetalmachinekeyset_delete
   name: az networkcloud cluster baremetalmachinekeyset delete
   summary: |-
     Delete the bare metal machine key set of the provided cluster.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud cluster baremetalmachinekeyset delete [--bare-metal-machine-key-set-name]
@@ -128,15 +134,19 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_networkcloud_cluster_baremetalmachinekeyset_list(networkcloud)
+- uid: az_networkcloud_cluster_baremetalmachinekeyset_list
   name: az networkcloud cluster baremetalmachinekeyset list
   summary: |-
     List bare metal machine key sets of the cluster.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud cluster baremetalmachinekeyset list --cluster-name
                                                         --resource-group
+                                                        [--max-items]
+                                                        [--next-token]
   examples:
   - summary: |-
       List bare metal machine key sets of the cluster
@@ -150,11 +160,20 @@ directCommands:
     name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_networkcloud_cluster_baremetalmachinekeyset_show(networkcloud)
+  optionalParameters:
+  - name: --max-items
+    summary: |-
+      Total number of items to return in the command's output. If the total number of items available is more than the value specified, a token is provided in the command's output. To resume pagination, provide the token value in `--next-token` argument of a subsequent command.
+  - name: --next-token
+    summary: |-
+      Token to specify where to start paginating. This is the token value from a previously truncated response.
+- uid: az_networkcloud_cluster_baremetalmachinekeyset_show
   name: az networkcloud cluster baremetalmachinekeyset show
   summary: |-
     Get bare metal machine key set of the provided cluster.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud cluster baremetalmachinekeyset show [--bare-metal-machine-key-set-name]
@@ -182,11 +201,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkcloud_cluster_baremetalmachinekeyset_update(networkcloud)
+- uid: az_networkcloud_cluster_baremetalmachinekeyset_update
   name: az networkcloud cluster baremetalmachinekeyset update
   summary: |-
     Update properties of bare metal machine key set for the provided cluster, or update the tags associated with it. Properties and tag updates can be done independently.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud cluster baremetalmachinekeyset update [--bare-metal-machine-key-set-name]
@@ -202,7 +223,7 @@ directCommands:
   examples:
   - summary: |-
       Patch bare metal machine key set of cluster
-    syntax: az networkcloud cluster baremetalmachinekeyset update --name "bareMetalMachineKeySetName" --expiration "2022-12-31T23:59:59.008Z" --jump-hosts-allowed "192.0.2.1" "192.0.2.5" --user-list "[{description:'User description',azureUserName:userABC,sshPublicKey:{keyData:'ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+/ojNZfpB3af/YDzwQCZzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm'}}]" --tags key1="myvalue1" key2="myvalue2" --cluster-name "clusterName" --resource-group "resourceGroupName"
+    syntax: az networkcloud cluster baremetalmachinekeyset update --name "bareMetalMachineKeySetName" --expiration "2022-12-31T23:59:59.008Z" --jump-hosts-allowed "192.0.2.1" "192.0.2.5" --user-list "[{description:'User description',azureUserName:userABC,userPrincipalName:'userABC@myorg.com',sshPublicKey:{keyData:'ssh-rsa AAtsE3njSONzDYRIZv/WLjVuMfrUSByHp+/ojNZfpB3af/YDzwQCZzXnblrv9d3q4c2tWmm/SyFqthaqd0= admin@vm'}}]" --tags key1="myvalue1" key2="myvalue2" --cluster-name "clusterName" --resource-group "resourceGroupName"
   optionalParameters:
   - name: --bare-metal-machine-key-set-name --name -n
     summary: |-
@@ -235,11 +256,13 @@ directCommands:
   - name: --user-list
     summary: |-
       The unique list of permitted users.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_networkcloud_cluster_baremetalmachinekeyset_wait(networkcloud)
+- uid: az_networkcloud_cluster_baremetalmachinekeyset_wait
   name: az networkcloud cluster baremetalmachinekeyset wait
   summary: |-
     Place the CLI in a waiting state until a condition is met.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud cluster baremetalmachinekeyset wait [--bare-metal-machine-key-set-name]
@@ -298,12 +321,12 @@ directCommands:
     summary: |-
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
-- az_networkcloud_cluster_baremetalmachinekeyset_create(networkcloud)
-- az_networkcloud_cluster_baremetalmachinekeyset_delete(networkcloud)
-- az_networkcloud_cluster_baremetalmachinekeyset_list(networkcloud)
-- az_networkcloud_cluster_baremetalmachinekeyset_show(networkcloud)
-- az_networkcloud_cluster_baremetalmachinekeyset_update(networkcloud)
-- az_networkcloud_cluster_baremetalmachinekeyset_wait(networkcloud)
+- az_networkcloud_cluster_baremetalmachinekeyset_create
+- az_networkcloud_cluster_baremetalmachinekeyset_delete
+- az_networkcloud_cluster_baremetalmachinekeyset_list
+- az_networkcloud_cluster_baremetalmachinekeyset_show
+- az_networkcloud_cluster_baremetalmachinekeyset_update
+- az_networkcloud_cluster_baremetalmachinekeyset_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -316,7 +339,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

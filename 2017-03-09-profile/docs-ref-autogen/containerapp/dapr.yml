@@ -1,21 +1,18 @@
 ### YamlMime:AzureCLIGroup
 uid: az_containerapp_dapr
 name: az containerapp dapr
-extensionInformation: >-
-  > [!NOTE]
-
-  > This reference is part of the **containerapp** extension for the Azure CLI (version 2.45.0 or higher). The extension will automatically install the first time you run an **az containerapp dapr** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Commands to manage Dapr. To manage Dapr components, see `az containerapp env dapr-component`.
 status: GA
-sourceType: Extension
+sourceType: Core
 directCommands:
-- uid: az_containerapp_dapr_disable(containerapp)
+- uid: az_containerapp_dapr_disable
   name: az containerapp dapr disable
   summary: |-
     Disable Dapr for a container app. Removes existing values.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp dapr disable [--ids]
                                  [--name]
@@ -24,7 +21,7 @@ directCommands:
   examples:
   - summary: |-
       Disable Dapr for a container app.
-    syntax: az containerapp dapr disable -n MyContainerapp -g MyResourceGroup
+    syntax: az containerapp dapr disable -n my-containerapp -g MyResourceGroup
   optionalParameters:
   - name: --ids
     summary: |-
@@ -38,12 +35,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_containerapp_dapr_enable(containerapp)
+- uid: az_containerapp_dapr_enable
   name: az containerapp dapr enable
   summary: |-
     Enable Dapr for a container app. Updates existing values.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp dapr enable [--dal]
                                 [--dapr-app-id]
@@ -59,7 +57,7 @@ directCommands:
   examples:
   - summary: |-
       Enable Dapr for a container app.
-    syntax: az containerapp dapr enable -n MyContainerapp -g MyResourceGroup --dapr-app-id my-app-id --dapr-app-port 8080
+    syntax: az containerapp dapr enable -n my-containerapp -g MyResourceGroup --dapr-app-id my-app-id --dapr-app-port 8080
   optionalParameters:
   - name: --dal --dapr-enable-api-logging
     defaultValue: "False"
@@ -98,8 +96,8 @@ directCommands:
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
 commands:
-- az_containerapp_dapr_disable(containerapp)
-- az_containerapp_dapr_enable(containerapp)
+- az_containerapp_dapr_disable
+- az_containerapp_dapr_enable
 globalParameters:
 - name: --debug
   summary: |-
@@ -112,7 +110,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query
@@ -125,4 +123,5 @@ globalParameters:
   summary: |-
     Increase logging verbosity. Use --debug for full debug logs.
 metadata:
+  ms.date: 11/28/2023
   description: Commands to manage Dapr. To manage Dapr components, see `az containerapp env dapr-component`.

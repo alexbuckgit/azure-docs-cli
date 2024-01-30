@@ -10,7 +10,7 @@ summary: |-
 status: GA
 sourceType: Core and Extension
 directCommands:
-- uid: az_aks_nodepool_add()
+- uid: az_aks_nodepool_add
   name: az aks nodepool add
   summary: |-
     Add a node pool to the managed Kubernetes cluster.
@@ -22,6 +22,10 @@ directCommands:
                         --name
                         --resource-group
                         [--aks-custom-headers]
+                        [--allowed-host-ports]
+                        [--asg-ids]
+                        [--crg-id]
+                        [--drain-timeout]
                         [--enable-cluster-autoscaler]
                         [--enable-encryption-at-host]
                         [--enable-fips-image]
@@ -44,6 +48,7 @@ directCommands:
                         [--node-osdisk-size]
                         [--node-osdisk-type {Ephemeral, Managed}]
                         [--node-public-ip-prefix-id]
+                        [--node-public-ip-tags]
                         [--node-taints]
                         [--node-vm-size]
                         [--os-sku {AzureLinux, CBLMariner, Mariner, Ubuntu, Windows2019, Windows2022}]
@@ -56,7 +61,7 @@ directCommands:
                         [--spot-max-price]
                         [--tags]
                         [--vnet-subnet-id]
-                        [--zones {1, 2, 3}]
+                        [--zones]
   examples:
   - summary: |-
       Create a nodepool in an existing AKS cluster with ephemeral os enabled.
@@ -79,6 +84,9 @@ directCommands:
   - summary: |-
       create a nodepool in an existing AKS cluster with host group id
     syntax: az aks nodepool add -g MyResourceGroup -n MyNodePool --cluster-name MyMC --host-group-id /subscriptions/00000/resourceGroups/AnotherResourceGroup/providers/Microsoft.ContainerService/hostGroups/myHostGroup --node-vm-size VMSize
+  - summary: |-
+      create a nodepool with a Capacity Reservation Group(CRG) ID.
+    syntax: az aks nodepool add -g MyResourceGroup -n MyNodePool --cluster-name MyMC --node-vm-size VMSize --crg-id "/subscriptions/SubID/resourceGroups/ResourceGroupName/providers/Microsoft.ContainerService/CapacityReservationGroups/MyCRGID"
   requiredParameters:
   - isRequired: true
     name: --cluster-name
@@ -96,6 +104,18 @@ directCommands:
   - name: --aks-custom-headers
     summary: |-
       Comma-separated key-value pairs to specify custom headers.
+  - name: --allowed-host-ports
+    summary: |-
+      Expose host ports on the node pool. When specified, format should be a space-separated list of ranges with protocol, eg. `80/TCP 443/TCP 4000-5000/TCP`.
+  - name: --asg-ids
+    summary: |-
+      The IDs of the application security groups to which the node pool's network interface should belong. When specified, format should be a space-separated list of IDs.
+  - name: --crg-id
+    summary: |-
+      The crg id used to associate the new nodepool with the existed Capacity Reservation Group resource.
+  - name: --drain-timeout
+    summary: |-
+      When nodes are drain how many minutes to wait for all pods to be evicted.
   - name: --enable-cluster-autoscaler -e
     defaultValue: "False"
     summary: |-
@@ -170,7 +190,7 @@ directCommands:
       Number of nodes in the Kubernetes agent pool. After creating a cluster, you can change the size of its node pool with `az aks scale`.
   - name: --node-osdisk-size
     summary: |-
-      Size in GB of the OS disk for each node in the agent pool. Minimum 30 GB.
+      Size in GiB of the OS disk for each node in the agent pool. Minimum 30 GiB.
   - name: --node-osdisk-type
     parameterValueGroup: "Ephemeral, Managed"
     summary: |-
@@ -178,6 +198,9 @@ directCommands:
   - name: --node-public-ip-prefix-id
     summary: |-
       Public IP prefix ID used to assign public IPs to VMSS nodes.
+  - name: --node-public-ip-tags
+    summary: |-
+      The ipTags of the node public IPs.
   - name: --node-taints
     summary: |-
       The node taints for the node pool.
@@ -221,7 +244,6 @@ directCommands:
     summary: |-
       The Resource Id of a subnet in an existing VNet into which to deploy the cluster.
   - name: --zones -z
-    parameterValueGroup: "1, 2, 3"
     summary: |-
       Availability zones where agent nodes will be placed. Also, to install agent nodes to more than one zone you need to pass zone numbers separated by blanks.  For example -  To have all 3 zones, you are expected to enter `--zones 1 2 3`.
 - uid: az_aks_nodepool_add(aks-preview)
@@ -240,6 +262,8 @@ directCommands:
                         [--asg-ids]
                         [--crg-id]
                         [--disable-windows-outbound-nat]
+                        [--drain-timeout]
+                        [--enable-artifact-streaming]
                         [--enable-cluster-autoscaler]
                         [--enable-custom-ca-trust]
                         [--enable-encryption-at-host]
@@ -265,6 +289,7 @@ directCommands:
                         [--node-osdisk-type {Ephemeral, Managed}]
                         [--node-public-ip-prefix-id]
                         [--node-public-ip-tags]
+                        [--node-soak-duration]
                         [--node-taints]
                         [--node-vm-size]
                         [--os-sku {AzureLinux, CBLMariner, Mariner, Ubuntu, Windows2019, Windows2022}]
@@ -273,13 +298,14 @@ directCommands:
                         [--ppg]
                         [--priority {Regular, Spot}]
                         [--scale-down-mode {Deallocate, Delete}]
+                        [--skip-gpu-driver-install]
                         [--snapshot-id]
                         [--spot-max-price]
                         [--tags]
                         [--vm-set-type]
                         [--vnet-subnet-id]
-                        [--workload-runtime {KataMshvVmIsolation, OCIContainer, WasmWasi}]
-                        [--zones {1, 2, 3}]
+                        [--workload-runtime {KataCcIsolation, KataMshvVmIsolation, OCIContainer, WasmWasi}]
+                        [--zones]
   examples:
   - summary: |-
       Create a nodepool in an existing AKS cluster with ephemeral os enabled.
@@ -321,24 +347,32 @@ directCommands:
       Send custom headers. When specified, format should be Key1=Value1,Key2=Value2.
   - name: --allowed-host-ports
     summary: |-
-      Expose host ports on the node pool. When specified, format should be a comma-separated list of ranges with protocol, eg. 80/TCP,443/TCP,4000-5000/TCP.
+      Expose host ports on the node pool. When specified, format should be a comma-separated list of ranges with protocol, eg. 80/TCP,443/TCP,4000-5000/TCP. Must use VMSS agent pool type.
     isPreview: true
   - name: --asg-ids
     summary: |-
-      The IDs of the application security groups to which the node pool's network interface should belong. When specified, format should be a comma-separated list of IDs.
+      The IDs of the application security groups to which the node pool's network interface should belong. When specified, format should be a comma-separated list of IDs. Must use VMSS agent pool type.
     isPreview: true
   - name: --crg-id
     summary: |-
-      The crg-id used to associate the new nodepool with the existed Capacity Reservation Group resource.
+      The crg-id used to associate the new nodepool with the existed Capacity Reservation Group resource. Must use VMSS agent pool type.
     isPreview: true
   - name: --disable-windows-outbound-nat
     defaultValue: "False"
     summary: |-
-      Disable Windows OutboundNAT on Windows agent node pool.
+      Disable Windows OutboundNAT on Windows agent node pool. Must use VMSS agent pool type.
+  - name: --drain-timeout
+    summary: |-
+      When nodes are drain how many minutes to wait for all pods to be evicted.
+  - name: --enable-artifact-streaming
+    defaultValue: "False"
+    summary: |-
+      Enable artifact streaming for VirtualMachineScaleSets managed by a node pool, to speed up the cold-start of containers on a node through on-demand image loading. To use this feature, container images must also enable artifact streaming on ACR. If not specified, the default is false.
+    isPreview: true
   - name: --enable-cluster-autoscaler -e
     defaultValue: "False"
     summary: |-
-      Enable cluster autoscaler.
+      Enable cluster autoscaler. Must use VMSS agent pool type.
   - name: --enable-custom-ca-trust
     defaultValue: "False"
     summary: |-
@@ -354,11 +388,11 @@ directCommands:
   - name: --enable-node-public-ip
     defaultValue: "False"
     summary: |-
-      Enable VMSS node public IP.
+      Enable VMSS node public IP. Must use VMSS agent pool type.
   - name: --enable-ultra-ssd
     defaultValue: "False"
     summary: |-
-      Enable UltraSSD on agent node pool.
+      Enable UltraSSD on agent node pool. Must use VMSS agent pool type.
   - name: --eviction-policy
     defaultValue: "Delete"
     parameterValueGroup: "Deallocate, Delete"
@@ -370,7 +404,7 @@ directCommands:
       GPU instance profile to partition multi-gpu Nvidia GPUs.
   - name: --host-group-id
     summary: |-
-      (PREVIEW) The fully qualified dedicated host group id used to provision agent node pool.
+      (PREVIEW) The fully qualified dedicated host group id used to provision agent node pool. Must use VMSS agent pool type.
   - name: --kubelet-config
     summary: |-
       Kubelet configurations for agent nodes.
@@ -418,17 +452,20 @@ directCommands:
   - name: --node-osdisk-size
     defaultValue: "0"
     summary: |-
-      Size in GB of the OS disk for each node in the agent pool. Minimum 30 GB.
+      Size in GiB of the OS disk for each node in the agent pool. Minimum 30 GiB.
   - name: --node-osdisk-type
     parameterValueGroup: "Ephemeral, Managed"
     summary: |-
-      OS disk type to be used for machines in a given agent pool. Defaults to 'Managed'. May not be changed for this pool after creation.
+      OS disk type to be used for machines in a given agent pool. Defaults to 'Ephemeral' when possible in conjunction with VM size and OS disk size. May not be changed for this pool after creation. ('Ephemeral' or 'Managed').
   - name: --node-public-ip-prefix-id
     summary: |-
-      Public IP prefix ID used to assign public IPs to VMSS nodes.
+      Public IP prefix ID used to assign public IPs to VMSS nodes. Must use VMSS agent pool type.
   - name: --node-public-ip-tags
     summary: |-
-      The ipTags of the node public IPs.
+      The ipTags of the node public IPs. Must use VMSS agent pool type.
+  - name: --node-soak-duration
+    summary: |-
+      The amount of time (in minutes) to wait after draining a node and before reimaging it and moving on to next node.
   - name: --node-taints
     summary: |-
       The node taints for the node pool.
@@ -441,13 +478,13 @@ directCommands:
       The os-sku of the agent node pool. Ubuntu or CBLMariner when os-type is Linux, default is Ubuntu if not set; Windows2019 or Windows2022 when os-type is Windows, the current default is Windows2019 if not set, and the default will be changed to Windows2022 after Windows2019 is deprecated.
   - name: --os-type
     summary: |-
-      The OS Type. Linux or Windows.
+      The OS Type. Linux or Windows. Windows not supported yet for "VirtualMachines" VM set type.
   - name: --pod-subnet-id
     summary: |-
       The ID of a subnet in an existing VNet into which to assign pods in the cluster (requires azure network-plugin).
   - name: --ppg
     summary: |-
-      The ID of a PPG.
+      The ID of a PPG. Must use VMSS agent pool type.
   - name: --priority
     defaultValue: "Regular"
     parameterValueGroup: "Regular, Spot"
@@ -458,9 +495,14 @@ directCommands:
     parameterValueGroup: "Deallocate, Delete"
     summary: |-
       Describes how VMs are added to or removed from nodepools.
+  - name: --skip-gpu-driver-install
+    defaultValue: "False"
+    summary: |-
+      To skip GPU driver auto installation by AKS on a nodepool using GPU vm size if customers want to manage GPU driver installation by their own. If not specified, the default is false.
+    isPreview: true
   - name: --snapshot-id
     summary: |-
-      The source snapshot id used to create this nodepool.
+      The source snapshot id used to create this nodepool. Must use VMSS agent pool type.
   - name: --spot-max-price
     defaultValue: "nan"
     summary: |-
@@ -470,20 +512,19 @@ directCommands:
       Space-separated tags: key[=value] [key[=value] ...]. Use "" to clear existing tags.
   - name: --vm-set-type
     summary: |-
-      Agent pool vm set type. VirtualMachineScaleSets, AvailabilitySet or VirtualMachines(internal use only).
+      Agent pool vm set type. VirtualMachineScaleSets, AvailabilitySet or VirtualMachines(Preview).
   - name: --vnet-subnet-id
     summary: |-
       The ID of a subnet in an existing VNet into which to deploy the cluster.
   - name: --workload-runtime
     defaultValue: "OCIContainer"
-    parameterValueGroup: "KataMshvVmIsolation, OCIContainer, WasmWasi"
+    parameterValueGroup: "KataCcIsolation, KataMshvVmIsolation, OCIContainer, WasmWasi"
     summary: |-
       Determines the type of workload a node can run. Defaults to OCIContainer.
   - name: --zones -z
-    parameterValueGroup: "1, 2, 3"
     summary: |-
-      Space-separated list of availability zones where agent nodes will be placed.
-- uid: az_aks_nodepool_delete()
+      Space-separated list of availability zones where agent nodes will be placed. Must use VMSS agent pool type.
+- uid: az_aks_nodepool_delete
   name: az aks nodepool delete
   summary: |-
     Delete the agent pool in the managed Kubernetes cluster.
@@ -552,7 +593,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not wait for the long-running operation to finish.
-- uid: az_aks_nodepool_get-upgrades()
+- uid: az_aks_nodepool_get-upgrades
   name: az aks nodepool get-upgrades
   summary: |-
     Get the available upgrade versions for an agent pool of the managed Kubernetes cluster.
@@ -608,7 +649,7 @@ directCommands:
     name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_aks_nodepool_list()
+- uid: az_aks_nodepool_list
   name: az aks nodepool list
   summary: |-
     List node pools in the managed Kubernetes cluster. To get list of nodes in the cluster run `kubectl get nodes` command.
@@ -646,7 +687,7 @@ directCommands:
     name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_aks_nodepool_operation-abort()
+- uid: az_aks_nodepool_operation-abort
   name: az aks nodepool operation-abort
   summary: |-
     Abort last running operation on nodepool.
@@ -718,7 +759,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not wait for the long-running operation to finish.
-- uid: az_aks_nodepool_scale()
+- uid: az_aks_nodepool_scale
   name: az aks nodepool scale
   summary: |-
     Scale the node pool in a managed Kubernetes cluster.
@@ -792,7 +833,7 @@ directCommands:
     defaultValue: "3"
     summary: |-
       Number of nodes in the Kubernetes node pool.
-- uid: az_aks_nodepool_show()
+- uid: az_aks_nodepool_show
   name: az aks nodepool show
   summary: |-
     Show the details for a node pool in the managed Kubernetes cluster.
@@ -840,7 +881,7 @@ directCommands:
     name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_aks_nodepool_start()
+- uid: az_aks_nodepool_start
   name: az aks nodepool start
   summary: |-
     Start stopped agent pool in the managed Kubernetes cluster.
@@ -916,7 +957,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not wait for the long-running operation to finish.
-- uid: az_aks_nodepool_stop()
+- uid: az_aks_nodepool_stop
   name: az aks nodepool stop
   summary: |-
     Stop running agent pool in the managed Kubernetes cluster.
@@ -992,7 +1033,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not wait for the long-running operation to finish.
-- uid: az_aks_nodepool_update()
+- uid: az_aks_nodepool_update
   name: az aks nodepool update
   summary: |-
     Update a node pool properties.
@@ -1006,7 +1047,10 @@ directCommands:
                            --name
                            --resource-group
                            [--aks-custom-headers]
+                           [--allowed-host-ports]
+                           [--asg-ids]
                            [--disable-cluster-autoscaler]
+                           [--drain-timeout]
                            [--enable-cluster-autoscaler]
                            [--labels]
                            [--max-count]
@@ -1048,10 +1092,19 @@ directCommands:
   - name: --aks-custom-headers
     summary: |-
       Comma-separated key-value pairs to specify custom headers.
+  - name: --allowed-host-ports
+    summary: |-
+      Expose host ports on the node pool. When specified, format should be a space-separated list of ranges with protocol, eg. `80/TCP 443/TCP 4000-5000/TCP`.
+  - name: --asg-ids
+    summary: |-
+      The IDs of the application security groups to which the node pool's network interface should belong. When specified, format should be a space-separated list of IDs.
   - name: --disable-cluster-autoscaler -d
     defaultValue: "False"
     summary: |-
       Disable cluster autoscaler.
+  - name: --drain-timeout
+    summary: |-
+      When nodes are drain how many minutes to wait for all pods to be evicted.
   - name: --enable-cluster-autoscaler -e
     defaultValue: "False"
     summary: |-
@@ -1108,6 +1161,8 @@ directCommands:
                            [--asg-ids]
                            [--dcat]
                            [--disable-cluster-autoscaler]
+                           [--drain-timeout]
+                           [--enable-artifact-streaming]
                            [--enable-cluster-autoscaler]
                            [--enable-custom-ca-trust]
                            [--labels]
@@ -1116,7 +1171,9 @@ directCommands:
                            [--min-count]
                            [--mode {System, User}]
                            [--no-wait]
+                           [--node-soak-duration]
                            [--node-taints]
+                           [--os-sku {AzureLinux, Ubuntu}]
                            [--scale-down-mode {Deallocate, Delete}]
                            [--tags]
                            [--update-cluster-autoscaler]
@@ -1155,11 +1212,11 @@ directCommands:
       Send custom headers. When specified, format should be Key1=Value1,Key2=Value2.
   - name: --allowed-host-ports
     summary: |-
-      Expose host ports on the node pool. When specified, format should be a comma-separated list of ranges with protocol, eg. 80/TCP,443/TCP,4000-5000/TCP.
+      Expose host ports on the node pool. When specified, format should be a comma-separated list of ranges with protocol, eg. 80/TCP,443/TCP,4000-5000/TCP. Must use VMSS agent pool type.
     isPreview: true
   - name: --asg-ids
     summary: |-
-      The IDs of the application security groups to which the node pool's network interface should belong. When specified, format should be a comma-separated list of IDs.
+      The IDs of the application security groups to which the node pool's network interface should belong. When specified, format should be a comma-separated list of IDs. Must use VMSS agent pool type.
     isPreview: true
   - name: --dcat --disable-custom-ca-trust
     defaultValue: "False"
@@ -1169,10 +1226,18 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Disable cluster autoscaler.
+  - name: --drain-timeout
+    summary: |-
+      When nodes are drain how many minutes to wait for all pods to be evicted.
+  - name: --enable-artifact-streaming
+    defaultValue: "False"
+    summary: |-
+      Enable artifact streaming for VirtualMachineScaleSets managed by a node pool, to speed up the cold-start of containers on a node through on-demand image loading. To use this feature, container images must also enable artifact streaming on ACR. If not specified, the default is false.
+    isPreview: true
   - name: --enable-cluster-autoscaler -e
     defaultValue: "False"
     summary: |-
-      Enable cluster autoscaler.
+      Enable cluster autoscaler. Must use VMSS agent pool type.
   - name: --enable-custom-ca-trust
     defaultValue: "False"
     summary: |-
@@ -1197,9 +1262,16 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not wait for the long-running operation to finish.
+  - name: --node-soak-duration
+    summary: |-
+      The amount of time (in minutes) to wait after draining a node and before reimaging it and moving on to next node.
   - name: --node-taints
     summary: |-
       The node taints for the node pool.
+  - name: --os-sku
+    parameterValueGroup: "AzureLinux, Ubuntu"
+    summary: |-
+      The os-sku of the agent node pool.
   - name: --scale-down-mode
     parameterValueGroup: "Deallocate, Delete"
     summary: |-
@@ -1211,7 +1283,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Update min-count or max-count for cluster autoscaler.
-- uid: az_aks_nodepool_upgrade()
+- uid: az_aks_nodepool_upgrade
   name: az aks nodepool upgrade
   summary: |-
     Upgrade the node pool in a managed Kubernetes cluster.
@@ -1223,6 +1295,7 @@ directCommands:
                             --name
                             --resource-group
                             [--aks-custom-headers]
+                            [--drain-timeout]
                             [--kubernetes-version]
                             [--max-surge]
                             [--no-wait]
@@ -1246,6 +1319,9 @@ directCommands:
   - name: --aks-custom-headers
     summary: |-
       Comma-separated key-value pairs to specify custom headers.
+  - name: --drain-timeout
+    summary: |-
+      When nodes are drain how long to wait for all pods to be evicted.
   - name: --kubernetes-version -k
     summary: |-
       Version of Kubernetes to upgrade the node pool to, such as "1.16.9".
@@ -1279,10 +1355,12 @@ directCommands:
                             --name
                             --resource-group
                             [--aks-custom-headers]
+                            [--drain-timeout]
                             [--kubernetes-version]
                             [--max-surge]
                             [--no-wait]
                             [--node-image-only]
+                            [--node-soak-duration]
                             [--snapshot-id]
                             [--yes]
   requiredParameters:
@@ -1302,6 +1380,9 @@ directCommands:
   - name: --aks-custom-headers
     summary: |-
       Send custom headers. When specified, format should be Key1=Value1,Key2=Value2.
+  - name: --drain-timeout
+    summary: |-
+      When nodes are drain how many minutes to wait for all pods to be evicted.
   - name: --kubernetes-version -k
     summary: |-
       Version of Kubernetes to upgrade the node pool to, such as "1.11.12".
@@ -1316,14 +1397,17 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Only upgrade agent pool's node image.
+  - name: --node-soak-duration
+    summary: |-
+      The amount of time (in minutes) to wait after draining a node and before reimaging it and moving on to next node.
   - name: --snapshot-id
     summary: |-
-      The source snapshot id used to upgrade this nodepool.
+      The source snapshot id used to upgrade this nodepool. Must use VMSS agent pool type.
   - name: --yes -y
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_aks_nodepool_wait()
+- uid: az_aks_nodepool_wait
   name: az aks nodepool wait
   summary: |-
     Wait for a node pool to reach a desired state.
@@ -1389,41 +1473,41 @@ directCommands:
     summary: |-
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
-- az_aks_nodepool_add()
+- az_aks_nodepool_add
 - az_aks_nodepool_add(aks-preview)
-- az_aks_nodepool_delete()
+- az_aks_nodepool_delete
 - az_aks_nodepool_delete(aks-preview)
-- az_aks_nodepool_get-upgrades()
+- az_aks_nodepool_get-upgrades
 - az_aks_nodepool_get-upgrades(aks-preview)
-- az_aks_nodepool_list()
+- az_aks_nodepool_list
 - az_aks_nodepool_list(aks-preview)
-- az_aks_nodepool_operation-abort()
+- az_aks_nodepool_operation-abort
 - az_aks_nodepool_operation-abort(aks-preview)
-- az_aks_nodepool_scale()
+- az_aks_nodepool_scale
 - az_aks_nodepool_scale(aks-preview)
-- az_aks_nodepool_show()
+- az_aks_nodepool_show
 - az_aks_nodepool_show(aks-preview)
 - az_aks_nodepool_snapshot
-- az_aks_nodepool_snapshot_create()
+- az_aks_nodepool_snapshot_create
 - az_aks_nodepool_snapshot_create(aks-preview)
-- az_aks_nodepool_snapshot_delete()
+- az_aks_nodepool_snapshot_delete
 - az_aks_nodepool_snapshot_delete(aks-preview)
-- az_aks_nodepool_snapshot_list()
+- az_aks_nodepool_snapshot_list
 - az_aks_nodepool_snapshot_list(aks-preview)
-- az_aks_nodepool_snapshot_show()
+- az_aks_nodepool_snapshot_show
 - az_aks_nodepool_snapshot_show(aks-preview)
-- az_aks_nodepool_snapshot_update()
+- az_aks_nodepool_snapshot_update
 - az_aks_nodepool_snapshot_update(aks-preview)
-- az_aks_nodepool_snapshot_wait()
-- az_aks_nodepool_start()
+- az_aks_nodepool_snapshot_wait
+- az_aks_nodepool_start
 - az_aks_nodepool_start(aks-preview)
-- az_aks_nodepool_stop()
+- az_aks_nodepool_stop
 - az_aks_nodepool_stop(aks-preview)
-- az_aks_nodepool_update()
+- az_aks_nodepool_update
 - az_aks_nodepool_update(aks-preview)
-- az_aks_nodepool_upgrade()
+- az_aks_nodepool_upgrade
 - az_aks_nodepool_upgrade(aks-preview)
-- az_aks_nodepool_wait()
+- az_aks_nodepool_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -1436,7 +1520,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

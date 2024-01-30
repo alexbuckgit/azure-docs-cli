@@ -8,7 +8,7 @@ description: |-
 status: GA
 sourceType: Core
 directCommands:
-- uid: az_network_lb_create()
+- uid: az_network_lb_create
   name: az network lb create
   summary: |-
     Create a load balancer.
@@ -21,7 +21,7 @@ directCommands:
                          [--backend-pool-name]
                          [--edge-zone]
                          [--frontend-ip-name]
-                         [--frontend-ip-zone {1, 2, 3}]
+                         [--frontend-ip-zone]
                          [--location]
                          [--no-wait]
                          [--private-ip-address]
@@ -29,7 +29,7 @@ directCommands:
                          [--public-ip-address]
                          [--public-ip-address-allocation {Dynamic, Static}]
                          [--public-ip-dns-name]
-                         [--public-ip-zone {1, 2, 3}]
+                         [--public-ip-zone]
                          [--sku {Basic, Gateway, Standard}]
                          [--subnet]
                          [--subnet-address-prefix]
@@ -74,7 +74,6 @@ directCommands:
     summary: |-
       The name of the frontend IP configuration.
   - name: --frontend-ip-zone
-    parameterValueGroup: "1, 2, 3"
     summary: |-
       Used to create internal facing Load balancer.
   - name: --location -l
@@ -103,11 +102,10 @@ directCommands:
     summary: |-
       Globally unique DNS name for a new public IP.
   - name: --public-ip-zone
-    parameterValueGroup: "1, 2, 3"
     summary: |-
       Used to created a new public ip for the load balancer, a.k.a public facing Load balancer.
   - name: --sku
-    defaultValue: "Basic"
+    defaultValue: "Standard"
     parameterValueGroup: "Basic, Gateway, Standard"
     summary: |-
       Load balancer SKU.
@@ -132,7 +130,7 @@ directCommands:
   - name: --vnet-name
     summary: |-
       The virtual network (VNet) name.
-- uid: az_network_lb_delete()
+- uid: az_network_lb_delete
   name: az network lb delete
   summary: |-
     Delete the specified load balancer.
@@ -166,23 +164,32 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_network_lb_list()
+- uid: az_network_lb_list
   name: az network lb list
   summary: |-
     List load balancers.
   status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
-  syntax: az network lb list [--resource-group]
+  syntax: >-
+    az network lb list [--max-items]
+                       [--next-token]
+                       [--resource-group]
   examples:
   - summary: |-
       List load balancers.
     syntax: az network lb list -g MyResourceGroup
   optionalParameters:
+  - name: --max-items
+    summary: |-
+      Total number of items to return in the command's output. If the total number of items available is more than the value specified, a token is provided in the command's output. To resume pagination, provide the token value in `--next-token` argument of a subsequent command.
+  - name: --next-token
+    summary: |-
+      Token to specify where to start paginating. This is the token value from a previously truncated response.
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_network_lb_list-mapping()
+- uid: az_network_lb_list-mapping
   name: az network lb list-mapping
   summary: |-
     List inbound NAT rule port mappings.
@@ -225,7 +232,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_network_lb_list-nic()
+- uid: az_network_lb_list-nic
   name: az network lb list-nic
   summary: |-
     List associated load balancer network interfaces.
@@ -235,6 +242,8 @@ directCommands:
   syntax: >-
     az network lb list-nic --name
                            --resource-group
+                           [--max-items]
+                           [--next-token]
   examples:
   - summary: |-
       List associated load balancer network interfaces.
@@ -248,7 +257,14 @@ directCommands:
     name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_network_lb_show()
+  optionalParameters:
+  - name: --max-items
+    summary: |-
+      Total number of items to return in the command's output. If the total number of items available is more than the value specified, a token is provided in the command's output. To resume pagination, provide the token value in `--next-token` argument of a subsequent command.
+  - name: --next-token
+    summary: |-
+      Token to specify where to start paginating. This is the token value from a previously truncated response.
+- uid: az_network_lb_show
   name: az network lb show
   summary: |-
     Get the details of a load balancer.
@@ -281,7 +297,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_network_lb_update()
+- uid: az_network_lb_update
   name: az network lb update
   summary: |-
     Update a load balancer.
@@ -342,7 +358,7 @@ directCommands:
   - name: --tags
     summary: |-
       Space-separated tags: key[=value] [key[=value] ...].  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_network_lb_wait()
+- uid: az_network_lb_wait
   name: az network lb wait
   summary: |-
     Place the CLI in a waiting state until a condition is met.
@@ -408,75 +424,75 @@ directCommands:
 commands:
 - az_network_lb_address-pool
 - az_network_lb_address-pool_address
-- az_network_lb_address-pool_address_add()
-- az_network_lb_address-pool_address_list()
-- az_network_lb_address-pool_address_remove()
-- az_network_lb_address-pool_address_show()
-- az_network_lb_address-pool_address_update()
-- az_network_lb_address-pool_address_wait()
-- az_network_lb_address-pool_create()
-- az_network_lb_address-pool_delete()
-- az_network_lb_address-pool_list()
-- az_network_lb_address-pool_show()
+- az_network_lb_address-pool_address_add
+- az_network_lb_address-pool_address_list
+- az_network_lb_address-pool_address_remove
+- az_network_lb_address-pool_address_show
+- az_network_lb_address-pool_address_update
+- az_network_lb_address-pool_address_wait
+- az_network_lb_address-pool_create
+- az_network_lb_address-pool_delete
+- az_network_lb_address-pool_list
+- az_network_lb_address-pool_show
 - az_network_lb_address-pool_tunnel-interface
-- az_network_lb_address-pool_tunnel-interface_add()
-- az_network_lb_address-pool_tunnel-interface_list()
-- az_network_lb_address-pool_tunnel-interface_remove()
-- az_network_lb_address-pool_tunnel-interface_show()
-- az_network_lb_address-pool_tunnel-interface_update()
-- az_network_lb_address-pool_tunnel-interface_wait()
-- az_network_lb_address-pool_update()
-- az_network_lb_address-pool_wait()
-- az_network_lb_create()
-- az_network_lb_delete()
+- az_network_lb_address-pool_tunnel-interface_add
+- az_network_lb_address-pool_tunnel-interface_list
+- az_network_lb_address-pool_tunnel-interface_remove
+- az_network_lb_address-pool_tunnel-interface_show
+- az_network_lb_address-pool_tunnel-interface_update
+- az_network_lb_address-pool_tunnel-interface_wait
+- az_network_lb_address-pool_update
+- az_network_lb_address-pool_wait
+- az_network_lb_create
+- az_network_lb_delete
 - az_network_lb_frontend-ip
-- az_network_lb_frontend-ip_create()
-- az_network_lb_frontend-ip_delete()
-- az_network_lb_frontend-ip_list()
-- az_network_lb_frontend-ip_show()
-- az_network_lb_frontend-ip_update()
-- az_network_lb_frontend-ip_wait()
+- az_network_lb_frontend-ip_create
+- az_network_lb_frontend-ip_delete
+- az_network_lb_frontend-ip_list
+- az_network_lb_frontend-ip_show
+- az_network_lb_frontend-ip_update
+- az_network_lb_frontend-ip_wait
 - az_network_lb_inbound-nat-pool
-- az_network_lb_inbound-nat-pool_create()
-- az_network_lb_inbound-nat-pool_delete()
-- az_network_lb_inbound-nat-pool_list()
-- az_network_lb_inbound-nat-pool_show()
-- az_network_lb_inbound-nat-pool_update()
-- az_network_lb_inbound-nat-pool_wait()
+- az_network_lb_inbound-nat-pool_create
+- az_network_lb_inbound-nat-pool_delete
+- az_network_lb_inbound-nat-pool_list
+- az_network_lb_inbound-nat-pool_show
+- az_network_lb_inbound-nat-pool_update
+- az_network_lb_inbound-nat-pool_wait
 - az_network_lb_inbound-nat-rule
-- az_network_lb_inbound-nat-rule_create()
-- az_network_lb_inbound-nat-rule_delete()
-- az_network_lb_inbound-nat-rule_list()
-- az_network_lb_inbound-nat-rule_show()
-- az_network_lb_inbound-nat-rule_update()
-- az_network_lb_inbound-nat-rule_wait()
-- az_network_lb_list()
-- az_network_lb_list-mapping()
-- az_network_lb_list-nic()
+- az_network_lb_inbound-nat-rule_create
+- az_network_lb_inbound-nat-rule_delete
+- az_network_lb_inbound-nat-rule_list
+- az_network_lb_inbound-nat-rule_show
+- az_network_lb_inbound-nat-rule_update
+- az_network_lb_inbound-nat-rule_wait
+- az_network_lb_list
+- az_network_lb_list-mapping
+- az_network_lb_list-nic
 - az_network_lb_outbound-rule
-- az_network_lb_outbound-rule_create()
-- az_network_lb_outbound-rule_delete()
-- az_network_lb_outbound-rule_list()
-- az_network_lb_outbound-rule_show()
-- az_network_lb_outbound-rule_update()
-- az_network_lb_outbound-rule_wait()
+- az_network_lb_outbound-rule_create
+- az_network_lb_outbound-rule_delete
+- az_network_lb_outbound-rule_list
+- az_network_lb_outbound-rule_show
+- az_network_lb_outbound-rule_update
+- az_network_lb_outbound-rule_wait
 - az_network_lb_probe
-- az_network_lb_probe_create()
-- az_network_lb_probe_delete()
-- az_network_lb_probe_list()
-- az_network_lb_probe_show()
-- az_network_lb_probe_update()
-- az_network_lb_probe_wait()
+- az_network_lb_probe_create
+- az_network_lb_probe_delete
+- az_network_lb_probe_list
+- az_network_lb_probe_show
+- az_network_lb_probe_update
+- az_network_lb_probe_wait
 - az_network_lb_rule
-- az_network_lb_rule_create()
-- az_network_lb_rule_delete()
-- az_network_lb_rule_list()
-- az_network_lb_rule_show()
-- az_network_lb_rule_update()
-- az_network_lb_rule_wait()
-- az_network_lb_show()
-- az_network_lb_update()
-- az_network_lb_wait()
+- az_network_lb_rule_create
+- az_network_lb_rule_delete
+- az_network_lb_rule_list
+- az_network_lb_rule_show
+- az_network_lb_rule_update
+- az_network_lb_rule_wait
+- az_network_lb_show
+- az_network_lb_update
+- az_network_lb_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -489,7 +505,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query
@@ -502,5 +518,5 @@ globalParameters:
   summary: |-
     Increase logging verbosity. Use --debug for full debug logs.
 metadata:
-  ms.date: 06/27/2023
+  ms.date: 10/11/2023
   description: To learn more about Azure Load Balancer visit https://learn.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-cli.

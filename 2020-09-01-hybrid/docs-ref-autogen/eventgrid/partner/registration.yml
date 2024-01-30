@@ -4,17 +4,21 @@ name: az eventgrid partner registration
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **eventgrid** extension for the Azure CLI (version 2.0.49 or higher). The extension will automatically install the first time you run an **az eventgrid partner registration** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **eventgrid** extension for the Azure CLI (version 2.51.0 or higher). The extension will automatically install the first time you run an **az eventgrid partner registration** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage partner registrations.
-status: GA
+status: Preview
+isPreview: true
+previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
 sourceType: Extension
 directCommands:
-- uid: az_eventgrid_partner_registration_create(eventgrid)
+- uid: az_eventgrid_partner_registration_create
   name: az eventgrid partner registration create
   summary: |-
     Create a new partner registration.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid partner registration create --name
@@ -86,13 +90,15 @@ directCommands:
   - name: --tags
     summary: |-
       Space-separated tags: key[=value] [key[=value] ...]. Use "" to clear existing tags.
-- uid: az_eventgrid_partner_registration_delete(eventgrid)
+- uid: az_eventgrid_partner_registration_delete
   name: az eventgrid partner registration delete
   summary: |-
     Delete a partner registration.
   description: |-
     Deletes a partner registration with the specified parameters.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid partner registration delete [--ids]
@@ -112,11 +118,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_eventgrid_partner_registration_list(eventgrid)
+- uid: az_eventgrid_partner_registration_list
   name: az eventgrid partner registration list
   summary: |-
     List all partner registrations in specific resource group or all under the specified azure subscription.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid partner registration list [--odata-query]
@@ -141,13 +149,15 @@ directCommands:
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_eventgrid_partner_registration_show(eventgrid)
+- uid: az_eventgrid_partner_registration_show
   name: az eventgrid partner registration show
   summary: |-
     Get a partner registration.
   description: |-
     Gets a partner registration with the specified parameters.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid partner registration show [--ids]
@@ -168,10 +178,10 @@ directCommands:
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
 commands:
-- az_eventgrid_partner_registration_create(eventgrid)
-- az_eventgrid_partner_registration_delete(eventgrid)
-- az_eventgrid_partner_registration_list(eventgrid)
-- az_eventgrid_partner_registration_show(eventgrid)
+- az_eventgrid_partner_registration_create
+- az_eventgrid_partner_registration_delete
+- az_eventgrid_partner_registration_list
+- az_eventgrid_partner_registration_show
 globalParameters:
 - name: --debug
   summary: |-
@@ -184,7 +194,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

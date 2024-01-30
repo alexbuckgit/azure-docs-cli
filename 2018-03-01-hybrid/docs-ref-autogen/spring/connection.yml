@@ -6,7 +6,7 @@ summary: |-
 status: GA
 sourceType: Core
 directCommands:
-- uid: az_spring_connection_delete()
+- uid: az_spring_connection_delete
   name: az spring connection delete
   summary: |-
     Delete a spring app connection.
@@ -27,7 +27,7 @@ directCommands:
     syntax: az spring connection delete
   - summary: |-
       Delete a spring app connection by connection name
-    syntax: az spring connection delete -g SpringCloudRG --service MySpringService --app MyApp --deployment MyDeployment --connection MyConnection
+    syntax: az spring connection delete -g SpringCloudRG --service MySpringService --app MyApp --connection MyConnection
   - summary: |-
       Delete a spring app connection by connection id
     syntax: az spring connection delete --id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site}/providers/Microsoft.ServiceLinker/linkers/{linker}
@@ -39,14 +39,13 @@ directCommands:
     summary: |-
       Name of the spring connection.
   - name: --deployment
-    defaultValue: "default"
     summary: |-
-      The deployment name of the app. Required if '--id' is not specified. Note: The default value of `--deployment` is deprecated and will be removed in a future release. Use `--deployment default` if you want stay in current behavior.
+      The deployment name of the app. Note: The default value of `--deployment` is removed. Use `--deployment default` if you want stay in default behavior.
     isDeprecated: true
     deprecateInfo: Argument 'deployment' has been deprecated and will be removed in a future release.
   - name: --id
     summary: |-
-      The resource id of the connection. ['--resource-group', '--service', '--app', '--deployment', '--connection'] are required if '--id' is not specified.
+      The resource id of the connection. ['--resource-group', '--service', '--app', '--connection'] are required if '--id' is not specified.
   - name: --no-wait
     defaultValue: "False"
     summary: |-
@@ -61,7 +60,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_spring_connection_list()
+- uid: az_spring_connection_list
   name: az spring connection list
   summary: |-
     List connections of a spring app.
@@ -79,18 +78,17 @@ directCommands:
     syntax: az spring connection list
   - summary: |-
       List spring app connections by source resource name
-    syntax: az spring connection list -g SpringCloudRG --service MySpringService --app MyApp --deployment MyDeployment
+    syntax: az spring connection list -g SpringCloudRG --service MySpringService --app MyApp
   - summary: |-
       List spring app connections by source resource id
-    syntax: az spring connection list --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.AppPlatform/Spring/{spring}/apps/{app}/deployments/{deployment}
+    syntax: az spring connection list --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.AppPlatform/Spring/{spring}/apps/{app}
   optionalParameters:
   - name: --app
     summary: |-
       Name of the app in the Azure Spring Apps. Required if '--source-id' is not specified.None.
   - name: --deployment
-    defaultValue: "default"
     summary: |-
-      The deployment name of the app. Required if '--source-id' is not specified. Note: The default value of `--deployment` is deprecated and will be removed in a future release. Use `--deployment default` if you want stay in current behavior.
+      The deployment name of the app. Note: The default value of `--deployment` is removed. Use `--deployment default` if you want stay in default behavior.
     isDeprecated: true
     deprecateInfo: Argument 'deployment' has been deprecated and will be removed in a future release.
   - name: --resource-group -g
@@ -101,8 +99,8 @@ directCommands:
       Name of the the Azure Spring Apps resource. Required if '--source-id' is not specified.None.
   - name: --source-id
     summary: |-
-      The resource id of a spring. Required if ['--resource-group', '--service', '--app', '--deployment'] are not specified.
-- uid: az_spring_connection_list-configuration()
+      The resource id of a spring. Required if ['--resource-group', '--service', '--app'] are not specified.
+- uid: az_spring_connection_list-configuration
   name: az spring connection list-configuration
   summary: |-
     List source configurations of a spring app connection.
@@ -121,7 +119,7 @@ directCommands:
     syntax: az spring connection list-configuration
   - summary: |-
       List a connection's source configurations by connection name
-    syntax: az spring connection list-configuration -g SpringCloudRG --service MySpringService --app MyApp --deployment MyDeployment --connection MyConnection
+    syntax: az spring connection list-configuration -g SpringCloudRG --service MySpringService --app MyApp --connection MyConnection
   - summary: |-
       List a connection's source configurations by connection id
     syntax: az spring connection list-configuration --id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site}/providers/Microsoft.ServiceLinker/linkers/{linker}
@@ -133,21 +131,20 @@ directCommands:
     summary: |-
       Name of the spring connection.
   - name: --deployment
-    defaultValue: "default"
     summary: |-
-      The deployment name of the app. Required if '--id' is not specified. Note: The default value of `--deployment` is deprecated and will be removed in a future release. Use `--deployment default` if you want stay in current behavior.
+      The deployment name of the app. Note: The default value of `--deployment` is removed. Use `--deployment default` if you want stay in default behavior.
     isDeprecated: true
     deprecateInfo: Argument 'deployment' has been deprecated and will be removed in a future release.
   - name: --id
     summary: |-
-      The resource id of the connection. ['--resource-group', '--service', '--app', '--deployment', '--connection'] are required if '--id' is not specified.
+      The resource id of the connection. ['--resource-group', '--service', '--app', '--connection'] are required if '--id' is not specified.
   - name: --resource-group -g
     summary: |-
       The resource group which contains app in the Azure Spring Apps. Required if '--id' is not specified.None.
   - name: --service
     summary: |-
       Name of the the Azure Spring Apps resource. Required if '--id' is not specified.None.
-- uid: az_spring_connection_list-support-types()
+- uid: az_spring_connection_list-support-types
   name: az spring connection list-support-types
   summary: |-
     List client types and auth types supported by spring app connections.
@@ -166,7 +163,7 @@ directCommands:
     parameterValueGroup: "appconfig, confluent-cloud, cosmos-cassandra, cosmos-gremlin, cosmos-mongo, cosmos-sql, cosmos-table, eventhub, keyvault, mysql, mysql-flexible, postgres, postgres-flexible, redis, redis-enterprise, servicebus, signalr, sql, storage-blob, storage-file, storage-queue, storage-table, webpubsub"
     summary: |-
       The target resource type.
-- uid: az_spring_connection_show()
+- uid: az_spring_connection_show
   name: az spring connection show
   summary: |-
     Get the details of a spring app connection.
@@ -185,7 +182,7 @@ directCommands:
     syntax: az spring connection show
   - summary: |-
       Get a connection by connection name
-    syntax: az spring connection show -g SpringCloudRG --service MySpringService --app MyApp --deployment MyDeployment --connection MyConnection
+    syntax: az spring connection show -g SpringCloudRG --service MySpringService --app MyApp --connection MyConnection
   - summary: |-
       Get a connection by connection id
     syntax: az spring connection show --id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site}/providers/Microsoft.ServiceLinker/linkers/{linker}
@@ -197,21 +194,20 @@ directCommands:
     summary: |-
       Name of the spring connection.
   - name: --deployment
-    defaultValue: "default"
     summary: |-
-      The deployment name of the app. Required if '--id' is not specified. Note: The default value of `--deployment` is deprecated and will be removed in a future release. Use `--deployment default` if you want stay in current behavior.
+      The deployment name of the app. Note: The default value of `--deployment` is removed. Use `--deployment default` if you want stay in default behavior.
     isDeprecated: true
     deprecateInfo: Argument 'deployment' has been deprecated and will be removed in a future release.
   - name: --id
     summary: |-
-      The resource id of the connection. ['--resource-group', '--service', '--app', '--deployment', '--connection'] are required if '--id' is not specified.
+      The resource id of the connection. ['--resource-group', '--service', '--app', '--connection'] are required if '--id' is not specified.
   - name: --resource-group -g
     summary: |-
       The resource group which contains app in the Azure Spring Apps. Required if '--id' is not specified.None.
   - name: --service
     summary: |-
       Name of the the Azure Spring Apps resource. Required if '--id' is not specified.None.
-- uid: az_spring_connection_validate()
+- uid: az_spring_connection_validate
   name: az spring connection validate
   summary: |-
     Validate a spring app connection.
@@ -230,7 +226,7 @@ directCommands:
     syntax: az spring connection validate
   - summary: |-
       Validate a connection by connection name
-    syntax: az spring connection validate -g SpringCloudRG --service MySpringService --app MyApp --deployment MyDeployment --connection MyConnection
+    syntax: az spring connection validate -g SpringCloudRG --service MySpringService --app MyApp --connection MyConnection
   - summary: |-
       Validate a connection by connection id
     syntax: az spring connection validate --id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site}/providers/Microsoft.ServiceLinker/linkers/{linker}
@@ -242,21 +238,20 @@ directCommands:
     summary: |-
       Name of the spring connection.
   - name: --deployment
-    defaultValue: "default"
     summary: |-
-      The deployment name of the app. Required if '--id' is not specified. Note: The default value of `--deployment` is deprecated and will be removed in a future release. Use `--deployment default` if you want stay in current behavior.
+      The deployment name of the app. Note: The default value of `--deployment` is removed. Use `--deployment default` if you want stay in default behavior.
     isDeprecated: true
     deprecateInfo: Argument 'deployment' has been deprecated and will be removed in a future release.
   - name: --id
     summary: |-
-      The resource id of the connection. ['--resource-group', '--service', '--app', '--deployment', '--connection'] are required if '--id' is not specified.
+      The resource id of the connection. ['--resource-group', '--service', '--app', '--connection'] are required if '--id' is not specified.
   - name: --resource-group -g
     summary: |-
       The resource group which contains app in the Azure Spring Apps. Required if '--id' is not specified.None.
   - name: --service
     summary: |-
       Name of the the Azure Spring Apps resource. Required if '--id' is not specified.None.
-- uid: az_spring_connection_wait()
+- uid: az_spring_connection_wait
   name: az spring connection wait
   summary: |-
     Place the CLI in a waiting state until a condition of the connection is met.
@@ -299,9 +294,8 @@ directCommands:
     summary: |-
       Wait until deleted.
   - name: --deployment
-    defaultValue: "default"
     summary: |-
-      The deployment name of the app. Required if '--id' is not specified. Note: The default value of `--deployment` is deprecated and will be removed in a future release. Use `--deployment default` if you want stay in current behavior.
+      The deployment name of the app. Note: The default value of `--deployment` is removed. Use `--deployment default` if you want stay in default behavior.
     isDeprecated: true
     deprecateInfo: Argument 'deployment' has been deprecated and will be removed in a future release.
   - name: --exists
@@ -310,7 +304,7 @@ directCommands:
       Wait until the resource exists.
   - name: --id
     summary: |-
-      The resource id of the connection. ['--resource-group', '--service', '--app', '--deployment', '--connection'] are required if '--id' is not specified.
+      The resource id of the connection. ['--resource-group', '--service', '--app', '--connection'] are required if '--id' is not specified.
   - name: --interval
     defaultValue: "30"
     summary: |-
@@ -331,60 +325,60 @@ directCommands:
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
 - az_spring_connection_create
-- az_spring_connection_create_appconfig()
-- az_spring_connection_create_confluent-cloud()
-- az_spring_connection_create_cosmos-cassandra()
-- az_spring_connection_create_cosmos-gremlin()
-- az_spring_connection_create_cosmos-mongo()
-- az_spring_connection_create_cosmos-sql()
-- az_spring_connection_create_cosmos-table()
-- az_spring_connection_create_eventhub()
-- az_spring_connection_create_keyvault()
-- az_spring_connection_create_mysql()
-- az_spring_connection_create_mysql-flexible()
-- az_spring_connection_create_postgres()
-- az_spring_connection_create_postgres-flexible()
-- az_spring_connection_create_redis()
-- az_spring_connection_create_redis-enterprise()
-- az_spring_connection_create_servicebus()
-- az_spring_connection_create_signalr()
-- az_spring_connection_create_sql()
-- az_spring_connection_create_storage-blob()
-- az_spring_connection_create_storage-file()
-- az_spring_connection_create_storage-queue()
-- az_spring_connection_create_storage-table()
-- az_spring_connection_create_webpubsub()
-- az_spring_connection_delete()
-- az_spring_connection_list()
-- az_spring_connection_list-configuration()
-- az_spring_connection_list-support-types()
-- az_spring_connection_show()
+- az_spring_connection_create_appconfig
+- az_spring_connection_create_confluent-cloud
+- az_spring_connection_create_cosmos-cassandra
+- az_spring_connection_create_cosmos-gremlin
+- az_spring_connection_create_cosmos-mongo
+- az_spring_connection_create_cosmos-sql
+- az_spring_connection_create_cosmos-table
+- az_spring_connection_create_eventhub
+- az_spring_connection_create_keyvault
+- az_spring_connection_create_mysql
+- az_spring_connection_create_mysql-flexible
+- az_spring_connection_create_postgres
+- az_spring_connection_create_postgres-flexible
+- az_spring_connection_create_redis
+- az_spring_connection_create_redis-enterprise
+- az_spring_connection_create_servicebus
+- az_spring_connection_create_signalr
+- az_spring_connection_create_sql
+- az_spring_connection_create_storage-blob
+- az_spring_connection_create_storage-file
+- az_spring_connection_create_storage-queue
+- az_spring_connection_create_storage-table
+- az_spring_connection_create_webpubsub
+- az_spring_connection_delete
+- az_spring_connection_list
+- az_spring_connection_list-configuration
+- az_spring_connection_list-support-types
+- az_spring_connection_show
 - az_spring_connection_update
-- az_spring_connection_update_appconfig()
-- az_spring_connection_update_confluent-cloud()
-- az_spring_connection_update_cosmos-cassandra()
-- az_spring_connection_update_cosmos-gremlin()
-- az_spring_connection_update_cosmos-mongo()
-- az_spring_connection_update_cosmos-sql()
-- az_spring_connection_update_cosmos-table()
-- az_spring_connection_update_eventhub()
-- az_spring_connection_update_keyvault()
-- az_spring_connection_update_mysql()
-- az_spring_connection_update_mysql-flexible()
-- az_spring_connection_update_postgres()
-- az_spring_connection_update_postgres-flexible()
-- az_spring_connection_update_redis()
-- az_spring_connection_update_redis-enterprise()
-- az_spring_connection_update_servicebus()
-- az_spring_connection_update_signalr()
-- az_spring_connection_update_sql()
-- az_spring_connection_update_storage-blob()
-- az_spring_connection_update_storage-file()
-- az_spring_connection_update_storage-queue()
-- az_spring_connection_update_storage-table()
-- az_spring_connection_update_webpubsub()
-- az_spring_connection_validate()
-- az_spring_connection_wait()
+- az_spring_connection_update_appconfig
+- az_spring_connection_update_confluent-cloud
+- az_spring_connection_update_cosmos-cassandra
+- az_spring_connection_update_cosmos-gremlin
+- az_spring_connection_update_cosmos-mongo
+- az_spring_connection_update_cosmos-sql
+- az_spring_connection_update_cosmos-table
+- az_spring_connection_update_eventhub
+- az_spring_connection_update_keyvault
+- az_spring_connection_update_mysql
+- az_spring_connection_update_mysql-flexible
+- az_spring_connection_update_postgres
+- az_spring_connection_update_postgres-flexible
+- az_spring_connection_update_redis
+- az_spring_connection_update_redis-enterprise
+- az_spring_connection_update_servicebus
+- az_spring_connection_update_signalr
+- az_spring_connection_update_sql
+- az_spring_connection_update_storage-blob
+- az_spring_connection_update_storage-file
+- az_spring_connection_update_storage-queue
+- az_spring_connection_update_storage-table
+- az_spring_connection_update_webpubsub
+- az_spring_connection_validate
+- az_spring_connection_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -397,7 +391,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

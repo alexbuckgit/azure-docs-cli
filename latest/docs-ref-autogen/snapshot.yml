@@ -6,7 +6,7 @@ summary: |-
 status: GA
 sourceType: Core
 directCommands:
-- uid: az_snapshot_create()
+- uid: az_snapshot_create
   name: az snapshot create
   summary: |-
     Create a snapshot.
@@ -21,6 +21,7 @@ directCommands:
                        [--disk-access]
                        [--disk-encryption-set]
                        [--edge-zone]
+                       [--elastic-san-id]
                        [--encryption-type {EncryptionAtRestWithCustomerKey, EncryptionAtRestWithPlatformAndCustomerKeys, EncryptionAtRestWithPlatformKey}]
                        [--for-upload {false, true}]
                        [--hyper-v-generation {V1, V2}]
@@ -82,6 +83,9 @@ directCommands:
   - name: --edge-zone
     summary: |-
       The name of edge zone.
+  - name: --elastic-san-id --elastic-san-resource-id
+    summary: |-
+      This is the ARM id of the source elastic san volume snapshot.
   - name: --encryption-type
     parameterValueGroup: "EncryptionAtRestWithCustomerKey, EncryptionAtRestWithPlatformAndCustomerKeys, EncryptionAtRestWithPlatformKey"
     summary: |-
@@ -91,7 +95,6 @@ directCommands:
     summary: |-
       Create the snapshot for uploading blobs later on through storage commands. Run "az snapshot grant-access --access-level Write" to retrieve the snapshot's SAS token.
   - name: --hyper-v-generation
-    defaultValue: "V1"
     parameterValueGroup: "V1, V2"
     summary: |-
       The hypervisor generation of the Virtual Machine. Applicable to OS disks only.
@@ -130,7 +133,7 @@ directCommands:
   - name: --tags
     summary: |-
       Space-separated tags: key[=value] [key[=value] ...]. Use "" to clear existing tags.
-- uid: az_snapshot_delete()
+- uid: az_snapshot_delete
   name: az snapshot delete
   summary: |-
     Delete a snapshot.
@@ -159,7 +162,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_snapshot_grant-access()
+- uid: az_snapshot_grant-access
   name: az snapshot grant-access
   summary: |-
     Grant read access to a snapshot.
@@ -199,7 +202,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_snapshot_list()
+- uid: az_snapshot_list
   name: az snapshot list
   summary: |-
     List snapshots under a resource group.
@@ -219,7 +222,7 @@ directCommands:
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_snapshot_revoke-access()
+- uid: az_snapshot_revoke-access
   name: az snapshot revoke-access
   summary: |-
     Revoke access to a snapshot.
@@ -252,7 +255,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_snapshot_show()
+- uid: az_snapshot_show
   name: az snapshot show
   summary: |-
     Get information about a snapshot.
@@ -276,7 +279,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_snapshot_update()
+- uid: az_snapshot_update
   name: az snapshot update
   summary: |-
     Update a snapshot.
@@ -370,7 +373,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_snapshot_wait()
+- uid: az_snapshot_wait
   name: az snapshot wait
   summary: |-
     Place the CLI in a waiting state until a condition is met.
@@ -429,14 +432,14 @@ directCommands:
     summary: |-
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
-- az_snapshot_create()
-- az_snapshot_delete()
-- az_snapshot_grant-access()
-- az_snapshot_list()
-- az_snapshot_revoke-access()
-- az_snapshot_show()
-- az_snapshot_update()
-- az_snapshot_wait()
+- az_snapshot_create
+- az_snapshot_delete
+- az_snapshot_grant-access
+- az_snapshot_list
+- az_snapshot_revoke-access
+- az_snapshot_show
+- az_snapshot_update
+- az_snapshot_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -449,7 +452,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

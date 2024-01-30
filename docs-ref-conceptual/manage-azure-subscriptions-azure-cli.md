@@ -4,7 +4,7 @@ description: Learn about Azure tenants, users, and subscriptions. Use Azure CLI 
 manager: jasongroce
 author: dbradish-microsoft
 ms.author: dbradish
-ms.date: 09/15/2023
+ms.date: 01/12/2024
 ms.topic: conceptual
 ms.service: azure-cli
 ms.tool: azure-cli
@@ -20,7 +20,7 @@ For detailed information on subscriptions, billing, and cost management, see the
 
 ## Terminology
 
-A _tenant_ is an instance of Azure AD in which information about a single organization resides. A _[multi-tenant organization](/azure/active-directory/multi-tenant-organizations/overview)_ is an organization that has more than one instance of Azure AD. A tenant has one or more _subscriptions_ and _users_.
+A _tenant_ is an instance of Microsoft Entra ID in which information about a single organization resides. A _[multi-tenant organization](/azure/active-directory/multi-tenant-organizations/overview)_ is an organization that has more than one instance of Microsoft Entra ID. A tenant has one or more _subscriptions_ and _users_.
 
 Users are those accounts that sign in to Azure to create, manage, and use resources. A user may have access to multiple _tenants_ and _subscriptions_.
 
@@ -68,7 +68,7 @@ Most Azure CLI commands act within a subscription. You can specify which subscri
 
 To see the subscription you're currently using or to get a list of available subscriptions, run the [az account show](/cli/azure/account#az-account-show) or [az account list](/cli/azure/account#az-account-list) command. Go to [Learn to use Bash with the Azure CLI](azure-cli-learn-bash.md#querying-and-formatting-single-values-and-nested-values) to see more examples of ways to use these commands.
 
-Here are examples showing how to get subscription information.
+Here are examples showing how to get subscription information:
 
 ```azurecli-interactive
 # get the current default subscription using show
@@ -79,7 +79,12 @@ az account list --query "[?isDefault]"
 
 # get a subscription that contains search words or phrases
 az account list --query "[?contains(name,'search phrase')].{SubscriptionName:name, SubscriptionID:id, TenantID:tenantId}" --output table
+```
+You can also store subscription information in a variable for use within a script.
 
+# [Bash](#tab/bash)
+
+```azurecli
 # store the default subscription in a variable
 subscriptionId="$(az account list --query "[?isDefault].id" --output tsv)"
 echo $subscriptionId
@@ -89,6 +94,19 @@ subscriptionId="$(az account list --query "[?name=='my case sensitive subscripti
 echo $subscriptionId
 ```
 
+# [PowerShell](#tab/powershell)
+
+```azurecli-interactive
+# store the default subscription in a variable
+$subscriptionId = az account list --query "[?isDefault].id" --output tsv
+Write-Host $subscriptionId
+
+# store a subscription of certain name in a variable
+$subscriptionId = az account list --query "[?name=='my case sensitive subscription full name'].id" --output tsv
+Write-Host $subscriptionId
+```
+
+---
 > [!TIP]
 > The `--output` parameter is a global parameter, available for all commands. The **table** value presents output in a friendly format. For more information, see [Output formats for Azure CLI commands](./format-output-azure-cli.md).
 
@@ -102,13 +120,28 @@ az account set --subscription "My Demos"
 
 # change the active subscription using the subscription ID
 az account set --subscription "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+```
+You can also change your subscription using a variable. Here is an example:
 
+ # [Bash](#tab/bash)
+
+```azurecli-interactive
 # change the active subscription using a variable
 subscriptionId="$(az account list --query "[?name=='my case sensitive subscription full name'].id" --output tsv)"
 az account set --subscription $subscriptionId
 ```
 
-If you change to a subscription that is in a different tenant, you will also be changing the active tenant. To learn how to add a new subscription to your Azure Active Directory tenant, see [Associate or add an Azure subscription to your Azure Active Directory tenant](/azure/active-directory/active-directory-how-subscriptions-associated-directory).
+# [PowerShell](#tab/powershell)
+
+```azurecli-interactive
+# change the active subscription using a variable
+$subscriptionId = az account list --query "[?name=='my case sensitive subscription full name'].id" -o tsv
+az account set --subscription $subscriptionId
+```
+
+---
+
+If you change to a subscription that is in a different tenant, you will also be changing the active tenant. To learn how to add a new subscription to your Microsoft Entra tenant, see [Associate or add an Azure subscription to your Microsoft Entra tenant](/azure/active-directory/active-directory-how-subscriptions-associated-directory).
 
 If you received a "The subscription of ... doesn't exist..." error, see [Troubleshooting](#troubleshooting) for possible solutions.
 
@@ -219,5 +252,5 @@ az account set --subscription 00000000-0000-0000-0000-00000000000
 
 ## See also
 
-- [Associate or add an Azure subscription to your Azure Active Directory tenant](/azure/active-directory/active-directory-how-subscriptions-associated-directory)
+- [Associate or add an Azure subscription to your Microsoft Entra tenant](/azure/active-directory/active-directory-how-subscriptions-associated-directory)
 - [Manage Azure resource groups](./manage-azure-groups-azure-cli.md)

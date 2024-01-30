@@ -4,17 +4,21 @@ name: az networkcloud cluster bmckeyset
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **networkcloud** extension for the Azure CLI (version 2.49.0 or higher). The extension will automatically install the first time you run an **az networkcloud cluster bmckeyset** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **networkcloud** extension for the Azure CLI (version 2.51.0 or higher). The extension will automatically install the first time you run an **az networkcloud cluster bmckeyset** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage cluster's baseboard management controller key set.
-status: GA
+status: Preview
+isPreview: true
+previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
 sourceType: Extension
 directCommands:
-- uid: az_networkcloud_cluster_bmckeyset_create(networkcloud)
+- uid: az_networkcloud_cluster_bmckeyset_create
   name: az networkcloud cluster bmckeyset create
   summary: |-
     Create a new baseboard management controller key set or update the existing one for the provided cluster.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud cluster bmckeyset create --azure-group-id
@@ -31,7 +35,7 @@ directCommands:
   examples:
   - summary: |-
       Create or update baseboard management controller key set of cluster
-    syntax: az networkcloud cluster bmckeyset create --name "bmcKeySetName" --extended-location name="/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName" type="CustomLocation" --location "location" --azure-group-id "f110271b-XXXX-4163-9b99-214d91660f0e" --expiration "2022-12-31T23:59:59.008Z" --privilege-level "Administrator" --user-list "[{description:'User description',azureUserName:userABC,sshPublicKey:{keyData:'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWtG2RiEGfXs+RK19HU/G8EdEnbTlkl8Kkb5xv6nm+ttTb9FrW/dc9RQvai24VEFJmG4Fmi6Ow/yjxq+jTDuWOSs+Lo= admin@vm'}}]" --tags key1="myvalue1" key2="myvalue2" --cluster-name "clusterName" --resource-group "resourceGroupName"
+    syntax: az networkcloud cluster bmckeyset create --name "bmcKeySetName" --extended-location name="/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName" type="CustomLocation" --location "location" --azure-group-id "f110271b-XXXX-4163-9b99-214d91660f0e" --expiration "2022-12-31T23:59:59.008Z" --privilege-level "Administrator" --user-list "[{description:'User description',azureUserName:userABC,userPrincipalName:'userABC@myorg.com',sshPublicKey:{keyData:'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWtG2RiEGfXs+RK19HU/G8EdEnbTlkl8Kkb5xv6nm+ttTb9FrW/dc9RQvai24VEFJmG4Fmi6Ow/yjxq+jTDuWOSs+Lo= admin@vm'}}]" --tags key1="myvalue1" key2="myvalue2" --cluster-name "clusterName" --resource-group "resourceGroupName"
   requiredParameters:
   - isRequired: true
     name: --azure-group-id
@@ -77,11 +81,13 @@ directCommands:
   - name: --tags
     summary: |-
       Resource tags.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_networkcloud_cluster_bmckeyset_delete(networkcloud)
+- uid: az_networkcloud_cluster_bmckeyset_delete
   name: az networkcloud cluster bmckeyset delete
   summary: |-
     Delete the baseboard management controller key set of the provided cluster.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud cluster bmckeyset delete [--bmc-key-set-name]
@@ -119,15 +125,19 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_networkcloud_cluster_bmckeyset_list(networkcloud)
+- uid: az_networkcloud_cluster_bmckeyset_list
   name: az networkcloud cluster bmckeyset list
   summary: |-
     List baseboard management controller key sets of the cluster.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud cluster bmckeyset list --cluster-name
                                            --resource-group
+                                           [--max-items]
+                                           [--next-token]
   examples:
   - summary: |-
       List baseboard management controller key sets of the cluster
@@ -141,11 +151,20 @@ directCommands:
     name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_networkcloud_cluster_bmckeyset_show(networkcloud)
+  optionalParameters:
+  - name: --max-items
+    summary: |-
+      Total number of items to return in the command's output. If the total number of items available is more than the value specified, a token is provided in the command's output. To resume pagination, provide the token value in `--next-token` argument of a subsequent command.
+  - name: --next-token
+    summary: |-
+      Token to specify where to start paginating. This is the token value from a previously truncated response.
+- uid: az_networkcloud_cluster_bmckeyset_show
   name: az networkcloud cluster bmckeyset show
   summary: |-
     Get baseboard management controller key set of the provided cluster.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud cluster bmckeyset show [--bmc-key-set-name]
@@ -173,11 +192,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkcloud_cluster_bmckeyset_update(networkcloud)
+- uid: az_networkcloud_cluster_bmckeyset_update
   name: az networkcloud cluster bmckeyset update
   summary: |-
     Update properties of baseboard management controller key set for the provided cluster, or update the tags associated with it. Properties and tag updates can be done independently.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud cluster bmckeyset update [--bmc-key-set-name]
@@ -192,7 +213,7 @@ directCommands:
   examples:
   - summary: |-
       Patch baseboard management controller key set of cluster
-    syntax: az networkcloud cluster bmckeyset update --name "bmcKeySetName" --expiration "2022-12-31T23:59:59.008Z" --user-list "[{description:'User description',azureUserName:userABC,sshPublicKey:{keyData:'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWtG2RiEGfXs+RK19HU/G8EdEnbTlkl8Kkb5xv6nm+ttTb9FrW/dc9RQvai24VEFJmG4Fmi6Ow/yjxq+jTDuWOSs+LovQpOKm9D8p05JcIOpdCPGA5S+dWIVL+a9jsQmzBbWYx= admin@vm'}}]" --tags key1="myvalue1" key2="myvalue2" --cluster-name "clusterName" --resource-group "resourceGroupName"
+    syntax: az networkcloud cluster bmckeyset update --name "bmcKeySetName" --expiration "2022-12-31T23:59:59.008Z" --user-list "[{description:'User description',azureUserName:userABC,userPrincipalName:'userABC@myorg.com',sshPublicKey:{keyData:'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDWtG2RiEGfXs+RK19HU/G8EdEnbTlkl8Kkb5xv6nm+ttTb9FrW/dc9RQvai24VEFJmG4Fmi6Ow/yjxq+jTDuWOSs+LovQpOKm9D8p05JcIOpdCPGA5S+dWIVL+a9jsQmzBbWYx= admin@vm'}}]" --tags key1="myvalue1" key2="myvalue2" --cluster-name "clusterName" --resource-group "resourceGroupName"
   optionalParameters:
   - name: --bmc-key-set-name --name -n
     summary: |-
@@ -222,11 +243,13 @@ directCommands:
   - name: --user-list
     summary: |-
       The unique list of permitted users.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_networkcloud_cluster_bmckeyset_wait(networkcloud)
+- uid: az_networkcloud_cluster_bmckeyset_wait
   name: az networkcloud cluster bmckeyset wait
   summary: |-
     Place the CLI in a waiting state until a condition is met.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az networkcloud' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az networkcloud cluster bmckeyset wait [--bmc-key-set-name]
@@ -285,12 +308,12 @@ directCommands:
     summary: |-
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
-- az_networkcloud_cluster_bmckeyset_create(networkcloud)
-- az_networkcloud_cluster_bmckeyset_delete(networkcloud)
-- az_networkcloud_cluster_bmckeyset_list(networkcloud)
-- az_networkcloud_cluster_bmckeyset_show(networkcloud)
-- az_networkcloud_cluster_bmckeyset_update(networkcloud)
-- az_networkcloud_cluster_bmckeyset_wait(networkcloud)
+- az_networkcloud_cluster_bmckeyset_create
+- az_networkcloud_cluster_bmckeyset_delete
+- az_networkcloud_cluster_bmckeyset_list
+- az_networkcloud_cluster_bmckeyset_show
+- az_networkcloud_cluster_bmckeyset_update
+- az_networkcloud_cluster_bmckeyset_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -303,7 +326,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

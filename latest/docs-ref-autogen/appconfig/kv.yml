@@ -6,7 +6,7 @@ summary: |-
 status: GA
 sourceType: Core
 directCommands:
-- uid: az_appconfig_kv_delete()
+- uid: az_appconfig_kv_delete
   name: az appconfig kv delete
   summary: |-
     Delete key-values.
@@ -58,7 +58,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_appconfig_kv_export()
+- uid: az_appconfig_kv_export
   name: az appconfig kv export
   summary: |-
     Export configurations to another place from your App Configuration.
@@ -216,12 +216,11 @@ directCommands:
   - name: --snapshot
     summary: |-
       Export all keys in a given snapshot of the App Configuration store. If no snapshot is specified, the keys currently in the store are exported based on the specified key and label filters.
-    isPreview: true
   - name: --yes -y
     defaultValue: "False"
     summary: |-
       Do not prompt for preview.
-- uid: az_appconfig_kv_import()
+- uid: az_appconfig_kv_import
   name: az appconfig kv import
   summary: |-
     Import configurations into your App Configuration from another place.
@@ -372,7 +371,6 @@ directCommands:
   - name: --src-snapshot
     summary: |-
       Import all keys in a given snapshot of the source App Configuration store. If no snapshot is specified, the keys currently in the store are imported based on the specified key and label filters.
-    isPreview: true
   - name: --strict
     defaultValue: "False"
     parameterValueGroup: "false, true"
@@ -382,7 +380,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for preview.
-- uid: az_appconfig_kv_list()
+- uid: az_appconfig_kv_list
   name: az appconfig kv list
   summary: |-
     List key-values.
@@ -464,11 +462,10 @@ directCommands:
   - name: --snapshot
     summary: |-
       List all keys in a given snapshot of the App Configuration store. If no snapshot is specified, the keys currently in the store are listed.
-    isPreview: true
   - name: --top -t
     summary: |-
       Maximum number of items to return. Must be a positive integer. Default to 100.
-- uid: az_appconfig_kv_lock()
+- uid: az_appconfig_kv_lock
   name: az appconfig kv lock
   summary: |-
     Lock a key-value to prohibit write operations.
@@ -517,7 +514,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_appconfig_kv_restore()
+- uid: az_appconfig_kv_restore
   name: az appconfig kv restore
   summary: |-
     Restore key-values.
@@ -570,7 +567,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_appconfig_kv_set()
+- uid: az_appconfig_kv_set
   name: az appconfig kv set
   summary: |-
     Set a key-value.
@@ -643,7 +640,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_appconfig_kv_set-keyvault()
+- uid: az_appconfig_kv_set-keyvault
   name: az appconfig kv set-keyvault
   summary: |-
     Set a keyvault reference.
@@ -701,7 +698,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_appconfig_kv_show()
+- uid: az_appconfig_kv_show
   name: az appconfig kv show
   summary: |-
     Show all attributes of a key-value.
@@ -752,7 +749,7 @@ directCommands:
   - name: --name -n
     summary: |-
       Name of the App Configuration. You can configure the default name using `az configure --defaults app_configuration_store=<name>`.
-- uid: az_appconfig_kv_unlock()
+- uid: az_appconfig_kv_unlock
   name: az appconfig kv unlock
   summary: |-
     Unlock a key-value to gain write operations.
@@ -802,16 +799,16 @@ directCommands:
     summary: |-
       Do not prompt for confirmation.
 commands:
-- az_appconfig_kv_delete()
-- az_appconfig_kv_export()
-- az_appconfig_kv_import()
-- az_appconfig_kv_list()
-- az_appconfig_kv_lock()
-- az_appconfig_kv_restore()
-- az_appconfig_kv_set()
-- az_appconfig_kv_set-keyvault()
-- az_appconfig_kv_show()
-- az_appconfig_kv_unlock()
+- az_appconfig_kv_delete
+- az_appconfig_kv_export
+- az_appconfig_kv_import
+- az_appconfig_kv_list
+- az_appconfig_kv_lock
+- az_appconfig_kv_restore
+- az_appconfig_kv_set
+- az_appconfig_kv_set-keyvault
+- az_appconfig_kv_show
+- az_appconfig_kv_unlock
 globalParameters:
 - name: --debug
   summary: |-
@@ -824,7 +821,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

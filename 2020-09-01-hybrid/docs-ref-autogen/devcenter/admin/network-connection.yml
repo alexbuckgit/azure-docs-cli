@@ -10,7 +10,7 @@ summary: |-
 status: GA
 sourceType: Extension
 directCommands:
-- uid: az_devcenter_admin_network-connection_create(devcenter)
+- uid: az_devcenter_admin_network-connection_create
   name: az devcenter admin network-connection create
   summary: |-
     Create a network connection.
@@ -80,7 +80,7 @@ directCommands:
   - name: --tags
     summary: |-
       Resource tags.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_devcenter_admin_network-connection_delete(devcenter)
+- uid: az_devcenter_admin_network-connection_delete
   name: az devcenter admin network-connection delete
   summary: |-
     Delete a network connection.
@@ -118,7 +118,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_devcenter_admin_network-connection_list(devcenter)
+- uid: az_devcenter_admin_network-connection_list
   name: az devcenter admin network-connection list
   summary: |-
     List network connections.
@@ -145,7 +145,7 @@ directCommands:
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_devcenter_admin_network-connection_list-health-check(devcenter)
+- uid: az_devcenter_admin_network-connection_list-health-check
   name: az devcenter admin network-connection list-health-check
   summary: |-
     List health check status details.
@@ -176,7 +176,7 @@ directCommands:
   - name: --next-token
     summary: |-
       Token to specify where to start paginating. This is the token value from a previously truncated response.
-- uid: az_devcenter_admin_network-connection_list-outbound-network-dependencies-endpoint(devcenter)
+- uid: az_devcenter_admin_network-connection_list-outbound-network-dependencies-endpoint
   name: az devcenter admin network-connection list-outbound-network-dependencies-endpoint
   summary: |-
     List the endpoints that agents may call as part of Dev Box service administration. These FQDNs should be allowed for outbound access in order for the Dev Box service to function.
@@ -207,7 +207,7 @@ directCommands:
   - name: --next-token
     summary: |-
       Token to specify where to start paginating. This is the token value from a previously truncated response.
-- uid: az_devcenter_admin_network-connection_run-health-check(devcenter)
+- uid: az_devcenter_admin_network-connection_run-health-check
   name: az devcenter admin network-connection run-health-check
   summary: |-
     Triggers a new health check run. The execution and health check result can be tracked via the network Connection health check details.
@@ -240,7 +240,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_devcenter_admin_network-connection_show(devcenter)
+- uid: az_devcenter_admin_network-connection_show
   name: az devcenter admin network-connection show
   summary: |-
     Get a network connection.
@@ -268,7 +268,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_devcenter_admin_network-connection_show-health-check(devcenter)
+- uid: az_devcenter_admin_network-connection_show-health-check
   name: az devcenter admin network-connection show-health-check
   summary: |-
     Get health check status details.
@@ -296,7 +296,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_devcenter_admin_network-connection_update(devcenter)
+- uid: az_devcenter_admin_network-connection_update
   name: az devcenter admin network-connection update
   summary: |-
     Update a network connection.
@@ -317,14 +317,14 @@ directCommands:
   examples:
   - summary: |-
       Update
-    syntax: az devcenter admin network-connection update --domain-password "New Password value for user" --name "{networkConnectionName}" --resource-group "rg1"
+    syntax: az devcenter admin network-connection update --domain-password "New Password value for user" --name "networkConnection" --resource-group "rg1"
   optionalParameters:
   - name: --domain-name
     summary: |-
       Active Directory domain name.
   - name: --domain-password
     summary: |-
-      The password for the account used to join domain.  If value is blank it's asked from the tty.
+      The password for the account used to join domain  If value is blank it's asked from the tty.
   - name: --domain-username
     summary: |-
       The username of an Active Directory account (user or service account) that has permissions to create computer objects in Active Directory. Required format: admin@contoso.com.
@@ -333,7 +333,7 @@ directCommands:
       One or more resource IDs (space-delimited). It should be a complete resource ID containing all information of 'Resource Id' arguments. You should provide either --ids or other 'Resource Id' arguments.
   - name: --name --network-connection-name -n
     summary: |-
-      Name of the network connection that can be applied to a pool.
+      Name of the Network Connection that can be applied to a Pool.
   - name: --no-wait
     parameterValueGroup: "0, 1, f, false, n, no, t, true, y, yes"
     summary: |-
@@ -346,14 +346,14 @@ directCommands:
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
   - name: --subnet-id
     summary: |-
-      The subnet to attach dev boxes to.
+      The subnet to attach Virtual Machines to.
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
   - name: --tags
     summary: |-
       Resource tags.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_devcenter_admin_network-connection_wait(devcenter)
+- uid: az_devcenter_admin_network-connection_wait
   name: az devcenter admin network-connection wait
   summary: |-
     Place the CLI in a waiting state until a condition is met.
@@ -412,16 +412,16 @@ directCommands:
     summary: |-
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
-- az_devcenter_admin_network-connection_create(devcenter)
-- az_devcenter_admin_network-connection_delete(devcenter)
-- az_devcenter_admin_network-connection_list(devcenter)
-- az_devcenter_admin_network-connection_list-health-check(devcenter)
-- az_devcenter_admin_network-connection_list-outbound-network-dependencies-endpoint(devcenter)
-- az_devcenter_admin_network-connection_run-health-check(devcenter)
-- az_devcenter_admin_network-connection_show(devcenter)
-- az_devcenter_admin_network-connection_show-health-check(devcenter)
-- az_devcenter_admin_network-connection_update(devcenter)
-- az_devcenter_admin_network-connection_wait(devcenter)
+- az_devcenter_admin_network-connection_create
+- az_devcenter_admin_network-connection_delete
+- az_devcenter_admin_network-connection_list
+- az_devcenter_admin_network-connection_list-health-check
+- az_devcenter_admin_network-connection_list-outbound-network-dependencies-endpoint
+- az_devcenter_admin_network-connection_run-health-check
+- az_devcenter_admin_network-connection_show
+- az_devcenter_admin_network-connection_show-health-check
+- az_devcenter_admin_network-connection_update
+- az_devcenter_admin_network-connection_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -434,7 +434,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

@@ -4,13 +4,13 @@ name: az networkfabric ipprefix
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **managednetworkfabric** extension for the Azure CLI (version 2.45.0 or higher). The extension will automatically install the first time you run an **az networkfabric ipprefix** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **managednetworkfabric** extension for the Azure CLI (version 2.49.0 or higher). The extension will automatically install the first time you run an **az networkfabric ipprefix** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage Ip Prefix Resource.
 status: GA
 sourceType: Extension
 directCommands:
-- uid: az_networkfabric_ipprefix_create(managednetworkfabric)
+- uid: az_networkfabric_ipprefix_create
   name: az networkfabric ipprefix create
   summary: |-
     Create a Ip Prefix resource.
@@ -58,7 +58,7 @@ directCommands:
   - name: --tags
     summary: |-
       Resource tags.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_networkfabric_ipprefix_delete(managednetworkfabric)
+- uid: az_networkfabric_ipprefix_delete
   name: az networkfabric ipprefix delete
   summary: |-
     Delete the Ip Prefix resource.
@@ -91,7 +91,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkfabric_ipprefix_list(managednetworkfabric)
+- uid: az_networkfabric_ipprefix_list
   name: az networkfabric ipprefix list
   summary: |-
     List all Ip Prefixes in the provided resource group or subscription.
@@ -109,7 +109,7 @@ directCommands:
   - name: --resource-group -g
     summary: |-
       Name of the resource group.
-- uid: az_networkfabric_ipprefix_show(managednetworkfabric)
+- uid: az_networkfabric_ipprefix_show
   name: az networkfabric ipprefix show
   summary: |-
     Show details of the provided Ip Prefix resource.
@@ -137,7 +137,52 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkfabric_ipprefix_wait(managednetworkfabric)
+- uid: az_networkfabric_ipprefix_update
+  name: az networkfabric ipprefix update
+  summary: |-
+    Update to update certain properties of the IP Prefix resource.
+  status: GA
+  sourceType: Extension
+  syntax: >-
+    az networkfabric ipprefix update [--annotation]
+                                     [--ids]
+                                     [--ip-prefix-rules]
+                                     [--no-wait {0, 1, f, false, n, no, t, true, y, yes}]
+                                     [--resource-group]
+                                     [--resource-name]
+                                     [--subscription]
+                                     [--tags]
+  examples:
+  - summary: |-
+      Update IP prefix
+    syntax: az networkfabric ipprefix update  -g "example-rg" --resource-name "example-ipprefix" --ip-prefix-rules "[{action:Permit,sequenceNumber:4155123341,networkPrefix:'10.10.10.10/30',condition:GreaterThanOrEqualTo,subnetMaskLength:10}]"
+  optionalParameters:
+  - name: --annotation
+    summary: |-
+      Description for underlying resource.
+  - name: --ids
+    summary: |-
+      One or more resource IDs (space-delimited). It should be a complete resource ID containing all information of 'Resource Id' arguments. You should provide either --ids or other 'Resource Id' arguments.
+  - name: --ip-prefix-rules
+    summary: |-
+      The list of IP Prefix Rules.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
+  - name: --no-wait
+    parameterValueGroup: "0, 1, f, false, n, no, t, true, y, yes"
+    summary: |-
+      Do not wait for the long-running operation to finish.
+  - name: --resource-group -g
+    summary: |-
+      Name of the resource group.
+  - name: --resource-name
+    summary: |-
+      Name of the IP Prefix.
+  - name: --subscription
+    summary: |-
+      Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
+  - name: --tags
+    summary: |-
+      Resource tags  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
+- uid: az_networkfabric_ipprefix_wait
   name: az networkfabric ipprefix wait
   summary: |-
     Place the CLI in a waiting state until a condition is met.
@@ -196,11 +241,12 @@ directCommands:
     summary: |-
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
-- az_networkfabric_ipprefix_create(managednetworkfabric)
-- az_networkfabric_ipprefix_delete(managednetworkfabric)
-- az_networkfabric_ipprefix_list(managednetworkfabric)
-- az_networkfabric_ipprefix_show(managednetworkfabric)
-- az_networkfabric_ipprefix_wait(managednetworkfabric)
+- az_networkfabric_ipprefix_create
+- az_networkfabric_ipprefix_delete
+- az_networkfabric_ipprefix_list
+- az_networkfabric_ipprefix_show
+- az_networkfabric_ipprefix_update
+- az_networkfabric_ipprefix_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -213,7 +259,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

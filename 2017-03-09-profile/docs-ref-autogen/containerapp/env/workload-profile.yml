@@ -1,21 +1,22 @@
 ### YamlMime:AzureCLIGroup
 uid: az_containerapp_env_workload-profile
 name: az containerapp env workload-profile
-extensionInformation: >-
+importantNote: >-
   > [!NOTE]
 
-  > This reference is part of the **containerapp** extension for the Azure CLI (version 2.45.0 or higher). The extension will automatically install the first time you run an **az containerapp env workload-profile** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This command group has commands that are defined in both Azure CLI and at least one extension. Install each extension to benefit from its extended capabilities. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage the workload profiles of a Container Apps environment.
 status: GA
-sourceType: Extension
+sourceType: Core and Extension
 directCommands:
-- uid: az_containerapp_env_workload-profile_add(containerapp)
+- uid: az_containerapp_env_workload-profile_add
   name: az containerapp env workload-profile add
   summary: |-
     Create a workload profile in a Container Apps environment.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp env workload-profile add --name
                                              --resource-group
@@ -50,12 +51,13 @@ directCommands:
   - name: --workload-profile-type
     summary: |-
       The type of workload profile to add to this environment. Run 'az containerapp env workload-profile list-supported -l <region>' to check the options for your region.
-- uid: az_containerapp_env_workload-profile_delete(containerapp)
+- uid: az_containerapp_env_workload-profile_delete
   name: az containerapp env workload-profile delete
   summary: |-
     Delete a workload profile from a Container Apps environment.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp env workload-profile delete --name
                                                 --resource-group
@@ -77,12 +79,13 @@ directCommands:
     name: --workload-profile-name -w
     summary: |-
       The friendly name for the workload profile.
-- uid: az_containerapp_env_workload-profile_list(containerapp)
+- uid: az_containerapp_env_workload-profile_list
   name: az containerapp env workload-profile list
   summary: |-
     List the workload profiles from a Container Apps environment.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp env workload-profile list --name
                                               --resource-group
@@ -99,12 +102,13 @@ directCommands:
     name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_containerapp_env_workload-profile_list-supported(containerapp)
+- uid: az_containerapp_env_workload-profile_list-supported
   name: az containerapp env workload-profile list-supported
   summary: |-
     List the supported workload profiles in a region.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: az containerapp env workload-profile list-supported --location
   examples:
   - summary: |-
@@ -115,13 +119,13 @@ directCommands:
     name: --location -l
     summary: |-
       Location of resource. Examples: eastus2, northeurope.
-- uid: az_containerapp_env_workload-profile_set(containerapp)
+- uid: az_containerapp_env_workload-profile_set
   name: az containerapp env workload-profile set
   summary: |-
     Create or update an existing workload profile in a Container Apps environment.
   status: Deprecated
   isDeprecated: true
-  deprecateInfo: This command has been deprecated and will be removed in a future release.
+  deprecateInfo: This command has been deprecated and will be removed in a future release. Use 'containerapp env workload-profile add/update' instead.
   sourceType: Extension
   syntax: >-
     az containerapp env workload-profile set --name
@@ -157,12 +161,13 @@ directCommands:
   - name: --workload-profile-type
     summary: |-
       The type of workload profile to add or update. Run 'az containerapp env workload-profile list-supported -l <region>' to check the options for your region.
-- uid: az_containerapp_env_workload-profile_show(containerapp)
+- uid: az_containerapp_env_workload-profile_show
   name: az containerapp env workload-profile show
   summary: |-
     Show a workload profile from a Container Apps environment.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp env workload-profile show --name
                                               --resource-group
@@ -184,23 +189,23 @@ directCommands:
     name: --workload-profile-name -w
     summary: |-
       The friendly name for the workload profile.
-- uid: az_containerapp_env_workload-profile_update(containerapp)
+- uid: az_containerapp_env_workload-profile_update
   name: az containerapp env workload-profile update
   summary: |-
     Update an existing workload profile in a Container Apps environment.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp env workload-profile update --name
                                                 --resource-group
                                                 --workload-profile-name
                                                 [--max-nodes]
                                                 [--min-nodes]
-                                                [--workload-profile-type]
   examples:
   - summary: |-
       Update an existing workload profile in a Container Apps environment
-    syntax: az containerapp env workload-profile update -g MyResourceGroup -n MyEnvironment --workload-profile-name my-wlp --workload-profile-type D4 --min-nodes 1 --max-nodes 3
+    syntax: az containerapp env workload-profile update -g MyResourceGroup -n MyEnvironment --workload-profile-name my-wlp --min-nodes 1 --max-nodes 3
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -221,17 +226,14 @@ directCommands:
   - name: --min-nodes
     summary: |-
       The minimum node count for the workload profile.
-  - name: --workload-profile-type
-    summary: |-
-      The type of workload profile to update. Run 'az containerapp env workload-profile list-supported -l <region>' to check the options for your region.
 commands:
-- az_containerapp_env_workload-profile_add(containerapp)
-- az_containerapp_env_workload-profile_delete(containerapp)
-- az_containerapp_env_workload-profile_list(containerapp)
-- az_containerapp_env_workload-profile_list-supported(containerapp)
-- az_containerapp_env_workload-profile_set(containerapp)
-- az_containerapp_env_workload-profile_show(containerapp)
-- az_containerapp_env_workload-profile_update(containerapp)
+- az_containerapp_env_workload-profile_add
+- az_containerapp_env_workload-profile_delete
+- az_containerapp_env_workload-profile_list
+- az_containerapp_env_workload-profile_list-supported
+- az_containerapp_env_workload-profile_set
+- az_containerapp_env_workload-profile_show
+- az_containerapp_env_workload-profile_update
 globalParameters:
 - name: --debug
   summary: |-
@@ -244,7 +246,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

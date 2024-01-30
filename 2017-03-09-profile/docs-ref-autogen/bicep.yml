@@ -4,7 +4,7 @@ name: az bicep
 summary: |-
   Bicep CLI command group.
 description: |-
-  Bicep CLI command group. There are two configurations that can be set for the command group, including bicep.check_version and bicep.use_binary_from_path:
+  There are two configurations that can be set for the command group, including bicep.check_version and bicep.use_binary_from_path:
 
   [1] az config set bicep.check_version=True/False
       Turn on/off Bicep CLI version check when executing az bicep commands.
@@ -14,7 +14,7 @@ description: |-
 status: GA
 sourceType: Core
 directCommands:
-- uid: az_bicep_build()
+- uid: az_bicep_build
   name: az bicep build
   summary: |-
     Build a Bicep file.
@@ -60,7 +60,7 @@ directCommands:
   - name: --stdout
     summary: |-
       When set, prints all output to stdout instead of corresponding files.
-- uid: az_bicep_build-params()
+- uid: az_bicep_build-params
   name: az bicep build-params
   summary: |-
     Build .bicepparam file.
@@ -100,7 +100,7 @@ directCommands:
   - name: --stdout
     summary: |-
       When set, prints all output to stdout instead of corresponding files.
-- uid: az_bicep_decompile()
+- uid: az_bicep_decompile
   name: az bicep decompile
   summary: |-
     Attempt to decompile an ARM template file to a Bicep file.
@@ -125,7 +125,7 @@ directCommands:
   - name: --force
     summary: |-
       Allows overwriting the output file if it exists.
-- uid: az_bicep_decompile-params()
+- uid: az_bicep_decompile-params
   name: az bicep decompile-params
   summary: |-
     Decompile a parameters .json file to .bicepparam.
@@ -171,7 +171,7 @@ directCommands:
   - name: --stdout
     summary: |-
       When set, prints all output to stdout instead of corresponding files.
-- uid: az_bicep_format()
+- uid: az_bicep_format
   name: az bicep format
   summary: |-
     Format a Bicep file.
@@ -235,7 +235,7 @@ directCommands:
   - name: --stdout
     summary: |-
       When set, prints all output to stdout instead of corresponding files.
-- uid: az_bicep_generate-params()
+- uid: az_bicep_generate-params
   name: az bicep generate-params
   summary: |-
     Generate parameters file for a Bicep file.
@@ -292,7 +292,7 @@ directCommands:
   - name: --stdout
     summary: |-
       When set, prints all output to stdout instead of corresponding files.
-- uid: az_bicep_install()
+- uid: az_bicep_install
   name: az bicep install
   summary: |-
     Install Bicep CLI.
@@ -319,14 +319,47 @@ directCommands:
   - name: --version -v
     summary: |-
       The version of Bicep CLI to be installed. Default to the latest if not specified.
-- uid: az_bicep_list-versions()
+- uid: az_bicep_lint
+  name: az bicep lint
+  summary: |-
+    Lint a Bicep file.
+  status: GA
+  sourceType: Core
+  syntax: >-
+    az bicep lint --file
+                  [--diagnostics-format {default, sarif}]
+                  [--no-restore]
+  examples:
+  - summary: |-
+      Lint a Bicep file.
+    syntax: az bicep lint --file {bicep_file}
+  - summary: |-
+      Lint a Bicep file without restoring external modules.
+    syntax: az bicep lint --file {bicep_file} --no-restore
+  - summary: |-
+      Lint a Bicep file with specified diagnostics format. Valid values are ( default | sarif ).
+    syntax: az bicep lint --file {bicep_file} --diagnostics-format {diagnostics_format}
+  requiredParameters:
+  - isRequired: true
+    name: --file -f
+    summary: |-
+      The path to the Bicep module file to lint in the file system.
+  optionalParameters:
+  - name: --diagnostics-format
+    parameterValueGroup: "default, sarif"
+    summary: |-
+      Set diagnostics format.
+  - name: --no-restore
+    summary: |-
+      When set, generates the parameters file without restoring external modules.
+- uid: az_bicep_list-versions
   name: az bicep list-versions
   summary: |-
     List out all available versions of Bicep CLI.
   status: GA
   sourceType: Core
   syntax: az bicep list-versions
-- uid: az_bicep_publish()
+- uid: az_bicep_publish
   name: az bicep publish
   summary: |-
     Publish a bicep file to a remote module registry.
@@ -337,6 +370,7 @@ directCommands:
                      --target
                      [--documentationUri]
                      [--force]
+                     [--with-source]
   examples:
   - summary: |-
       Publish a bicep file.
@@ -347,6 +381,9 @@ directCommands:
   - summary: |-
       Publish a bicep file with documentation uri.
     syntax: az bicep publish --file {bicep_file} --target "br:{registry}/{module_path}:{tag}" --documentationUri {documentationUri}
+  - summary: |-
+      Publish a bicep file with documentation uri and include source code
+    syntax: az bicep publish --file {bicep_file} --target "br:{registry}/{module_path}:{tag}" --documentationUri {documentationUri} --with-source
   requiredParameters:
   - isRequired: true
     name: --file -f
@@ -363,7 +400,11 @@ directCommands:
   - name: --force
     summary: |-
       Allow overwriting an existing Bicep module version.
-- uid: az_bicep_restore()
+  - name: --with-source
+    summary: |-
+      Publish source code with the module.
+    isPreview: true
+- uid: az_bicep_restore
   name: az bicep restore
   summary: |-
     Restore external modules for a bicep file.
@@ -388,14 +429,14 @@ directCommands:
   - name: --force
     summary: |-
       Allows overwriting the cached external modules.
-- uid: az_bicep_uninstall()
+- uid: az_bicep_uninstall
   name: az bicep uninstall
   summary: |-
     Uninstall Bicep CLI.
   status: GA
   sourceType: Core
   syntax: az bicep uninstall
-- uid: az_bicep_upgrade()
+- uid: az_bicep_upgrade
   name: az bicep upgrade
   summary: |-
     Upgrade Bicep CLI to the latest version.
@@ -414,7 +455,7 @@ directCommands:
     parameterValueGroup: "linux-arm64, linux-musl-x64, linux-x64, osx-arm64, osx-x64, win-x64"
     summary: |-
       The platform the Bicep CLI will be running on. Set this to skip automatic platform detection if it does not work properly.
-- uid: az_bicep_version()
+- uid: az_bicep_version
   name: az bicep version
   summary: |-
     Show the installed version of Bicep CLI.
@@ -422,19 +463,20 @@ directCommands:
   sourceType: Core
   syntax: az bicep version
 commands:
-- az_bicep_build()
-- az_bicep_build-params()
-- az_bicep_decompile()
-- az_bicep_decompile-params()
-- az_bicep_format()
-- az_bicep_generate-params()
-- az_bicep_install()
-- az_bicep_list-versions()
-- az_bicep_publish()
-- az_bicep_restore()
-- az_bicep_uninstall()
-- az_bicep_upgrade()
-- az_bicep_version()
+- az_bicep_build
+- az_bicep_build-params
+- az_bicep_decompile
+- az_bicep_decompile-params
+- az_bicep_format
+- az_bicep_generate-params
+- az_bicep_install
+- az_bicep_lint
+- az_bicep_list-versions
+- az_bicep_publish
+- az_bicep_restore
+- az_bicep_uninstall
+- az_bicep_upgrade
+- az_bicep_version
 globalParameters:
 - name: --debug
   summary: |-
@@ -447,7 +489,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query
@@ -461,7 +503,7 @@ globalParameters:
     Increase logging verbosity. Use --debug for full debug logs.
 metadata:
   description: >-
-    Bicep CLI command group. There are two configurations that can be set for the command group, including bicep.check_version and bicep.use_binary_from_path:
+    There are two configurations that can be set for the command group, including bicep.check_version and bicep.use_binary_from_path:
 
 
     [1] az config set bicep.check_version=True/False

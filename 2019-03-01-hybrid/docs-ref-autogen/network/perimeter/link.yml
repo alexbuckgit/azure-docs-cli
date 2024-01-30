@@ -4,13 +4,13 @@ name: az network perimeter link
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **nsp** extension for the Azure CLI (version 2.45.0 or higher). The extension will automatically install the first time you run an **az network perimeter link** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **nsp** extension for the Azure CLI (version 2.54.0 or higher). The extension will automatically install the first time you run an **az network perimeter link** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage network security perimeter link.
 status: GA
 sourceType: Extension
 directCommands:
-- uid: az_network_perimeter_link_create(nsp)
+- uid: az_network_perimeter_link_create
   name: az network perimeter link create
   summary: |-
     Create NSP link resource.
@@ -54,7 +54,7 @@ directCommands:
   - name: --remote-inbound-profile
     summary: |-
       List of remote Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles. This property can only be updated in auto-approval mode. It's default value is ['*'].  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_network_perimeter_link_delete(nsp)
+- uid: az_network_perimeter_link_delete
   name: az network perimeter link delete
   summary: |-
     Delete an NSP Link resource.
@@ -96,7 +96,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_network_perimeter_link_list(nsp)
+- uid: az_network_perimeter_link_list
   name: az network perimeter link list
   summary: |-
     List the NSP Link resources in the specified network security perimeter.
@@ -105,6 +105,8 @@ directCommands:
   syntax: >-
     az network perimeter link list --perimeter-name
                                    --resource-group
+                                   [--max-items]
+                                   [--next-token]
                                    [--skip-token]
                                    [--top]
   examples:
@@ -121,13 +123,19 @@ directCommands:
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
   optionalParameters:
+  - name: --max-items
+    summary: |-
+      Total number of items to return in the command's output. If the total number of items available is more than the value specified, a token is provided in the command's output. To resume pagination, provide the token value in `--next-token` argument of a subsequent command.
+  - name: --next-token
+    summary: |-
+      Token to specify where to start paginating. This is the token value from a previously truncated response.
   - name: --skip-token
     summary: |-
       SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.
   - name: --top
     summary: |-
       An optional query parameter which specifies the maximum number of records to be returned by the server.
-- uid: az_network_perimeter_link_show(nsp)
+- uid: az_network_perimeter_link_show
   name: az network perimeter link show
   summary: |-
     Get the specified NSP link resource.
@@ -159,7 +167,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_network_perimeter_link_update(nsp)
+- uid: az_network_perimeter_link_update
   name: az network perimeter link update
   summary: |-
     Update NSP link resource.
@@ -220,7 +228,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_network_perimeter_link_wait(nsp)
+- uid: az_network_perimeter_link_wait
   name: az network perimeter link wait
   summary: |-
     Place the CLI in a waiting state until a condition is met.
@@ -283,12 +291,12 @@ directCommands:
     summary: |-
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
-- az_network_perimeter_link_create(nsp)
-- az_network_perimeter_link_delete(nsp)
-- az_network_perimeter_link_list(nsp)
-- az_network_perimeter_link_show(nsp)
-- az_network_perimeter_link_update(nsp)
-- az_network_perimeter_link_wait(nsp)
+- az_network_perimeter_link_create
+- az_network_perimeter_link_delete
+- az_network_perimeter_link_list
+- az_network_perimeter_link_show
+- az_network_perimeter_link_update
+- az_network_perimeter_link_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -301,7 +309,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

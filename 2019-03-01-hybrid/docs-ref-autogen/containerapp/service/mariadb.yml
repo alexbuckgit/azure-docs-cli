@@ -4,20 +4,24 @@ name: az containerapp service mariadb
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **containerapp** extension for the Azure CLI (version 2.45.0 or higher). The extension will automatically install the first time you run an **az containerapp service mariadb** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **containerapp** extension for the Azure CLI (version 2.53.0 or higher). The extension will automatically install the first time you run an **az containerapp service mariadb** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Commands to manage the mariadb service for the Container Apps environment.
-status: Preview
+status: Preview and Deprecated
+isDeprecated: true
 isPreview: true
+deprecateInfo: This command group is implicitly deprecated because command group 'containerapp service' is deprecated and will be removed in a future release. Use 'containerapp add-on' instead.
 previewOrExperimentalInfo: "Command group 'containerapp service' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
 sourceType: Extension
 directCommands:
-- uid: az_containerapp_service_mariadb_create(containerapp)
+- uid: az_containerapp_service_mariadb_create
   name: az containerapp service mariadb create
   summary: |-
     Command to create the mariadb service.
-  status: Preview
+  status: Preview and Deprecated
+  isDeprecated: true
   isPreview: true
+  deprecateInfo: This command is implicitly deprecated because command group 'containerapp service mariadb' is deprecated and will be removed in a future release. Use 'containerapp add-on mariadb' instead.
   previewOrExperimentalInfo: "Command group 'containerapp service' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
@@ -43,12 +47,14 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not wait for the long-running operation to finish.
-- uid: az_containerapp_service_mariadb_delete(containerapp)
+- uid: az_containerapp_service_mariadb_delete
   name: az containerapp service mariadb delete
   summary: |-
     Command to delete the mariadb service.
-  status: Preview
+  status: Preview and Deprecated
+  isDeprecated: true
   isPreview: true
+  deprecateInfo: This command is implicitly deprecated because command group 'containerapp service mariadb' is deprecated and will be removed in a future release. Use 'containerapp add-on mariadb' instead.
   previewOrExperimentalInfo: "Command group 'containerapp service' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
@@ -75,8 +81,8 @@ directCommands:
     summary: |-
       Do not prompt for confirmation.
 commands:
-- az_containerapp_service_mariadb_create(containerapp)
-- az_containerapp_service_mariadb_delete(containerapp)
+- az_containerapp_service_mariadb_create
+- az_containerapp_service_mariadb_delete
 globalParameters:
 - name: --debug
   summary: |-
@@ -89,7 +95,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

@@ -4,13 +4,13 @@ name: az networkfabric acl
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **managednetworkfabric** extension for the Azure CLI (version 2.45.0 or higher). The extension will automatically install the first time you run an **az networkfabric acl** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **managednetworkfabric** extension for the Azure CLI (version 2.49.0 or higher). The extension will automatically install the first time you run an **az networkfabric acl** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage Access Control List Resource.
 status: GA
 sourceType: Extension
 directCommands:
-- uid: az_networkfabric_acl_create(managednetworkfabric)
+- uid: az_networkfabric_acl_create
   name: az networkfabric acl create
   summary: |-
     Create a Access Control List resource.
@@ -79,7 +79,7 @@ directCommands:
   - name: --tags
     summary: |-
       Resource tags.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_networkfabric_acl_delete(managednetworkfabric)
+- uid: az_networkfabric_acl_delete
   name: az networkfabric acl delete
   summary: |-
     Delete the Access Control List resource.
@@ -112,7 +112,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkfabric_acl_list(managednetworkfabric)
+- uid: az_networkfabric_acl_list
   name: az networkfabric acl list
   summary: |-
     List all Access Control Lists in the provided resource group or subscription.
@@ -130,7 +130,7 @@ directCommands:
   - name: --resource-group -g
     summary: |-
       Name of the resource group.
-- uid: az_networkfabric_acl_show(managednetworkfabric)
+- uid: az_networkfabric_acl_show
   name: az networkfabric acl show
   summary: |-
     Show details of the provided Access Control List resource.
@@ -158,7 +158,70 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_networkfabric_acl_wait(managednetworkfabric)
+- uid: az_networkfabric_acl_update
+  name: az networkfabric acl update
+  summary: |-
+    Update the Access Control List resource.
+  status: GA
+  sourceType: Extension
+  syntax: >-
+    az networkfabric acl update [--acls-url]
+                                [--annotation]
+                                [--configuration-type {File, Inline}]
+                                [--default-action {Deny, Permit}]
+                                [--dynamic-match-configurations]
+                                [--ids]
+                                [--match-configurations]
+                                [--no-wait {0, 1, f, false, n, no, t, true, y, yes}]
+                                [--resource-group]
+                                [--resource-name]
+                                [--subscription]
+                                [--tags]
+  examples:
+  - summary: |-
+      Update ACL with Inline configuration type
+    syntax: az networkfabric acl update -g "example-rg" --resource-name "example-acl" --configuration-type "Inline" --default-action "Permit"  --dynamic-match-configurations "[{ipGroups:[{name:'example-ipGroup',ipAddressType:IPv4,ipPrefixes:['10.20.3.1/20']}],vlanGroups:[{name:'example-vlanGroup',vlans:['20-30']}],portGroups:[{name:'example-portGroup',ports:['100-200']}]}]" --match-configurations "[{matchConfigurationName:'example-match',sequenceNumber:123,ipAddressType:IPv4,matchConditions:[{etherTypes:['0x1'],fragments:['0xff00-0xffff'],ipLengths:['4094-9214'],ttlValues:[23],dscpMarkings:[32],portCondition:{flags:[established],portType:SourcePort,layer4Protocol:TCP,ports:['1-20'],portGroupNames:['example-portGroup']},protocolTypes:[TCP],vlanMatchCondition:{vlans:['20-30'],innerVlans:[30],vlanGroupNames:['example-vlanGroup']},ipCondition:{type:SourceIP,prefixType:Prefix,ipPrefixValues:['10.20.20.20/12'],ipGroupNames:['example-ipGroup']}}],actions:[{type:Count,counterName:'example-counter'}]}]"
+  optionalParameters:
+  - name: --acls-url
+    summary: |-
+      Access Control List file URL.
+  - name: --annotation
+    summary: |-
+      Description for underlying resource.
+  - name: --configuration-type
+    parameterValueGroup: "File, Inline"
+    summary: |-
+      Input method to configure Access Control List. Example: File.
+  - name: --default-action
+    parameterValueGroup: "Deny, Permit"
+    summary: |-
+      Default action that needs to be applied when no condition is matched. Example: Permit.
+  - name: --dynamic-match-configurations
+    summary: |-
+      List of dynamic match configurations.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
+  - name: --ids
+    summary: |-
+      One or more resource IDs (space-delimited). It should be a complete resource ID containing all information of 'Resource Id' arguments. You should provide either --ids or other 'Resource Id' arguments.
+  - name: --match-configurations
+    summary: |-
+      List of match configurations.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
+  - name: --no-wait
+    parameterValueGroup: "0, 1, f, false, n, no, t, true, y, yes"
+    summary: |-
+      Do not wait for the long-running operation to finish.
+  - name: --resource-group -g
+    summary: |-
+      Name of the resource group.
+  - name: --resource-name
+    summary: |-
+      Name of the Access Control List.
+  - name: --subscription
+    summary: |-
+      Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
+  - name: --tags
+    summary: |-
+      Resource tags  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
+- uid: az_networkfabric_acl_wait
   name: az networkfabric acl wait
   summary: |-
     Place the CLI in a waiting state until a condition is met.
@@ -217,11 +280,12 @@ directCommands:
     summary: |-
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
-- az_networkfabric_acl_create(managednetworkfabric)
-- az_networkfabric_acl_delete(managednetworkfabric)
-- az_networkfabric_acl_list(managednetworkfabric)
-- az_networkfabric_acl_show(managednetworkfabric)
-- az_networkfabric_acl_wait(managednetworkfabric)
+- az_networkfabric_acl_create
+- az_networkfabric_acl_delete
+- az_networkfabric_acl_list
+- az_networkfabric_acl_show
+- az_networkfabric_acl_update
+- az_networkfabric_acl_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -234,7 +298,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

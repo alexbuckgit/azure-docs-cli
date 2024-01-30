@@ -6,7 +6,7 @@ summary: |-
 status: GA
 sourceType: Core
 directCommands:
-- uid: az_network_public-ip_prefix_create()
+- uid: az_network_public-ip_prefix_create
   name: az network public-ip prefix create
   summary: |-
     Create a public IP prefix resource.
@@ -23,6 +23,7 @@ directCommands:
                                        [--location]
                                        [--no-wait {0, 1, f, false, n, no, t, true, y, yes}]
                                        [--tags]
+                                       [--tier {Global, Regional}]
                                        [--version {IPv4, IPv6}]
                                        [--zone]
   examples:
@@ -61,6 +62,10 @@ directCommands:
   - name: --tags
     summary: |-
       Space-separated tags: key[=value] [key[=value] ...]. Use "" to clear existing tags.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
+  - name: --tier
+    parameterValueGroup: "Global, Regional"
+    summary: |-
+      Tier of a public IP prefix SKU.
   - name: --version
     defaultValue: "IPv4"
     parameterValueGroup: "IPv4, IPv6"
@@ -69,7 +74,7 @@ directCommands:
   - name: --zone -z
     summary: |-
       Space-separated list of availability zones into which to provision the resource.  Allowed values: 1, 2, 3.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_network_public-ip_prefix_delete()
+- uid: az_network_public-ip_prefix_delete
   name: az network public-ip prefix delete
   summary: |-
     Delete a public IP prefix resource.
@@ -103,23 +108,32 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_network_public-ip_prefix_list()
+- uid: az_network_public-ip_prefix_list
   name: az network public-ip prefix list
   summary: |-
     List public IP prefix resources.
   status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/network/_help.py
-  syntax: az network public-ip prefix list [--resource-group]
+  syntax: >-
+    az network public-ip prefix list [--max-items]
+                                     [--next-token]
+                                     [--resource-group]
   examples:
   - summary: |-
       List public IP prefix resource.
     syntax: az network public-ip prefix list --resource-group MyResourceGroup
   optionalParameters:
+  - name: --max-items
+    summary: |-
+      Total number of items to return in the command's output. If the total number of items available is more than the value specified, a token is provided in the command's output. To resume pagination, provide the token value in `--next-token` argument of a subsequent command.
+  - name: --next-token
+    summary: |-
+      Token to specify where to start paginating. This is the token value from a previously truncated response.
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_network_public-ip_prefix_show()
+- uid: az_network_public-ip_prefix_show
   name: az network public-ip prefix show
   summary: |-
     Get the details of a public IP prefix resource.
@@ -152,7 +166,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_network_public-ip_prefix_update()
+- uid: az_network_public-ip_prefix_update
   name: az network public-ip prefix update
   summary: |-
     Update a public IP prefix resource.
@@ -207,7 +221,7 @@ directCommands:
   - name: --tags
     summary: |-
       Resource tags.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_network_public-ip_prefix_wait()
+- uid: az_network_public-ip_prefix_wait
   name: az network public-ip prefix wait
   summary: |-
     Place the CLI in a waiting state until a condition is met.
@@ -271,12 +285,12 @@ directCommands:
     summary: |-
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
-- az_network_public-ip_prefix_create()
-- az_network_public-ip_prefix_delete()
-- az_network_public-ip_prefix_list()
-- az_network_public-ip_prefix_show()
-- az_network_public-ip_prefix_update()
-- az_network_public-ip_prefix_wait()
+- az_network_public-ip_prefix_create
+- az_network_public-ip_prefix_delete
+- az_network_public-ip_prefix_list
+- az_network_public-ip_prefix_show
+- az_network_public-ip_prefix_update
+- az_network_public-ip_prefix_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -289,7 +303,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query
@@ -302,5 +316,5 @@ globalParameters:
   summary: |-
     Increase logging verbosity. Use --debug for full debug logs.
 metadata:
-  ms.date: 06/27/2023
+  ms.date: 10/11/2023
   description: Manage public IP prefix resources.

@@ -6,7 +6,7 @@ summary: |-
 status: GA
 sourceType: Core
 directCommands:
-- uid: az_sql_db_copy()
+- uid: az_sql_db_copy
   name: az sql db copy
   summary: |-
     Create a copy of a database.
@@ -143,7 +143,7 @@ directCommands:
       Name of the Azure SQL Server. You can configure the default using `az configure --defaults sql-server=<name>`.
   - name: --service-level-objective --service-objective
     summary: |-
-      The service objective for the new database. For example: Basic, S0, P1, GP_Gen4_1, GP_Gen5_S_8, BC_Gen5_2, HS_Gen5_32.
+      The service objective for the new database. For example: Basic, S0, P1, GP_Gen4_1, GP_S_Gen5_8, BC_Gen5_2, HS_Gen5_32.
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
@@ -157,7 +157,7 @@ directCommands:
     parameterValueGroup: "false, true"
     summary: |-
       Specifies whether to enable zone redundancy. Default is true if no value is specified.
-- uid: az_sql_db_create()
+- uid: az_sql_db_create
   name: az sql db create
   summary: |-
     Create a database.
@@ -182,8 +182,10 @@ directCommands:
                      [--elastic-pool]
                      [--encryption-protector]
                      [--encryption-protector-auto-rotation {false, true}]
+                     [--exhaustion-behavior {AutoPause, BillOverUsage}]
                      [--family]
                      [--federated-client-id]
+                     [--free-limit {false, true}]
                      [--ha-replicas]
                      [--keys]
                      [--ledger-on {Disabled, Enabled}]
@@ -225,6 +227,9 @@ directCommands:
   - summary: |-
       Create a database with VBS enclave enabled.
     syntax: az sql db create -g mygroup -s myserver -n mydb --preferred-enclave-type VBS
+  - summary: |-
+      Create a database with free limit applied
+    syntax: az sql db create -g mygroup -s myserver -n mydb -e GeneralPurpose -f Gen5 -c 2 --compute-model Serverless --use-free-limit --free-limit-exhaustion-behavior AutoPause
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -279,12 +284,20 @@ directCommands:
     parameterValueGroup: "false, true"
     summary: |-
       Specifies the database encryption protector key auto rotation flag. Can be either true, false or null.
+  - name: --exhaustion-behavior --fleb --free-limit-exhaustion-behavior
+    parameterValueGroup: "AutoPause, BillOverUsage"
+    summary: |-
+      Specifies the behavior when monthly free limits are exhausted for the free database.AutoPause: The database will be auto paused upon exhaustion of free limits for remainder of the month.BillForUsage: The database will continue to be online upon exhaustion of free limitsand any overage will be billed.
   - name: --family -f
     summary: |-
       The compute generation component of the sku (for vcore skus only). Allowed values include: Gen4, Gen5.
   - name: --federated-client-id
     summary: |-
       The federated client id for the SQL Database. It is used for cross tenant CMK scenario.
+  - name: --free-limit --use-free-limit
+    parameterValueGroup: "false, true"
+    summary: |-
+      Whether or not the database uses free monthly limits. Allowed on one database in a subscription.
   - name: --ha-replicas --read-replicas
     summary: |-
       The number of high availability replicas to provision for the database. Only settable for Hyperscale edition.
@@ -326,7 +339,7 @@ directCommands:
       The name of the sample schema to apply when creating thisdatabase.
   - name: --service-level-objective --service-objective
     summary: |-
-      The service objective for the new database. For example: Basic, S0, P1, GP_Gen4_1, GP_Gen5_S_8, BC_Gen5_2, HS_Gen5_32.
+      The service objective for the new database. For example: Basic, S0, P1, GP_Gen4_1, GP_S_Gen5_8, BC_Gen5_2, HS_Gen5_32.
   - name: --tags
     summary: |-
       Space-separated tags: key[=value] [key[=value] ...]. Use "" to clear existing tags.
@@ -340,7 +353,7 @@ directCommands:
     parameterValueGroup: "false, true"
     summary: |-
       Specifies whether to enable zone redundancy. Default is true if no value is specified.
-- uid: az_sql_db_delete()
+- uid: az_sql_db_delete
   name: az sql db delete
   summary: |-
     Delete a database.
@@ -383,7 +396,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_sql_db_export()
+- uid: az_sql_db_export
   name: az sql db export
   summary: |-
     Export a database to a bacpac.
@@ -468,7 +481,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_sql_db_import()
+- uid: az_sql_db_import
   name: az sql db import
   summary: |-
     Imports a bacpac into an existing database.
@@ -553,7 +566,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_sql_db_list()
+- uid: az_sql_db_list
   name: az sql db list
   summary: |-
     List databases on a server or elastic pool.
@@ -586,7 +599,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_sql_db_list-deleted()
+- uid: az_sql_db_list-deleted
   name: az sql db list-deleted
   summary: |-
     Gets a list of restorable dropped databases.
@@ -611,7 +624,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_sql_db_list-editions()
+- uid: az_sql_db_list-editions
   name: az sql db list-editions
   summary: |-
     Show database editions available for the currently active subscription.
@@ -664,7 +677,7 @@ directCommands:
   - name: --vcores
     summary: |-
       Number of vcores to search for. If unspecified, all vcore sizes are shown.
-- uid: az_sql_db_list-usages()
+- uid: az_sql_db_list-usages
   name: az sql db list-usages
   summary: |-
     Gets database usages.
@@ -693,7 +706,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_sql_db_rename()
+- uid: az_sql_db_rename
   name: az sql db rename
   summary: |-
     Rename a database.
@@ -732,7 +745,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_sql_db_restore()
+- uid: az_sql_db_restore
   name: az sql db restore
   summary: |-
     Create a new database by restoring from a backup.
@@ -865,7 +878,7 @@ directCommands:
       Name of the Azure SQL Server. You can configure the default using `az configure --defaults sql-server=<name>`.
   - name: --service-level-objective --service-objective
     summary: |-
-      The service objective for the new database. For example: Basic, S0, P1, GP_Gen4_1, GP_Gen5_S_8, BC_Gen5_2, HS_Gen5_32.
+      The service objective for the new database. For example: Basic, S0, P1, GP_Gen4_1, GP_S_Gen5_8, BC_Gen5_2, HS_Gen5_32.
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
@@ -882,7 +895,7 @@ directCommands:
     parameterValueGroup: "false, true"
     summary: |-
       Specifies whether to enable zone redundancy. Default is true if no value is specified.
-- uid: az_sql_db_show()
+- uid: az_sql_db_show
   name: az sql db show
   summary: |-
     Get the details for a database.
@@ -925,7 +938,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_sql_db_show-connection-string()
+- uid: az_sql_db_show-connection-string
   name: az sql db show-connection-string
   summary: |-
     Generates a connection string to a database.
@@ -969,7 +982,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_sql_db_show-deleted()
+- uid: az_sql_db_show-deleted
   name: az sql db show-deleted
   summary: |-
     Get the details for a deleted database.
@@ -1014,7 +1027,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_sql_db_update()
+- uid: az_sql_db_update
   name: az sql db update
   summary: |-
     Update a database.
@@ -1032,10 +1045,12 @@ directCommands:
                      [--elastic-pool]
                      [--encryption-protector]
                      [--encryption-protector-auto-rotation {false, true}]
+                     [--exhaustion-behavior {AutoPause, BillOverUsage}]
                      [--family]
                      [--federated-client-id]
                      [--filter]
                      [--force-string]
+                     [--free-limit {false, true}]
                      [--ha-replicas]
                      [--ids]
                      [--keys]
@@ -1083,6 +1098,9 @@ directCommands:
   - summary: |-
       Update database with VBS enclave enabled.
     syntax: az sql db update -g mygroup -s myserver -n mydb --preferred-enclave-type VBS
+  - summary: |-
+      Update exhaustion behavior of free limit database to BillOverUsage
+    syntax: az sql db update -g mygroup -s myserver -n mydb --free-limit-exhaustion-behavior BillOverUsage
   optionalParameters:
   - name: --add
     defaultValue: "[]"
@@ -1119,6 +1137,10 @@ directCommands:
     parameterValueGroup: "false, true"
     summary: |-
       Specifies the database encryption protector key auto rotation flag. Can be either true, false or null.
+  - name: --exhaustion-behavior --fleb --free-limit-exhaustion-behavior
+    parameterValueGroup: "AutoPause, BillOverUsage"
+    summary: |-
+      Specifies the behavior when monthly free limits are exhausted for the free database.AutoPause: The database will be auto paused upon exhaustion of free limits for remainder of the month.BillForUsage: The database will continue to be online upon exhaustion of free limitsand any overage will be billed.
   - name: --family -f
     summary: |-
       The compute generation component of the sku (for vcore skus only). Allowed values include: Gen4, Gen5.
@@ -1132,6 +1154,10 @@ directCommands:
     defaultValue: "False"
     summary: |-
       When using 'set' or 'add', preserve string literals instead of attempting to convert to JSON.
+  - name: --free-limit --use-free-limit
+    parameterValueGroup: "false, true"
+    summary: |-
+      Whether or not the database uses free monthly limits. Allowed on one database in a subscription.
   - name: --ha-replicas --read-replicas
     summary: |-
       The number of high availability replicas to provision for the database. Only settable for Hyperscale edition.
@@ -1197,74 +1223,74 @@ directCommands:
       Specifies whether to enable zone redundancy. Default is true if no value is specified.
 commands:
 - az_sql_db_advanced-threat-protection-setting
-- az_sql_db_advanced-threat-protection-setting_show()
-- az_sql_db_advanced-threat-protection-setting_update()
+- az_sql_db_advanced-threat-protection-setting_show
+- az_sql_db_advanced-threat-protection-setting_update
 - az_sql_db_audit-policy
-- az_sql_db_audit-policy_show()
-- az_sql_db_audit-policy_update()
-- az_sql_db_audit-policy_wait()
+- az_sql_db_audit-policy_show
+- az_sql_db_audit-policy_update
+- az_sql_db_audit-policy_wait
 - az_sql_db_classification
-- az_sql_db_classification_delete()
-- az_sql_db_classification_list()
+- az_sql_db_classification_delete
+- az_sql_db_classification_list
 - az_sql_db_classification_recommendation
-- az_sql_db_classification_recommendation_disable()
-- az_sql_db_classification_recommendation_enable()
-- az_sql_db_classification_recommendation_list()
-- az_sql_db_classification_show()
-- az_sql_db_classification_update()
-- az_sql_db_copy()
-- az_sql_db_create()
-- az_sql_db_delete()
-- az_sql_db_export()
+- az_sql_db_classification_recommendation_disable
+- az_sql_db_classification_recommendation_enable
+- az_sql_db_classification_recommendation_list
+- az_sql_db_classification_show
+- az_sql_db_classification_update
+- az_sql_db_copy
+- az_sql_db_create
+- az_sql_db_delete
+- az_sql_db_export
 - az_sql_db_geo-backup
-- az_sql_db_geo-backup_list()
-- az_sql_db_geo-backup_restore()
-- az_sql_db_geo-backup_show()
-- az_sql_db_import()
+- az_sql_db_geo-backup_list
+- az_sql_db_geo-backup_restore
+- az_sql_db_geo-backup_show
+- az_sql_db_import
 - az_sql_db_ledger-digest-uploads
-- az_sql_db_ledger-digest-uploads_disable()
-- az_sql_db_ledger-digest-uploads_enable()
-- az_sql_db_ledger-digest-uploads_show()
-- az_sql_db_list()
-- az_sql_db_list-deleted()
-- az_sql_db_list-editions()
-- az_sql_db_list-usages()
+- az_sql_db_ledger-digest-uploads_disable
+- az_sql_db_ledger-digest-uploads_enable
+- az_sql_db_ledger-digest-uploads_show
+- az_sql_db_list
+- az_sql_db_list-deleted
+- az_sql_db_list-editions
+- az_sql_db_list-usages
 - az_sql_db_ltr-backup
-- az_sql_db_ltr-backup_delete()
-- az_sql_db_ltr-backup_list()
-- az_sql_db_ltr-backup_restore()
-- az_sql_db_ltr-backup_show()
-- az_sql_db_ltr-backup_wait()
+- az_sql_db_ltr-backup_delete
+- az_sql_db_ltr-backup_list
+- az_sql_db_ltr-backup_restore
+- az_sql_db_ltr-backup_show
+- az_sql_db_ltr-backup_wait
 - az_sql_db_ltr-policy
-- az_sql_db_ltr-policy_set()
-- az_sql_db_ltr-policy_show()
+- az_sql_db_ltr-policy_set
+- az_sql_db_ltr-policy_show
 - az_sql_db_op
-- az_sql_db_op_cancel()
-- az_sql_db_op_list()
-- az_sql_db_rename()
+- az_sql_db_op_cancel
+- az_sql_db_op_list
+- az_sql_db_rename
 - az_sql_db_replica
-- az_sql_db_replica_create()
-- az_sql_db_replica_delete-link()
-- az_sql_db_replica_list-links()
-- az_sql_db_replica_set-primary()
-- az_sql_db_restore()
-- az_sql_db_show()
-- az_sql_db_show-connection-string()
-- az_sql_db_show-deleted()
+- az_sql_db_replica_create
+- az_sql_db_replica_delete-link
+- az_sql_db_replica_list-links
+- az_sql_db_replica_set-primary
+- az_sql_db_restore
+- az_sql_db_show
+- az_sql_db_show-connection-string
+- az_sql_db_show-deleted
 - az_sql_db_str-policy
-- az_sql_db_str-policy_set()
-- az_sql_db_str-policy_show()
-- az_sql_db_str-policy_wait()
+- az_sql_db_str-policy_set
+- az_sql_db_str-policy_show
+- az_sql_db_str-policy_wait
 - az_sql_db_tde
 - az_sql_db_tde_key
-- az_sql_db_tde_key_revalidate()
-- az_sql_db_tde_key_revert()
-- az_sql_db_tde_set()
-- az_sql_db_tde_show()
+- az_sql_db_tde_key_revalidate
+- az_sql_db_tde_key_revert
+- az_sql_db_tde_set
+- az_sql_db_tde_show
 - az_sql_db_threat-policy
-- az_sql_db_threat-policy_show()
-- az_sql_db_threat-policy_update()
-- az_sql_db_update()
+- az_sql_db_threat-policy_show
+- az_sql_db_threat-policy_update
+- az_sql_db_update
 globalParameters:
 - name: --debug
   summary: |-
@@ -1277,7 +1303,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query
@@ -1290,5 +1316,5 @@ globalParameters:
   summary: |-
     Increase logging verbosity. Use --debug for full debug logs.
 metadata:
-  ms.date: 06/21/2023
+  ms.date: 11/24/2023
   description: Manage databases.

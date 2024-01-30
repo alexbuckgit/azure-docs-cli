@@ -1,21 +1,18 @@
 ### YamlMime:AzureCLIGroup
 uid: az_containerapp_auth_openid-connect
 name: az containerapp auth openid-connect
-extensionInformation: >-
-  > [!NOTE]
-
-  > This reference is part of the **containerapp** extension for the Azure CLI (version 2.45.0 or higher). The extension will automatically install the first time you run an **az containerapp auth openid-connect** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage containerapp authentication and authorization of the custom OpenID Connect identity providers.
 status: GA
-sourceType: Extension
+sourceType: Core
 directCommands:
-- uid: az_containerapp_auth_openid-connect_add(containerapp)
+- uid: az_containerapp_auth_openid-connect_add
   name: az containerapp auth openid-connect add
   summary: |-
     Configure a new custom OpenID Connect identity provider.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp auth openid-connect add --provider-name
                                             [--client-id]
@@ -32,7 +29,7 @@ directCommands:
   - summary: |-
       Configure a new custom OpenID Connect identity provider.
     syntax: >-
-      az containerapp auth openid-connect add -g myResourceGroup --name MyContainerapp \
+      az containerapp auth openid-connect add -g myResourceGroup --name my-containerapp \
         --provider-name myOpenIdConnectProvider --client-id my-client-id \
         --client-secret-name MY_SECRET_APP_SETTING \
         --openid-configuration https://myopenidprovider.net/.well-known/openid-configuration
@@ -73,12 +70,13 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_containerapp_auth_openid-connect_remove(containerapp)
+- uid: az_containerapp_auth_openid-connect_remove
   name: az containerapp auth openid-connect remove
   summary: |-
     Removes an existing custom OpenID Connect identity provider.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp auth openid-connect remove --provider-name
                                                [--ids]
@@ -90,7 +88,7 @@ directCommands:
   - summary: |-
       Removes an existing custom OpenID Connect identity provider.
     syntax: >-
-      az containerapp auth openid-connect remove --name MyContainerapp --resource-group MyResourceGroup \
+      az containerapp auth openid-connect remove --name my-containerapp --resource-group MyResourceGroup \
         --provider-name myOpenIdConnectProvider
   requiredParameters:
   - isRequired: true
@@ -114,12 +112,13 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_containerapp_auth_openid-connect_show(containerapp)
+- uid: az_containerapp_auth_openid-connect_show
   name: az containerapp auth openid-connect show
   summary: |-
     Show the authentication settings for the custom OpenID Connect identity provider.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp auth openid-connect show --provider-name
                                              [--ids]
@@ -129,7 +128,7 @@ directCommands:
   examples:
   - summary: |-
       Show the authentication settings for the custom OpenID Connect identity provider.
-    syntax: az containerapp auth openid-connect show --name MyContainerapp --resource-group MyResourceGroup \ --provider-name myOpenIdConnectProvider
+    syntax: az containerapp auth openid-connect show --name my-containerapp --resource-group MyResourceGroup \ --provider-name myOpenIdConnectProvider
   requiredParameters:
   - isRequired: true
     name: --provider-name
@@ -148,12 +147,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_containerapp_auth_openid-connect_update(containerapp)
+- uid: az_containerapp_auth_openid-connect_update
   name: az containerapp auth openid-connect update
   summary: |-
     Update the client id and client secret setting name for an existing custom OpenID Connect identity provider.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp auth openid-connect update --provider-name
                                                [--client-id]
@@ -170,7 +170,7 @@ directCommands:
   - summary: |-
       Update the client id and client secret setting name for an existing custom OpenID Connect identity provider.
     syntax: >-
-      az containerapp auth openid-connect update -g myResourceGroup --name MyContainerapp \
+      az containerapp auth openid-connect update -g myResourceGroup --name my-containerapp \
         --provider-name myOpenIdConnectProvider --client-id my-client-id \
         --client-secret-name MY_SECRET_APP_SETTING
   requiredParameters:
@@ -211,10 +211,10 @@ directCommands:
     summary: |-
       Do not prompt for confirmation.
 commands:
-- az_containerapp_auth_openid-connect_add(containerapp)
-- az_containerapp_auth_openid-connect_remove(containerapp)
-- az_containerapp_auth_openid-connect_show(containerapp)
-- az_containerapp_auth_openid-connect_update(containerapp)
+- az_containerapp_auth_openid-connect_add
+- az_containerapp_auth_openid-connect_remove
+- az_containerapp_auth_openid-connect_show
+- az_containerapp_auth_openid-connect_update
 globalParameters:
 - name: --debug
   summary: |-
@@ -227,7 +227,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query
@@ -240,4 +240,5 @@ globalParameters:
   summary: |-
     Increase logging verbosity. Use --debug for full debug logs.
 metadata:
+  ms.date: 11/28/2023
   description: Manage containerapp authentication and authorization of the custom OpenID Connect identity providers.

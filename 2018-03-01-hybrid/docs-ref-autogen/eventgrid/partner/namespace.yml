@@ -4,17 +4,21 @@ name: az eventgrid partner namespace
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **eventgrid** extension for the Azure CLI (version 2.0.49 or higher). The extension will automatically install the first time you run an **az eventgrid partner namespace** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **eventgrid** extension for the Azure CLI (version 2.51.0 or higher). The extension will automatically install the first time you run an **az eventgrid partner namespace** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage partner namespaces.
-status: GA
+status: Preview
+isPreview: true
+previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
 sourceType: Extension
 directCommands:
-- uid: az_eventgrid_partner_namespace_create(eventgrid)
+- uid: az_eventgrid_partner_namespace_create
   name: az eventgrid partner namespace create
   summary: |-
     Create a partner namespace.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid partner namespace create --location
@@ -47,11 +51,13 @@ directCommands:
   - name: --tags
     summary: |-
       Space-separated tags: key[=value] [key[=value] ...]. Use "" to clear existing tags.
-- uid: az_eventgrid_partner_namespace_delete(eventgrid)
+- uid: az_eventgrid_partner_namespace_delete
   name: az eventgrid partner namespace delete
   summary: |-
     Delete a partner namespace.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid partner namespace delete [--ids]
@@ -75,11 +81,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_eventgrid_partner_namespace_list(eventgrid)
+- uid: az_eventgrid_partner_namespace_list
   name: az eventgrid partner namespace list
   summary: |-
     List available partner namespaces.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid partner namespace list [--odata-query]
@@ -104,11 +112,13 @@ directCommands:
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_eventgrid_partner_namespace_show(eventgrid)
+- uid: az_eventgrid_partner_namespace_show
   name: az eventgrid partner namespace show
   summary: |-
     Get the details of a partner namespace.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid partner namespace show [--ids]
@@ -136,18 +146,18 @@ directCommands:
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
 commands:
-- az_eventgrid_partner_namespace_create(eventgrid)
-- az_eventgrid_partner_namespace_delete(eventgrid)
+- az_eventgrid_partner_namespace_create
+- az_eventgrid_partner_namespace_delete
 - az_eventgrid_partner_namespace_event-channel
-- az_eventgrid_partner_namespace_event-channel_create(eventgrid)
-- az_eventgrid_partner_namespace_event-channel_delete(eventgrid)
-- az_eventgrid_partner_namespace_event-channel_list(eventgrid)
-- az_eventgrid_partner_namespace_event-channel_show(eventgrid)
+- az_eventgrid_partner_namespace_event-channel_create
+- az_eventgrid_partner_namespace_event-channel_delete
+- az_eventgrid_partner_namespace_event-channel_list
+- az_eventgrid_partner_namespace_event-channel_show
 - az_eventgrid_partner_namespace_key
-- az_eventgrid_partner_namespace_key_list(eventgrid)
-- az_eventgrid_partner_namespace_key_regenerate(eventgrid)
-- az_eventgrid_partner_namespace_list(eventgrid)
-- az_eventgrid_partner_namespace_show(eventgrid)
+- az_eventgrid_partner_namespace_key_list
+- az_eventgrid_partner_namespace_key_regenerate
+- az_eventgrid_partner_namespace_list
+- az_eventgrid_partner_namespace_show
 globalParameters:
 - name: --debug
   summary: |-
@@ -160,7 +170,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

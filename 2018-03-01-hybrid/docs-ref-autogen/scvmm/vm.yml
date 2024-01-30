@@ -7,18 +7,14 @@ extensionInformation: >-
   > This reference is part of the **scvmm** extension for the Azure CLI (version 2.15.0 or higher). The extension will automatically install the first time you run an **az scvmm vm** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage Arc for SCVMM Virtual Machine resources.
-status: Preview
-isPreview: true
-previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+status: GA
 sourceType: Extension
 directCommands:
-- uid: az_scvmm_vm_create(scvmm)
+- uid: az_scvmm_vm_create
   name: az scvmm vm create
   summary: |-
     Create VM resource.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm create --custom-location
@@ -114,13 +110,11 @@ directCommands:
   - name: --vmmserver -v
     summary: |-
       Name or ID of the vmmserver that is managing this resource.
-- uid: az_scvmm_vm_create-checkpoint(scvmm)
+- uid: az_scvmm_vm_create-checkpoint
   name: az scvmm vm create-checkpoint
   summary: |-
     Create a VM checkpoint.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm create-checkpoint --checkpoint-description
@@ -160,13 +154,11 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_scvmm_vm_delete(scvmm)
+- uid: az_scvmm_vm_delete
   name: az scvmm vm delete
   summary: |-
     Delete VM resource.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm delete [--delete-from-host]
@@ -224,13 +216,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_scvmm_vm_delete-checkpoint(scvmm)
+- uid: az_scvmm_vm_delete-checkpoint
   name: az scvmm vm delete-checkpoint
   summary: |-
     Delete the specified VM checkpoint.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm delete-checkpoint --checkpoint-id
@@ -265,15 +255,13 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_scvmm_vm_list(scvmm)
+- uid: az_scvmm_vm_list
   name: az scvmm vm list
   summary: |-
     Retrieve a list of VMs.
-  status: Preview and Deprecated
+  status: Deprecated
   isDeprecated: true
-  isPreview: true
   deprecateInfo: This command has been deprecated and will be removed in a future release. Use 'scvmm vm show' instead.
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: az scvmm vm list [--resource-group]
   examples:
@@ -287,13 +275,11 @@ directCommands:
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_scvmm_vm_restart(scvmm)
+- uid: az_scvmm_vm_restart
   name: az scvmm vm restart
   summary: |-
     Restart a VM.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm restart [--ids]
@@ -322,13 +308,11 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_scvmm_vm_restore-checkpoint(scvmm)
+- uid: az_scvmm_vm_restore-checkpoint
   name: az scvmm vm restore-checkpoint
   summary: |-
     Restore VM checkpoint.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm restore-checkpoint --checkpoint-id
@@ -363,13 +347,11 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_scvmm_vm_show(scvmm)
+- uid: az_scvmm_vm_show
   name: az scvmm vm show
   summary: |-
     Get details of an VM.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm show [--ids]
@@ -396,13 +378,11 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_scvmm_vm_start(scvmm)
+- uid: az_scvmm_vm_start
   name: az scvmm vm start
   summary: |-
     Start a VM.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm start [--ids]
@@ -431,13 +411,11 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_scvmm_vm_stop(scvmm)
+- uid: az_scvmm_vm_stop
   name: az scvmm vm stop
   summary: |-
     Stop a VM.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm stop [--ids]
@@ -474,13 +452,11 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_scvmm_vm_update(scvmm)
+- uid: az_scvmm_vm_update
   name: az scvmm vm update
   summary: |-
     Update a VM. Management of VM disks and NICs are not using this subcommand. There are separate subcommands for the same.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm update [--availability-sets]
@@ -538,13 +514,11 @@ directCommands:
   - name: --tags
     summary: |-
       Space-separated tags: key[=value] [key[=value] ...]. Use "" to clear existing tags.
-- uid: az_scvmm_vm_wait(scvmm)
+- uid: az_scvmm_vm_wait
   name: az scvmm vm wait
   summary: |-
     Place the CLI in a waiting state until a condition of the vm is met.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm vm wait --resource-group
@@ -594,41 +568,41 @@ directCommands:
     summary: |-
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
-- az_scvmm_vm_create(scvmm)
-- az_scvmm_vm_create-checkpoint(scvmm)
-- az_scvmm_vm_delete(scvmm)
-- az_scvmm_vm_delete-checkpoint(scvmm)
+- az_scvmm_vm_create
+- az_scvmm_vm_create-checkpoint
+- az_scvmm_vm_delete
+- az_scvmm_vm_delete-checkpoint
 - az_scvmm_vm_disk
-- az_scvmm_vm_disk_add(scvmm)
-- az_scvmm_vm_disk_delete(scvmm)
-- az_scvmm_vm_disk_list(scvmm)
-- az_scvmm_vm_disk_show(scvmm)
-- az_scvmm_vm_disk_update(scvmm)
-- az_scvmm_vm_disk_wait(scvmm)
+- az_scvmm_vm_disk_add
+- az_scvmm_vm_disk_delete
+- az_scvmm_vm_disk_list
+- az_scvmm_vm_disk_show
+- az_scvmm_vm_disk_update
+- az_scvmm_vm_disk_wait
 - az_scvmm_vm_extension
-- az_scvmm_vm_extension_create(scvmm)
-- az_scvmm_vm_extension_delete(scvmm)
-- az_scvmm_vm_extension_list(scvmm)
-- az_scvmm_vm_extension_show(scvmm)
-- az_scvmm_vm_extension_update(scvmm)
+- az_scvmm_vm_extension_create
+- az_scvmm_vm_extension_delete
+- az_scvmm_vm_extension_list
+- az_scvmm_vm_extension_show
+- az_scvmm_vm_extension_update
 - az_scvmm_vm_guest-agent
-- az_scvmm_vm_guest-agent_enable(scvmm)
-- az_scvmm_vm_guest-agent_show(scvmm)
-- az_scvmm_vm_list(scvmm)
+- az_scvmm_vm_guest-agent_enable
+- az_scvmm_vm_guest-agent_show
+- az_scvmm_vm_list
 - az_scvmm_vm_nic
-- az_scvmm_vm_nic_add(scvmm)
-- az_scvmm_vm_nic_delete(scvmm)
-- az_scvmm_vm_nic_list(scvmm)
-- az_scvmm_vm_nic_show(scvmm)
-- az_scvmm_vm_nic_update(scvmm)
-- az_scvmm_vm_nic_wait(scvmm)
-- az_scvmm_vm_restart(scvmm)
-- az_scvmm_vm_restore-checkpoint(scvmm)
-- az_scvmm_vm_show(scvmm)
-- az_scvmm_vm_start(scvmm)
-- az_scvmm_vm_stop(scvmm)
-- az_scvmm_vm_update(scvmm)
-- az_scvmm_vm_wait(scvmm)
+- az_scvmm_vm_nic_add
+- az_scvmm_vm_nic_delete
+- az_scvmm_vm_nic_list
+- az_scvmm_vm_nic_show
+- az_scvmm_vm_nic_update
+- az_scvmm_vm_nic_wait
+- az_scvmm_vm_restart
+- az_scvmm_vm_restore-checkpoint
+- az_scvmm_vm_show
+- az_scvmm_vm_start
+- az_scvmm_vm_stop
+- az_scvmm_vm_update
+- az_scvmm_vm_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -641,7 +615,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

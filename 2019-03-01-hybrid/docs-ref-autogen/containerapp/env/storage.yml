@@ -1,21 +1,18 @@
 ### YamlMime:AzureCLIGroup
 uid: az_containerapp_env_storage
 name: az containerapp env storage
-extensionInformation: >-
-  > [!NOTE]
-
-  > This reference is part of the **containerapp** extension for the Azure CLI (version 2.45.0 or higher). The extension will automatically install the first time you run an **az containerapp env storage** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Commands to manage storage for the Container Apps environment.
 status: GA
-sourceType: Extension
+sourceType: Core
 directCommands:
-- uid: az_containerapp_env_storage_list(containerapp)
+- uid: az_containerapp_env_storage_list
   name: az containerapp env storage list
   summary: |-
     List the storages for an environment.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp env storage list --name
                                      --resource-group
@@ -32,17 +29,17 @@ directCommands:
     name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_containerapp_env_storage_remove(containerapp)
+- uid: az_containerapp_env_storage_remove
   name: az containerapp env storage remove
   summary: |-
     Remove a storage from an environment.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp env storage remove --name
                                        --resource-group
                                        --storage-name
-                                       [--no-wait]
                                        [--yes]
   examples:
   - summary: |-
@@ -62,20 +59,17 @@ directCommands:
     summary: |-
       Name of the storage.
   optionalParameters:
-  - name: --no-wait
-    defaultValue: "False"
-    summary: |-
-      Do not wait for the long-running operation to finish.
   - name: --yes -y
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_containerapp_env_storage_set(containerapp)
+- uid: az_containerapp_env_storage_set
   name: az containerapp env storage set
   summary: |-
     Create or update a storage.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp env storage set --access-mode {ReadOnly, ReadWrite}
                                     --account-name
@@ -124,12 +118,13 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not wait for the long-running operation to finish.
-- uid: az_containerapp_env_storage_show(containerapp)
+- uid: az_containerapp_env_storage_show
   name: az containerapp env storage show
   summary: |-
     Show the details of a storage.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp env storage show --name
                                      --resource-group
@@ -152,10 +147,10 @@ directCommands:
     summary: |-
       Name of the storage.
 commands:
-- az_containerapp_env_storage_list(containerapp)
-- az_containerapp_env_storage_remove(containerapp)
-- az_containerapp_env_storage_set(containerapp)
-- az_containerapp_env_storage_show(containerapp)
+- az_containerapp_env_storage_list
+- az_containerapp_env_storage_remove
+- az_containerapp_env_storage_set
+- az_containerapp_env_storage_show
 globalParameters:
 - name: --debug
   summary: |-
@@ -168,7 +163,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query
@@ -181,4 +176,5 @@ globalParameters:
   summary: |-
     Increase logging verbosity. Use --debug for full debug logs.
 metadata:
+  ms.date: 11/28/2023
   description: Commands to manage storage for the Container Apps environment.

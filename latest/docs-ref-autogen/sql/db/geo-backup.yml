@@ -8,7 +8,7 @@ isPreview: true
 previewOrExperimentalInfo: 'This command group is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus'
 sourceType: Core
 directCommands:
-- uid: az_sql_db_geo-backup_list()
+- uid: az_sql_db_geo-backup_list
   name: az sql db geo-backup list
   summary: |-
     Gets a list of recoverable databases.
@@ -39,7 +39,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_sql_db_geo-backup_restore()
+- uid: az_sql_db_geo-backup_restore
   name: az sql db geo-backup restore
   summary: |-
     Restore a geo-redundant backup to a new database.
@@ -164,7 +164,7 @@ directCommands:
       If enabled, connections that have application intent set to readonly in their connection string may be routed to a readonly secondary replica. This property is only settable for Premium and Business Critical databases.
   - name: --service-level-objective --service-objective
     summary: |-
-      The service objective for the new database. For example: Basic, S0, P1, GP_Gen4_1, GP_Gen5_S_8, BC_Gen5_2, HS_Gen5_32.
+      The service objective for the new database. For example: Basic, S0, P1, GP_Gen4_1, GP_S_Gen5_8, BC_Gen5_2, HS_Gen5_32.
   - name: --tags
     summary: |-
       Space-separated tags: key[=value] [key[=value] ...]. Use "" to clear existing tags.
@@ -175,7 +175,7 @@ directCommands:
     parameterValueGroup: "false, true"
     summary: |-
       Specifies whether to enable zone redundancy. Default is true if no value is specified.
-- uid: az_sql_db_geo-backup_show()
+- uid: az_sql_db_geo-backup_show
   name: az sql db geo-backup show
   summary: |-
     Gets a recoverable database, which is a resource representing a database's geo backup.
@@ -221,9 +221,9 @@ directCommands:
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
 commands:
-- az_sql_db_geo-backup_list()
-- az_sql_db_geo-backup_restore()
-- az_sql_db_geo-backup_show()
+- az_sql_db_geo-backup_list
+- az_sql_db_geo-backup_restore
+- az_sql_db_geo-backup_show
 globalParameters:
 - name: --debug
   summary: |-
@@ -236,7 +236,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query
@@ -249,5 +249,5 @@ globalParameters:
   summary: |-
     Increase logging verbosity. Use --debug for full debug logs.
 metadata:
-  ms.date: 06/21/2023
+  ms.date: 11/24/2023
   description: Manage SQL database geo redundant backups.

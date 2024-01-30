@@ -4,17 +4,21 @@ name: az eventgrid domain key
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **eventgrid** extension for the Azure CLI (version 2.0.49 or higher). The extension will automatically install the first time you run an **az eventgrid domain key** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **eventgrid** extension for the Azure CLI (version 2.51.0 or higher). The extension will automatically install the first time you run an **az eventgrid domain key** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage shared access keys of a domain.
-status: GA
+status: Preview
+isPreview: true
+previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
 sourceType: Extension
 directCommands:
-- uid: az_eventgrid_domain_key_list(eventgrid)
+- uid: az_eventgrid_domain_key_list
   name: az eventgrid domain key list
   summary: |-
     List shared access keys of a domain.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid domain key list --name
@@ -32,11 +36,13 @@ directCommands:
     name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_eventgrid_domain_key_regenerate(eventgrid)
+- uid: az_eventgrid_domain_key_regenerate
   name: az eventgrid domain key regenerate
   summary: |-
     Regenerate a shared access key of a domain.
-  status: GA
+  status: Preview
+  isPreview: true
+  previewOrExperimentalInfo: "Command group 'az eventgrid' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
   sourceType: Extension
   syntax: >-
     az eventgrid domain key regenerate --key-name
@@ -56,8 +62,8 @@ directCommands:
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
 commands:
-- az_eventgrid_domain_key_list(eventgrid)
-- az_eventgrid_domain_key_regenerate(eventgrid)
+- az_eventgrid_domain_key_list
+- az_eventgrid_domain_key_regenerate
 globalParameters:
 - name: --debug
   summary: |-
@@ -70,7 +76,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

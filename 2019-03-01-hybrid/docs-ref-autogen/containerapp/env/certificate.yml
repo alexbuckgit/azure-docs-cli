@@ -1,16 +1,16 @@
 ### YamlMime:AzureCLIGroup
 uid: az_containerapp_env_certificate
 name: az containerapp env certificate
-extensionInformation: >-
+importantNote: >-
   > [!NOTE]
 
-  > This reference is part of the **containerapp** extension for the Azure CLI (version 2.45.0 or higher). The extension will automatically install the first time you run an **az containerapp env certificate** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This command group has commands that are defined in both Azure CLI and at least one extension. Install each extension to benefit from its extended capabilities. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Commands to manage certificates for the Container Apps environment.
 status: GA
-sourceType: Extension
+sourceType: Core and Extension
 directCommands:
-- uid: az_containerapp_env_certificate_create(containerapp)
+- uid: az_containerapp_env_certificate_create
   name: az containerapp env certificate create
   summary: |-
     Create a managed certificate.
@@ -49,8 +49,61 @@ directCommands:
   - name: --certificate-name -c
     summary: |-
       Name of the managed certificate which should be unique within the Container Apps environment.
+- uid: az_containerapp_env_certificate_delete
+  name: az containerapp env certificate delete
+  summary: |-
+    Delete a certificate from the Container Apps environment.
+  status: GA
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
+  syntax: >-
+    az containerapp env certificate delete [--certificate]
+                                           [--ids]
+                                           [--location]
+                                           [--name]
+                                           [--resource-group]
+                                           [--subscription]
+                                           [--thumbprint]
+                                           [--yes]
+  examples:
+  - summary: |-
+      Delete a certificate from the Container Apps environment by certificate name
+    syntax: az containerapp env certificate delete -g MyResourceGroup --name MyEnvironment --certificate MyCertificateName
+  - summary: |-
+      Delete a certificate from the Container Apps environment by certificate id
+    syntax: az containerapp env certificate delete -g MyResourceGroup --name MyEnvironment --certificate MyCertificateId
+  - summary: |-
+      Delete all certificates that have a matching thumbprint from the Container Apps environment
+    syntax: az containerapp env certificate delete -g MyResourceGroup --name MyEnvironment --thumbprint MyCertificateThumbprint
+  optionalParameters:
+  - name: --certificate -c
+    summary: |-
+      Name or resource id of the certificate.
+  - name: --ids
+    summary: |-
+      One or more resource IDs (space-delimited). It should be a complete resource ID containing all information of 'Resource Id' arguments. You should provide either --ids or other 'Resource Id' arguments.
+  - name: --location -l
+    summary: |-
+      Location of resource. Examples: eastus2, northeurope.
+  - name: --name -n
+    summary: |-
+      Name of the Container Apps environment.
+  - name: --resource-group -g
+    summary: |-
+      Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
+  - name: --subscription
+    summary: |-
+      Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
+  - name: --thumbprint -t
+    summary: |-
+      Thumbprint of the certificate.
+  - name: --yes -y
+    defaultValue: "False"
+    summary: |-
+      Do not prompt for confirmation.
 - uid: az_containerapp_env_certificate_delete(containerapp)
   name: az containerapp env certificate delete
+  extensionSuffix: containerapp
   summary: |-
     Delete a certificate from the Container Apps environment.
   status: Preview
@@ -102,8 +155,54 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
+- uid: az_containerapp_env_certificate_list
+  name: az containerapp env certificate list
+  summary: |-
+    List certificates for an environment.
+  status: GA
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
+  syntax: >-
+    az containerapp env certificate list --name
+                                         --resource-group
+                                         [--certificate]
+                                         [--location]
+                                         [--thumbprint]
+  examples:
+  - summary: |-
+      List certificates for an environment.
+    syntax: az containerapp env certificate list -g MyResourceGroup --name MyEnvironment
+  - summary: |-
+      Show a certificate by certificate id.
+    syntax: az containerapp env certificate list -g MyResourceGroup --name MyEnvironment --certificate MyCertificateId
+  - summary: |-
+      List certificates by certificate name.
+    syntax: az containerapp env certificate list -g MyResourceGroup --name MyEnvironment --certificate MyCertificateName
+  - summary: |-
+      List certificates by certificate thumbprint.
+    syntax: az containerapp env certificate list -g MyResourceGroup --name MyEnvironment --thumbprint MyCertificateThumbprint
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: |-
+      Name of the Container Apps environment.
+  - isRequired: true
+    name: --resource-group -g
+    summary: |-
+      Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
+  optionalParameters:
+  - name: --certificate -c
+    summary: |-
+      Name or resource id of the certificate.
+  - name: --location -l
+    summary: |-
+      Location of resource. Examples: eastus2, northeurope.
+  - name: --thumbprint -t
+    summary: |-
+      Thumbprint of the certificate.
 - uid: az_containerapp_env_certificate_list(containerapp)
   name: az containerapp env certificate list
+  extensionSuffix: containerapp
   summary: |-
     List certificates for an environment.
   status: Preview
@@ -164,12 +263,13 @@ directCommands:
   - name: --thumbprint -t
     summary: |-
       Thumbprint of the certificate.
-- uid: az_containerapp_env_certificate_upload(containerapp)
+- uid: az_containerapp_env_certificate_upload
   name: az containerapp env certificate upload
   summary: |-
     Add or update a certificate.
   status: GA
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp env certificate upload --certificate-file
                                            [--certificate-name]
@@ -219,10 +319,12 @@ directCommands:
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
 commands:
-- az_containerapp_env_certificate_create(containerapp)
+- az_containerapp_env_certificate_create
+- az_containerapp_env_certificate_delete
 - az_containerapp_env_certificate_delete(containerapp)
+- az_containerapp_env_certificate_list
 - az_containerapp_env_certificate_list(containerapp)
-- az_containerapp_env_certificate_upload(containerapp)
+- az_containerapp_env_certificate_upload
 globalParameters:
 - name: --debug
   summary: |-
@@ -235,7 +337,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

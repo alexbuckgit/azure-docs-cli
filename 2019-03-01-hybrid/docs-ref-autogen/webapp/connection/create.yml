@@ -10,7 +10,7 @@ summary: |-
 status: GA
 sourceType: Core and Extension
 directCommands:
-- uid: az_webapp_connection_create_appconfig()
+- uid: az_webapp_connection_create_appconfig
   name: az webapp connection create appconfig
   summary: |-
     Create a webapp connection to appconfig.
@@ -18,7 +18,7 @@ directCommands:
   sourceType: Core
   syntax: >-
     az webapp connection create appconfig [--app-config]
-                                          [--client-type {dotnet, java, nodejs, none, python}]
+                                          [--client-type {dotnet, dotnet-internal, java, nodejs, none, python}]
                                           [--connection]
                                           [--customized-keys]
                                           [--name]
@@ -52,7 +52,7 @@ directCommands:
     summary: |-
       Name of the app configuration. Required if '--target-id' is not specified.
   - name: --client-type
-    parameterValueGroup: "dotnet, java, nodejs, none, python"
+    parameterValueGroup: "dotnet, dotnet-internal, java, nodejs, none, python"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -117,7 +117,7 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_confluent-cloud()
+- uid: az_webapp_connection_create_confluent-cloud
   name: az webapp connection create confluent-cloud
   summary: |-
     Create a webapp connection to confluent-cloud.
@@ -130,7 +130,7 @@ directCommands:
                                                 --schema-key
                                                 --schema-registry
                                                 --schema-secret
-                                                [--client-type {dotnet, go, java, none, python, springBoot}]
+                                                [--client-type {dotnet, dotnet-internal, go, java, none, python, springBoot}]
                                                 [--connection]
                                                 [--customized-keys]
                                                 [--name]
@@ -170,7 +170,7 @@ directCommands:
       Schema registry API-Key (secret).
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "dotnet, go, java, none, python, springBoot"
+    parameterValueGroup: "dotnet, dotnet-internal, go, java, none, python, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -198,7 +198,7 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_cosmos-cassandra()
+- uid: az_webapp_connection_create_cosmos-cassandra
   name: az webapp connection create cosmos-cassandra
   summary: |-
     Create a webapp connection to cosmos-cassandra.
@@ -206,7 +206,7 @@ directCommands:
   sourceType: Core
   syntax: >-
     az webapp connection create cosmos-cassandra [--account]
-                                                 [--client-type {dotnet, go, java, nodejs, none, python, springBoot}]
+                                                 [--client-type {dotnet, dotnet-internal, go, java, nodejs, none, python, springBoot}]
                                                  [--connection]
                                                  [--customized-keys]
                                                  [--key-space]
@@ -242,7 +242,7 @@ directCommands:
     summary: |-
       Name of the cosmos database account. Required if '--target-id' is not specified.
   - name: --client-type
-    parameterValueGroup: "dotnet, go, java, nodejs, none, python, springBoot"
+    parameterValueGroup: "dotnet, dotnet-internal, go, java, nodejs, none, python, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -314,7 +314,7 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_cosmos-gremlin()
+- uid: az_webapp_connection_create_cosmos-gremlin
   name: az webapp connection create cosmos-gremlin
   summary: |-
     Create a webapp connection to cosmos-gremlin.
@@ -322,7 +322,7 @@ directCommands:
   sourceType: Core
   syntax: >-
     az webapp connection create cosmos-gremlin [--account]
-                                               [--client-type {dotnet, java, nodejs, none, php, python}]
+                                               [--client-type {dotnet, dotnet-internal, java, nodejs, none, php, python}]
                                                [--connection]
                                                [--customized-keys]
                                                [--database]
@@ -359,7 +359,7 @@ directCommands:
     summary: |-
       Name of the cosmos database account. Required if '--target-id' is not specified.
   - name: --client-type
-    parameterValueGroup: "dotnet, java, nodejs, none, php, python"
+    parameterValueGroup: "dotnet, dotnet-internal, java, nodejs, none, php, python"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -434,7 +434,7 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_cosmos-mongo()
+- uid: az_webapp_connection_create_cosmos-mongo
   name: az webapp connection create cosmos-mongo
   summary: |-
     Create a webapp connection to cosmos-mongo.
@@ -442,7 +442,7 @@ directCommands:
   sourceType: Core
   syntax: >-
     az webapp connection create cosmos-mongo [--account]
-                                             [--client-type {dotnet, go, java, nodejs, none, springBoot}]
+                                             [--client-type {dotnet, dotnet-internal, go, java, nodejs, none, springBoot}]
                                              [--connection]
                                              [--customized-keys]
                                              [--database]
@@ -478,7 +478,7 @@ directCommands:
     summary: |-
       Name of the cosmos database account. Required if '--target-id' is not specified.
   - name: --client-type
-    parameterValueGroup: "dotnet, go, java, nodejs, none, springBoot"
+    parameterValueGroup: "dotnet, dotnet-internal, go, java, nodejs, none, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -550,7 +550,7 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_cosmos-sql()
+- uid: az_webapp_connection_create_cosmos-sql
   name: az webapp connection create cosmos-sql
   summary: |-
     Create a webapp connection to cosmos-sql.
@@ -558,7 +558,7 @@ directCommands:
   sourceType: Core
   syntax: >-
     az webapp connection create cosmos-sql [--account]
-                                           [--client-type {dotnet, java, nodejs, none, python, springBoot}]
+                                           [--client-type {dotnet, dotnet-internal, java, nodejs, none, python, springBoot}]
                                            [--connection]
                                            [--customized-keys]
                                            [--database]
@@ -594,7 +594,7 @@ directCommands:
     summary: |-
       Name of the cosmos database account. Required if '--target-id' is not specified.
   - name: --client-type
-    parameterValueGroup: "dotnet, java, nodejs, none, python, springBoot"
+    parameterValueGroup: "dotnet, dotnet-internal, java, nodejs, none, python, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -666,7 +666,7 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_cosmos-table()
+- uid: az_webapp_connection_create_cosmos-table
   name: az webapp connection create cosmos-table
   summary: |-
     Create a webapp connection to cosmos-table.
@@ -674,7 +674,7 @@ directCommands:
   sourceType: Core
   syntax: >-
     az webapp connection create cosmos-table [--account]
-                                             [--client-type {dotnet, java, nodejs, none, python, springBoot}]
+                                             [--client-type {dotnet, dotnet-internal, java, nodejs, none, python, springBoot}]
                                              [--connection]
                                              [--customized-keys]
                                              [--name]
@@ -710,7 +710,7 @@ directCommands:
     summary: |-
       Name of the cosmos database account. Required if '--target-id' is not specified.
   - name: --client-type
-    parameterValueGroup: "dotnet, java, nodejs, none, python, springBoot"
+    parameterValueGroup: "dotnet, dotnet-internal, java, nodejs, none, python, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -782,14 +782,14 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_eventhub()
+- uid: az_webapp_connection_create_eventhub
   name: az webapp connection create eventhub
   summary: |-
     Create a webapp connection to eventhub.
   status: GA
   sourceType: Core
   syntax: >-
-    az webapp connection create eventhub [--client-type {dotnet, go, java, kafka-springBoot, nodejs, none, python, springBoot}]
+    az webapp connection create eventhub [--client-type {dotnet, dotnet-internal, go, java, kafka-springBoot, nodejs, none, python, springBoot}]
                                          [--connection]
                                          [--customized-keys]
                                          [--name]
@@ -822,7 +822,7 @@ directCommands:
     syntax: az webapp connection create eventhub --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --target-id /subscriptions/{subscription}/resourceGroups/{target_resource_group}/providers/Microsoft.EventHub/namespaces/{namespace} --system-identity
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "dotnet, go, java, kafka-springBoot, nodejs, none, python, springBoot"
+    parameterValueGroup: "dotnet, dotnet-internal, go, java, kafka-springBoot, nodejs, none, python, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -894,14 +894,14 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_keyvault()
+- uid: az_webapp_connection_create_keyvault
   name: az webapp connection create keyvault
   summary: |-
     Create a webapp connection to keyvault.
   status: GA
   sourceType: Core
   syntax: >-
-    az webapp connection create keyvault [--client-type {dotnet, java, nodejs, none, python, springBoot}]
+    az webapp connection create keyvault [--client-type {dotnet, dotnet-internal, java, nodejs, none, python, springBoot}]
                                          [--connection]
                                          [--customized-keys]
                                          [--name]
@@ -940,7 +940,7 @@ directCommands:
     syntax: az webapp connection create keyvault --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --new
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "dotnet, java, nodejs, none, python, springBoot"
+    parameterValueGroup: "dotnet, dotnet-internal, java, nodejs, none, python, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -1012,7 +1012,7 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_mysql()
+- uid: az_webapp_connection_create_mysql
   name: az webapp connection create mysql
   summary: |-
     Create a webapp connection to mysql.
@@ -1021,7 +1021,7 @@ directCommands:
   deprecateInfo: This command has been deprecated and will be removed in a future release.
   sourceType: Core
   syntax: >-
-    az webapp connection create mysql [--client-type {django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot}]
+    az webapp connection create mysql [--client-type {django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot}]
                                       [--config-connstr {false, true}]
                                       [--connection]
                                       [--customized-keys]
@@ -1053,7 +1053,7 @@ directCommands:
     syntax: az webapp connection create mysql --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --target-id /subscriptions/{subscription}/resourceGroups/{target_resource_group}/providers/Microsoft.DBForMySQL/servers/{server}/databases/{database} --secret name=XX secret=XX
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot"
+    parameterValueGroup: "django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --config-connstr
@@ -1119,14 +1119,14 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_mysql-flexible()
+- uid: az_webapp_connection_create_mysql-flexible
   name: az webapp connection create mysql-flexible
   summary: |-
     Create a webapp connection to mysql-flexible.
   status: GA
   sourceType: Core
   syntax: >-
-    az webapp connection create mysql-flexible [--client-type {django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot}]
+    az webapp connection create mysql-flexible [--client-type {django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot}]
                                                [--config-connstr {false, true}]
                                                [--connection]
                                                [--customized-keys]
@@ -1157,7 +1157,7 @@ directCommands:
     syntax: az webapp connection create mysql-flexible --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --target-id /subscriptions/{subscription}/resourceGroups/{target_resource_group}/providers/Microsoft.DBforMySQL/flexibleServers/{server}/databases/{database} --secret name=XX secret=XX
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot"
+    parameterValueGroup: "django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --config-connstr
@@ -1230,7 +1230,7 @@ directCommands:
   status: GA
   sourceType: Extension
   syntax: >-
-    az webapp connection create mysql-flexible [--client-type {django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot}]
+    az webapp connection create mysql-flexible [--client-type {django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot}]
                                                [--config-connstr {false, true}]
                                                [--connection]
                                                [--customized-keys]
@@ -1261,7 +1261,7 @@ directCommands:
     syntax: az webapp connection create mysql-flexible --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --target-id /subscriptions/{subscription}/resourceGroups/{target_resource_group}/providers/Microsoft.DBforMySQL/flexibleServers/{server}/databases/{database} --secret name=XX secret=XX
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot"
+    parameterValueGroup: "django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --config-connstr
@@ -1313,7 +1313,7 @@ directCommands:
       client-id            : Required. Client id of the service principal.
       object-id            : Optional. Object id of the service principal (Enterprise Application).
       secret               : Required. Secret of the service principal.
-      mysql-identity-id    : Optional. ID of identity used for MySQL flexible server AAD Authentication. Ignore it if you are the server AAD administrator.
+      mysql-identity-id    : Optional. ID of identity used for MySQL flexible server Microsoft Entra Authentication. Ignore it if you are the server Microsoft Entra administrator.
   - name: --slot
     summary: |-
       The name of the slot. Default to the production slot if not specified.
@@ -1326,7 +1326,7 @@ directCommands:
     description: |-
       Usage: --system-identity mysql-identity-id=xx
 
-      mysql-identity-id      : Optional. ID of identity used for MySQL flexible server AAD Authentication. Ignore it if you are the server AAD administrator.
+      mysql-identity-id      : Optional. ID of identity used for MySQL flexible server Microsoft Entra Authentication. Ignore it if you are the server Microsoft Entra administrator.
   - name: --target-id
     summary: |-
       The resource id of target service. Required if ['--target-resource-group', '--server', '--database'] are not specified.
@@ -1341,7 +1341,7 @@ directCommands:
 
       client-id            : Required. Client id of the user assigned identity.
       subs-id              : Required. Subscription id of the user assigned identity.
-      mysql-identity-id    : Optional. ID of identity used for MySQL flexible server AAD Authentication. Ignore it if you are the server AAD administrator.
+      mysql-identity-id    : Optional. ID of identity used for MySQL flexible server Microsoft Entra Authentication. Ignore it if you are the server Microsoft Entra administrator.
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
@@ -1349,7 +1349,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_webapp_connection_create_postgres()
+- uid: az_webapp_connection_create_postgres
   name: az webapp connection create postgres
   summary: |-
     Create a webapp connection to postgres.
@@ -1358,7 +1358,7 @@ directCommands:
   deprecateInfo: This command has been deprecated and will be removed in a future release.
   sourceType: Core
   syntax: >-
-    az webapp connection create postgres [--client-type {django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot}]
+    az webapp connection create postgres [--client-type {django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot}]
                                          [--config-connstr {false, true}]
                                          [--connection]
                                          [--customized-keys]
@@ -1398,7 +1398,7 @@ directCommands:
     syntax: az webapp connection create postgres --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --new
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot"
+    parameterValueGroup: "django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --config-connstr
@@ -1482,7 +1482,7 @@ directCommands:
   status: GA
   sourceType: Extension
   syntax: >-
-    az webapp connection create postgres [--client-type {django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot}]
+    az webapp connection create postgres [--client-type {django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot}]
                                          [--config-connstr {false, true}]
                                          [--connection]
                                          [--customized-keys]
@@ -1522,7 +1522,7 @@ directCommands:
     syntax: az webapp connection create postgres --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --new
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot"
+    parameterValueGroup: "django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --config-connstr
@@ -1619,14 +1619,14 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_webapp_connection_create_postgres-flexible()
+- uid: az_webapp_connection_create_postgres-flexible
   name: az webapp connection create postgres-flexible
   summary: |-
     Create a webapp connection to postgres-flexible.
   status: GA
   sourceType: Core
   syntax: >-
-    az webapp connection create postgres-flexible [--client-type {django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot}]
+    az webapp connection create postgres-flexible [--client-type {django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot}]
                                                   [--config-connstr {false, true}]
                                                   [--connection]
                                                   [--customized-keys]
@@ -1657,7 +1657,7 @@ directCommands:
     syntax: az webapp connection create postgres-flexible --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --target-id /subscriptions/{subscription}/resourceGroups/{target_resource_group}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{server}/databases/{database} --secret name=XX secret=XX
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot"
+    parameterValueGroup: "django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --config-connstr
@@ -1728,7 +1728,7 @@ directCommands:
   status: GA
   sourceType: Extension
   syntax: >-
-    az webapp connection create postgres-flexible [--client-type {django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot}]
+    az webapp connection create postgres-flexible [--client-type {django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot}]
                                                   [--config-connstr {false, true}]
                                                   [--connection]
                                                   [--customized-keys]
@@ -1759,7 +1759,7 @@ directCommands:
     syntax: az webapp connection create postgres-flexible --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --target-id /subscriptions/{subscription}/resourceGroups/{target_resource_group}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{server}/databases/{database} --secret name=XX secret=XX
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot"
+    parameterValueGroup: "django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --config-connstr
@@ -1843,14 +1843,14 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_webapp_connection_create_redis()
+- uid: az_webapp_connection_create_redis
   name: az webapp connection create redis
   summary: |-
     Create a webapp connection to redis.
   status: GA
   sourceType: Core
   syntax: >-
-    az webapp connection create redis [--client-type {dotnet, go, java, nodejs, none, python, springBoot}]
+    az webapp connection create redis [--client-type {dotnet, dotnet-internal, go, java, nodejs, none, python, springBoot}]
                                       [--connection]
                                       [--customized-keys]
                                       [--database]
@@ -1880,7 +1880,7 @@ directCommands:
     syntax: az webapp connection create redis --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --target-id /subscriptions/{subscription}/resourceGroups/{target_resource_group}/providers/Microsoft.Cache/redis/{server}/databases/{database} --secret
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "dotnet, go, java, nodejs, none, python, springBoot"
+    parameterValueGroup: "dotnet, dotnet-internal, go, java, nodejs, none, python, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -1929,14 +1929,14 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_redis-enterprise()
+- uid: az_webapp_connection_create_redis-enterprise
   name: az webapp connection create redis-enterprise
   summary: |-
     Create a webapp connection to redis-enterprise.
   status: GA
   sourceType: Core
   syntax: >-
-    az webapp connection create redis-enterprise [--client-type {dotnet, go, java, nodejs, none, python, springBoot}]
+    az webapp connection create redis-enterprise [--client-type {dotnet, dotnet-internal, go, java, nodejs, none, python, springBoot}]
                                                  [--connection]
                                                  [--customized-keys]
                                                  [--database]
@@ -1965,7 +1965,7 @@ directCommands:
     syntax: az webapp connection create redis-enterprise --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --target-id /subscriptions/{subscription}/resourceGroups/{target_resource_group}/providers/Microsoft.Cache/redisEnterprise/{server}/databases/{database} --secret
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "dotnet, go, java, nodejs, none, python, springBoot"
+    parameterValueGroup: "dotnet, dotnet-internal, go, java, nodejs, none, python, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -2010,14 +2010,14 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_servicebus()
+- uid: az_webapp_connection_create_servicebus
   name: az webapp connection create servicebus
   summary: |-
     Create a webapp connection to servicebus.
   status: GA
   sourceType: Core
   syntax: >-
-    az webapp connection create servicebus [--client-type {dotnet, go, java, nodejs, none, python, springBoot}]
+    az webapp connection create servicebus [--client-type {dotnet, dotnet-internal, go, java, nodejs, none, python, springBoot}]
                                            [--connection]
                                            [--customized-keys]
                                            [--name]
@@ -2050,7 +2050,7 @@ directCommands:
     syntax: az webapp connection create servicebus --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --target-id /subscriptions/{subscription}/resourceGroups/{target_resource_group}/providers/Microsoft.ServiceBus/namespaces/{namespace} --system-identity
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "dotnet, go, java, nodejs, none, python, springBoot"
+    parameterValueGroup: "dotnet, dotnet-internal, go, java, nodejs, none, python, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -2122,14 +2122,14 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_signalr()
+- uid: az_webapp_connection_create_signalr
   name: az webapp connection create signalr
   summary: |-
     Create a webapp connection to signalr.
   status: GA
   sourceType: Core
   syntax: >-
-    az webapp connection create signalr [--client-type {dotnet, none}]
+    az webapp connection create signalr [--client-type {dotnet, dotnet-internal, none}]
                                         [--connection]
                                         [--customized-keys]
                                         [--name]
@@ -2161,7 +2161,7 @@ directCommands:
     syntax: az webapp connection create signalr --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --target-id /subscriptions/{subscription}/resourceGroups/{target_resource_group}/providers/Microsoft.SignalRService/SignalR/{signalr} --system-identity
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "dotnet, none"
+    parameterValueGroup: "dotnet, dotnet-internal, none"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -2229,14 +2229,14 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_sql()
+- uid: az_webapp_connection_create_sql
   name: az webapp connection create sql
   summary: |-
     Create a webapp connection to sql.
   status: GA
   sourceType: Core
   syntax: >-
-    az webapp connection create sql [--client-type {django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot}]
+    az webapp connection create sql [--client-type {django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot}]
                                     [--config-connstr {false, true}]
                                     [--connection]
                                     [--customized-keys]
@@ -2269,7 +2269,7 @@ directCommands:
     syntax: az webapp connection create sql --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --target-id /subscriptions/{subscription}/resourceGroups/{target_resource_group}/providers/Microsoft.Sql/servers/{server}/databases/{database} --secret name=XX secret=XX
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot"
+    parameterValueGroup: "django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --config-connstr
@@ -2348,7 +2348,7 @@ directCommands:
   status: GA
   sourceType: Extension
   syntax: >-
-    az webapp connection create sql [--client-type {django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot}]
+    az webapp connection create sql [--client-type {django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot}]
                                     [--config-connstr {false, true}]
                                     [--connection]
                                     [--customized-keys]
@@ -2381,7 +2381,7 @@ directCommands:
     syntax: az webapp connection create sql --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --target-id /subscriptions/{subscription}/resourceGroups/{target_resource_group}/providers/Microsoft.Sql/servers/{server}/databases/{database} --secret name=XX secret=XX
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "django, dotnet, go, java, nodejs, none, php, python, ruby, springBoot"
+    parameterValueGroup: "django, dotnet, dotnet-internal, go, java, nodejs, none, php, python, ruby, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --config-connstr
@@ -2473,7 +2473,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_webapp_connection_create_storage-blob()
+- uid: az_webapp_connection_create_storage-blob
   name: az webapp connection create storage-blob
   summary: |-
     Create a webapp connection to storage-blob.
@@ -2481,7 +2481,7 @@ directCommands:
   sourceType: Core
   syntax: >-
     az webapp connection create storage-blob [--account]
-                                             [--client-type {dotnet, java, nodejs, none, python, springBoot}]
+                                             [--client-type {dotnet, dotnet-internal, java, nodejs, none, python, springBoot}]
                                              [--connection]
                                              [--customized-keys]
                                              [--name]
@@ -2523,7 +2523,7 @@ directCommands:
     summary: |-
       Name of the storage account. Required if '--target-id' is not specified.
   - name: --client-type
-    parameterValueGroup: "dotnet, java, nodejs, none, python, springBoot"
+    parameterValueGroup: "dotnet, dotnet-internal, java, nodejs, none, python, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -2597,7 +2597,7 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_storage-file()
+- uid: az_webapp_connection_create_storage-file
   name: az webapp connection create storage-file
   summary: |-
     Create a webapp connection to storage-file.
@@ -2605,7 +2605,7 @@ directCommands:
   sourceType: Core
   syntax: >-
     az webapp connection create storage-file [--account]
-                                             [--client-type {dotnet, java, nodejs, none, php, python, ruby, springBoot}]
+                                             [--client-type {dotnet, dotnet-internal, java, nodejs, none, php, python, ruby, springBoot}]
                                              [--connection]
                                              [--customized-keys]
                                              [--name]
@@ -2637,7 +2637,7 @@ directCommands:
     summary: |-
       Name of the storage account. Required if '--target-id' is not specified.
   - name: --client-type
-    parameterValueGroup: "dotnet, java, nodejs, none, php, python, ruby, springBoot"
+    parameterValueGroup: "dotnet, dotnet-internal, java, nodejs, none, php, python, ruby, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -2684,7 +2684,7 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_storage-queue()
+- uid: az_webapp_connection_create_storage-queue
   name: az webapp connection create storage-queue
   summary: |-
     Create a webapp connection to storage-queue.
@@ -2692,7 +2692,7 @@ directCommands:
   sourceType: Core
   syntax: >-
     az webapp connection create storage-queue [--account]
-                                              [--client-type {dotnet, java, nodejs, none, python, springBoot}]
+                                              [--client-type {dotnet, dotnet-internal, java, nodejs, none, python, springBoot}]
                                               [--connection]
                                               [--customized-keys]
                                               [--name]
@@ -2727,7 +2727,7 @@ directCommands:
     summary: |-
       Name of the storage account. Required if '--target-id' is not specified.
   - name: --client-type
-    parameterValueGroup: "dotnet, java, nodejs, none, python, springBoot"
+    parameterValueGroup: "dotnet, dotnet-internal, java, nodejs, none, python, springBoot"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -2796,7 +2796,7 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_storage-table()
+- uid: az_webapp_connection_create_storage-table
   name: az webapp connection create storage-table
   summary: |-
     Create a webapp connection to storage-table.
@@ -2804,7 +2804,7 @@ directCommands:
   sourceType: Core
   syntax: >-
     az webapp connection create storage-table [--account]
-                                              [--client-type {dotnet, java, nodejs, none, python}]
+                                              [--client-type {dotnet, dotnet-internal, java, nodejs, none, python}]
                                               [--connection]
                                               [--customized-keys]
                                               [--name]
@@ -2836,7 +2836,7 @@ directCommands:
     summary: |-
       Name of the storage account. Required if '--target-id' is not specified.
   - name: --client-type
-    parameterValueGroup: "dotnet, java, nodejs, none, python"
+    parameterValueGroup: "dotnet, dotnet-internal, java, nodejs, none, python"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -2883,14 +2883,14 @@ directCommands:
   - name: --vault-id
     summary: |-
       The id of key vault to store secret value.
-- uid: az_webapp_connection_create_webpubsub()
+- uid: az_webapp_connection_create_webpubsub
   name: az webapp connection create webpubsub
   summary: |-
     Create a webapp connection to webpubsub.
   status: GA
   sourceType: Core
   syntax: >-
-    az webapp connection create webpubsub [--client-type {dotnet, java, nodejs, none, python}]
+    az webapp connection create webpubsub [--client-type {dotnet, dotnet-internal, java, nodejs, none, python}]
                                           [--connection]
                                           [--customized-keys]
                                           [--name]
@@ -2922,7 +2922,7 @@ directCommands:
     syntax: az webapp connection create webpubsub --source-id /subscriptions/{subscription}/resourceGroups/{source_resource_group}/providers/Microsoft.Web/sites/{site} --target-id /subscriptions/{subscription}/resourceGroups/{target_resource_group}/providers/Microsoft.SignalRService/WebPubSub/{webpubsub} --system-identity
   optionalParameters:
   - name: --client-type
-    parameterValueGroup: "dotnet, java, nodejs, none, python"
+    parameterValueGroup: "dotnet, dotnet-internal, java, nodejs, none, python"
     summary: |-
       The client type used on the webapp.
   - name: --connection
@@ -2991,33 +2991,33 @@ directCommands:
     summary: |-
       Name of the webpubsub service. Required if '--target-id' is not specified.
 commands:
-- az_webapp_connection_create_appconfig()
-- az_webapp_connection_create_confluent-cloud()
-- az_webapp_connection_create_cosmos-cassandra()
-- az_webapp_connection_create_cosmos-gremlin()
-- az_webapp_connection_create_cosmos-mongo()
-- az_webapp_connection_create_cosmos-sql()
-- az_webapp_connection_create_cosmos-table()
-- az_webapp_connection_create_eventhub()
-- az_webapp_connection_create_keyvault()
-- az_webapp_connection_create_mysql()
-- az_webapp_connection_create_mysql-flexible()
+- az_webapp_connection_create_appconfig
+- az_webapp_connection_create_confluent-cloud
+- az_webapp_connection_create_cosmos-cassandra
+- az_webapp_connection_create_cosmos-gremlin
+- az_webapp_connection_create_cosmos-mongo
+- az_webapp_connection_create_cosmos-sql
+- az_webapp_connection_create_cosmos-table
+- az_webapp_connection_create_eventhub
+- az_webapp_connection_create_keyvault
+- az_webapp_connection_create_mysql
+- az_webapp_connection_create_mysql-flexible
 - az_webapp_connection_create_mysql-flexible(serviceconnector-passwordless)
-- az_webapp_connection_create_postgres()
+- az_webapp_connection_create_postgres
 - az_webapp_connection_create_postgres(serviceconnector-passwordless)
-- az_webapp_connection_create_postgres-flexible()
+- az_webapp_connection_create_postgres-flexible
 - az_webapp_connection_create_postgres-flexible(serviceconnector-passwordless)
-- az_webapp_connection_create_redis()
-- az_webapp_connection_create_redis-enterprise()
-- az_webapp_connection_create_servicebus()
-- az_webapp_connection_create_signalr()
-- az_webapp_connection_create_sql()
+- az_webapp_connection_create_redis
+- az_webapp_connection_create_redis-enterprise
+- az_webapp_connection_create_servicebus
+- az_webapp_connection_create_signalr
+- az_webapp_connection_create_sql
 - az_webapp_connection_create_sql(serviceconnector-passwordless)
-- az_webapp_connection_create_storage-blob()
-- az_webapp_connection_create_storage-file()
-- az_webapp_connection_create_storage-queue()
-- az_webapp_connection_create_storage-table()
-- az_webapp_connection_create_webpubsub()
+- az_webapp_connection_create_storage-blob
+- az_webapp_connection_create_storage-file
+- az_webapp_connection_create_storage-queue
+- az_webapp_connection_create_storage-table
+- az_webapp_connection_create_webpubsub
 globalParameters:
 - name: --debug
   summary: |-
@@ -3030,7 +3030,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

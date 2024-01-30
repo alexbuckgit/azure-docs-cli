@@ -3,18 +3,14 @@ uid: az_servicebus_topic_subscription_rule
 name: az servicebus topic subscription rule
 summary: |-
   Servicebus topic subscription rule.
-status: Preview
-isPreview: true
-previewOrExperimentalInfo: 'This command group is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus'
+status: GA
 sourceType: Core
 directCommands:
-- uid: az_servicebus_topic_subscription_rule_create()
+- uid: az_servicebus_topic_subscription_rule_create
   name: az servicebus topic subscription rule create
   summary: |-
     Create the ServiceBus Rule for Subscription.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'servicebus topic subscription rule' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/servicebus/_help.py
   syntax: >-
@@ -122,13 +118,11 @@ directCommands:
   - name: --to
     summary: |-
       Address to send to.
-- uid: az_servicebus_topic_subscription_rule_delete()
+- uid: az_servicebus_topic_subscription_rule_delete
   name: az servicebus topic subscription rule delete
   summary: |-
     Delete an existing rule.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'servicebus topic subscription rule' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/servicebus/_help.py
   syntax: >-
@@ -161,13 +155,11 @@ directCommands:
   - name: --topic-name
     summary: |-
       The topic name.
-- uid: az_servicebus_topic_subscription_rule_list()
+- uid: az_servicebus_topic_subscription_rule_list
   name: az servicebus topic subscription rule list
   summary: |-
     List all the rules within given topic-subscription.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'servicebus topic subscription rule' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/servicebus/_help.py
   syntax: >-
@@ -201,13 +193,11 @@ directCommands:
   - name: --top
     summary: |-
       May be used to limit the number of results to the most recent N usageDetails.
-- uid: az_servicebus_topic_subscription_rule_show()
+- uid: az_servicebus_topic_subscription_rule_show
   name: az servicebus topic subscription rule show
   summary: |-
     Get the description for the specified rule.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'servicebus topic subscription rule' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/servicebus/_help.py
   syntax: >-
@@ -240,13 +230,11 @@ directCommands:
   - name: --topic-name
     summary: |-
       The topic name.
-- uid: az_servicebus_topic_subscription_rule_update()
+- uid: az_servicebus_topic_subscription_rule_update
   name: az servicebus topic subscription rule update
   summary: |-
     Update a new rule and updates an existing rule.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'servicebus topic subscription rule' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/servicebus/_help.py
   syntax: >-
@@ -369,11 +357,11 @@ directCommands:
     summary: |-
       The topic name.
 commands:
-- az_servicebus_topic_subscription_rule_create()
-- az_servicebus_topic_subscription_rule_delete()
-- az_servicebus_topic_subscription_rule_list()
-- az_servicebus_topic_subscription_rule_show()
-- az_servicebus_topic_subscription_rule_update()
+- az_servicebus_topic_subscription_rule_create
+- az_servicebus_topic_subscription_rule_delete
+- az_servicebus_topic_subscription_rule_list
+- az_servicebus_topic_subscription_rule_show
+- az_servicebus_topic_subscription_rule_update
 globalParameters:
 - name: --debug
   summary: |-
@@ -386,7 +374,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

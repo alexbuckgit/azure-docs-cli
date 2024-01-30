@@ -10,7 +10,7 @@ summary: |-
 status: GA
 sourceType: Core and Extension
 directCommands:
-- uid: az_storage_file_copy_cancel()
+- uid: az_storage_file_copy_cancel
   name: az storage file copy cancel
   summary: |-
     Abort an ongoing copy operation.
@@ -28,6 +28,7 @@ directCommands:
                                 [--auth-mode {key, login}]
                                 [--backup-intent]
                                 [--connection-string]
+                                [--disallow-trailing-dot {false, true}]
                                 [--file-endpoint]
                                 [--sas-token]
                                 [--timeout]
@@ -62,6 +63,11 @@ directCommands:
   - name: --connection-string
     summary: |-
       Storage account connection string. Environment variable: AZURE_STORAGE_CONNECTION_STRING.
+  - name: --disallow-trailing-dot
+    defaultValue: "False"
+    parameterValueGroup: "false, true"
+    summary: |-
+      If true, the trailing dot will be trimmed from the target URI. Default to False.
   - name: --file-endpoint
     summary: |-
       Storage data service endpoint. Must be used in conjunction with either storage account key or a SAS token. You can find each service primary endpoint with `az storage account show`. Environment variable: AZURE_STORAGE_SERVICE_ENDPOINT.
@@ -136,7 +142,7 @@ directCommands:
   - name: --timeout
     summary: |-
       Request timeout in seconds. Applies to each call to the service.
-- uid: az_storage_file_copy_start()
+- uid: az_storage_file_copy_start
   name: az storage file copy start
   summary: |-
     Copy a file asynchronously.
@@ -151,6 +157,8 @@ directCommands:
                                [--auth-mode {key, login}]
                                [--backup-intent]
                                [--connection-string]
+                               [--disallow-source-trailing-dot {false, true}]
+                               [--disallow-trailing-dot {false, true}]
                                [--file-endpoint]
                                [--file-snapshot]
                                [--metadata]
@@ -202,6 +210,16 @@ directCommands:
   - name: --connection-string
     summary: |-
       Storage account connection string. Environment variable: AZURE_STORAGE_CONNECTION_STRING.
+  - name: --disallow-source-trailing-dot --disallow-src-trailing
+    defaultValue: "False"
+    parameterValueGroup: "false, true"
+    summary: |-
+      If true, the trailing dot will be trimmed from the source URI. Default to False.
+  - name: --disallow-trailing-dot
+    defaultValue: "False"
+    parameterValueGroup: "false, true"
+    summary: |-
+      If true, the trailing dot will be trimmed from the target URI. Default to False.
   - name: --file-endpoint
     summary: |-
       Storage data service endpoint. Must be used in conjunction with either storage account key or a SAS token. You can find each service primary endpoint with `az storage account show`. Environment variable: AZURE_STORAGE_SERVICE_ENDPOINT.
@@ -362,7 +380,7 @@ directCommands:
   - name: --timeout
     summary: |-
       Request timeout in seconds. Applies to each call to the service.
-- uid: az_storage_file_copy_start-batch()
+- uid: az_storage_file_copy_start-batch
   name: az storage file copy start-batch
   summary: |-
     Copy multiple files or blobs to a file share.
@@ -375,6 +393,8 @@ directCommands:
                                      [--connection-string]
                                      [--destination-path]
                                      [--destination-share]
+                                     [--disallow-source-trailing-dot {false, true}]
+                                     [--disallow-trailing-dot {false, true}]
                                      [--dryrun]
                                      [--file-endpoint]
                                      [--metadata]
@@ -410,6 +430,16 @@ directCommands:
   - name: --destination-share
     summary: |-
       The file share where the source data is copied to.
+  - name: --disallow-source-trailing-dot --disallow-src-trailing
+    defaultValue: "False"
+    parameterValueGroup: "false, true"
+    summary: |-
+      If true, the trailing dot will be trimmed from the source URI. Default to False.
+  - name: --disallow-trailing-dot
+    defaultValue: "False"
+    parameterValueGroup: "false, true"
+    summary: |-
+      If true, the trailing dot will be trimmed from the target URI. Default to False.
   - name: --dryrun
     defaultValue: "False"
     summary: |-
@@ -551,11 +581,11 @@ directCommands:
     summary: |-
       Request timeout in seconds. Applies to each call to the service.
 commands:
-- az_storage_file_copy_cancel()
+- az_storage_file_copy_cancel
 - az_storage_file_copy_cancel(storage-preview)
-- az_storage_file_copy_start()
+- az_storage_file_copy_start
 - az_storage_file_copy_start(storage-preview)
-- az_storage_file_copy_start-batch()
+- az_storage_file_copy_start-batch
 - az_storage_file_copy_start-batch(storage-preview)
 globalParameters:
 - name: --debug
@@ -569,7 +599,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

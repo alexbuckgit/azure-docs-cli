@@ -7,18 +7,14 @@ extensionInformation: >-
   > This reference is part of the **scvmm** extension for the Azure CLI (version 2.15.0 or higher). The extension will automatically install the first time you run an **az scvmm avset** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage Arc for SCVMM Availability Set resources.
-status: Preview
-isPreview: true
-previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+status: GA
 sourceType: Extension
 directCommands:
-- uid: az_scvmm_avset_create(scvmm)
+- uid: az_scvmm_avset_create
   name: az scvmm avset create
   summary: |-
     Create availabilty set resource.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm avset create --avset-name
@@ -66,13 +62,11 @@ directCommands:
   - name: --tags
     summary: |-
       Space-separated tags: key[=value] [key[=value] ...]. Use "" to clear existing tags.
-- uid: az_scvmm_avset_delete(scvmm)
+- uid: az_scvmm_avset_delete
   name: az scvmm avset delete
   summary: |-
     Delete availabilty set resource.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm avset delete [--force]
@@ -113,13 +107,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_scvmm_avset_list(scvmm)
+- uid: az_scvmm_avset_list
   name: az scvmm avset list
   summary: |-
     Retrieve a list of availabilty sets.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: az scvmm avset list [--resource-group]
   examples:
@@ -133,13 +125,11 @@ directCommands:
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_scvmm_avset_show(scvmm)
+- uid: az_scvmm_avset_show
   name: az scvmm avset show
   summary: |-
     Get details of an availabilty set.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm avset show [--ids]
@@ -166,13 +156,11 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_scvmm_avset_update(scvmm)
+- uid: az_scvmm_avset_update
   name: az scvmm avset update
   summary: |-
     Update availabilty set resource.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm avset update [--ids]
@@ -208,13 +196,11 @@ directCommands:
   - name: --tags
     summary: |-
       Space-separated tags: key[=value] [key[=value] ...]. Use "" to clear existing tags.
-- uid: az_scvmm_avset_wait(scvmm)
+- uid: az_scvmm_avset_wait
   name: az scvmm avset wait
   summary: |-
     Place the CLI in a waiting state until a condition of the availability set is met.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'scvmm' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Extension
   syntax: >-
     az scvmm avset wait --availability-set-name
@@ -264,12 +250,12 @@ directCommands:
     summary: |-
       Wait until updated with provisioningState at 'Succeeded'.
 commands:
-- az_scvmm_avset_create(scvmm)
-- az_scvmm_avset_delete(scvmm)
-- az_scvmm_avset_list(scvmm)
-- az_scvmm_avset_show(scvmm)
-- az_scvmm_avset_update(scvmm)
-- az_scvmm_avset_wait(scvmm)
+- az_scvmm_avset_create
+- az_scvmm_avset_delete
+- az_scvmm_avset_list
+- az_scvmm_avset_show
+- az_scvmm_avset_update
+- az_scvmm_avset_wait
 globalParameters:
 - name: --debug
   summary: |-
@@ -282,7 +268,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

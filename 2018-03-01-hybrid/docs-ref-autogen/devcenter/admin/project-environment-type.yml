@@ -10,7 +10,7 @@ summary: |-
 status: GA
 sourceType: Extension
 directCommands:
-- uid: az_devcenter_admin_project-environment-type_create(devcenter)
+- uid: az_devcenter_admin_project-environment-type_create
   name: az devcenter admin project-environment-type create
   summary: |-
     Create a project environment type.
@@ -19,12 +19,13 @@ directCommands:
   syntax: >-
     az devcenter admin project-environment-type create --deployment-target-id
                                                        --environment-type-name
+                                                       --identity-type {None, SystemAssigned, SystemAssigned, UserAssigned, UserAssigned}
                                                        --project
                                                        --resource-group
+                                                       --roles
                                                        --status {Disabled, Enabled}
-                                                       [--identity-type {None, SystemAssigned, SystemAssigned, UserAssigned, UserAssigned}]
+                                                       [--display-name]
                                                        [--location]
-                                                       [--roles]
                                                        [--tags]
                                                        [--user-assigned-identities]
                                                        [--user-role-assignments]
@@ -42,6 +43,11 @@ directCommands:
     summary: |-
       The name of the environment type.
   - isRequired: true
+    name: --identity-type
+    parameterValueGroup: "None, SystemAssigned, SystemAssigned, UserAssigned, UserAssigned"
+    summary: |-
+      Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
+  - isRequired: true
     name: --project --project-name
     summary: |-
       The name of the project. Use `az configure -d project=<project_name>` to configure a default.
@@ -50,21 +56,21 @@ directCommands:
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
   - isRequired: true
+    name: --roles
+    summary: |-
+      A map of roles to assign to the environment creator.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
+  - isRequired: true
     name: --status
     parameterValueGroup: "Disabled, Enabled"
     summary: |-
       Defines whether this environment type can be used in this project.
   optionalParameters:
-  - name: --identity-type
-    parameterValueGroup: "None, SystemAssigned, SystemAssigned, UserAssigned, UserAssigned"
+  - name: --display-name
     summary: |-
-      Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
+      The display name of the project environment type.
   - name: --location -l
     summary: |-
       The geo-location where the resource lives. Values from: `az account list-locations`. You can configure the default location using `az configure --defaults location=<location>`.
-  - name: --roles
-    summary: |-
-      A map of roles to assign to the environment creator.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
   - name: --tags
     summary: |-
       Resource tags.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
@@ -74,7 +80,7 @@ directCommands:
   - name: --user-role-assignments
     summary: |-
       Role assignments created on environment backing resources. This is a mapping from a user object ID to an object of role definition IDs.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-- uid: az_devcenter_admin_project-environment-type_delete(devcenter)
+- uid: az_devcenter_admin_project-environment-type_delete
   name: az devcenter admin project-environment-type delete
   summary: |-
     Delete a project environment type.
@@ -111,7 +117,7 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_devcenter_admin_project-environment-type_list(devcenter)
+- uid: az_devcenter_admin_project-environment-type_list
   name: az devcenter admin project-environment-type list
   summary: |-
     List environment types for a project.
@@ -142,7 +148,7 @@ directCommands:
   - name: --next-token
     summary: |-
       Token to specify where to start paginating. This is the token value from a previously truncated response.
-- uid: az_devcenter_admin_project-environment-type_show(devcenter)
+- uid: az_devcenter_admin_project-environment-type_show
   name: az devcenter admin project-environment-type show
   summary: |-
     Get a project environment type.
@@ -174,7 +180,7 @@ directCommands:
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_devcenter_admin_project-environment-type_update(devcenter)
+- uid: az_devcenter_admin_project-environment-type_update
   name: az devcenter admin project-environment-type update
   summary: |-
     Update a project environment type.
@@ -183,6 +189,7 @@ directCommands:
   syntax: >-
     az devcenter admin project-environment-type update [--add]
                                                        [--deployment-target-id]
+                                                       [--display-name]
                                                        [--environment-type-name]
                                                        [--force-string {0, 1, f, false, n, no, t, true, y, yes}]
                                                        [--identity-type {None, SystemAssigned, SystemAssigned, UserAssigned, UserAssigned}]
@@ -208,6 +215,9 @@ directCommands:
   - name: --deployment-target-id
     summary: |-
       ID of a subscription that the environment type will be mapped to. The environment's resources will be deployed into this subscription.
+  - name: --display-name
+    summary: |-
+      The display name of the project environment type.
   - name: --environment-type-name --name -n
     summary: |-
       The name of the environment type.
@@ -254,11 +264,11 @@ directCommands:
     summary: |-
       Role assignments created on environment backing resources. This is a mapping from a user object ID to an object of role definition IDs.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
 commands:
-- az_devcenter_admin_project-environment-type_create(devcenter)
-- az_devcenter_admin_project-environment-type_delete(devcenter)
-- az_devcenter_admin_project-environment-type_list(devcenter)
-- az_devcenter_admin_project-environment-type_show(devcenter)
-- az_devcenter_admin_project-environment-type_update(devcenter)
+- az_devcenter_admin_project-environment-type_create
+- az_devcenter_admin_project-environment-type_delete
+- az_devcenter_admin_project-environment-type_list
+- az_devcenter_admin_project-environment-type_show
+- az_devcenter_admin_project-environment-type_update
 globalParameters:
 - name: --debug
   summary: |-
@@ -271,7 +281,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

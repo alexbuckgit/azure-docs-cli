@@ -6,7 +6,7 @@ summary: |-
 status: GA
 sourceType: Core
 directCommands:
-- uid: az_security_automation-action-event-hub_create()
+- uid: az_security_automation-action-event-hub_create
   name: az security automation-action-event-hub create
   summary: |-
     Creates security automation event hub action.
@@ -35,7 +35,7 @@ directCommands:
     summary: |-
       The target Event Hub SAS policy name.
 commands:
-- az_security_automation-action-event-hub_create()
+- az_security_automation-action-event-hub_create
 globalParameters:
 - name: --debug
   summary: |-
@@ -48,7 +48,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query
@@ -61,5 +61,5 @@ globalParameters:
   summary: |-
     Increase logging verbosity. Use --debug for full debug logs.
 metadata:
-  ms.date: 12/14/2022
+  ms.date: 10/17/2023
   description: Creates security automation event hub action.

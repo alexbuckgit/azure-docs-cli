@@ -3,18 +3,14 @@ uid: az_servicebus_namespace_private-endpoint-connection
 name: az servicebus namespace private-endpoint-connection
 summary: |-
   Manage servicebus namespace private endpoint connection.
-status: Preview
-isPreview: true
-previewOrExperimentalInfo: "Command group 'servicebus namespace' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+status: GA
 sourceType: Core
 directCommands:
-- uid: az_servicebus_namespace_private-endpoint-connection_approve()
+- uid: az_servicebus_namespace_private-endpoint-connection_approve
   name: az servicebus namespace private-endpoint-connection approve
   summary: |-
     Approve a private endpoint connection request for servicebus namespace.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'servicebus namespace private-endpoint-connection' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/servicebus/_help.py
   syntax: >-
@@ -58,13 +54,11 @@ directCommands:
   - name: --resource-group -g
     summary: |-
       The resource group name of specified Service bus namespace.
-- uid: az_servicebus_namespace_private-endpoint-connection_delete()
+- uid: az_servicebus_namespace_private-endpoint-connection_delete
   name: az servicebus namespace private-endpoint-connection delete
   summary: |-
     Delete a private endpoint connection request for servicebus namespace.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'servicebus namespace private-endpoint-connection' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/servicebus/_help.py
   syntax: >-
@@ -113,13 +107,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not prompt for confirmation.
-- uid: az_servicebus_namespace_private-endpoint-connection_reject()
+- uid: az_servicebus_namespace_private-endpoint-connection_reject
   name: az servicebus namespace private-endpoint-connection reject
   summary: |-
     Reject a private endpoint connection request for servicebus namespace.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: "Command group 'servicebus namespace private-endpoint-connection' is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus"
+  status: GA
   sourceType: Core
   editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/servicebus/_help.py
   syntax: >-
@@ -164,9 +156,9 @@ directCommands:
     summary: |-
       The resource group name of specified Service bus namespace.
 commands:
-- az_servicebus_namespace_private-endpoint-connection_approve()
-- az_servicebus_namespace_private-endpoint-connection_delete()
-- az_servicebus_namespace_private-endpoint-connection_reject()
+- az_servicebus_namespace_private-endpoint-connection_approve
+- az_servicebus_namespace_private-endpoint-connection_delete
+- az_servicebus_namespace_private-endpoint-connection_reject
 globalParameters:
 - name: --debug
   summary: |-
@@ -179,7 +171,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

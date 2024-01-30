@@ -4,13 +4,13 @@ name: az baremetalinstance
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **baremetal-infrastructure** extension for the Azure CLI (version 2.12.0 or higher). The extension will automatically install the first time you run an **az baremetalinstance** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **baremetal-infrastructure** extension for the Azure CLI (version 2.56.0 or higher). The extension will automatically install the first time you run an **az baremetalinstance** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   (PREVIEW) Manage BareMetal Instances.
 status: GA
 sourceType: Extension
 directCommands:
-- uid: az_baremetalinstance_delete(baremetal-infrastructure)
+- uid: az_baremetalinstance_delete
   name: az baremetalinstance delete
   summary: |-
     Delete a BareMetal Instance.
@@ -27,14 +27,14 @@ directCommands:
       One or more resource IDs (space-delimited). It should be a complete resource ID containing all information of 'Resource Id' arguments. You should provide either --ids or other 'Resource Id' arguments.
   - name: --instance-name -n
     summary: |-
-      The name of the BareMetal instance.
+      The name of the BareMetalInstance.
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_baremetalinstance_list(baremetal-infrastructure)
+- uid: az_baremetalinstance_list
   name: az baremetalinstance list
   summary: |-
     List BareMetal Instances.
@@ -45,31 +45,37 @@ directCommands:
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
-- uid: az_baremetalinstance_restart(baremetal-infrastructure)
+- uid: az_baremetalinstance_restart
   name: az baremetalinstance restart
   summary: |-
     Restart a BareMetal Instance.
   status: GA
   sourceType: Extension
   syntax: >-
-    az baremetalinstance restart [--ids]
+    az baremetalinstance restart [--force {false, true}]
+                                 [--ids]
                                  [--instance-name]
                                  [--resource-group]
                                  [--subscription]
   optionalParameters:
+  - name: --force -f
+    defaultValue: "False"
+    parameterValueGroup: "false, true"
+    summary: |-
+      Force restart option.
   - name: --ids
     summary: |-
       One or more resource IDs (space-delimited). It should be a complete resource ID containing all information of 'Resource Id' arguments. You should provide either --ids or other 'Resource Id' arguments.
   - name: --instance-name -n
     summary: |-
-      The name of the BareMetal instance.
+      The name of the BareMetalInstance.
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_baremetalinstance_show(baremetal-infrastructure)
+- uid: az_baremetalinstance_show
   name: az baremetalinstance show
   summary: |-
     Get the details of a BareMetal Instance.
@@ -86,14 +92,14 @@ directCommands:
       One or more resource IDs (space-delimited). It should be a complete resource ID containing all information of 'Resource Id' arguments. You should provide either --ids or other 'Resource Id' arguments.
   - name: --instance-name -n
     summary: |-
-      The name of the BareMetal instance.
+      The name of the BareMetalInstance.
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_baremetalinstance_shutdown(baremetal-infrastructure)
+- uid: az_baremetalinstance_shutdown
   name: az baremetalinstance shutdown
   summary: |-
     Shutdown a BareMetal Instance.
@@ -110,14 +116,14 @@ directCommands:
       One or more resource IDs (space-delimited). It should be a complete resource ID containing all information of 'Resource Id' arguments. You should provide either --ids or other 'Resource Id' arguments.
   - name: --instance-name -n
     summary: |-
-      The name of the BareMetal instance.
+      The name of the BareMetalInstance.
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_baremetalinstance_start(baremetal-infrastructure)
+- uid: az_baremetalinstance_start
   name: az baremetalinstance start
   summary: |-
     Start a BareMetal Instance.
@@ -134,14 +140,14 @@ directCommands:
       One or more resource IDs (space-delimited). It should be a complete resource ID containing all information of 'Resource Id' arguments. You should provide either --ids or other 'Resource Id' arguments.
   - name: --instance-name -n
     summary: |-
-      The name of the BareMetal instance.
+      The name of the BareMetalInstance.
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
-- uid: az_baremetalinstance_update(baremetal-infrastructure)
+- uid: az_baremetalinstance_update
   name: az baremetalinstance update
   summary: |-
     Update the tags field of a BareMetal Instance.
@@ -171,7 +177,7 @@ directCommands:
       One or more resource IDs (space-delimited). It should be a complete resource ID containing all information of 'Resource Id' arguments. You should provide either --ids or other 'Resource Id' arguments.
   - name: --instance-name -n
     summary: |-
-      The name of the BareMetal instance.
+      The name of the BareMetalInstance.
   - name: --no-wait
     defaultValue: "False"
     summary: |-
@@ -191,13 +197,13 @@ directCommands:
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
 commands:
-- az_baremetalinstance_delete(baremetal-infrastructure)
-- az_baremetalinstance_list(baremetal-infrastructure)
-- az_baremetalinstance_restart(baremetal-infrastructure)
-- az_baremetalinstance_show(baremetal-infrastructure)
-- az_baremetalinstance_shutdown(baremetal-infrastructure)
-- az_baremetalinstance_start(baremetal-infrastructure)
-- az_baremetalinstance_update(baremetal-infrastructure)
+- az_baremetalinstance_delete
+- az_baremetalinstance_list
+- az_baremetalinstance_restart
+- az_baremetalinstance_show
+- az_baremetalinstance_shutdown
+- az_baremetalinstance_start
+- az_baremetalinstance_update
 globalParameters:
 - name: --debug
   summary: |-
@@ -210,7 +216,7 @@ globalParameters:
     Only show errors, suppressing warnings.
 - name: --output -o
   defaultValue: "json"
-  parameterValueGroup: "json, jsonc, table, tsv"
+  parameterValueGroup: "json, jsonc, none, table, tsv, yaml, yamlc"
   summary: |-
     Output format.
 - name: --query

@@ -4,7 +4,7 @@ description: Learn what's new in the Azure CLI
 manager: jasongroce
 author: dbradish-microsoft
 ms.author: dbradish
-ms.date: 08/11/2023
+ms.date: 09/29/2023
 ms.topic: conceptual
 ms.service: azure-cli
 ms.tool: azure-cli 
@@ -13,14 +13,23 @@ keywords: Azure CLI, new articles, new references, new samples, announcements
 ---
 # What's new in the Azure CLI
 
-This page highlights new features, articles and learning paths for the Azure CLI.  Use these quick links to jump straight to the article containing detailed information:
+This page highlights new features, articles and learning paths for the Azure CLI.
 
-- [64-bit install](/cli/azure/install-azure-cli-windows#latest-version)
-- [Tab completion](/cli/azure/install-azure-cli-windows#enable-tab-completion-on-powershell)
-- [WAM sign in](/cli/azure/authenticate-azure-cli#sign-in-with-web-account-manager-wam)
-- [Cheat sheet](cheat-sheet-onboarding.md)
-- [Article index](reference-docs-index.md)
-- [Sample index](samples-index.md)
+## Azure Copilot for Azure CLI
+
+[Microsoft Copilot for Azure](https://aka.ms/MicrosoftCopilotforAzureDocs) (preview) is published! Copilot is an AI-powered tool to help you do more with Azure. It unifies knowledge and data across hundreds of Azure services to increase productivity, reduce costs, and provide deep insights. Microsoft Copilot for Azure (preview) helps you learn about Azure by answering questions, and it provides information tailored to your own Azure resources and environment. By letting you express your goals in natural language, Copilot simplifies your Azure management experience. This benefits Azure CLI users because the knowledge of Azure CLI is built into Copilot!
+
+Access Microsoft Copilot for Azure (preview) in the Azure portal, and tell Copilot what you would like to do using Azure CLI. For example:
+
+- I want to create a virtual machine using Azure CLI.
+- I want to update service principal credentials using Azure CLI.
+- I want to create a web app using Azure CLI.
+
+To enable access to Microsoft Copilot for Azure (preview) for your organization, [complete the registration form](https://aka.ms/MSCopilotforAzurePreviewRequest). The application process only needs to be completed once per tenant. Check with your administrator if you have questions about joining the preview.
+
+## Reduced Docker image size
+
+With the release of Azure CLI version 2.54.0, the size of the Docker image of `azure-cli` is reduced from 1.1 GB to 700 MB! This reduction is a 36.3% decrease resulting in improved download speed and faster startup. For more information, see "Trim Azure CLI’s docker image size" in [Azure Command-line Tools Ignite 2023 Announcement](https://techcommunity.microsoft.com/t5/azure-tools-blog/azure-command-line-tools-ignite-2023-announcement/ba-p/3984502).
 
 ## 64-bit Windows install
 
@@ -36,19 +45,32 @@ Tab completion is also available in [Azure Cloud Shell](/azure/cloud-shell/quick
 
 The Azure CLI now offers preview support for sign in with Web Account Manager (WAM). Read about the benefits of WAM and how to enable the feature in [Sign in with Web Account Manager](/cli/azure/authenticate-azure-cli#sign-in-with-web-account-manager-wam)
 
-## New search tools
+## Reference type and status
 
-#### Onboarding cheat sheet
+Reference type and status information is now available in Azure CLI reference content. Why is this important? Reference command status determines the support level.
 
-If you're new to the Azure CLI, there's now a one-page [onboarding cheat sheet](cheat-sheet-onboarding.md) to help you get started. The cheat sheet answers common questions, like "How do I change my subscription?" and "What is the Azure CLI syntax pattern?". Also find links to help you learn to use the Azure CLI with step-by-step interactive prompts.
+You see this information in three places:
 
-#### Conceptual article index A-Z
+- **New "type" and "status" columns in reference list tables.**
+  
+  ![status table](./media/status-table.png)
 
-It's often helpful to see how different Azure services use the same reference command. The [Azure CLI conceptual article list](reference-docs-index.md) is an A to Z index of popular Quickstarts, How-to guides and Tutorials that use Azure CLI commands. Use your keyboard shortcut (Ctrl + F in Windows) to quickly jump to a reference group.
+  For a live example, see the [reference index](/cli/azure/reference-index) or drill down to [az account](/cli/azure/account).
 
-#### Samples index A-Z
+- **New status indicators under command names.**
 
-Are you looking for a tested script that completes a common job to be done? The [Azure CLI sample's list](samples-index.md) is an A to Z index of tested sample scripts.
+  ![status badges](./media/status-badges.png)
 
-> [!NOTE]
-> The [Reference index A-Z](/cli/azure/reference-index) is a list of all Azure CLI reference commands. For new Azure CLI reference commands, see [Release notes](release-notes-azure-cli.md).
+  If there's no status indicator, the command group or reference command is GA (Generally Available). For a live example, see [az account subscription](/cli/azure/account/subscription).
+
+- **New status indicator for parameters.** Only deprecated parameters show a status. All other parameters inherit the status of the reference command.
+
+For more information on Azure CLI statuses, see [Azure CLI terminology and support levels](./reference-types-and-status.md#what-is-reference-status).
+
+## New onboarding tools
+
+Are you knew to the Azure CLI?  Check out the new Onboarding Cheat Sheet to jump-start your journey, and find code examples in the A to Z indexes.
+
+- [Onboarding cheat sheet](cheat-sheet-onboarding.md)
+- [Azure CLI conceptual article index](reference-docs-index.md)
+- [Azure CLI sample index](samples-index.md)
