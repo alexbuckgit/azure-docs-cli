@@ -48,6 +48,7 @@ directCommands:
                    [--dns-servers]
                    [--edge-zone]
                    [--enable-agent {false, true}]
+                   [--enable-auto-os-upgrade {false, true}]
                    [--enable-auto-update {false, true}]
                    [--enable-cross-zone-upgrade {false, true}]
                    [--enable-hibernation {false, true}]
@@ -61,6 +62,7 @@ directCommands:
                    [--ephemeral-os-disk {false, true}]
                    [--ephemeral-os-disk-placement {CacheDisk, ResourceDisk}]
                    [--eviction-policy {Deallocate, Delete}]
+                   [--exclude-extensions]
                    [--generate-ssh-keys]
                    [--health-probe]
                    [--host-group]
@@ -109,6 +111,7 @@ directCommands:
                    [--scale-in-policy {Default, NewestVM, OldestVM}]
                    [--scope]
                    [--secrets]
+                   [--security-posture-id]
                    [--security-type {ConfidentialVM, Standard, TrustedLaunch}]
                    [--single-placement-group {false, true}]
                    [--specialized {false, true}]
@@ -201,6 +204,11 @@ directCommands:
   - summary: |-
       Create a Windows VMSS with patch mode 'Manual' (Currently patch mode 'AutomaticByPlatform' is not supported during VMSS creation as health extension which is required for 'AutomaticByPlatform' mode cannot be set during VMSS creation).
     syntax: az vmss create -n MyVmss -g MyResourceGroup --image Win2019Datacenter --enable-agent --enable-auto-update false --patch-mode Manual --orchestration-mode Flexible
+  - summary: |-
+      Create a VMSS with specifying the security posture to be used for all virtual machines in the scale set.
+    syntax: >-
+      az vmss create -n MyVmss -g MyResourceGroup --image /CommunityGalleries/{gallery_unique_name}/Images/{image}/Versions/{version} --security-posture-reference-id /CommunityGalleries/{communityGalleryName}/securityPostures/{securityPostureName}/versions/{version} \
+          --security-posture-reference-exclude-extensions "c:\tmp\exclude_extensions.json"
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -312,6 +320,10 @@ directCommands:
     parameterValueGroup: "false, true"
     summary: |-
       Indicate whether virtual machine agent should be provisioned on the virtual machine. When this property is not specified, default behavior is to set it to true. This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
+  - name: --enable-auto-os-upgrade
+    parameterValueGroup: "false, true"
+    summary: |-
+      Indicate whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available.
   - name: --enable-auto-update
     parameterValueGroup: "false, true"
     summary: |-
@@ -364,10 +376,13 @@ directCommands:
     parameterValueGroup: "Deallocate, Delete"
     summary: |-
       The eviction policy for virtual machines in a Spot priority scale set. Default eviction policy is Deallocate for a Spot priority scale set.
+  - name: --exclude-extensions --security-posture-reference-exclude-extensions
+    summary: |-
+      List of virtual machine extensions to exclude when applying the Security Posture. Either a Json string or a file path is acceptable. Please refer to https://docs.microsoft.com/rest/api/compute/virtualmachinescalesets/get#virtualmachineextension for the data format.
   - name: --generate-ssh-keys
     defaultValue: "False"
     summary: |-
-      Generate SSH public and private key files if missing. The keys will be stored in the ~/.ssh directory.
+      Generate SSH public and private RSA key files if missing. The keys will be stored in the ~/.ssh directory.
   - name: --health-probe
     summary: |-
       Probe name from the existing load balancer, mainly used for rolling upgrade or automatic repairs.
@@ -531,6 +546,9 @@ directCommands:
   - name: --secrets
     summary: |-
       One or many Key Vault secrets as JSON strings or files via `@{path}` containing `[{ "sourceVault": { "id": "value" }, "vaultCertificates": [{ "certificateUrl": "value", "certificateStore": "cert store name (only on windows)"}] }]`.
+  - name: --security-posture-id --security-posture-reference-id
+    summary: |-
+      The security posture reference id in the form of /CommunityGalleries/{communityGalleryName}/securityPostures/{securityPostureName}/versions/{major.minor.patch}|{major.*}|latest.
   - name: --security-type
     parameterValueGroup: "ConfidentialVM, Standard, TrustedLaunch"
     summary: |-
@@ -1296,6 +1314,7 @@ directCommands:
                    [--enable-terminate-notification {false, true}]
                    [--enable-vtpm {false, true}]
                    [--ephemeral-os-disk-placement {CacheDisk, ResourceDisk}]
+                   [--exclude-extensions]
                    [--force-deletion]
                    [--force-string]
                    [--ids]
@@ -1319,6 +1338,7 @@ directCommands:
                    [--remove]
                    [--resource-group]
                    [--scale-in-policy {Default, NewestVM, OldestVM}]
+                   [--security-posture-id]
                    [--security-type {TrustedLaunch}]
                    [--set]
                    [--spot-restore-timeout]
@@ -1351,11 +1371,16 @@ directCommands:
   - summary: |-
       Update a Linux VMSS to patch mode 'AutomaticByPlatform'.
     syntax: az vmss update -n MyVmss -g MyResourceGroup --set virtualMachineProfile.osProfile.linuxConfiguration.patchSettings.patchMode=AutomaticByPlatform
+  - summary: |-
+      Update a VMSS with specifying the security posture to be used for all virtual machines in the scale set.
+    syntax: >-
+      az vmss update -n MyVmss -g MyResourceGroup --security-posture-reference-id /CommunityGalleries/{communityGalleryName}/securityPostures/{securityPostureName}/versions/{version} \
+          --security-posture-reference-exclude-extensions "c:\tmp\exclude_extensions.json"
   optionalParameters:
   - name: --add
     defaultValue: "[]"
     summary: |-
-      Add an object to a list of objects by specifying a path and key value pairs.  Example: --add property.listProperty <key=value, string or JSON string>.
+      Add an object to a list of objects by specifying a path and key value pairs.  Example: `--add property.listProperty <key=value, string or JSON string>`.
   - name: --automatic-repairs-action
     parameterValueGroup: "Reimage, Replace, Restart"
     summary: |-
@@ -1415,6 +1440,9 @@ directCommands:
     parameterValueGroup: "CacheDisk, ResourceDisk"
     summary: |-
       Only applicable when used with `--vm-sku`. Allows you to choose the Ephemeral OS disk provisioning location.
+  - name: --exclude-extensions --security-posture-reference-exclude-extensions
+    summary: |-
+      List of virtual machine extensions to exclude when applying the Security Posture. Either a Json string or a file path is acceptable. Please refer to https://docs.microsoft.com/rest/api/compute/virtualmachinescalesets/get#virtualmachineextension for the data format.
   - name: --force-deletion
     summary: |-
       This property allow you to specify if virtual machines chosen for removal have to be force deleted when a virtual machine scale set is being scaled-in.
@@ -1490,7 +1518,7 @@ directCommands:
   - name: --remove
     defaultValue: "[]"
     summary: |-
-      Remove a property or an element from a list.  Example: --remove property.list <indexToRemove> OR --remove propertyToRemove.
+      Remove a property or an element from a list.  Example: `--remove property.list <indexToRemove>` OR `--remove propertyToRemove`.
   - name: --resource-group -g
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
@@ -1498,6 +1526,9 @@ directCommands:
     parameterValueGroup: "Default, NewestVM, OldestVM"
     summary: |-
       Specify the scale-in policy (space delimited) that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in.
+  - name: --security-posture-id --security-posture-reference-id
+    summary: |-
+      The security posture reference id in the form of /CommunityGalleries/{communityGalleryName}/securityPostures/{securityPostureName}/versions/{major.minor.patch}|{major.*}|latest.
   - name: --security-type
     parameterValueGroup: "TrustedLaunch"
     summary: |-
@@ -1505,7 +1536,7 @@ directCommands:
   - name: --set
     defaultValue: "[]"
     summary: |-
-      Update an object by specifying a property path and value to set.  Example: --set property1.property2=<value>.
+      Update an object by specifying a property path and value to set.  Example: `--set property1.property2=<value>`.
   - name: --spot-restore-timeout
     summary: |-
       Timeout value expressed as an ISO 8601 time duration after which the platform will not try to restore the VMSS SPOT instances.
@@ -1532,6 +1563,49 @@ directCommands:
     summary: |-
       The new size of the virtual machine instances in the scale set. Default to "Standard_DS1_v2". See https://azure.microsoft.com/pricing/details/virtual-machines/ for size info.
     isPreview: true
+- uid: az_vmss_update-domain-walk
+  name: az vmss update-domain-walk
+  summary: |-
+    Manual platform update domain walk to update virtual machines in a service fabric virtual machine scale set.
+  status: GA
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/vm/_help.py
+  syntax: >-
+    az vmss update-domain-walk --platform-update-domain
+                               [--ids]
+                               [--placement-group-id]
+                               [--resource-group]
+                               [--subscription]
+                               [--vmss-name]
+                               [--zone]
+  examples:
+  - summary: |-
+      Force recovery service fabric platform update domain walk
+    syntax: az vmss update-domain-walk -g rg --vmss-name vmss --platform-update-domain
+  requiredParameters:
+  - isRequired: true
+    name: --platform-update-domain
+    summary: |-
+      The platform update domain for which a manual recovery walk is requested.
+  optionalParameters:
+  - name: --ids
+    summary: |-
+      One or more resource IDs (space-delimited). It should be a complete resource ID containing all information of 'Resource Id' arguments. You should provide either --ids or other 'Resource Id' arguments.
+  - name: --placement-group-id
+    summary: |-
+      The placement group id for which the manual recovery walk is requested.
+  - name: --resource-group -g
+    summary: |-
+      Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
+  - name: --subscription
+    summary: |-
+      Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.
+  - name: --vmss-name
+    summary: |-
+      The name of the VM scale set.
+  - name: --zone
+    summary: |-
+      The zone in which the manual recovery walk is requested for cross zone virtual machine scale set.
 - uid: az_vmss_update-instances
   name: az vmss update-instances
   summary: |-
@@ -1704,6 +1778,7 @@ commands:
 - az_vmss_start
 - az_vmss_stop
 - az_vmss_update
+- az_vmss_update-domain-walk
 - az_vmss_update-instances
 - az_vmss_wait
 globalParameters:
@@ -1731,5 +1806,5 @@ globalParameters:
   summary: |-
     Increase logging verbosity. Use --debug for full debug logs.
 metadata:
-  ms.date: 08/28/2023
+  ms.date: 03/26/2024
   description: Manage groupings of virtual machines in an Azure Virtual Machine Scale Set (VMSS).

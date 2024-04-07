@@ -51,7 +51,7 @@ directCommands:
       Update an object by specifying a property path and value to set. Example: --set property1.property2=<value>.
   - name: --workspace-name -w
     summary: |-
-      Name of the Azure ML workspace. You can configure the default group using `az configure --defaults workspace=<name>`.
+      Name of the Azure ML workspace. You can configure the default workspace using `az configure --defaults workspace=<name>`.
 - uid: az_ml_schedule_delete
   name: az ml schedule delete
   summary: |-
@@ -75,7 +75,7 @@ directCommands:
   - isRequired: true
     name: --workspace-name -w
     summary: |-
-      Name of the Azure ML workspace. You can configure the default group using `az configure --defaults workspace=<name>`.
+      Name of the Azure ML workspace. You can configure the default workspace using `az configure --defaults workspace=<name>`.
   optionalParameters:
   - name: --no-wait
     defaultValue: "False"
@@ -104,7 +104,7 @@ directCommands:
   - isRequired: true
     name: --workspace-name -w
     summary: |-
-      Name of the Azure ML workspace. You can configure the default group using `az configure --defaults workspace=<name>`.
+      Name of the Azure ML workspace. You can configure the default workspace using `az configure --defaults workspace=<name>`.
   optionalParameters:
   - name: --no-wait
     defaultValue: "False"
@@ -133,7 +133,7 @@ directCommands:
   - isRequired: true
     name: --workspace-name -w
     summary: |-
-      Name of the Azure ML workspace. You can configure the default group using `az configure --defaults workspace=<name>`.
+      Name of the Azure ML workspace. You can configure the default workspace using `az configure --defaults workspace=<name>`.
   optionalParameters:
   - name: --no-wait
     defaultValue: "False"
@@ -174,7 +174,7 @@ directCommands:
       Max number of results to return.
   - name: --workspace-name -w
     summary: |-
-      Name of the Azure ML workspace. You can configure the default group using `az configure --defaults workspace=<name>`.
+      Name of the Azure ML workspace. You can configure the default workspace using `az configure --defaults workspace=<name>`.
 - uid: az_ml_schedule_show
   name: az ml schedule show
   summary: |-
@@ -201,7 +201,34 @@ directCommands:
   optionalParameters:
   - name: --workspace-name -w
     summary: |-
-      Name of the Azure ML workspace. You can configure the default group using `az configure --defaults workspace=<name>`.
+      Name of the Azure ML workspace. You can configure the default workspace using `az configure --defaults workspace=<name>`.
+- uid: az_ml_schedule_trigger
+  name: az ml schedule trigger
+  summary: |-
+    Trigger a schedule once.
+  status: GA
+  sourceType: Extension
+  syntax: >-
+    az ml schedule trigger --name
+                           --resource-group
+                           --workspace-name
+  examples:
+  - summary: |-
+      Trigger a schedule once.
+    syntax: az ml schedule trigger --name my-schedule --resource-group my-resource-group --workspace-name my-workspace
+  requiredParameters:
+  - isRequired: true
+    name: --name -n
+    summary: |-
+      Name of the schedule.
+  - isRequired: true
+    name: --resource-group -g
+    summary: |-
+      Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
+  - isRequired: true
+    name: --workspace-name -w
+    summary: |-
+      Name of the Azure ML workspace. You can configure the default workspace using `az configure --defaults workspace=<name>`.
 - uid: az_ml_schedule_update
   name: az ml schedule update
   summary: |-
@@ -233,12 +260,12 @@ directCommands:
   - isRequired: true
     name: --workspace-name -w
     summary: |-
-      Name of the Azure ML workspace. You can configure the default group using `az configure --defaults workspace=<name>`.
+      Name of the Azure ML workspace. You can configure the default workspace using `az configure --defaults workspace=<name>`.
   optionalParameters:
   - name: --add
     defaultValue: "[]"
     summary: |-
-      Add an object to a list of objects by specifying a path and key value pairs.  Example: --add property.listProperty <key=value, string or JSON string>.
+      Add an object to a list of objects by specifying a path and key value pairs.  Example: `--add property.listProperty <key=value, string or JSON string>`.
   - name: --force-string
     defaultValue: "False"
     summary: |-
@@ -250,11 +277,11 @@ directCommands:
   - name: --remove
     defaultValue: "[]"
     summary: |-
-      Remove a property or an element from a list.  Example: --remove property.list <indexToRemove> OR --remove propertyToRemove.
+      Remove a property or an element from a list.  Example: `--remove property.list <indexToRemove>` OR `--remove propertyToRemove`.
   - name: --set
     defaultValue: "[]"
     summary: |-
-      Update an object by specifying a property path and value to set.  Example: --set property1.property2=<value>.
+      Update an object by specifying a property path and value to set.  Example: `--set property1.property2=<value>`.
 commands:
 - az_ml_schedule_create
 - az_ml_schedule_delete
@@ -262,6 +289,7 @@ commands:
 - az_ml_schedule_enable
 - az_ml_schedule_list
 - az_ml_schedule_show
+- az_ml_schedule_trigger
 - az_ml_schedule_update
 globalParameters:
 - name: --debug

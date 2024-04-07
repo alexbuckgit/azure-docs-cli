@@ -1,5 +1,5 @@
 --- 
-title: How-to learn Bash with Azure CLI | Microsoft Docs
+title: How-to use the Azure CLI in a Bash environment | Microsoft Docs
 description: Learn how to use Bash with Azure CLI.  Query, format output, filter, use variables, and use Bash constructs of loops, if/exists/then and case statements.
 manager: jasongroce
 author: dbradish-microsoft
@@ -10,7 +10,7 @@ ms.custom: devx-track-azurecli
 ms.date: 12/04/2023
 ms.tool: azure-cli
 ---
-# Learn to use Bash with the Azure CLI
+# How-to use the Azure CLI in a Bash environment
 
 Azure CLI reference commands can execute in several different [shell environments](choose-the-right-azure-command-line-tool.md#different-shell-environments), but Microsoft Docs primarily use the Bash environment. If you're new to Bash and also the Azure CLI, this article a great place to begin your learning journey.  Work through this article much like you would a tutorial to learn how to use the Azure CLI in a Bash environment with ease.
 
@@ -217,7 +217,7 @@ else
 fi
 ```
 
-The following script deletes an existing new resource group if one with the specified name already exists. You could use the `--no-wait` argument to return control without waiting for the command to complete. However, for this article, we want to wait for the resource group to be deleted before continuing. For more information on asynchronous operations, see [Asynchronous operations](./use-cli-effectively.md#asynchronous-operations). We demonstrate the use of the `--no-wait` argument at the end of this article.
+The following script deletes an existing new resource group if one with the specified name already exists. You could use the `--no-wait` argument to return control without waiting for the command to complete. However, for this article, we want to wait for the resource group to be deleted before continuing. For more information on asynchronous operations, see [Asynchronous operations](./use-azure-cli-successfully.md#asynchronous-operations). We demonstrate the use of the `--no-wait` argument at the end of this article.
 
 ```azurecli
 if [ $(az group exists --name $resourceGroup) = true ]; then 
@@ -430,6 +430,6 @@ fi
 ## See also
 
 - [Tutorial: Learn to use the Azure CLI](./get-started-tutorial-0-before-you-begin.md)
-- [How to use the Azure CLI successfully](use-cli-effectively.md)
+- [How to use the Azure CLI successfully](use-azure-cli-successfully.md)
 - [How to query Azure CLI command output](query-azure-cli.md)
 - Find Azure CLI [samples](./samples-index.md) and [published articles](./reference-docs-index.md)

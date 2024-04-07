@@ -381,6 +381,7 @@ commands:
 - az_arcappliance
 - az_arcdata
 - az_artifacts
+- az_astronomer
 - az_attestation
 - az_automanage
 - az_automation
@@ -389,7 +390,6 @@ commands:
 - az_batch
 - az_bicep
 - az_billing-benefits
-- az_blockchain
 - az_blueprint
 - az_boards
 - az_cache
@@ -399,6 +399,7 @@ commands:
 - az_cloud-service
 - az_command-change
 - az_communication
+- az_compute-diagnostic
 - az_confcom
 - az_confidentialledger
 - az_config
@@ -446,11 +447,13 @@ commands:
 - az_extension
 - az_feedback
 - az_find
+- az_firmwareanalysis
 - az_fleet
 - az_fluid-relay
 - az_footprint
 - az_functionapp
 - az_fzf
+- az_gallery
 - az_grafana
 - az_graph
 - az_graph-services
@@ -490,9 +493,10 @@ commands:
 - az_managed-cassandra
 - az_managedapp
 - az_managementpartner
+- az_mdp
 - az_mesh
 - az_ml
-- az_ml(v1)
+- az_ml[v1]
 - az_mobile-network
 - az_monitor
 - az_mysql

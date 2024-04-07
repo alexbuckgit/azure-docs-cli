@@ -208,6 +208,15 @@ commands:
 - az_postgres_flexible-server_parameter_list
 - az_postgres_flexible-server_parameter_set
 - az_postgres_flexible-server_parameter_show
+- az_postgres_flexible-server_private-endpoint-connection
+- az_postgres_flexible-server_private-endpoint-connection_approve
+- az_postgres_flexible-server_private-endpoint-connection_delete
+- az_postgres_flexible-server_private-endpoint-connection_list
+- az_postgres_flexible-server_private-endpoint-connection_reject
+- az_postgres_flexible-server_private-endpoint-connection_show
+- az_postgres_flexible-server_private-link-resource
+- az_postgres_flexible-server_private-link-resource_list
+- az_postgres_flexible-server_private-link-resource_show
 - az_postgres_flexible-server_replica
 - az_postgres_flexible-server_replica_create
 - az_postgres_flexible-server_replica_list

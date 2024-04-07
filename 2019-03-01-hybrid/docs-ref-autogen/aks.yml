@@ -105,6 +105,7 @@ directCommands:
                   [--enable-addon-autoscaling]
                   [--enable-addons]
                   [--enable-ahub]
+                  [--enable-ai-toolchain-operator]
                   [--enable-apiserver-vnet-integration]
                   [--enable-app-routing]
                   [--enable-asm]
@@ -132,10 +133,12 @@ directCommands:
                   [--enable-pod-identity-with-kubenet]
                   [--enable-private-cluster]
                   [--enable-secret-rotation]
+                  [--enable-secure-boot]
                   [--enable-sgxquotehelper]
                   [--enable-syslog {false, true}]
                   [--enable-ultra-ssd]
                   [--enable-vpa]
+                  [--enable-vtpm]
                   [--enable-windows-gmsa]
                   [--enable-windows-recording-rules]
                   [--enable-workload-identity]
@@ -145,9 +148,6 @@ directCommands:
                   [--gmsa-root-domain-name]
                   [--gpu-instance-profile {MIG1g, MIG2g, MIG3g, MIG4g, MIG7g}]
                   [--grafana-resource-id]
-                  [--guardrails-excluded-ns]
-                  [--guardrails-level {Enforcement, Off, Warning}]
-                  [--guardrails-version]
                   [--host-group-id]
                   [--http-proxy-config]
                   [--image-cleaner-interval-hours]
@@ -201,18 +201,24 @@ directCommands:
                   [--outbound-type {loadBalancer, managedNATGateway, userAssignedNATGateway, userDefinedRouting}]
                   [--pod-cidr]
                   [--pod-cidrs]
+                  [--pod-ip-allocation-mode {DynamicIndividual, StaticBlock}]
                   [--pod-subnet-id]
                   [--ppg]
                   [--private-dns-zone]
+                  [--revision]
                   [--rotation-poll-interval]
+                  [--safeguards-excluded-ns]
+                  [--safeguards-level {Enforcement, Off, Warning}]
+                  [--safeguards-version]
                   [--service-cidr]
                   [--service-cidrs]
                   [--service-principal]
                   [--skip-subnet-role-assignment]
                   [--snapshot-id]
+                  [--ssh-access {disabled, localuser}]
                   [--ssh-key-value]
                   [--storage-pool-name]
-                  [--storage-pool-option {NVMe, SSD}]
+                  [--storage-pool-option {NVMe, Temp}]
                   [--storage-pool-size]
                   [--storage-pool-sku {PremiumV2_LRS, Premium_LRS, Premium_ZRS, StandardSSD_LRS, StandardSSD_ZRS, Standard_LRS, UltraSSD_LRS}]
                   [--tags]
@@ -323,17 +329,20 @@ directCommands:
       Create a kubernetes cluster with Custom CA Trust enabled.
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --enable-custom-ca-trust
   - summary: |-
-      Create a kubernetes cluster with guardrails set to "Warning"
-    syntax: az aks create -g MyResourceGroup -n MyManagedCluster --guardrails-level Warning --enable-addons azure-policy
+      Create a kubernetes cluster with safeguards set to "Warning"
+    syntax: az aks create -g MyResourceGroup -n MyManagedCluster --safeguards-level Warning --enable-addons azure-policy
   - summary: |-
-      Create a kubernetes cluster with guardrails set to "Warning" and some namespaces excluded
-    syntax: az aks create -g MyResourceGroup -n MyManagedCluster --guardrails-level Warning --guardrails-excluded-ns ns1,ns2 --enable-addons azure-policy
+      Create a kubernetes cluster with safeguards set to "Warning" and some namespaces excluded
+    syntax: az aks create -g MyResourceGroup -n MyManagedCluster --safeguards-level Warning --safeguards-excluded-ns ns1,ns2 --enable-addons azure-policy
   - summary: |-
       Create a kubernetes cluster with Azure Service Mesh enabled.
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --enable-azure-service-mesh
   - summary: |-
       Create a kubernetes cluster with Azure Monitor Metrics enabled.
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --enable-azuremonitormetrics
+  - summary: |-
+      Create a kubernetes cluster with a nodepool having ip allocation mode set to "StaticBlock"
+    syntax: az aks create -g MyResourceGroup -n MyManagedCluster --os-sku Ubuntu --max-pods MaxPodsPerNode --network-plugin azure --vnet-subnet-id /subscriptions/00000/resourceGroups/AnotherResourceGroup/providers/Microsoft.Network/virtualNetworks/MyVnet/subnets/NodeSubnet --pod-subnet-id /subscriptions/00000/resourceGroups/AnotherResourceGroup/providers/Microsoft.Network/virtualNetworks/MyVnet/subnets/PodSubnet --pod-ip-allocation-mode StaticBlock
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -497,7 +506,7 @@ directCommands:
       - http_application_routing        : configure ingress with automatic public DNS name creation.
       - monitoring                      :  turn on Log Analytics monitoring. Uses the Log Analytics Default Workspace if it exists, else creates one. Specify "--workspace-resource-id" to use an existing workspace. If monitoring addon is enabled --no-wait argument will have no effect
       - virtual-node                    : enable AKS Virtual Node. Requires --aci-subnet-name to provide the name of an existing subnet for the Virtual Node to use. aci-subnet-name must be in the same vnet which is specified by --vnet-subnet-id (required as well).
-      - azure-policy                    : enable Azure policy. The Azure Policy add-on for AKS enables at-scale enforcements and safeguards on your clusters in a centralized, consistent manner. Required if enabling Guardrails. Learn more at aka.ms/aks/policy.
+      - azure-policy                    : enable Azure policy. The Azure Policy add-on for AKS enables at-scale enforcements and safeguards on your clusters in a centralized, consistent manner. Required if enabling deployment safeguards. Learn more at aka.ms/aks/policy.
       - ingress-appgw                   : enable Application Gateway Ingress Controller addon (PREVIEW).
       - confcom                         : enable confcom addon, this will enable SGX device plugin by default(PREVIEW).
       - open-service-mesh               : enable Open Service Mesh addon (PREVIEW).
@@ -508,6 +517,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable Azure Hybrid User Benefits (AHUB) for Windows VMs.
+  - name: --enable-ai-toolchain-operator
+    defaultValue: "False"
+    summary: |-
+      Enable AI toolchain operator to the cluster.
+    isPreview: true
   - name: --enable-apiserver-vnet-integration
     defaultValue: "False"
     summary: |-
@@ -624,6 +638,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable secret rotation. Use with azure-keyvault-secrets-provider addon.
+  - name: --enable-secure-boot
+    defaultValue: "False"
+    summary: |-
+      Enable Secure Boot on all node pools in the cluster. Must use VMSS agent pool type.
+    isPreview: true
   - name: --enable-sgxquotehelper
     defaultValue: "False"
     summary: |-
@@ -642,6 +661,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable vertical pod autoscaler for cluster.
+    isPreview: true
+  - name: --enable-vtpm
+    defaultValue: "False"
+    summary: |-
+      Enable vTPM on all node pools in the cluster. Must use VMSS agent pool type.
     isPreview: true
   - name: --enable-windows-gmsa
     defaultValue: "False"
@@ -681,19 +705,6 @@ directCommands:
   - name: --grafana-resource-id
     summary: |-
       Resource ID of the Azure Managed Grafana Workspace.
-  - name: --guardrails-excluded-ns
-    summary: |-
-      Comma-separated list of Kubernetes namespaces to exclude from Guardrails.
-    isPreview: true
-  - name: --guardrails-level
-    parameterValueGroup: "Enforcement, Off, Warning"
-    summary: |-
-      The Guardrails Level. Accepted Values are [Off, Warning]. Requires azure policy addon to be enabled.
-    isPreview: true
-  - name: --guardrails-version
-    summary: |-
-      The version of Guardrails to use. Default "v1.0.0" Use the ListGuardrailsVersions API to discover available versions.
-    isPreview: true
   - name: --host-group-id
     summary: |-
       (PREVIEW) The fully qualified dedicated host group id used to provision agent node pool.
@@ -920,6 +931,13 @@ directCommands:
       A comma separated list of CIDR notation IP ranges from which to assign pod IPs when kubenet is used.
     description: |-
       Each range must not overlap with any Subnet IP ranges. For example, 172.244.0.0/16.
+  - name: --pod-ip-allocation-mode
+    parameterValueGroup: "DynamicIndividual, StaticBlock"
+    summary: |-
+      Set the ip allocation mode for how Pod IPs from the Azure Pod Subnet are allocated to the nodes in the AKS cluster. The choice is between dynamic batches of individual IPs or static allocation of a set of CIDR blocks. Accepted Values are "DynamicIndividual" or "StaticBlock".
+    description: |-
+      Used together with the "azure" network plugin.
+      Requires --pod-subnet-id.
   - name: --pod-subnet-id
     summary: |-
       The ID of a subnet in an existing VNet into which to assign pods in the cluster (requires azure network-plugin).
@@ -931,9 +949,25 @@ directCommands:
       Private dns zone mode for private cluster. "none" mode is in preview.
     description: |-
       Allowed values are "system", "none" (Preview) or your custom private dns zone resource id. If not set, defaults to type system. Requires --enable-private-cluster to be used.
+  - name: --revision
+    summary: |-
+      Azure Service Mesh revision to install.
   - name: --rotation-poll-interval
     summary: |-
       Set interval of rotation poll. Use with azure-keyvault-secrets-provider addon.
+  - name: --safeguards-excluded-ns
+    summary: |-
+      Comma-separated list of Kubernetes namespaces to exclude from deployment safeguards.
+    isPreview: true
+  - name: --safeguards-level
+    parameterValueGroup: "Enforcement, Off, Warning"
+    summary: |-
+      The deployment safeguards Level. Accepted Values are [Off, Warning, Enforcement]. Requires azure policy addon to be enabled.
+    isPreview: true
+  - name: --safeguards-version
+    summary: |-
+      The version of deployment safeguards to use. Default "v1.0.0" Use the ListSafeguardsVersions API to discover available versions.
+    isPreview: true
   - name: --service-cidr
     summary: |-
       A CIDR notation IP range from which to assign service cluster IPs.
@@ -958,6 +992,12 @@ directCommands:
   - name: --snapshot-id
     summary: |-
       The source nodepool snapshot id used to create this cluster.
+  - name: --ssh-access
+    defaultValue: "localuser"
+    parameterValueGroup: "disabled, localuser"
+    summary: |-
+      Configure SSH setting for all node pools in this cluster. Use "disabled" to disable SSH access, "localuser" to enable SSH access using private key.
+    isPreview: true
   - name: --ssh-key-value
     defaultValue: "~\\.ssh\\id_rsa.pub"
     summary: |-
@@ -966,7 +1006,7 @@ directCommands:
     summary: |-
       Set storage pool name for azure container storage.
   - name: --storage-pool-option
-    parameterValueGroup: "NVMe, SSD"
+    parameterValueGroup: "NVMe, Temp"
     summary: |-
       Set ephemeral disk storage pool option for azure container storage.
   - name: --storage-pool-size
@@ -1651,7 +1691,8 @@ directCommands:
                   [--detach-acr]
                   [--disable-addon-autoscaling]
                   [--disable-ahub]
-                  [--disable-azure-container-storage]
+                  [--disable-ai-toolchain-operator]
+                  [--disable-azure-container-storage {all, azureDisk, elasticSan, ephemeralDisk}]
                   [--disable-azure-keyvault-kms]
                   [--disable-azure-monitor-metrics]
                   [--disable-azure-rbac]
@@ -1680,6 +1721,7 @@ directCommands:
                   [--enable-aad]
                   [--enable-addon-autoscaling]
                   [--enable-ahub]
+                  [--enable-ai-toolchain-operator]
                   [--enable-apiserver-vnet-integration]
                   [--enable-azure-container-storage {azureDisk, elasticSan, ephemeralDisk}]
                   [--enable-azure-keyvault-kms]
@@ -1713,9 +1755,6 @@ directCommands:
                   [--gmsa-dns-server]
                   [--gmsa-root-domain-name]
                   [--grafana-resource-id]
-                  [--guardrails-excluded-ns]
-                  [--guardrails-level {Enforcement, Off, Warning}]
-                  [--guardrails-version]
                   [--http-proxy-config]
                   [--image-cleaner-interval-hours]
                   [--ip-families]
@@ -1748,9 +1787,13 @@ directCommands:
                   [--pod-cidr]
                   [--private-dns-zone]
                   [--rotation-poll-interval]
+                  [--safeguards-excluded-ns]
+                  [--safeguards-level {Enforcement, Off, Warning}]
+                  [--safeguards-version]
+                  [--ssh-access {disabled, localuser}]
                   [--ssh-key-value]
                   [--storage-pool-name]
-                  [--storage-pool-option {NVMe, SSD}]
+                  [--storage-pool-option {NVMe, Temp, all}]
                   [--storage-pool-size]
                   [--storage-pool-sku {PremiumV2_LRS, Premium_LRS, Premium_ZRS, StandardSSD_LRS, StandardSSD_ZRS, Standard_LRS, UltraSSD_LRS}]
                   [--tags]
@@ -1848,14 +1891,14 @@ directCommands:
       Update a existing managed cluster to a managed cluster snapshot.
     syntax: az aks update -g MyResourceGroup -n MyManagedCluster --cluster-snapshot-id "/subscriptions/00000/resourceGroups/AnotherResourceGroup/providers/Microsoft.ContainerService/managedclustersnapshots/mysnapshot1"
   - summary: |-
-      Update a kubernetes cluster with guardrails set to "Warning". Assumes azure policy addon is already enabled
-    syntax: az aks update -g MyResourceGroup -n MyManagedCluster --guardrails-level Warning
+      Update a kubernetes cluster with safeguards set to "Warning". Assumes azure policy addon is already enabled
+    syntax: az aks update -g MyResourceGroup -n MyManagedCluster --safeguards-level Warning
   - summary: |-
-      Update a kubernetes cluster with guardrails set to "Warning" and some namespaces excluded. Assumes azure policy addon is already enabled
-    syntax: az aks update -g MyResourceGroup -n MyManagedCluster --guardrails-level Warning --guardrails-excluded-ns ns1,ns2
+      Update a kubernetes cluster with safeguards set to "Warning" and some namespaces excluded. Assumes azure policy addon is already enabled
+    syntax: az aks update -g MyResourceGroup -n MyManagedCluster --safeguards-level Warning --safeguards-excluded-ns ns1,ns2
   - summary: |-
-      Update a kubernetes cluster to clear any namespaces excluded from guardrails. Assumes azure policy addon is already enabled
-    syntax: az aks update -g MyResourceGroup -n MyManagedCluster --guardrails-excluded-ns ""
+      Update a kubernetes cluster to clear any namespaces excluded from safeguards. Assumes azure policy addon is already enabled
+    syntax: az aks update -g MyResourceGroup -n MyManagedCluster --safeguards-excluded-ns ""
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -1941,10 +1984,15 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Disable Azure Hybrid User Benefits (AHUB) feature for cluster.
-  - name: --disable-azure-container-storage
+  - name: --disable-ai-toolchain-operator
     defaultValue: "False"
     summary: |-
-      Flag to disable azure container storage.
+      Disable AI toolchain operator.
+    isPreview: true
+  - name: --disable-azure-container-storage
+    parameterValueGroup: "all, azureDisk, elasticSan, ephemeralDisk"
+    summary: |-
+      Disable azure container storage or any one of the storagepool types.
   - name: --disable-azure-keyvault-kms
     defaultValue: "False"
     summary: |-
@@ -2066,6 +2114,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable Azure Hybrid User Benefits (AHUB) feature for cluster.
+  - name: --enable-ai-toolchain-operator
+    defaultValue: "False"
+    summary: |-
+      Enable AI toolchain operator to the cluster.
+    isPreview: true
   - name: --enable-apiserver-vnet-integration
     defaultValue: "False"
     summary: |-
@@ -2206,19 +2259,6 @@ directCommands:
   - name: --grafana-resource-id
     summary: |-
       Resource ID of the Azure Managed Grafana Workspace.
-  - name: --guardrails-excluded-ns
-    summary: |-
-      Comma-separated list of Kubernetes namespaces to exclude from Guardrails. Use "" to clear a previously non-empty list.
-    isPreview: true
-  - name: --guardrails-level
-    parameterValueGroup: "Enforcement, Off, Warning"
-    summary: |-
-      The Guardrails Level. Accepted Values are [Off, Warning]. Requires azure policy addon to be enabled.
-    isPreview: true
-  - name: --guardrails-version
-    summary: |-
-      The version of Guardrails to use. Default "v1.0.0" Use the ListGuardrailsVersions API to discover available versions.
-    isPreview: true
   - name: --http-proxy-config
     summary: |-
       HTTP Proxy configuration for this cluster.
@@ -2362,6 +2402,24 @@ directCommands:
   - name: --rotation-poll-interval
     summary: |-
       Set interval of rotation poll. Use with azure-keyvault-secrets-provider addon.
+  - name: --safeguards-excluded-ns
+    summary: |-
+      Comma-separated list of Kubernetes namespaces to exclude from deployment safeguards. Use "" to clear a previously non-empty list.
+    isPreview: true
+  - name: --safeguards-level
+    parameterValueGroup: "Enforcement, Off, Warning"
+    summary: |-
+      The deployment safeguards Level. Accepted Values are [Off, Warning, Enforcement]. Requires azure policy addon to be enabled.
+    isPreview: true
+  - name: --safeguards-version
+    summary: |-
+      The version of deployment safeguards to use. Default "v1.0.0" Use the ListSafeguardsVersions API to discover available versions.
+    isPreview: true
+  - name: --ssh-access
+    parameterValueGroup: "disabled, localuser"
+    summary: |-
+      Update SSH setting for all node pools in this cluster. Use "disabled" to disable SSH access, "localuser" to enable SSH access using private key.
+    isPreview: true
   - name: --ssh-key-value
     summary: |-
       Public key path or key contents to install on node VMs for SSH access. For example, 'ssh-rsa AAAAB...snip...UcyupgH azureuser@linuxvm'.
@@ -2369,7 +2427,7 @@ directCommands:
     summary: |-
       Set storage pool name for azure container storage.
   - name: --storage-pool-option
-    parameterValueGroup: "NVMe, SSD"
+    parameterValueGroup: "NVMe, Temp, all"
     summary: |-
       Set ephemeral disk storage pool option for azure container storage.
   - name: --storage-pool-size
@@ -2605,6 +2663,8 @@ commands:
 - az_aks_approuting_zone_list
 - az_aks_approuting_zone_update
 - az_aks_browse
+- az_aks_check-network
+- az_aks_check-network_outbound
 - az_aks_create
 - az_aks_delete
 - az_aks_disable-addons
@@ -2649,6 +2709,7 @@ commands:
 - az_aks_nodepool
 - az_aks_nodepool_add
 - az_aks_nodepool_delete
+- az_aks_nodepool_delete-machines
 - az_aks_nodepool_get-upgrades
 - az_aks_nodepool_list
 - az_aks_nodepool_operation-abort

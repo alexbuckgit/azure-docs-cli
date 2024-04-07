@@ -8,7 +8,7 @@ ms.date: 09/28/2023
 ms.topic: conceptual
 ms.service: azure-cli
 ms.tool: azure-cli
-ms.custom: devx-track-azurecli, seo-azure-cli
+ms.custom: devx-track-azurecli, seo-azure-cli, linux-related-content
 keywords: azure cli, install azure cli, azure cli download, download azure cli
 ---
 
@@ -65,4 +65,4 @@ Use the `az extension list` command to see installed extension. You can also use
 * [Sign in with the Azure CLI](./authenticate-azure-cli.md)
 * [Azure CLI Onboarding cheat sheet](./cheat-sheet-onboarding.md)
 * Find Azure CLI [samples](./samples-index.md) and [published docs](./reference-docs-index.md)
-* [How to use the Azure CLI successfully](use-cli-effectively.md)
+* [How to use the Azure CLI successfully](use-azure-cli-successfully.md)
