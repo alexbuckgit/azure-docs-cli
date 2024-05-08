@@ -394,6 +394,7 @@ commands:
 - az_blueprint
 - az_boards
 - az_cache
+- az_capacity
 - az_change-analysis
 - az_cli-translator
 - az_cloud
@@ -442,6 +443,7 @@ commands:
 - az_dns-resolver
 - az_dt
 - az_dynatrace
+- az_edge-zones
 - az_edgeorder
 - az_elastic
 - az_elastic-san
@@ -564,6 +566,8 @@ commands:
 - az_stack
 - az_stack-hci
 - az_stack-hci-vm
+- az_standby-container-group-pool
+- az_standby-vm-pool
 - az_staticwebapp
 - az_storage
 - az_storage-mover
@@ -574,6 +578,7 @@ commands:
 - az_synapse
 - az_tag
 - az_term
+- az_trustedsigning
 - az_tsi
 - az_upgrade
 - az_version

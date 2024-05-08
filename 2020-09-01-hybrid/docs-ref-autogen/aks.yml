@@ -1025,9 +1025,12 @@ directCommands:
                   [--azure-keyvault-kms-key-vault-network-access {Private, Public}]
                   [--azure-keyvault-kms-key-vault-resource-id]
                   [--azure-monitor-workspace-resource-id]
+                  [--bootstrap-artifact-source {Cache, Direct}]
+                  [--bootstrap-container-registry-resource-id]
                   [--ca-certs]
                   [--ca-profile]
                   [--client-secret]
+                  [--cluster-service-load-balancer-health-probe-mode {Servicenodeport, Shared}]
                   [--cluster-snapshot-id]
                   [--crg-id]
                   [--data-collection-settings]
@@ -1053,6 +1056,7 @@ directCommands:
                   [--enable-asm]
                   [--enable-azure-container-storage {azureDisk, elasticSan, ephemeralDisk}]
                   [--enable-azure-keyvault-kms]
+                  [--enable-azure-monitor-app-monitoring]
                   [--enable-azure-monitor-metrics]
                   [--enable-azure-rbac]
                   [--enable-blob-driver]
@@ -1077,6 +1081,7 @@ directCommands:
                   [--enable-secret-rotation]
                   [--enable-secure-boot]
                   [--enable-sgxquotehelper]
+                  [--enable-static-egress-gateway]
                   [--enable-syslog {false, true}]
                   [--enable-ultra-ssd]
                   [--enable-vpa]
@@ -1123,6 +1128,7 @@ directCommands:
                   [--no-ssh-key]
                   [--no-wait]
                   [--node-count]
+                  [--node-init-taints]
                   [--node-os-upgrade-channel {NodeImage, None, SecurityPatch, Unmanaged}]
                   [--node-osdisk-diskencryptionset-id]
                   [--node-osdisk-size]
@@ -1156,6 +1162,7 @@ directCommands:
                   [--service-cidrs]
                   [--service-principal]
                   [--skip-subnet-role-assignment]
+                  [--sku {automatic, base}]
                   [--snapshot-id]
                   [--ssh-access {disabled, localuser}]
                   [--ssh-key-value]
@@ -1283,6 +1290,9 @@ directCommands:
       Create a kubernetes cluster with Azure Monitor Metrics enabled.
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --enable-azuremonitormetrics
   - summary: |-
+      Create a kubernetes cluster with Azure Monitor App Monitoring enabled
+    syntax: az aks create -g MyResourceGroup -n MyManagedCluster --enable-azure-monitor-app-monitoring
+  - summary: |-
       Create a kubernetes cluster with a nodepool having ip allocation mode set to "StaticBlock"
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --os-sku Ubuntu --max-pods MaxPodsPerNode --network-plugin azure --vnet-subnet-id /subscriptions/00000/resourceGroups/AnotherResourceGroup/providers/Microsoft.Network/virtualNetworks/MyVnet/subnets/NodeSubnet --pod-subnet-id /subscriptions/00000/resourceGroups/AnotherResourceGroup/providers/Microsoft.Network/virtualNetworks/MyVnet/subnets/PodSubnet --pod-ip-allocation-mode StaticBlock
   requiredParameters:
@@ -1362,6 +1372,18 @@ directCommands:
   - name: --azure-monitor-workspace-resource-id
     summary: |-
       Resource ID of the Azure Monitor Workspace.
+  - name: --bootstrap-artifact-source
+    defaultValue: "Direct"
+    parameterValueGroup: "Cache, Direct"
+    summary: |-
+      Configure artifact source when bootstraping the cluster.
+    description: |-
+      The artifacts include the addon image. Use "Direct" to download artifacts from MCR, "Cache" to downalod artifacts from Azure Container Registry.
+    isPreview: true
+  - name: --bootstrap-container-registry-resource-id
+    summary: |-
+      Configure container registry resource ID. Must use "Cache" as bootstrap artifact source.
+    isPreview: true
   - name: --ca-certs --custom-ca-trust-certificates
     summary: |-
       Path to a file containing up to 10 blank line separated certificates. Only valid for linux nodes.
@@ -1374,6 +1396,13 @@ directCommands:
   - name: --client-secret
     summary: |-
       Secret associated with the service principal. This argument is required if `--service-principal` is specified.
+  - name: --cluster-service-load-balancer-health-probe-mode
+    parameterValueGroup: "Servicenodeport, Shared"
+    summary: |-
+      Set the cluster service health probe mode.
+    description: |-
+      Set the cluster service health probe mode. Default is "Servicenodeport".
+    isPreview: true
   - name: --cluster-snapshot-id
     summary: |-
       The source cluster snapshot id is used to create new cluster.
@@ -1486,6 +1515,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable Azure KeyVault Key Management Service.
+  - name: --enable-azure-monitor-app-monitoring
+    defaultValue: "False"
+    summary: |-
+      Enable Azure Monitor Application Monitoring.
+    isPreview: true
   - name: --enable-azure-monitor-metrics
     defaultValue: "False"
     summary: |-
@@ -1589,6 +1623,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable SGX quote helper for confcom addon.
+  - name: --enable-static-egress-gateway
+    defaultValue: "False"
+    summary: |-
+      Enable Static Egress Gateway addon to the cluster.
+    isPreview: true
   - name: --enable-syslog
     defaultValue: "False"
     parameterValueGroup: "false, true"
@@ -1794,6 +1833,10 @@ directCommands:
     defaultValue: "3"
     summary: |-
       Number of nodes in the Kubernetes node pool. It is required when --enable-cluster-autoscaler specified. After creating a cluster, you can change the size of its node pool with `az aks scale`.
+  - name: --node-init-taints --nodepool-initialization-taints
+    summary: |-
+      The node initialization taints for node pools created with aks create operation.
+    isPreview: true
   - name: --node-os-upgrade-channel
     parameterValueGroup: "NodeImage, None, SecurityPatch, Unmanaged"
     summary: |-
@@ -1931,6 +1974,11 @@ directCommands:
       Skip role assignment for subnet (advanced networking).
     description: |-
       If specified, please make sure your service principal has the access to your subnet.
+  - name: --sku
+    parameterValueGroup: "automatic, base"
+    summary: |-
+      Specify SKU name for managed clusters. '--sku base' enables a base managed cluster. '--sku automatic' enables an automatic managed cluster.
+    isPreview: true
   - name: --snapshot-id
     summary: |-
       The source nodepool snapshot id used to create this cluster.
@@ -2054,6 +2102,7 @@ directCommands:
   syntax: >-
     az aks delete --name
                   --resource-group
+                  [--if-match]
                   [--ignore-pod-disruption-budget]
                   [--no-wait]
                   [--yes]
@@ -2071,6 +2120,9 @@ directCommands:
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
   optionalParameters:
+  - name: --if-match
+    summary: |-
+      The request should only proceed if an entity matches this string. Default value is None.
   - name: --ignore-pod-disruption-budget
     summary: |-
       Ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget. Default value is None.
@@ -3792,8 +3844,11 @@ directCommands:
                   [--azure-keyvault-kms-key-vault-network-access {Private, Public}]
                   [--azure-keyvault-kms-key-vault-resource-id]
                   [--azure-monitor-workspace-resource-id]
+                  [--bootstrap-artifact-source {Cache, Direct}]
+                  [--bootstrap-container-registry-resource-id]
                   [--ca-certs]
                   [--ca-profile]
+                  [--cluster-service-load-balancer-health-probe-mode {Servicenodeport, Shared}]
                   [--cluster-snapshot-id]
                   [--defender-config]
                   [--detach-acr]
@@ -3802,6 +3857,7 @@ directCommands:
                   [--disable-ai-toolchain-operator]
                   [--disable-azure-container-storage {all, azureDisk, elasticSan, ephemeralDisk}]
                   [--disable-azure-keyvault-kms]
+                  [--disable-azure-monitor-app-monitoring]
                   [--disable-azure-monitor-metrics]
                   [--disable-azure-rbac]
                   [--disable-blob-driver]
@@ -3823,6 +3879,7 @@ directCommands:
                   [--disable-public-fqdn]
                   [--disable-secret-rotation]
                   [--disable-snapshot-controller]
+                  [--disable-static-egress-gateway]
                   [--disable-vpa]
                   [--disable-workload-identity]
                   [--disk-driver-version {v1, v2}]
@@ -3833,6 +3890,7 @@ directCommands:
                   [--enable-apiserver-vnet-integration]
                   [--enable-azure-container-storage {azureDisk, elasticSan, ephemeralDisk}]
                   [--enable-azure-keyvault-kms]
+                  [--enable-azure-monitor-app-monitoring]
                   [--enable-azure-monitor-metrics]
                   [--enable-azure-rbac]
                   [--enable-blob-driver]
@@ -3856,6 +3914,7 @@ directCommands:
                   [--enable-public-fqdn]
                   [--enable-secret-rotation]
                   [--enable-snapshot-controller]
+                  [--enable-static-egress-gateway]
                   [--enable-vpa]
                   [--enable-windows-gmsa]
                   [--enable-windows-recording-rules]
@@ -3886,6 +3945,7 @@ directCommands:
                   [--network-plugin-mode]
                   [--network-policy]
                   [--no-wait]
+                  [--node-init-taints]
                   [--node-os-upgrade-channel {NodeImage, None, SecurityPatch, Unmanaged}]
                   [--node-provisioning-mode {Auto, Manual}]
                   [--nodepool-labels]
@@ -3898,6 +3958,7 @@ directCommands:
                   [--safeguards-excluded-ns]
                   [--safeguards-level {Enforcement, Off, Warning}]
                   [--safeguards-version]
+                  [--sku {automatic, base}]
                   [--ssh-access {disabled, localuser}]
                   [--ssh-key-value]
                   [--storage-pool-name]
@@ -4064,6 +4125,17 @@ directCommands:
   - name: --azure-monitor-workspace-resource-id
     summary: |-
       Resource ID of the Azure Monitor Workspace.
+  - name: --bootstrap-artifact-source
+    parameterValueGroup: "Cache, Direct"
+    summary: |-
+      Configure artifact source when bootstraping the cluster.
+    description: |-
+      The artifacts include the addon image. Use "Direct" to download artifacts from MCR, "Cache" to downalod artifacts from Azure Container Registry.
+    isPreview: true
+  - name: --bootstrap-container-registry-resource-id
+    summary: |-
+      Configure container registry resource ID. Must use "Cache" as bootstrap artifact source.
+    isPreview: true
   - name: --ca-certs --custom-ca-trust-certificates
     summary: |-
       Path to a file containing up to 10 blank line separated certificates. Only valid for linux nodes.
@@ -4073,6 +4145,13 @@ directCommands:
   - name: --ca-profile --cluster-autoscaler-profile
     summary: |-
       Space-separated list of key=value pairs for configuring cluster autoscaler. Pass an empty string to clear the profile.
+  - name: --cluster-service-load-balancer-health-probe-mode
+    parameterValueGroup: "Servicenodeport, Shared"
+    summary: |-
+      Set the cluster service health probe mode.
+    description: |-
+      Set the cluster service health probe mode. Default is "Servicenodeport".
+    isPreview: true
   - name: --cluster-snapshot-id
     summary: |-
       The source cluster snapshot id is used to update existing cluster.
@@ -4105,6 +4184,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Disable Azure KeyVault Key Management Service.
+  - name: --disable-azure-monitor-app-monitoring
+    defaultValue: "False"
+    summary: |-
+      Disable Azure Monitor Application Monitoring.
+    isPreview: true
   - name: --disable-azure-monitor-metrics
     defaultValue: "False"
     summary: |-
@@ -4196,6 +4280,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Disable CSI Snapshot Controller.
+  - name: --disable-static-egress-gateway
+    defaultValue: "False"
+    summary: |-
+      Disable Static Egress Gateway addon to the cluster.
+    isPreview: true
   - name: --disable-vpa
     defaultValue: "False"
     summary: |-
@@ -4240,6 +4329,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable Azure KeyVault Key Management Service.
+  - name: --enable-azure-monitor-app-monitoring
+    defaultValue: "False"
+    summary: |-
+      Enable Azure Monitor Application Monitoring.
+    isPreview: true
   - name: --enable-azure-monitor-metrics
     defaultValue: "False"
     summary: |-
@@ -4335,6 +4429,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable Snapshot Controller.
+  - name: --enable-static-egress-gateway
+    defaultValue: "False"
+    summary: |-
+      Enable Static Egress Gateway addon to the cluster.
+    isPreview: true
   - name: --enable-vpa
     defaultValue: "False"
     summary: |-
@@ -4471,6 +4570,10 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Do not wait for the long-running operation to finish.
+  - name: --node-init-taints --nodepool-initialization-taints
+    summary: |-
+      The node initialization taints for all node pools in cluster.
+    isPreview: true
   - name: --node-os-upgrade-channel
     parameterValueGroup: "NodeImage, None, SecurityPatch, Unmanaged"
     summary: |-
@@ -4522,6 +4625,11 @@ directCommands:
   - name: --safeguards-version
     summary: |-
       The version of deployment safeguards to use. Default "v1.0.0" Use the ListSafeguardsVersions API to discover available versions.
+    isPreview: true
+  - name: --sku
+    parameterValueGroup: "automatic, base"
+    summary: |-
+      Specify SKU name for managed clusters. '--sku base' enables a base managed cluster. '--sku automatic' enables an automatic managed cluster.
     isPreview: true
   - name: --ssh-access
     parameterValueGroup: "disabled, localuser"
@@ -4702,9 +4810,12 @@ directCommands:
                    [--aks-custom-headers]
                    [--cluster-snapshot-id]
                    [--control-plane-only]
+                   [--disable-force-upgrade]
+                   [--enable-force-upgrade]
                    [--kubernetes-version]
                    [--no-wait]
                    [--node-image-only]
+                   [--upgrade-override-until]
                    [--yes]
   examples:
   - summary: |-
@@ -4731,6 +4842,14 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Upgrade the cluster control plane only. If not specified, control plane AND all node pools will be upgraded.
+  - name: --disable-force-upgrade
+    defaultValue: "False"
+    summary: |-
+      Disable forceUpgrade cluster upgrade settings override.
+  - name: --enable-force-upgrade
+    defaultValue: "False"
+    summary: |-
+      Enable forceUpgrade cluster upgrade settings override.
   - name: --kubernetes-version -k
     summary: |-
       Version of Kubernetes to upgrade the cluster to, such as "1.11.12".
@@ -4743,6 +4862,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Only upgrade node image for agent pools.
+  - name: --upgrade-override-until
+    summary: |-
+      Until when the cluster upgradeSettings overrides are effective.
+    description: |-
+      It needs to be in a valid date-time format that's within the next 30 days. For example, 2023-04-01T13:00:00Z. Note that if --force-upgrade is set to true and --upgrade-override-until is not set, by default it will be set to 3 days from now.
   - name: --yes -y
     defaultValue: "False"
     summary: |-
@@ -5015,6 +5139,68 @@ commands:
 - az_aks_command
 - az_aks_command_invoke
 - az_aks_command_result
+- az_aks_connection
+- az_aks_connection_create
+- az_aks_connection_create_app-insights
+- az_aks_connection_create_appconfig
+- az_aks_connection_create_confluent-cloud
+- az_aks_connection_create_cosmos-cassandra
+- az_aks_connection_create_cosmos-gremlin
+- az_aks_connection_create_cosmos-mongo
+- az_aks_connection_create_cosmos-sql
+- az_aks_connection_create_cosmos-table
+- az_aks_connection_create_eventhub
+- az_aks_connection_create_keyvault
+- az_aks_connection_create_mysql
+- az_aks_connection_create_mysql-flexible
+- az_aks_connection_create_mysql-flexible(serviceconnector-passwordless)
+- az_aks_connection_create_postgres
+- az_aks_connection_create_postgres(serviceconnector-passwordless)
+- az_aks_connection_create_postgres-flexible
+- az_aks_connection_create_postgres-flexible(serviceconnector-passwordless)
+- az_aks_connection_create_redis
+- az_aks_connection_create_redis-enterprise
+- az_aks_connection_create_servicebus
+- az_aks_connection_create_signalr
+- az_aks_connection_create_sql
+- az_aks_connection_create_sql(serviceconnector-passwordless)
+- az_aks_connection_create_storage-blob
+- az_aks_connection_create_storage-file
+- az_aks_connection_create_storage-queue
+- az_aks_connection_create_storage-table
+- az_aks_connection_create_webpubsub
+- az_aks_connection_delete
+- az_aks_connection_list
+- az_aks_connection_list-configuration
+- az_aks_connection_list-support-types
+- az_aks_connection_show
+- az_aks_connection_update
+- az_aks_connection_update_app-insights
+- az_aks_connection_update_appconfig
+- az_aks_connection_update_confluent-cloud
+- az_aks_connection_update_cosmos-cassandra
+- az_aks_connection_update_cosmos-gremlin
+- az_aks_connection_update_cosmos-mongo
+- az_aks_connection_update_cosmos-sql
+- az_aks_connection_update_cosmos-table
+- az_aks_connection_update_eventhub
+- az_aks_connection_update_keyvault
+- az_aks_connection_update_mysql
+- az_aks_connection_update_mysql-flexible
+- az_aks_connection_update_postgres
+- az_aks_connection_update_postgres-flexible
+- az_aks_connection_update_redis
+- az_aks_connection_update_redis-enterprise
+- az_aks_connection_update_servicebus
+- az_aks_connection_update_signalr
+- az_aks_connection_update_sql
+- az_aks_connection_update_storage-blob
+- az_aks_connection_update_storage-file
+- az_aks_connection_update_storage-queue
+- az_aks_connection_update_storage-table
+- az_aks_connection_update_webpubsub
+- az_aks_connection_validate
+- az_aks_connection_wait
 - az_aks_create
 - az_aks_create(aks-preview)
 - az_aks_delete
