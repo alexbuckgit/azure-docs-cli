@@ -1,7 +1,6 @@
 ---
 title: Get variable values from Azure resources or a local JSON file | Microsoft Docs
 description: Learn how to use variables to store JSON file properties and query output.
-manager: jasongroce
 author: dbradish-microsoft
 ms.author: dbradish
 ms.date: 12/04/2023
@@ -113,7 +112,7 @@ Combine what you learned about quoting with what you just learned about `--query
 In Bash, you can't have a space before or after the equal (`=`) sign. You can opt to use quotes around the variable value, so `msdocs-tutorial-rg-00000000` and `"msdocs-tutorial-rg-00000000"` are both correct.
 
 ```azurecli-interactive
-rgName=<msdocs-tutorial-rg-00000000>
+rgName="<msdocs-tutorial-rg-00000000>"
 
 # Get a list of all Azure storage accounts that allow blob public access.
 # Notice the backticks and escape characters needed for boolean values.
@@ -171,9 +170,9 @@ These examples use `echo` to verify variable values because this is a teaching t
 ```azurecli-interactive
 # Set your variables.
 let "randomIdentifier=$RANDOM*$RANDOM"
-rgName=<msdocs-tutorial-rg-00000000>
-kvName=msdocs-kv-$randomIdentifier
-location=eastus
+rgName="<msdocs-tutorial-rg-00000000>"
+kvName="msdocs-kv-$randomIdentifier"
+location="eastus"
 
 # Set your default output to none
 az config set core.output=none
@@ -185,8 +184,8 @@ echo "My new Azure Kev Vault ID is $myNewKeyVaultID"
 # Wait about 1 minute for your Key Vault creation to complete.
 
 # Create a new secret returning the secret ID
-kvSecretName=<myKVSecretName>
-kvSecretValue=<myKVSecretValue>
+kvSecretName="<myKVSecretName>"
+kvSecretValue="<myKVSecretValue>"
 myNewSecretID=$(az keyvault secret set --vault-name $kvName --name $kvSecretName --value $kvSecretValue --query id --output tsv)
 echo "My new secret ID is $myNewSecretID"
 
@@ -265,7 +264,7 @@ This Bash script was tested in [Azure Cloud Shell](/azure/cloud-shell/overview) 
 
 ```bash
 # Show the contents of a file in the console
-fileName=msdocs-tutorial.json
+fileName="msdocs-tutorial.json"
 cat $fileName | jq
 
 # Get a JSON dictionary object
@@ -309,10 +308,10 @@ Do you want more detail on one of the subjects covered in this tutorial step? Us
 
 |Subject| Learn more|
 |-|-|
-|Variables| See advanced examples in [Use the Azure CLI successfully - Pass values to another command](./use-azure-cli-successfully.md#pass-values-to-another-command)
+|Variables| See advanced examples in [Use the Azure CLI successfully - Pass values to another command](./use-azure-cli-successfully-tips.md#pass-values-to-another-command)
 || Read a good overview of variables in [How to use variables in Azure CLI commands](./azure-cli-variables.md).
-|Querying| Find a wide range of examples in [How to query Azure CLI command output using a JMESPath query](./query-azure-cli.md).
-| | Take a deeper dive in Bash using `--query` in [Learn to use Bash with the Azure CLI](./azure-cli-learn-bash.md).
+|Querying| Find a wide range of examples in [How to query Azure CLI command output using a JMESPath query](./use-azure-cli-successfully-query.md).
+| | Take a deeper dive in Bash using `--query` in [Learn to use Bash with the Azure CLI](./use-azure-cli-successfully-bash.md).
 |Azure key vault| [About Azure Key Vault](/azure/key-vault/general/overview)
 | | [Provide access to Key Vault keys, certificates, and secrets with an Azure role-based access control](/azure/key-vault/general/rbac-guide?tabs=azure).
 | | [Common error codes for Azure Key Vault](/azure/key-vault/general/common-error-codes)

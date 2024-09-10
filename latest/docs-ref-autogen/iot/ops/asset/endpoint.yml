@@ -4,7 +4,7 @@ name: az iot ops asset endpoint
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **azure-iot-ops** extension for the Azure CLI (version 2.46.0 or higher). The extension will automatically install the first time you run an **az iot ops asset endpoint** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **azure-iot-ops** extension for the Azure CLI (version 2.53.0 or higher). The extension will automatically install the first time you run an **az iot ops asset endpoint** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage asset endpoint profiles.
 status: Preview
@@ -34,11 +34,11 @@ directCommands:
                                      [--ac]
                                      [--cert]
                                      [--cert-ref]
+                                     [--cg]
                                      [--cl]
-                                     [--clrg]
+                                     [--clg]
                                      [--cls]
                                      [--cluster]
-                                     [--cluster-resource-group]
                                      [--cluster-subscription]
                                      [--location]
                                      [--password-ref]
@@ -86,10 +86,13 @@ directCommands:
   - name: --cert-ref --certificate-ref --cr
     summary: |-
       Reference for the certificate used in authentication. This method of user authentication is not supported yet.
+  - name: --cg --cluster-resource-group
+    summary: |-
+      Resource group for cluster.
   - name: --cl --custom-location
     summary: |-
       Custom location used to associate asset endpoint with cluster.
-  - name: --clrg --custom-location-resource-group
+  - name: --clg --custom-location-resource-group
     summary: |-
       Resource group for custom location.
   - name: --cls --custom-location-subscription
@@ -98,9 +101,6 @@ directCommands:
   - name: --cluster -c
     summary: |-
       Cluster to associate the asset with.
-  - name: --cluster-resource-group --crg
-    summary: |-
-      Resource group for cluster.
   - name: --cluster-subscription --cs
     summary: |-
       Subscription Id for cluster.

@@ -1,7 +1,6 @@
 ---
 title: Delete multiple resources from a script using Azure CLI
 description: Learn how to delete multiple Azure resources from a script and log progress to a file.
-manager: jasongroce
 author: dbradish-microsoft
 ms.author: dbradish
 ms.date: 04/30/2024
@@ -23,7 +22,7 @@ In this Azure CLI sample you will learn the following:
 > * Delete multiple Azure resources from a script
 > * Log script progress to a local TXT file
 
-This sample script has been tested in [Azure Cloud Shell](/azure/cloud-shell/overview) in both Bash and PowerShell environments. This script has also been tested successfully in [PowerShell 7](/powershell/scripting/overview) and [Windows Subsystem for Linux](/windows/wsl/about) (WSL) with Ubuntu 22.04.3 LTS using [Windows Terminal](/windows/terminal/).
+This sample script has been tested in [Azure Cloud Shell](/azure/cloud-shell/overview) in a Bash environment. This script has also been tested successfully in Ubuntu 22.04.3 LTS using [Windows Terminal](/windows/terminal/).
 
 ## Delete Azure resources filtering by name
 

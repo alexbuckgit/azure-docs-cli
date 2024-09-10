@@ -1,14 +1,13 @@
 ---
 title: What is the Azure CLI? | Microsoft Docs
 description: The Azure Command-Line Interface (CLI) is a command-line tool designed to create and manage Azure resources available in Windows, macOS, Linux, and Docker containers.
-manager: jasongroce
 author: dbradish-microsoft
 ms.author: dbradish
 ms.date: 03/07/2024
 ms.topic: overview
 ms.service: azure-cli
 ms.tool: azure-cli
-ms.custom: devx-track-azurecli
+ms.custom: devx-track-azurecli, linux-related-content
 keywords: command line interface, azure cli, azure command line, azure command line interface, what is cli, azure cli examples
 ---
 # What is the Azure CLI?
@@ -53,7 +52,7 @@ For more information on managing subscriptions, see [Manage subscriptions with A
 | Create Resource Group | az group create --name \<ResourceGroupName> --location eastus |New-AzResourceGroup -Name \<ResourceGroupName> -Location eastus
 | Create Azure Storage Account | az storage account create --name \<StorageAccountName> --resource-group \<ResourceGroupName> --location eastus --sku Standard_LRS --kind StorageV2 | New-AzStorageAccount -Name \<StorageAccountName> -ResourceGroupName \<ResourceGroupName> -Location eastus -SkuName Standard_LRS -Kind StorageV2
 
-For Azure CLI syntax comparisons between Bash and PowerShell environments, see [Learn Azure CLI syntax differences](./get-started-tutorial-2-environment-syntax.md).
+For Azure CLI syntax comparisons between Bash and PowerShell environments, see [Learn Azure CLI syntax differences in Bash, PowerShell and Cmd](./get-started-tutorial-2-environment-syntax.md).
 
 ## Output formats
 

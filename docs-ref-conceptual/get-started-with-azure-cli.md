@@ -1,7 +1,6 @@
 ---
 title: Get started with Azure Command-Line Interface (CLI) | Microsoft Docs
 description: Learn how to start using the Azure CLI by completing common commands. You can begin using the Azure CLI by running it in an Azure Cloud Shell environment.
-manager: jasongroce
 author: dbradish-microsoft
 ms.author: dbradish
 ms.date: 03/07/2024
@@ -133,9 +132,9 @@ There are some arguments that are available for most commands.
 * `--output` changes the output format. The available output formats are `json`, `jsonc` (colorized JSON), `tsv` (Tab-Separated
   Values), `table` (human-readable ASCII tables), and `yaml`. By default the CLI outputs `json`. To learn more about the available
   output formats, see [Output formats for Azure CLI](format-output-azure-cli.md).
-* `--query` uses the [JMESPath query language](http://jmespath.org/) to filter the output returned from Azure services. To learn more about queries, see [Query command results with Azure CLI](query-azure-cli.md) and the [JMESPath tutorial](http://jmespath.org/tutorial.html).
+* `--query` uses the [JMESPath query language](http://jmespath.org/) to filter the output returned from Azure services. To learn more about queries, see [Query command results with Azure CLI](use-azure-cli-successfully-query.md) and the [JMESPath tutorial](http://jmespath.org/tutorial.html).
 * `--verbose` prints information about resources created in Azure during an operation, and other useful information.
-* `--debug` prints even more information about CLI operations, used for debugging purposes. If you find a bug, provide output generated with the `--debug` flag on when submitting a bug report.
+* `--debug` prints even more information about CLI operations, used for debugging purposes. If you find a bug, provide output generated with the `--debug` flag on when submitting a bug report. It can be used, for example, to identify the REST API that the command executed is invoking underneath, and the response received from the service.
 * `--subscription` is the name or ID of a subscription. For more information about setting your default subscription, see [Manage Azure subscriptions with the Azure CLI](./manage-azure-subscriptions-azure-cli.md).
 * `--only-show-errors` suppresses warnings in command output and only shows errors.
 
@@ -161,7 +160,7 @@ To learn how to use the Azure CLI, try our [onboarding tutorial](./get-started-t
 * [Create an Azure resource containing a random ID in the name.](./get-started-tutorial-1-prepare-environment.md#create-a-resource-group-containing-a-random-id)
 * [Set environment variables.](./get-started-tutorial-1-prepare-environment.md#set-environment-variables)
 * [Learn syntax differences between Bash, PowerShell, and Cmd.](./get-started-tutorial-2-environment-syntax.md)
-* [Debug Azure CLI reference commands.](./get-started-tutorial-2-environment-syntax.md#debug-azure-cli-reference-commands)
+* [Debug Azure CLI reference commands.](./use-azure-cli-successfully-troubleshooting.md#the---debug-parameter)
 * [Get properties from a local JSON file.](./get-started-tutorial-3-use-variables.md#get-the-contents-of-a-json-file-and-store-it-in-a-variable). This example shows how to get configuration values for development, stage, and production. 
 * [Delete multiple resources using a script.](./get-started-tutorial-4-delete-resources.md#delete-multiple-azure-resources-using-a-script)
 
@@ -186,5 +185,5 @@ az feedback
 
 * [Onboarding cheat sheet](./cheat-sheet-onboarding.md)
 * [Learn to use the Azure CLI tutorial](./get-started-tutorial-0-before-you-begin.md)
-* [Use the Azure CLI in a Bash environment](./azure-cli-learn-bash.md)
-* [Considerations for using the Azure CLI in a PowerShell environment](./use-azure-cli-successfully-in-powershell.md)
+* [Use the Azure CLI in a Bash environment](./use-azure-cli-successfully-bash.md)
+* [Considerations for using the Azure CLI in a PowerShell environment](./use-azure-cli-successfully-powershell.md)

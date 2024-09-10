@@ -208,6 +208,8 @@ directCommands:
                   [--enable-windows-gmsa]
                   [--enable-windows-recording-rules]
                   [--enable-workload-identity]
+                  [--ephemeral-disk-nvme-perf-tier {Basic, Premium, Standard}]
+                  [--ephemeral-disk-volume-type {EphemeralVolumeOnly, PersistentVolumeWithAnnotation}]
                   [--fqdn-subdomain]
                   [--generate-ssh-keys]
                   [--gmsa-dns-server]
@@ -297,9 +299,6 @@ directCommands:
   - summary: |-
       Create a Kubernetes cluster with a larger node pool.
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster --node-count 7
-  - summary: |-
-      Create a kubernetes cluster with k8s 1.13.9 but use vmas.
-    syntax: az aks create -g MyResourceGroup -n MyManagedCluster --kubernetes-version 1.16.9 --vm-set-type AvailabilitySet
   - summary: |-
       Create a kubernetes cluster with default kubernetes version, default SKU load balancer (Standard) and default vm set type (VirtualMachineScaleSets).
     syntax: az aks create -g MyResourceGroup -n MyManagedCluster
@@ -563,7 +562,6 @@ directCommands:
   - name: --enable-asm --enable-azure-service-mesh
     summary: |-
       Enable Azure Service Mesh addon.
-    isPreview: true
   - name: --enable-azure-container-storage
     parameterValueGroup: "azureDisk, elasticSan, ephemeralDisk"
     summary: |-
@@ -620,9 +618,8 @@ directCommands:
     summary: |-
       Enable KEDA workload auto-scaler.
   - name: --enable-managed-identity
-    defaultValue: "False"
     summary: |-
-      Using a system assigned managed identity to manage cluster resource group.
+      Using a system assigned managed identity to manage cluster resource group. You can explicitly specify "--service-principal" and "--client-secret" to disable managed identity, otherwise it will be enabled.
   - name: --enable-msi-auth-for-monitoring
     defaultValue: "True"
     parameterValueGroup: "false, true"
@@ -673,6 +670,14 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable workload identity addon.
+  - name: --ephemeral-disk-nvme-perf-tier
+    parameterValueGroup: "Basic, Premium, Standard"
+    summary: |-
+      Set ephemeral disk volume type for azure container storage.
+  - name: --ephemeral-disk-volume-type
+    parameterValueGroup: "EphemeralVolumeOnly, PersistentVolumeWithAnnotation"
+    summary: |-
+      Set ephemeral disk volume type for azure container storage.
   - name: --fqdn-subdomain
     summary: |-
       Prefix for FQDN that is created for private cluster with custom private dns zone scenario.
@@ -821,11 +826,14 @@ directCommands:
       --network-plugin=azure will use an overlay network (non-VNET IPs) for pods in the cluster.
   - name: --network-policy
     summary: |-
-      The Kubernetes network policy to use.
+      Network Policy Engine to use.
     description: |-
-      Using together with "azure" network plugin.
-      Specify "azure" for Azure network policy manager, "calico" for calico network policy controller, "cilium" for Azure CNI powered by Cilium.
-      Defaults to "" (network policy disabled).
+      Azure provides three Network Policy Engines for enforcing network policies that can be used together with "azure" network plugin. The following values can be specified:
+        - "azure" for Azure Network Policy Manager,
+        - "cilium" for Azure CNI Powered by Cilium,
+        - "calico" for open-source network and network security solution founded by Tigera,
+        - "none" when no Network Policy Engine is installed (default value).
+      Defaults to "none" (network policy disabled).
   - name: --no-ssh-key -x
     defaultValue: "False"
     summary: |-
@@ -1025,9 +1033,12 @@ directCommands:
                   [--aad-tenant-id]
                   [--aci-subnet-name]
                   [--admin-username]
+                  [--advanced-networking-observability-tls-management {Managed, None}]
                   [--aks-custom-headers]
+                  [--ampls-resource-id]
                   [--api-server-authorized-ip-ranges]
                   [--apiserver-subnet-id]
+                  [--app-routing-default-nginx-controller {AnnotationControlled, External, Internal, None}]
                   [--appgw-id]
                   [--appgw-name]
                   [--appgw-subnet-cidr]
@@ -1063,6 +1074,7 @@ directCommands:
                   [--dns-zone-resource-ids]
                   [--edge-zone]
                   [--enable-aad]
+                  [--enable-acns]
                   [--enable-addon-autoscaling]
                   [--enable-addons]
                   [--enable-advanced-network-observability]
@@ -1083,14 +1095,15 @@ directCommands:
                   [--enable-defender]
                   [--enable-encryption-at-host]
                   [--enable-fips-image]
+                  [--enable-fqdn-policy]
+                  [--enable-high-log-scale-mode {false, true}]
                   [--enable-image-cleaner]
                   [--enable-image-integrity]
+                  [--enable-imds-restriction]
                   [--enable-keda]
                   [--enable-managed-identity]
                   [--enable-msi-auth-for-monitoring {false, true}]
-                  [--enable-network-observability]
                   [--enable-node-public-ip]
-                  [--enable-node-restriction]
                   [--enable-oidc-issuer]
                   [--enable-pod-identity]
                   [--enable-pod-identity-with-kubenet]
@@ -1106,6 +1119,8 @@ directCommands:
                   [--enable-windows-gmsa]
                   [--enable-windows-recording-rules]
                   [--enable-workload-identity]
+                  [--ephemeral-disk-nvme-perf-tier {Basic, Premium, Standard}]
+                  [--ephemeral-disk-volume-type {EphemeralVolumeOnly, PersistentVolumeWithAnnotation}]
                   [--fqdn-subdomain]
                   [--generate-ssh-keys]
                   [--gmsa-dns-server]
@@ -1114,6 +1129,8 @@ directCommands:
                   [--grafana-resource-id]
                   [--host-group-id]
                   [--http-proxy-config]
+                  [--if-match]
+                  [--if-none-match]
                   [--image-cleaner-interval-hours]
                   [--ip-families]
                   [--k8s-support-plan {AKSLongTermSupport, KubernetesOfficial}]
@@ -1339,9 +1356,19 @@ directCommands:
     defaultValue: "azureuser"
     summary: |-
       User account to create on node VMs for SSH access.
+  - name: --advanced-networking-observability-tls-management
+    defaultValue: "Managed"
+    parameterValueGroup: "Managed, None"
+    summary: |-
+      Management of TLS certificates for querying network flow logs via the flow log endpoint for Advanced Networking observability clusters. Valid values are "Managed" and "None". If not specified, the default is Managed.
+    isPreview: true
   - name: --aks-custom-headers
     summary: |-
       Send custom headers. When specified, format should be Key1=Value1,Key2=Value2.
+  - name: --ampls-resource-id
+    summary: |-
+      Resource ID of Azure Monitor Private Link scope for Monitoring Addon.
+    isPreview: true
   - name: --api-server-authorized-ip-ranges
     summary: |-
       Comma-separated list of authorized apiserver IP ranges. Set to 0.0.0.0/32 to restrict apiserver traffic to node pools.
@@ -1349,6 +1376,10 @@ directCommands:
     summary: |-
       The ID of a subnet in an existing VNet into which to assign control plane apiserver pods(requires --enable-apiserver-vnet-integration).
     isPreview: true
+  - name: --app-routing-default-nginx-controller --ardnc
+    parameterValueGroup: "AnnotationControlled, External, Internal, None"
+    summary: |-
+      Configure default nginx ingress controller type. Valid values are annotationControlled (default behavior), external, internal, or none.
   - name: --appgw-id
     summary: |-
       Resource Id of an existing Application Gateway to use with AGIC. Use with ingress-azure addon.
@@ -1485,6 +1516,10 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable managed AAD feature for cluster.
+  - name: --enable-acns
+    summary: |-
+      Enable advanced network functionalities on a cluster. Note that enabling this will incur additional costs.
+    isPreview: true
   - name: --enable-addon-autoscaling
     defaultValue: "False"
     summary: |-
@@ -1507,7 +1542,7 @@ directCommands:
       - web_application_routing         : enable Web Application Routing addon (PREVIEW). Specify "--dns-zone-resource-id" to configure DNS.
   - name: --enable-advanced-network-observability
     summary: |-
-      Enable advanced network observability functionalities for cluster.
+      Enable advanced network observability functionalities on a cluster. Note that enabling this will incur additional costs.
     isPreview: true
   - name: --enable-ahub
     defaultValue: "False"
@@ -1531,7 +1566,6 @@ directCommands:
   - name: --enable-asm --enable-azure-service-mesh
     summary: |-
       Enable Azure Service Mesh.
-    isPreview: true
   - name: --enable-azure-container-storage
     parameterValueGroup: "azureDisk, elasticSan, ephemeralDisk"
     summary: |-
@@ -1566,7 +1600,6 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable exporting Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal. For more information see aka.ms/aks/docs/cost-analysis.
-    isPreview: true
   - name: --enable-custom-ca-trust
     defaultValue: "False"
     summary: |-
@@ -1583,6 +1616,16 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Use FIPS-enabled OS on agent nodes.
+  - name: --enable-fqdn-policy
+    summary: |-
+      Enable advanced network security FQDN functionalities on a cluster. Note that enabling this will incur additional costs.
+    isPreview: true
+  - name: --enable-high-log-scale-mode
+    defaultValue: "False"
+    parameterValueGroup: "false, true"
+    summary: |-
+      Enable High Log Scale Mode for Container Logs.
+    isPreview: true
   - name: --enable-image-cleaner
     defaultValue: "False"
     summary: |-
@@ -1591,34 +1634,29 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable ImageIntegrity Service.
+  - name: --enable-imds-restriction
+    defaultValue: "False"
+    summary: |-
+      Enable IMDS restriction in the cluster. Non-hostNetwork Pods will not be able to access IMDS.
+    isPreview: true
   - name: --enable-keda
     defaultValue: "False"
     summary: |-
       Enable KEDA workload auto-scaler.
     isPreview: true
   - name: --enable-managed-identity
-    defaultValue: "False"
     summary: |-
-      Using managed identity to manage cluster resource group. Default value is true, you can explicitly specify "--client-id" and "--secret" to disable managed identity.
+      Using managed identity to manage cluster resource group. You can explicitly specify "--service-principal" and "--client-secret" to disable managed identity, otherwise it will be enabled.
   - name: --enable-msi-auth-for-monitoring
     defaultValue: "True"
     parameterValueGroup: "false, true"
     summary: |-
       Send monitoring data to Log Analytics using the cluster's assigned identity (instead of the Log Analytics Workspace's shared key).
     isPreview: true
-  - name: --enable-network-observability
-    summary: |-
-      Enable network observability on a cluster.
-    isPreview: true
   - name: --enable-node-public-ip
     defaultValue: "False"
     summary: |-
       Enable VMSS node public IP.
-  - name: --enable-node-restriction
-    defaultValue: "False"
-    summary: |-
-      Enable node restriction for cluster.
-    isPreview: true
   - name: --enable-oidc-issuer
     defaultValue: "False"
     summary: |-
@@ -1685,6 +1723,14 @@ directCommands:
     defaultValue: "False"
     summary: |-
       (PREVIEW) Enable workload identity addon.
+  - name: --ephemeral-disk-nvme-perf-tier
+    parameterValueGroup: "Basic, Premium, Standard"
+    summary: |-
+      Set ephemeral disk volume type for azure container storage.
+  - name: --ephemeral-disk-volume-type
+    parameterValueGroup: "EphemeralVolumeOnly, PersistentVolumeWithAnnotation"
+    summary: |-
+      Set ephemeral disk volume type for azure container storage.
   - name: --fqdn-subdomain
     summary: |-
       Prefix for FQDN that is created for private cluster with custom private dns zone scenario.
@@ -1717,6 +1763,12 @@ directCommands:
   - name: --http-proxy-config
     summary: |-
       Http Proxy configuration for this cluster.
+  - name: --if-match
+    summary: |-
+      The value provided will be compared to the ETag of the managed cluster, if it matches the operation will proceed. If it does not match, the request will be rejected to prevent accidental overwrites. This must not be specified when creating a new cluster.
+  - name: --if-none-match
+    summary: |-
+      Set to '*' to allow a new cluster to be created, but to prevent updating an existing cluster. Other values will be ignored.
   - name: --image-cleaner-interval-hours
     summary: |-
       ImageCleaner scanning interval.
@@ -2380,6 +2432,7 @@ directCommands:
                          --name
                          --resource-group
                          [--aks-custom-headers]
+                         [--ampls-resource-id]
                          [--appgw-id]
                          [--appgw-name]
                          [--appgw-subnet-cidr]
@@ -2387,6 +2440,7 @@ directCommands:
                          [--appgw-watch-namespace]
                          [--data-collection-settings]
                          [--dns-zone-resource-ids]
+                         [--enable-high-log-scale-mode {false, true}]
                          [--enable-msi-auth-for-monitoring {false, true}]
                          [--enable-secret-rotation]
                          [--enable-sgxquotehelper]
@@ -2422,6 +2476,10 @@ directCommands:
   - name: --aks-custom-headers
     summary: |-
       Send custom headers. When specified, format should be Key1=Value1,Key2=Value2.
+  - name: --ampls-resource-id
+    summary: |-
+      Resource ID of Azure Monitor Private Link scope for Monitoring Addon.
+    isPreview: true
   - name: --appgw-id
     summary: |-
       Resource Id of an existing Application Gateway to use with AGIC. Use with ingress-azure addon.
@@ -2444,6 +2502,12 @@ directCommands:
   - name: --dns-zone-resource-ids
     summary: |-
       A comma separated list of resource IDs of the DNS zone resource to use with the web_application_routing addon.
+    isPreview: true
+  - name: --enable-high-log-scale-mode
+    defaultValue: "False"
+    parameterValueGroup: "false, true"
+    summary: |-
+      Enable High Log Scale Mode for Container Logs.
     isPreview: true
   - name: --enable-msi-auth-for-monitoring
     defaultValue: "True"
@@ -2596,22 +2660,6 @@ directCommands:
     defaultValue: "clusterUser"
     summary: |-
       Get credentials for the user. Only valid when --admin is False.  Default: cluster user credentials.
-- uid: az_aks_get-os-options
-  name: az aks get-os-options
-  summary: |-
-    Get the OS options available for creating a managed Kubernetes cluster.
-  status: GA
-  sourceType: Extension
-  syntax: az aks get-os-options --location
-  examples:
-  - summary: |-
-      Get the OS options available for creating a managed Kubernetes cluster
-    syntax: az aks get-os-options --location westus2
-  requiredParameters:
-  - isRequired: true
-    name: --location -l
-    summary: |-
-      Location. Values from: `az account list-locations`. You can configure the default location using `az configure --defaults location=<location>`.
 - uid: az_aks_get-upgrades
   name: az aks get-upgrades
   summary: |-
@@ -3314,6 +3362,8 @@ directCommands:
                   [--enable-windows-gmsa]
                   [--enable-windows-recording-rules]
                   [--enable-workload-identity]
+                  [--ephemeral-disk-nvme-perf-tier {Basic, Premium, Standard}]
+                  [--ephemeral-disk-volume-type {EphemeralVolumeOnly, PersistentVolumeWithAnnotation}]
                   [--gmsa-dns-server]
                   [--gmsa-root-domain-name]
                   [--grafana-resource-id]
@@ -3336,7 +3386,7 @@ directCommands:
                   [--network-dataplane {azure, cilium}]
                   [--network-plugin {azure, kubenet, none}]
                   [--network-plugin-mode]
-                  [--network-policy]
+                  [--network-policy {azure, calico, cilium, none}]
                   [--no-wait]
                   [--node-os-upgrade-channel]
                   [--nodepool-labels]
@@ -3512,7 +3562,7 @@ directCommands:
   - name: --disable-azure-container-storage
     parameterValueGroup: "all, azureDisk, elasticSan, ephemeralDisk"
     summary: |-
-      Disable azure container storage or any one of the storagepool types.
+      Disable azure container storage or any one of the storage pool types.
   - name: --disable-azure-keyvault-kms
     defaultValue: "False"
     summary: |-
@@ -3687,6 +3737,14 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable workload identity addon.
+  - name: --ephemeral-disk-nvme-perf-tier
+    parameterValueGroup: "Basic, Premium, Standard"
+    summary: |-
+      Set ephemeral disk volume type for azure container storage.
+  - name: --ephemeral-disk-volume-type
+    parameterValueGroup: "EphemeralVolumeOnly, PersistentVolumeWithAnnotation"
+    summary: |-
+      Set ephemeral disk volume type for azure container storage.
   - name: --gmsa-dns-server
     summary: |-
       Specify DNS server for Windows gmsa on cluster.
@@ -3787,11 +3845,16 @@ directCommands:
     summary: |-
       Update the mode of a network plugin to migrate to a different pod networking setup.
   - name: --network-policy
+    parameterValueGroup: "azure, calico, cilium, none"
     summary: |-
-      Update the mode of a network policy.
+      Update Network Policy Engine.
     description: |-
-      Specify "azure" for Azure network policy manager, "cilium" for Azure CNI powered by Cilium.
-      Defaults to "" (network policy disabled).
+      Azure provides three Network Policy Engines for enforcing network policies. The following values can be specified:
+        - "azure" for Azure Network Policy Manager,
+        - "cilium" for Azure CNI Powered by Cilium,
+        - "calico" for open-source network and network security solution founded by Tigera,
+        - "none" to uninstall Network Policy Engine (Azure Network Policy Manager or Calico).
+      Defaults to "none" (network policy disabled).
   - name: --no-wait
     defaultValue: "False"
     summary: |-
@@ -3882,6 +3945,7 @@ directCommands:
                   --resource-group
                   [--aad-admin-group-object-ids]
                   [--aad-tenant-id]
+                  [--advanced-networking-observability-tls-management {Managed, None}]
                   [--aks-custom-headers]
                   [--api-server-authorized-ip-ranges]
                   [--apiserver-subnet-id]
@@ -3902,6 +3966,7 @@ directCommands:
                   [--cluster-snapshot-id]
                   [--defender-config]
                   [--detach-acr]
+                  [--disable-acns]
                   [--disable-addon-autoscaling]
                   [--disable-advanced-network-observability]
                   [--disable-ahub]
@@ -3918,12 +3983,12 @@ directCommands:
                   [--disable-disk-driver]
                   [--disable-file-driver]
                   [--disable-force-upgrade]
+                  [--disable-fqdn-policy]
                   [--disable-image-cleaner]
                   [--disable-image-integrity]
+                  [--disable-imds-restriction]
                   [--disable-keda]
                   [--disable-local-accounts]
-                  [--disable-network-observability]
-                  [--disable-node-restriction]
                   [--disable-pod-identity]
                   [--disable-pod-security-policy]
                   [--disable-private-cluster]
@@ -3935,6 +4000,7 @@ directCommands:
                   [--disable-workload-identity]
                   [--disk-driver-version {v1, v2}]
                   [--enable-aad]
+                  [--enable-acns]
                   [--enable-addon-autoscaling]
                   [--enable-advanced-network-observability]
                   [--enable-ahub]
@@ -3952,13 +4018,13 @@ directCommands:
                   [--enable-disk-driver]
                   [--enable-file-driver]
                   [--enable-force-upgrade]
+                  [--enable-fqdn-policy]
                   [--enable-image-cleaner]
                   [--enable-image-integrity]
+                  [--enable-imds-restriction]
                   [--enable-keda]
                   [--enable-local-accounts]
                   [--enable-managed-identity]
-                  [--enable-network-observability]
-                  [--enable-node-restriction]
                   [--enable-oidc-issuer]
                   [--enable-pod-identity]
                   [--enable-pod-identity-with-kubenet]
@@ -3971,10 +4037,14 @@ directCommands:
                   [--enable-windows-gmsa]
                   [--enable-windows-recording-rules]
                   [--enable-workload-identity]
+                  [--ephemeral-disk-nvme-perf-tier {Basic, Premium, Standard}]
+                  [--ephemeral-disk-volume-type {EphemeralVolumeOnly, PersistentVolumeWithAnnotation}]
                   [--gmsa-dns-server]
                   [--gmsa-root-domain-name]
                   [--grafana-resource-id]
                   [--http-proxy-config]
+                  [--if-match]
+                  [--if-none-match]
                   [--image-cleaner-interval-hours]
                   [--ip-families]
                   [--k8s-support-plan {AKSLongTermSupport, KubernetesOfficial}]
@@ -4136,6 +4206,11 @@ directCommands:
   - name: --aad-tenant-id
     summary: |-
       The ID of an Azure Active Directory tenant.
+  - name: --advanced-networking-observability-tls-management
+    parameterValueGroup: "Managed, None"
+    summary: |-
+      Management of TLS certificates for querying network flow logs via the flow log endpoint for Advanced Networking observability clusters. Valid values are "Managed" and "None". If not specified, the default is Managed.
+    isPreview: true
   - name: --aks-custom-headers
     summary: |-
       Send custom headers. When specified, format should be Key1=Value1,Key2=Value2.
@@ -4214,6 +4289,10 @@ directCommands:
   - name: --detach-acr
     summary: |-
       Disable the 'acrpull' role assignment to the ACR specified by name or resource ID.
+  - name: --disable-acns
+    summary: |-
+      Disable advanced network functionalities on a cluster.
+    isPreview: true
   - name: --disable-addon-autoscaling
     defaultValue: "False"
     summary: |-
@@ -4235,7 +4314,7 @@ directCommands:
   - name: --disable-azure-container-storage
     parameterValueGroup: "all, azureDisk, elasticSan, ephemeralDisk"
     summary: |-
-      Disable azure container storage or any one of the storagepool types.
+      Disable azure container storage or any one of the storage pool types.
   - name: --disable-azure-keyvault-kms
     defaultValue: "False"
     summary: |-
@@ -4264,7 +4343,6 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Disable exporting Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal.
-    isPreview: true
   - name: --disable-defender
     defaultValue: "False"
     summary: |-
@@ -4281,6 +4359,10 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Disable forceUpgrade cluster upgrade settings override.
+  - name: --disable-fqdn-policy
+    summary: |-
+      Disable advanced network security FQDN functionalities on a cluster.
+    isPreview: true
   - name: --disable-image-cleaner
     defaultValue: "False"
     summary: |-
@@ -4289,6 +4371,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Disable ImageIntegrity Service.
+    isPreview: true
+  - name: --disable-imds-restriction
+    defaultValue: "False"
+    summary: |-
+      Disable IMDS restriction in the cluster. All Pods in the cluster will be able to access IMDS.
     isPreview: true
   - name: --disable-keda
     defaultValue: "False"
@@ -4299,15 +4386,6 @@ directCommands:
     defaultValue: "False"
     summary: |-
       (Preview) If set to true, getting static credential will be disabled for this cluster.
-  - name: --disable-network-observability
-    summary: |-
-      Disable network observability on a cluster.
-    isPreview: true
-  - name: --disable-node-restriction
-    defaultValue: "False"
-    summary: |-
-      Disable node restriction option on cluster.
-    isPreview: true
   - name: --disable-pod-identity
     defaultValue: "False"
     summary: |-
@@ -4358,6 +4436,10 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable managed AAD feature for cluster.
+  - name: --enable-acns
+    summary: |-
+      Enable advanced network functionalities on a cluster. Note that enabling this will incur additional costs.
+    isPreview: true
   - name: --enable-addon-autoscaling
     defaultValue: "False"
     summary: |-
@@ -4365,7 +4447,7 @@ directCommands:
     isPreview: true
   - name: --enable-advanced-network-observability
     summary: |-
-      Enable advanced network observability functionalities on a cluster.
+      Enable advanced network observability functionalities on a cluster. Note that enabling this will incur additional costs.
     isPreview: true
   - name: --enable-ahub
     defaultValue: "False"
@@ -4413,7 +4495,6 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable exporting Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal. For more information see aka.ms/aks/docs/cost-analysis.
-    isPreview: true
   - name: --enable-defender
     defaultValue: "False"
     summary: |-
@@ -4430,6 +4511,10 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable forceUpgrade cluster upgrade settings override.
+  - name: --enable-fqdn-policy
+    summary: |-
+      Enable advanced network security FQDN functionalities on a cluster. Note that enabling this will incur additional costs.
+    isPreview: true
   - name: --enable-image-cleaner
     defaultValue: "False"
     summary: |-
@@ -4438,6 +4523,11 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable ImageIntegrity Service.
+  - name: --enable-imds-restriction
+    defaultValue: "False"
+    summary: |-
+      Enable IMDS restriction in the cluster. Non-hostNetwork Pods will not be able to access IMDS.
+    isPreview: true
   - name: --enable-keda
     defaultValue: "False"
     summary: |-
@@ -4451,15 +4541,6 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Update current cluster to managed identity to manage cluster resource group.
-  - name: --enable-network-observability
-    summary: |-
-      Enable network observability on a cluster.
-    isPreview: true
-  - name: --enable-node-restriction
-    defaultValue: "False"
-    summary: |-
-      Enable node restriction option on cluster.
-    isPreview: true
   - name: --enable-oidc-issuer
     defaultValue: "False"
     summary: |-
@@ -4511,6 +4592,14 @@ directCommands:
     defaultValue: "False"
     summary: |-
       (PREVIEW) Enable Workload Identity addon for cluster.
+  - name: --ephemeral-disk-nvme-perf-tier
+    parameterValueGroup: "Basic, Premium, Standard"
+    summary: |-
+      Set ephemeral disk volume type for azure container storage.
+  - name: --ephemeral-disk-volume-type
+    parameterValueGroup: "EphemeralVolumeOnly, PersistentVolumeWithAnnotation"
+    summary: |-
+      Set ephemeral disk volume type for azure container storage.
   - name: --gmsa-dns-server
     summary: |-
       Specify DNS server for Windows gmsa on cluster.
@@ -4529,6 +4618,12 @@ directCommands:
   - name: --http-proxy-config
     summary: |-
       HTTP Proxy configuration for this cluster.
+  - name: --if-match
+    summary: |-
+      The value provided will be compared to the ETag of the managed cluster, if it matches the operation will proceed. If it does not match, the request will be rejected to prevent accidental overwrites. This must not be specified when creating a new cluster.
+  - name: --if-none-match
+    summary: |-
+      Set to '*' to allow a new cluster to be created, but to prevent updating an existing cluster. Other values will be ignored.
   - name: --image-cleaner-interval-hours
     summary: |-
       ImageCleaner scanning interval.
@@ -4803,9 +4898,11 @@ directCommands:
                    [--control-plane-only]
                    [--disable-force-upgrade]
                    [--enable-force-upgrade]
+                   [--k8s-support-plan {AKSLongTermSupport, KubernetesOfficial}]
                    [--kubernetes-version]
                    [--no-wait]
                    [--node-image-only]
+                   [--tier {free, premium, standard}]
                    [--upgrade-override-until]
                    [--yes]
   examples:
@@ -4834,6 +4931,10 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable forceUpgrade cluster upgrade settings override.
+  - name: --k8s-support-plan
+    parameterValueGroup: "AKSLongTermSupport, KubernetesOfficial"
+    summary: |-
+      Choose from "KubernetesOfficial" or "AKSLongTermSupport", with "AKSLongTermSupport" you get 1 extra year of CVE patchs.
   - name: --kubernetes-version -k
     summary: |-
       Version of Kubernetes to upgrade the cluster to, such as "1.16.9".
@@ -4846,6 +4947,10 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Only upgrade node image for agent pools.
+  - name: --tier
+    parameterValueGroup: "free, premium, standard"
+    summary: |-
+      Specify SKU tier for managed clusters. '--tier standard' enables a standard managed cluster service with a financially backed SLA. '--tier free' does not have a financially backed SLA. '--tier premium' is required for '--k8s-support-plan AKSLongTermSupport'.
   - name: --upgrade-override-until
     summary: |-
       Until when the cluster upgradeSettings overrides are effective.
@@ -4872,6 +4977,8 @@ directCommands:
                    [--control-plane-only]
                    [--disable-force-upgrade]
                    [--enable-force-upgrade]
+                   [--if-match]
+                   [--if-none-match]
                    [--kubernetes-version]
                    [--no-wait]
                    [--node-image-only]
@@ -4910,6 +5017,12 @@ directCommands:
     defaultValue: "False"
     summary: |-
       Enable forceUpgrade cluster upgrade settings override.
+  - name: --if-match
+    summary: |-
+      The value provided will be compared to the ETag of the managed cluster, if it matches the operation will proceed. If it does not match, the request will be rejected to prevent accidental overwrites. This must not be specified when creating a new cluster.
+  - name: --if-none-match
+    summary: |-
+      Set to '*' to allow a new cluster to be created, but to prevent updating an existing cluster. Other values will be ignored.
   - name: --kubernetes-version -k
     summary: |-
       Version of Kubernetes to upgrade the cluster to, such as "1.11.12".
@@ -5216,7 +5329,6 @@ commands:
 - az_aks_connection_create_mysql-flexible
 - az_aks_connection_create_mysql-flexible(serviceconnector-passwordless)
 - az_aks_connection_create_postgres
-- az_aks_connection_create_postgres(serviceconnector-passwordless)
 - az_aks_connection_create_postgres-flexible
 - az_aks_connection_create_postgres-flexible(serviceconnector-passwordless)
 - az_aks_connection_create_redis
@@ -5281,7 +5393,6 @@ commands:
 - az_aks_enable-addons(aks-preview)
 - az_aks_get-credentials
 - az_aks_get-credentials(aks-preview)
-- az_aks_get-os-options
 - az_aks_get-upgrades
 - az_aks_get-upgrades(aks-preview)
 - az_aks_get-versions
@@ -5308,12 +5419,10 @@ commands:
 - az_aks_mesh
 - az_aks_mesh_disable
 - az_aks_mesh_disable(aks-preview)
-- az_aks_mesh_disable-egress-gateway
 - az_aks_mesh_disable-ingress-gateway
 - az_aks_mesh_disable-ingress-gateway(aks-preview)
 - az_aks_mesh_enable
 - az_aks_mesh_enable(aks-preview)
-- az_aks_mesh_enable-egress-gateway
 - az_aks_mesh_enable-ingress-gateway
 - az_aks_mesh_enable-ingress-gateway(aks-preview)
 - az_aks_mesh_get-revisions

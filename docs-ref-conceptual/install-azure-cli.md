@@ -3,7 +3,6 @@ title: How to install the Azure CLI | Microsoft Docs
 description: The Azure CLI is available to install in Windows, macOS and Linux environments. It can also be run in a Docker container and Azure Cloud Shell.
 author: dbradish-microsoft
 ms.author: dbradish
-manager: mamccrea
 ms.date: 09/28/2023
 ms.topic: conceptual
 ms.service: azure-cli
@@ -13,9 +12,6 @@ keywords: azure cli, install azure cli, azure cli download, download azure cli
 ---
 
 # How to install the Azure CLI
-
-> [!CAUTION]
-> This article references CentOS, a Linux distribution that is nearing End Of Life (EOL) status. Please consider your use and plan accordingly. For more information, see the [CentOS End Of Life guidance](/azure/virtual-machines/workloads/centos/centos-end-of-life).
 
 The Azure CLI is available to install in Windows, macOS and Linux environments. It can also be run in a Docker container and Azure Cloud Shell.
 
@@ -28,7 +24,7 @@ The Azure CLI is available to install in Windows, macOS and Linux environments. 
 * [Install on macOS](install-azure-cli-macos.md)
 * Install on Linux or Windows Subsystem for Linux (WSL) ([What is WSL?](/windows/wsl/about))
 
-  * [Install on RHEL/CentOS with dnf](./install-azure-cli-linux.md?pivots=dnf)
+  * [Install on RHEL/CentOS Stream with dnf](./install-azure-cli-linux.md?pivots=dnf)
   * [Install on SLES/OpenSUSE with zypper](./install-azure-cli-linux.md?pivots=zypper)
   * [Install on Ubuntu/Debian with apt](./install-azure-cli-linux.md?pivots=apt)
   * [Install on Azure Linux with tdnf](./install-azure-cli-linux.md?pivots=tdnf)
@@ -43,7 +39,7 @@ The Azure CLI is available to install in Windows, macOS and Linux environments. 
 
 ### Where is the Azure CLI installed?
 
-When installing the Azure CLI, you can't select an install location. In Windows, the 32-bit Azure CLI installs in `C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2` and the 64-bit in `C:\Program Files\Microsoft SDKs\Azure\CLI2`. In Linux, the Azure CLI is installed in `/opt/az/` on Ubuntu and Debian, and in `/lib64/az/` on CentOS, RHEL and Azure Linux.
+When installing the Azure CLI, you can't select an install location. In Windows, the 32-bit Azure CLI installs in `C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2` and the 64-bit in `C:\Program Files\Microsoft SDKs\Azure\CLI2`. In Linux, the Azure CLI is installed in `/opt/az/` on Ubuntu and Debian, and in `/lib64/az/` on CentOS Stream, RHEL and Azure Linux.
 
 User-specific configuration files are located in `$HOME/.azure` on macOS and Linux, and `%USERPROFILE%\.azure` on Windows. These locations are known as the `AZURE_CONFIG_DIR`.
 
@@ -69,4 +65,4 @@ Use the `az extension list` command to see installed extension. You can also use
 * [Sign in with the Azure CLI](./authenticate-azure-cli.md)
 * [Azure CLI Onboarding cheat sheet](./cheat-sheet-onboarding.md)
 * Find Azure CLI [samples](./samples-index.md) and [published docs](./reference-docs-index.md)
-* [How to use the Azure CLI successfully](use-azure-cli-successfully.md)
+* [Tips to use the Azure CLI successfully](use-azure-cli-successfully-tips.md)

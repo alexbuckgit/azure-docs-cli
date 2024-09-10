@@ -1,13 +1,9 @@
 ---
 title: Use global parameters with Azure CLI  | Microsoft Docs
 description: Learn how to use various global parameters with Azure CLI to configure a resource group.
-manager: jasongroce
-author: daphnemamsft
-ms.author: daphnema
 ms.date: 08/2/2023
 ms.topic: conceptual
 ms.service: azure-cli
-ms.tool: azure-cli 
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: azure cli, how to use azure cli, azure command line interface, how to open azure cli, azure cli commands
 ---
@@ -146,6 +142,8 @@ You can skip preloading in a single pass by CTRL+C or turn it off by setting 'az
 Loading command table... Expected time around 1 minute.
 ```
 
+---
+
 ## `--subscription` global parameter
 
 You can use the `--subscription` global parameter to set a specific subscription for a command. The
@@ -198,12 +196,12 @@ Output console:
 [
   {
     "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7WbiMEsB0iwdGPjeGXs3UWFtzbCkUwtIxzkIOpEtlqkLGa0XQdvwhzok6szq6Ycx/f4cfid/yrmBPtzmxdQnGeCy2FOcVIzp+SkjIUg/Ez2YyDcMb60u66QUmHPRyhipJ/PDZROt6O0092qfTkTjB+7hLRiZzV2raLjiQ95eV0AXUP+Gsvdo/7ytqWNIm3iQTWbQ/GwSg+p0v+kmZELIbrxo845dambSpgBL8g0wCUZaptru3ZHo9m0UWbFPASVJKauhfPCSVPQCaOCaAdB01Ih8QDVRCazT+jyV6GgTwUIXVQthVBbt56ibhuSUdf0cWF8IVncjH+WXexVAhQw0j",
-    "path": "/home/daphnema/.ssh/authorized_keys"
+    "path": "/home/yourName/.ssh/authorized_keys"
   }
 ]
 ```
 
-To learn more about querying command output, see [How to query Azure CLI command output using a JMESPath query](../docs-ref-conceptual/query-azure-cli.md).
+To learn more about querying command output, see [How to query Azure CLI command output using a JMESPath query](../docs-ref-conceptual/use-azure-cli-successfully-query.md).
 
 ## See also
 

@@ -217,7 +217,7 @@ directCommands:
     syntax: az network lb rule update -g MyResourceGroup --lb-name MyLb -n MyLbRule --protocol Udp
   - summary: |-
       Update a load balancing rule to support HA ports.
-    syntax: az network lb rule update -g MyResourceGroup --lb-name MyLb -n MyLbRule \ --protocol All --frontend-port 0 --backend-port 0
+    syntax: az network lb rule update -g MyResourceGroup --lb-name MyLb -n MyLbRule --protocol All --frontend-port 0 --backend-port 0
   requiredParameters:
   - isRequired: true
     name: --lb-name
@@ -378,5 +378,5 @@ globalParameters:
   summary: |-
     Increase logging verbosity. Use --debug for full debug logs.
 metadata:
-  ms.date: 10/11/2023
+  ms.date: 07/19/2024
   description: Manage load balancing rules.

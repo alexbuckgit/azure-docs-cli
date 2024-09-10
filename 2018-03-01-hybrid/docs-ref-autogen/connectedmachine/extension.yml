@@ -4,7 +4,7 @@ name: az connectedmachine extension
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **connectedmachine** extension for the Azure CLI (version 2.49.0 or higher). The extension will automatically install the first time you run an **az connectedmachine extension** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **connectedmachine** extension for the Azure CLI (version 2.57.0 or higher). The extension will automatically install the first time you run an **az connectedmachine extension** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage a VM extension on an Azure Arc-Enabled Server.
 status: GA
@@ -13,15 +13,15 @@ directCommands:
 - uid: az_connectedmachine_extension_create
   name: az connectedmachine extension create
   summary: |-
-    The operation to create the extension.
+    Create an extension.
   status: GA
   sourceType: Extension
   syntax: >-
     az connectedmachine extension create --extension-name
                                          --machine-name
                                          --resource-group
-                                         [--auto-upgrade {0, 1, f, false, n, no, t, true, y, yes}]
-                                         [--auto-upgrade-minor {0, 1, f, false, n, no, t, true, y, yes}]
+                                         [--auto-upgrade-min {0, 1, f, false, n, no, t, true, y, yes}]
+                                         [--enable-auto-upgrade {0, 1, f, false, n, no, t, true, y, yes}]
                                          [--force-update-tag]
                                          [--instance-view]
                                          [--location]
@@ -50,14 +50,14 @@ directCommands:
     summary: |-
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
   optionalParameters:
-  - name: --auto-upgrade --enable-auto-upgrade --enable-automatic-upgrade
-    parameterValueGroup: "0, 1, f, false, n, no, t, true, y, yes"
-    summary: |-
-      Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available.
-  - name: --auto-upgrade-minor --auto-upgrade-minor-version --upgrade-minor-ver
+  - name: --auto-upgrade-min --auto-upgrade-minor-version
     parameterValueGroup: "0, 1, f, false, n, no, t, true, y, yes"
     summary: |-
       Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
+  - name: --enable-auto-upgrade --enable-automatic-upgrade
+    parameterValueGroup: "0, 1, f, false, n, no, t, true, y, yes"
+    summary: |-
+      Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available.
   - name: --force-update-tag
     summary: |-
       How the extension handler should be forced to update even if the extension configuration has not changed.
@@ -92,7 +92,7 @@ directCommands:
 - uid: az_connectedmachine_extension_delete
   name: az connectedmachine extension delete
   summary: |-
-    The operation to delete the extension.
+    Delete an extension.
   status: GA
   sourceType: Extension
   syntax: >-
@@ -134,13 +134,15 @@ directCommands:
 - uid: az_connectedmachine_extension_list
   name: az connectedmachine extension list
   summary: |-
-    The operation to get all extensions of a Non-Azure machine.
+    Get all extensions of a Non-Azure machine.
   status: GA
   sourceType: Extension
   syntax: >-
     az connectedmachine extension list --machine-name
                                        --resource-group
                                        [--expand]
+                                       [--max-items]
+                                       [--next-token]
   examples:
   - summary: |-
       Sample command for extension list
@@ -158,10 +160,16 @@ directCommands:
   - name: --expand
     summary: |-
       The expand expression to apply on the operation.
+  - name: --max-items
+    summary: |-
+      Total number of items to return in the command's output. If the total number of items available is more than the value specified, a token is provided in the command's output. To resume pagination, provide the token value in `--next-token` argument of a subsequent command.
+  - name: --next-token
+    summary: |-
+      Token to specify where to start paginating. This is the token value from a previously truncated response.
 - uid: az_connectedmachine_extension_show
   name: az connectedmachine extension show
   summary: |-
-    The operation to create or update the extension.
+    Show an extension of a Non-Azure machine.
   status: GA
   sourceType: Extension
   syntax: >-
@@ -193,13 +201,13 @@ directCommands:
 - uid: az_connectedmachine_extension_update
   name: az connectedmachine extension update
   summary: |-
-    Update operation to update the extension.
+    Update an extension.
   status: GA
   sourceType: Extension
   syntax: >-
     az connectedmachine extension update [--add]
-                                         [--auto-upgrade {0, 1, f, false, n, no, t, true, y, yes}]
-                                         [--auto-upgrade-minor {0, 1, f, false, n, no, t, true, y, yes}]
+                                         [--auto-upgrade-min {0, 1, f, false, n, no, t, true, y, yes}]
+                                         [--enable-auto-upgrade {0, 1, f, false, n, no, t, true, y, yes}]
                                          [--extension-name]
                                          [--force-string {0, 1, f, false, n, no, t, true, y, yes}]
                                          [--force-update-tag]
@@ -225,14 +233,14 @@ directCommands:
   - name: --add
     summary: |-
       Add an object to a list of objects by specifying a path and key value pairs.  Example: --add property.listProperty <key=value, string or JSON string>.
-  - name: --auto-upgrade --enable-auto-upgrade --enable-automatic-upgrade
-    parameterValueGroup: "0, 1, f, false, n, no, t, true, y, yes"
-    summary: |-
-      Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available.
-  - name: --auto-upgrade-minor --auto-upgrade-minor-version --upgrade-minor-ver
+  - name: --auto-upgrade-min --auto-upgrade-minor-version
     parameterValueGroup: "0, 1, f, false, n, no, t, true, y, yes"
     summary: |-
       Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true.
+  - name: --enable-auto-upgrade --enable-automatic-upgrade
+    parameterValueGroup: "0, 1, f, false, n, no, t, true, y, yes"
+    summary: |-
+      Indicates whether the extension should be automatically upgraded by the platform if there is a newer version available.
   - name: --extension-name --name -n
     summary: |-
       The name of the machine extension.

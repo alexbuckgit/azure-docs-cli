@@ -1,7 +1,6 @@
 ---
-author: chasecrum
-ms.author: chasecrum
-manager: mamccrea
+author: dbradish-microsoft
+ms.author: dbradish
 ms.date: 09/27/2023
 ms.topic: include
 ms.custom: devx-track-azurecli, linux-related-content
@@ -48,7 +47,7 @@ If you prefer a step-by-step installation process, complete the following steps 
     ```bash
     sudo mkdir -p /etc/apt/keyrings
     curl -sLS https://packages.microsoft.com/keys/microsoft.asc |
-      sudo gpg --dearmor -o /etc/apt/keyrings/microsoft.gpg
+      gpg --dearmor | sudo tee /etc/apt/keyrings/microsoft.gpg > /dev/null
     sudo chmod go+r /etc/apt/keyrings/microsoft.gpg
     ```
 

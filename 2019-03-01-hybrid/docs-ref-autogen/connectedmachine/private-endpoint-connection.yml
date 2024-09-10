@@ -4,7 +4,7 @@ name: az connectedmachine private-endpoint-connection
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **connectedmachine** extension for the Azure CLI (version 2.49.0 or higher). The extension will automatically install the first time you run an **az connectedmachine private-endpoint-connection** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **connectedmachine** extension for the Azure CLI (version 2.57.0 or higher). The extension will automatically install the first time you run an **az connectedmachine private-endpoint-connection** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage private endpoint connection with an Azure Arc-Enabled Server.
 status: GA
@@ -61,6 +61,8 @@ directCommands:
   syntax: >-
     az connectedmachine private-endpoint-connection list --resource-group
                                                          --scope-name
+                                                         [--max-items]
+                                                         [--next-token]
   examples:
   - summary: |-
       Sample command for private-endpoint-connection list
@@ -74,6 +76,13 @@ directCommands:
     name: --scope-name
     summary: |-
       The name of the Azure Arc PrivateLinkScope resource.
+  optionalParameters:
+  - name: --max-items
+    summary: |-
+      Total number of items to return in the command's output. If the total number of items available is more than the value specified, a token is provided in the command's output. To resume pagination, provide the token value in `--next-token` argument of a subsequent command.
+  - name: --next-token
+    summary: |-
+      Token to specify where to start paginating. This is the token value from a previously truncated response.
 - uid: az_connectedmachine_private-endpoint-connection_show
   name: az connectedmachine private-endpoint-connection show
   summary: |-
@@ -114,7 +123,7 @@ directCommands:
   sourceType: Extension
   syntax: >-
     az connectedmachine private-endpoint-connection update [--add]
-                                                           [--connection-state]
+                                                           [--description]
                                                            [--force-string {0, 1, f, false, n, no, t, true, y, yes}]
                                                            [--ids]
                                                            [--name]
@@ -124,18 +133,19 @@ directCommands:
                                                            [--resource-group]
                                                            [--scope-name]
                                                            [--set]
+                                                           [--status]
                                                            [--subscription]
   examples:
   - summary: |-
       Sample command for private-endpoint-connection update
-    syntax: az connectedmachine private-endpoint-connection update --connection-state "{{"description":"Rejected by AZ CLI", "status":"Rejected"}}" --name private-endpoint-connection-name --resource-group myResourceGroup --scope-name myPrivateLinkScope
+    syntax: az connectedmachine private-endpoint-connection update --description "Rejected by AZ CLI" --status "Rejected" --name private-endpoint-connection-name --resource-group myResourceGroup --scope-name myPrivateLinkScope
   optionalParameters:
   - name: --add
     summary: |-
       Add an object to a list of objects by specifying a path and key value pairs.  Example: --add property.listProperty <key=value, string or JSON string>.
-  - name: --connection-state --private-link-service-connection-state
+  - name: --description
     summary: |-
-      Connection state of the private endpoint connection.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
+      The private link service connection description.
   - name: --force-string
     parameterValueGroup: "0, 1, f, false, n, no, t, true, y, yes"
     summary: |-
@@ -165,6 +175,9 @@ directCommands:
   - name: --set
     summary: |-
       Update an object by specifying a property path and value to set.  Example: --set property1.property2=<value>.
+  - name: --status
+    summary: |-
+      The private link service connection status.
   - name: --subscription
     summary: |-
       Name or ID of subscription. You can configure the default subscription using `az account set -s NAME_OR_ID`.

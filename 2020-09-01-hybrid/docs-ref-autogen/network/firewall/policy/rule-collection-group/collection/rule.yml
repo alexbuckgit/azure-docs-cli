@@ -4,7 +4,7 @@ name: az network firewall policy rule-collection-group collection rule
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **azure-firewall** extension for the Azure CLI (version 2.55.0 or higher). The extension will automatically install the first time you run an **az network firewall policy rule-collection-group collection rule** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **azure-firewall** extension for the Azure CLI (version 2.61.0 or higher). The extension will automatically install the first time you run an **az network firewall policy rule-collection-group collection rule** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Manage and configure the rule of a filter collection in the rule collection group of Azure firewall policy.
 description: |-
@@ -37,6 +37,7 @@ directCommands:
                                                                          [--enable-tls-insp {0, 1, f, false, n, no, t, true, y, yes}]
                                                                          [--force-string {0, 1, f, false, n, no, t, true, y, yes}]
                                                                          [--fqdn-tags]
+                                                                         [--http-headers-to-insert]
                                                                          [--ip-protocols]
                                                                          [--no-wait {0, 1, f, false, n, no, t, true, y, yes}]
                                                                          [--protocols]
@@ -100,7 +101,6 @@ directCommands:
     parameterValueGroup: "0, 1, f, false, n, no, t, true, y, yes"
     summary: |-
       Enable flag to terminate TLS connection for this rule.
-    isPreview: true
   - name: --force-string
     parameterValueGroup: "0, 1, f, false, n, no, t, true, y, yes"
     summary: |-
@@ -108,6 +108,9 @@ directCommands:
   - name: --fqdn-tags
     summary: |-
       Space-separated list of FQDN tags for this rule.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
+  - name: --http-headers-to-insert
+    summary: |-
+      Space-separated list of HTTP headers to insert, in NAME=VALUE format.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
   - name: --ip-protocols
     summary: |-
       Space-separated list of IP protocols. This argument is supported for Nat and Network Rule.   Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
@@ -136,7 +139,6 @@ directCommands:
   - name: --target-urls
     summary: |-
       Space-separated list of target urls for this rule.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-    isPreview: true
   - name: --translated-address
     summary: |-
       Translated address for this NAT rule collection.
@@ -236,6 +238,7 @@ directCommands:
                                                                             [--enable-tls-insp {0, 1, f, false, n, no, t, true, y, yes}]
                                                                             [--force-string {0, 1, f, false, n, no, t, true, y, yes}]
                                                                             [--fqdn-tags]
+                                                                            [--http-headers-to-insert]
                                                                             [--ip-protocols]
                                                                             [--no-wait {0, 1, f, false, n, no, t, true, y, yes}]
                                                                             [--protocols]
@@ -303,7 +306,6 @@ directCommands:
     parameterValueGroup: "0, 1, f, false, n, no, t, true, y, yes"
     summary: |-
       Enable flag to terminate TLS connection for this rule.
-    isPreview: true
   - name: --force-string
     parameterValueGroup: "0, 1, f, false, n, no, t, true, y, yes"
     summary: |-
@@ -311,6 +313,9 @@ directCommands:
   - name: --fqdn-tags
     summary: |-
       Space-separated list of FQDN tags for this rule.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
+  - name: --http-headers-to-insert
+    summary: |-
+      Space-separated list of HTTP headers to insert, in NAME=VALUE format.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
   - name: --ip-protocols
     summary: |-
       Space-separated list of IP protocols. This argument is supported for Nat and Network Rule.   Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
@@ -329,7 +334,7 @@ directCommands:
       Update an object by specifying a property path and value to set.  Example: --set property1.property2=<value>.
   - name: --source-addresses
     summary: |-
-      Space-separated list of source IP ddresses.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
+      Space-separated list of source IP addresses.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
   - name: --source-ip-groups
     summary: |-
       Space-separated list of name or resource id of source IpGroups.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
@@ -339,7 +344,6 @@ directCommands:
   - name: --target-urls
     summary: |-
       Space-separated list of target urls for this rule.  Support shorthand-syntax, json-file and yaml-file. Try "??" to show more.
-    isPreview: true
   - name: --translated-address
     summary: |-
       Translated address for this NAT rule collection.

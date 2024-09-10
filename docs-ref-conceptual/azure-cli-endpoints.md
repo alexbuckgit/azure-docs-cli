@@ -1,10 +1,8 @@
 --- 
 title: Endpoints used when installing the Azure CLI  | Microsoft Docs
 description: Learn what endpoints are used when installing the Azure CLI.  These URLs are sometimes added to allowlists when working behind a firewall.
-manager: jasongroce
 author: dbradish-microsoft
 ms.author: dbradish
-ms.prod: non-product-specific
 ms.topic: conceptual
 ms.custom: devx-track-azurecli
 ms.date: 08/1/2023
@@ -168,7 +166,7 @@ All extensions install with endpoint **azcliprod.blob.core.windows.net** with th
 
 ## See also
 
-- [How to use the Azure CLI effectively - Work behind a proxy](./use-azure-cli-successfully.md?tabs=bash%2cbash2#work-behind-a-proxy)
+- [Azure CLI troubleshooting - Work behind a proxy](./use-azure-cli-successfully-troubleshooting.md#work-behind-a-proxy)
 - [Work with existing on-premises proxy servers](/azure/active-directory/app-proxy/application-proxy-configure-connectors-with-proxy-servers)
 - [Azure Firewall threat intelligence configuration - Allowlist addresses](/azure/firewall-manager/threat-intelligence-settings#allowlist-addresses)
 - Azure IP ranges and Service Tags

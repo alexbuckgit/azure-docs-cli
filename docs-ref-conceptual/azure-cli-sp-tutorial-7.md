@@ -1,7 +1,6 @@
 ---
 title: Reset service principal credentials using the Azure CLI | Microsoft Docs
 description: Learn how to reset your service principal credentials using the Azure CLI.
-manager: jasongroce
 author: dbradish-microsoft
 ms.author: dbradish
 ms.date: 10/18/2023
@@ -82,6 +81,8 @@ $myNewPassword = az ad sp credential reset --id myServicePrincipalID --query pas
 # Comment it out or remove it in production if you don't want to display the password.
 Write-Host $myNewPassword
 ```
+
+For more information on the `tsv` output type, see [Output formats for Azure CLI commands](./format-output-azure-cli.md#tsv-output-format).
 
 ---
 ## Next Steps

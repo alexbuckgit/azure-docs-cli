@@ -4,7 +4,7 @@ name: az grafana dashboard
 extensionInformation: >-
   > [!NOTE]
 
-  > This reference is part of the **amg** extension for the Azure CLI (version 2.38.0 or higher). The extension will automatically install the first time you run an **az grafana dashboard** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
+  > This reference is part of the **amg** extension for the Azure CLI (version 2.61.0 or higher). The extension will automatically install the first time you run an **az grafana dashboard** command. [Learn more](https://learn.microsoft.com/cli/azure/azure-cli-extensions-overview) about extensions.
 summary: |-
   Commands to manage dashboards of an instance.
 status: GA
@@ -54,7 +54,7 @@ directCommands:
       Api key or service account token, a randomly generated string used to interact with Grafana endpoint; if missing, CLI will use current logged-in user's credentials.
   - name: --folder
     summary: |-
-      Id, uid, title which can identify a folder. CLI will search in the order of id, uid, and title, till finds a match.
+      Uid or title which can identify a folder. CLI will search with uid first, then title, till it finds a match.
   - name: --overwrite
     parameterValueGroup: "false, true"
     summary: |-
@@ -133,7 +133,7 @@ directCommands:
       Api key or service account token, a randomly generated string used to interact with Grafana endpoint; if missing, CLI will use current logged-in user's credentials.
   - name: --folder
     summary: |-
-      Id, uid, title which can identify a folder. CLI will search in the order of id, uid, and title, till finds a match.
+      Uid or title which can identify a folder. CLI will search with uid first, then title, till it finds a match.
   - name: --overwrite
     parameterValueGroup: "false, true"
     summary: |-
@@ -201,7 +201,7 @@ directCommands:
 - uid: az_grafana_dashboard_sync
   name: az grafana dashboard sync
   summary: |-
-    Sync Azure Managed Grafana dashboards from one instance to another instance. Note, dashboards with "provisioned" state will be skipped due to being read-only.
+    Sync Azure Managed Grafana dashboards from one instance to another instance. Library panels within the dashboards will be automatically included in the sync. Note, dashboards with "Provisioned" state will be skipped due to being read-only.
   status: Preview
   isPreview: true
   previewOrExperimentalInfo: 'This command is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus'
@@ -282,7 +282,7 @@ directCommands:
       Api key or service account token, a randomly generated string used to interact with Grafana endpoint; if missing, CLI will use current logged-in user's credentials.
   - name: --folder
     summary: |-
-      Id, uid, title which can identify a folder. CLI will search in the order of id, uid, and title, till finds a match.
+      Uid or title which can identify a folder. CLI will search with uid first, then title, till it finds a match.
   - name: --overwrite
     parameterValueGroup: "false, true"
     summary: |-

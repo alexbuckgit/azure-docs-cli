@@ -97,7 +97,7 @@ directCommands:
               [--version]
   examples:
   - summary: |-
-      Ensure that a Azure Database for SQL server is up and running and configured for immediate use.
+      Ensure that an Azure Database for SQL server is up and running and configured for immediate use.
     syntax: az sql up
   - summary: |-
       To override default names, provide parameters indicating desired values/existing resources.
@@ -388,6 +388,7 @@ commands:
 - az_sql_server
 - az_sql_server-arc
 - az_sql_server-arc_availability-group
+- az_sql_server-arc_availability-group_create
 - az_sql_server-arc_availability-group_failover
 - az_sql_server-arc_backups-policy
 - az_sql_server-arc_backups-policy_delete

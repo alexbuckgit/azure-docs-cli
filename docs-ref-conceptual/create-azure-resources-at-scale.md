@@ -1,7 +1,6 @@
 ---
 title: Create multiple resources from a script using Azure CLI
 description: Learn how to create multiple Azure resources from a script and log progress to a file. The Azure CLI script is provided for both Bash and PowerShell..
-manager: jasongroce
 author: dbradish-microsoft
 ms.author: dbradish
 ms.date: 04/30/2024
@@ -162,27 +161,69 @@ You have now created your variable block, validated your CSV values, and complet
 
 :::code language="azurecli" source="~/azure_cli_scripts/azure-cli/create-azure-resources-at-scale/bash/create-azure-resources-at-scale.sh" id="step4":::
 
+In your console output, are you missing the last row in your CSV file?  This can be caused by a missing line continuation character after the last line. Add a blank line at the end of your CSV file to fix the issue.
+
 # [PowerShell](#tab/powershell)
 
 :::code language="azurecli" source="~/azure_cli_scripts/azure-cli/create-azure-resources-at-scale/powershell/create-azure-resources-at-scale.ps1" id="step4":::
 
 ---
 
-Console output before log file read:
+Console output _before_ log file read:
 
 ```output
 Starting creation of resourceNo 1 at YYYY-MM-DD HH:MM:SS.
   RG msdocs-rg-00000001 creation complete
   VNet msdocs-vnet-00000001 creation complete
   VM msdocs-vm-00000001 creation complete
+
 Starting creation of resourceNo 2 at YYYY-MM-DD HH:MM:SS.
   RG msdocs-rg-00000002 creation complete
   VM msdocs-vm-00000002 creation complete
+
 Starting creation of resourceNo 3 at YYYY-MM-DD HH:MM:SS.
   VM msdocs-vm-00000003 creation complete
 ```
 
+Your log file contents should look similar to this:
+
+```output
+Starting creation of resourceNo 1 at YYYY-MM-DD HH:MM:SS.
+  Creating RG msdocs-rg-00000001 at YYYY-MM-DD HH:MM:SS.
+  {
+  Resource group create output
+  }
+  Creating VNet msdocs-vnet-00000001 in RG msdocs-rg-000000001 at YYYY-MM-DD HH:MM:SS.
+  {
+  VNet create output
+  }  
+  Creating VM msdocs-vm-00000001 in RG msdocs-rg-00000001 at YYYY-MM-DD HH:MM:SS.
+  {
+  VM create output
+  }
+
+Starting creation of resourceNo 2 at YYYY-MM-DD HH:MM:SS.
+  Creating RG msdocs-rg-00000002 at YYYY-MM-DD HH:MM:SS.
+  {
+  Resource group create output
+  }
+  Creating VM msdocs-vm-00000002 in RG msdocs-rg-00000002 at YYYY-MM-DD HH:MM:SS.
+  {
+  VM create output
+  }
+
+Starting creation of resourceNo 3 at YYYY-MM-DD HH:MM:SS.
+  Creating msdocs-vm-00000003 creation complete
+  {
+  VM create output
+  }
+```
+
 ## Troubleshooting
+
+### In Bash, the "Create Azure resources" step stops after step 1
+
+In Ubuntu 22.04.3 LTS and Debian version 12 (bookworm) the [Validate script logic](#validate-script-logic) works as expected returning results for all three resources. However, the [Create Azure resources](#create-azure-resources) stops after the first resource. A possible reason for this issue is that the creating the VNet in step #1 takes a few seconds. Both Ubuntu and Debian proceed to the second resource without waiting for the completion of the VNet. You can read more about this in [wait doesn't wait for the processes in the while loop to finish](https://stackoverflow.com/questions/63489618/wait-doesnt-wait-for-the-processes-in-the-while-loop-to-finish) or [Waiting for any process to finish in bash script](https://unix.stackexchange.com/questions/656103/waiting-for-any-process-to-finish-in-bash-script).
 
 ### Bash script ignores IF statement
 
@@ -226,10 +267,12 @@ When you try to create an Azure resource in a location that does not offer that 
 Here's the full error example:
 
 ```Error
-{"error":{"code":"InvalidTemplateDeployment","message":"The template deployment 'vm_deploy_fZIVcQkGU0GS6HJBVxQaUNPaCr94lgym' is not valid according to the validation procedure. The tracking id is 'f6e6ff29-986f-49b2-9a67-12084b2e0217'. See inner errors for details.","details":[{"code":"SkuNotAvailable","message":"The requested VM size for resource 'Following SKUs have failed for Capacity Restrictions: Standard_DS1_v2' is currently not available in location 'westus'. Please try another size or deploy to a different location or different zone. See https://aka.ms/azureskunotavailable for details."}]}}
-(ResourceGroupNotFound) Resource group 'msdocs-rg-00000000' could not be found.
-Code: ResourceGroupNotFound
-Message: Resource group 'msdocs-rg-00000000' could not be found.
+{"error":{"code":"InvalidTemplateDeployment","message":"The template deployment 'vm_deploy_<32 character ID>'
+is not valid according to the validation procedure. The tracking id is '<36 character ID>'.
+See inner errors for details.","details":[{"code":"SkuNotAvailable","message":"The requested VM size for resource
+'Following SKUs have failed for Capacity Restrictions: Standard_DS1_v2' is currently not available
+in location '<your specified location>'. Please try another size or deploy to a different location
+or different zone. See https://aka.ms/azureskunotavailable for details."}]}}
 ```
 
 To correct the error, either change the location or select a different parameter value that is offered for your desired location.

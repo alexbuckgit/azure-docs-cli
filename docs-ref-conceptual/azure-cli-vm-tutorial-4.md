@@ -2,7 +2,6 @@
 title: Get virtual machines information with queries (VM) – Azure CLI | Microsoft Docs
 description: Learn how to get virtual machines (VM) information with Azure CLI queries.
 ms.date: 01/08/2024
-manager: jasongroce
 author: dbradish-microsoft
 ms.author: dbradish
 ms.tool: azure-cli
@@ -58,7 +57,7 @@ There's a lot going on here, just by adding the query. Each part of it reference
 The output format `tsv` (tab-separated values) is guaranteed to only include the result data and whitespace consisting of tabs and newlines.
 Since the returned value is a single bare string, it's safe to assign directly to a shell variable.
 
-For more information about querying Azure CLI output, see [How to query Azure CLI command output using a JMESPath query](query-azure-cli.md)
+For more information about querying Azure CLI output, see [How to query Azure CLI command output using a JMESPath query](use-azure-cli-successfully-query.md)
 
 Go ahead and assign the NIC object ID to a shell variable now.
 

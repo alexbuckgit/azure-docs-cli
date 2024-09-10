@@ -48,10 +48,6 @@
         uid: az_apic_metadata
         displayName: az apic metadata
         items: []
-      - name: service
-        uid: az_apic_service
-        displayName: az apic service
-        items: []
   - name: API Management
     uid: sp-API_Management
     displayName: API Management
@@ -439,6 +435,10 @@
           uid: az_connectedmachine_extension_image
           displayName: az connectedmachine extension image
           items: []
+      - name: license
+        uid: az_connectedmachine_license
+        displayName: az connectedmachine license
+        items: []
       - name: private-endpoint-connection
         uid: az_connectedmachine_private-endpoint-connection
         displayName: az connectedmachine private-endpoint-connection
@@ -448,9 +448,14 @@
         displayName: az connectedmachine private-link-resource
         items: []
       - name: private-link-scope
-        uid: az_connectedmachine_private-link-scope
-        displayName: az connectedmachine private-link-scope
-        items: []
+        items:
+        - name: Commands
+          uid: az_connectedmachine_private-link-scope
+          displayName: az connectedmachine private-link-scope
+        - name: network-security-perimeter-configuration
+          uid: az_connectedmachine_private-link-scope_network-security-perimeter-configuration
+          displayName: az connectedmachine private-link-scope network-security-perimeter-configuration
+          items: []
       - name: run-command
         uid: az_connectedmachine_run-command
         displayName: az connectedmachine run-command
@@ -782,6 +787,29 @@
         uid: az_ad_user
         displayName: az ad user
         items: []
+  - name: Azure App Compliance Automation Tool
+    items:
+    - name: Commands
+      uid: sp-Azure_App_Compliance_Automation_Tool
+      displayName: Azure App Compliance Automation Tool
+    - name: acat
+      items:
+      - name: Commands
+        uid: az_acat
+        displayName: az acat
+      - name: report
+        items:
+        - name: Commands
+          uid: az_acat_report
+          displayName: az acat report
+        - name: snapshot
+          uid: az_acat_report_snapshot
+          displayName: az acat report snapshot
+          items: []
+        - name: webhook
+          uid: az_acat_report_webhook
+          displayName: az acat report webhook
+          items: []
   - name: Azure Arc Kubernetes Runtime
     items:
     - name: Commands
@@ -1268,6 +1296,15 @@
           uid: az_support_services_problem-classifications
           displayName: az support services problem-classifications
           items: []
+  - name: AzureTerraform
+    items:
+    - name: Commands
+      uid: sp-AzureTerraform
+      displayName: AzureTerraform
+    - name: azure-terraform
+      uid: az_azure-terraform
+      displayName: az azure-terraform
+      items: []
   - name: Backup
     items:
     - name: Commands
@@ -1341,6 +1378,10 @@
     - name: baremetalinstance
       uid: az_baremetalinstance
       displayName: az baremetalinstance
+      items: []
+    - name: baremetalstorageinstance
+      uid: az_baremetalstorageinstance
+      displayName: az baremetalstorageinstance
       items: []
   - name: Batch
     items:
@@ -1961,6 +2002,18 @@
         - name: identity
           uid: az_containerapp_job_identity
           displayName: az containerapp job identity
+          items: []
+        - name: logs
+          uid: az_containerapp_job_logs
+          displayName: az containerapp job logs
+          items: []
+        - name: registry
+          uid: az_containerapp_job_registry
+          displayName: az containerapp job registry
+          items: []
+        - name: replica
+          uid: az_containerapp_job_replica
+          displayName: az containerapp job replica
           items: []
         - name: secret
           uid: az_containerapp_job_secret
@@ -3509,6 +3562,10 @@
         uid: az_hdinsight_azure-monitor
         displayName: az hdinsight azure-monitor
         items: []
+      - name: azure-monitor-agent
+        uid: az_hdinsight_azure-monitor-agent
+        displayName: az hdinsight azure-monitor-agent
+        items: []
       - name: host
         uid: az_hdinsight_host
         displayName: az hdinsight host
@@ -3539,17 +3596,13 @@
           uid: az_hdinsight-on-aks_cluster_job
           displayName: az hdinsight-on-aks cluster job
           items: []
+        - name: library
+          uid: az_hdinsight-on-aks_cluster_library
+          displayName: az hdinsight-on-aks cluster library
+          items: []
         - name: node-profile
           uid: az_hdinsight-on-aks_cluster_node-profile
           displayName: az hdinsight-on-aks cluster node-profile
-          items: []
-        - name: secret
-          uid: az_hdinsight-on-aks_cluster_secret
-          displayName: az hdinsight-on-aks cluster secret
-          items: []
-        - name: trino-hive-catalog
-          uid: az_hdinsight-on-aks_cluster_trino-hive-catalog
-          displayName: az hdinsight-on-aks cluster trino-hive-catalog
           items: []
         - name: upgrade
           uid: az_hdinsight-on-aks_cluster_upgrade
@@ -3594,6 +3647,25 @@
         uid: az_hpc-cache_usage-model
         displayName: az hpc-cache usage-model
         items: []
+  - name: Informatica
+    items:
+    - name: Commands
+      uid: sp-Informatica
+      displayName: Informatica
+    - name: informatica
+      items:
+      - name: Commands
+        uid: az_informatica
+        displayName: az informatica
+      - name: data-management
+        items:
+        - name: Commands
+          uid: az_informatica_data-management
+          displayName: az informatica data-management
+        - name: organization
+          uid: az_informatica_data-management_organization
+          displayName: az informatica data-management organization
+          items: []
   - name: IoT
     items:
     - name: Commands
@@ -3950,40 +4022,40 @@
             uid: az_iot_ops_asset_event
             displayName: az iot ops asset event
             items: []
-        - name: mq
-          uid: az_iot_ops_mq
-          displayName: az iot ops mq
-          items: []
+        - name: broker
+          items:
+          - name: Commands
+            uid: az_iot_ops_broker
+            displayName: az iot ops broker
+          - name: authn
+            uid: az_iot_ops_broker_authn
+            displayName: az iot ops broker authn
+            items: []
+          - name: authz
+            uid: az_iot_ops_broker_authz
+            displayName: az iot ops broker authz
+            items: []
+          - name: listener
+            uid: az_iot_ops_broker_listener
+            displayName: az iot ops broker listener
+            items: []
+        - name: dataflow
+          items:
+          - name: Commands
+            uid: az_iot_ops_dataflow
+            displayName: az iot ops dataflow
+          - name: endpoint
+            uid: az_iot_ops_dataflow_endpoint
+            displayName: az iot ops dataflow endpoint
+            items: []
+          - name: profile
+            uid: az_iot_ops_dataflow_profile
+            displayName: az iot ops dataflow profile
+            items: []
         - name: support
           uid: az_iot_ops_support
           displayName: az iot ops support
           items: []
-      - name: product
-        items:
-        - name: Commands
-          uid: az_iot_product
-          displayName: az iot product
-        - name: requirement
-          uid: az_iot_product_requirement
-          displayName: az iot product requirement
-          items: []
-        - name: test
-          items:
-          - name: Commands
-            uid: az_iot_product_test
-            displayName: az iot product test
-          - name: case
-            uid: az_iot_product_test_case
-            displayName: az iot product test case
-            items: []
-          - name: run
-            uid: az_iot_product_test_run
-            displayName: az iot product test run
-            items: []
-          - name: task
-            uid: az_iot_product_test_task
-            displayName: az iot product test task
-            items: []
   - name: Key Vault
     items:
     - name: Commands
@@ -4592,8 +4664,21 @@
         uid: az_mdp
         displayName: az mdp
       - name: pool
-        uid: az_mdp_pool
-        displayName: az mdp pool
+        items:
+        - name: Commands
+          uid: az_mdp_pool
+          displayName: az mdp pool
+        - name: agent
+          uid: az_mdp_pool_agent
+          displayName: az mdp pool agent
+          items: []
+      - name: sku
+        uid: az_mdp_sku
+        displayName: az mdp sku
+        items: []
+      - name: usage
+        uid: az_mdp_usage
+        displayName: az mdp usage
         items: []
   - name: Managed Grafana
     items:
@@ -4621,9 +4706,17 @@
         uid: az_grafana_folder
         displayName: az grafana folder
         items: []
+      - name: mpe
+        uid: az_grafana_mpe
+        displayName: az grafana mpe
+        items: []
       - name: notification-channel
         uid: az_grafana_notification-channel
         displayName: az grafana notification-channel
+        items: []
+      - name: private-endpoint-connection
+        uid: az_grafana_private-endpoint-connection
+        displayName: az grafana private-endpoint-connection
         items: []
       - name: service-account
         items:
@@ -5089,6 +5182,20 @@
       - name: user
         uid: az_ad_user
         displayName: az ad user
+        items: []
+  - name: Microsoft Fabric
+    items:
+    - name: Commands
+      uid: sp-Microsoft_Fabric
+      displayName: Microsoft Fabric
+    - name: fabric
+      items:
+      - name: Commands
+        uid: az_fabric
+        displayName: az fabric
+      - name: capacity
+        uid: az_fabric_capacity
+        displayName: az fabric capacity
         items: []
   - name: Microsoft Partner Center
     items:
@@ -5653,6 +5760,19 @@
           - name: Commands
             uid: az_network_firewall_policy
             displayName: az network firewall policy
+          - name: draft
+            items:
+            - name: Commands
+              uid: az_network_firewall_policy_draft
+              displayName: az network firewall policy draft
+            - name: intrusion-detection
+              uid: az_network_firewall_policy_draft_intrusion-detection
+              displayName: az network firewall policy draft intrusion-detection
+              items: []
+            - name: rule-collection-group
+              uid: az_network_firewall_policy_draft_rule-collection-group
+              displayName: az network firewall policy draft rule-collection-group
+              items: []
           - name: intrusion-detection
             uid: az_network_firewall_policy_intrusion-detection
             displayName: az network firewall policy intrusion-detection
@@ -5671,6 +5791,20 @@
                 uid: az_network_firewall_policy_rule-collection-group_collection_rule
                 displayName: az network firewall policy rule-collection-group collection rule
                 items: []
+            - name: draft
+              items:
+              - name: Commands
+                uid: az_network_firewall_policy_rule-collection-group_draft
+                displayName: az network firewall policy rule-collection-group draft
+              - name: collection
+                items:
+                - name: Commands
+                  uid: az_network_firewall_policy_rule-collection-group_draft_collection
+                  displayName: az network firewall policy rule-collection-group draft collection
+                - name: rule
+                  uid: az_network_firewall_policy_rule-collection-group_draft_collection_rule
+                  displayName: az network firewall policy rule-collection-group draft collection rule
+                  items: []
         - name: threat-intel-allowlist
           uid: az_network_firewall_threat-intel-allowlist
           displayName: az network firewall threat-intel-allowlist
@@ -5822,6 +5956,20 @@
             uid: az_network_manager_group_static-member
             displayName: az network manager group static-member
             items: []
+        - name: routing-config
+          items:
+          - name: Commands
+            uid: az_network_manager_routing-config
+            displayName: az network manager routing-config
+          - name: rule-collection
+            items:
+            - name: Commands
+              uid: az_network_manager_routing-config_rule-collection
+              displayName: az network manager routing-config rule-collection
+            - name: rule
+              uid: az_network_manager_routing-config_rule-collection_rule
+              displayName: az network manager routing-config rule-collection rule
+              items: []
         - name: scope-connection
           uid: az_network_manager_scope-connection
           displayName: az network manager scope-connection
@@ -6131,6 +6279,10 @@
           uid: az_networkcloud_kubernetescluster_agentpool
           displayName: az networkcloud kubernetescluster agentpool
           items: []
+        - name: feature
+          uid: az_networkcloud_kubernetescluster_feature
+          displayName: az networkcloud kubernetescluster feature
+          items: []
       - name: l2network
         uid: az_networkcloud_l2network
         displayName: az networkcloud l2network
@@ -6311,6 +6463,15 @@
           uid: az_peering_service_provider
           displayName: az peering service provider
           items: []
+  - name: Nexus Identity
+    items:
+    - name: Commands
+      uid: sp-Nexus_Identity
+      displayName: Nexus Identity
+    - name: nexusidentity
+      uid: az_nexusidentity
+      displayName: az nexusidentity
+      items: []
   - name: Nginx
     items:
     - name: Commands
@@ -6386,6 +6547,71 @@
           uid: az_notification-hub_namespace_authorization-rule
           displayName: az notification-hub namespace authorization-rule
           items: []
+  - name: Oracle.Database
+    items:
+    - name: Commands
+      uid: sp-Oracle.Database
+      displayName: Oracle.Database
+    - name: oracle-database
+      items:
+      - name: Commands
+        uid: az_oracle-database
+        displayName: az oracle-database
+      - name: autonomous-database
+        items:
+        - name: Commands
+          uid: az_oracle-database_autonomous-database
+          displayName: az oracle-database autonomous-database
+        - name: backup
+          uid: az_oracle-database_autonomous-database_backup
+          displayName: az oracle-database autonomous-database backup
+          items: []
+        - name: character-set
+          uid: az_oracle-database_autonomous-database_character-set
+          displayName: az oracle-database autonomous-database character-set
+          items: []
+        - name: national-character-set
+          uid: az_oracle-database_autonomous-database_national-character-set
+          displayName: az oracle-database autonomous-database national-character-set
+          items: []
+        - name: version
+          uid: az_oracle-database_autonomous-database_version
+          displayName: az oracle-database autonomous-database version
+          items: []
+      - name: cloud-exadata-infrastructure
+        items:
+        - name: Commands
+          uid: az_oracle-database_cloud-exadata-infrastructure
+          displayName: az oracle-database cloud-exadata-infrastructure
+        - name: database-server
+          uid: az_oracle-database_cloud-exadata-infrastructure_database-server
+          displayName: az oracle-database cloud-exadata-infrastructure database-server
+          items: []
+      - name: cloud-vm-cluster
+        items:
+        - name: Commands
+          uid: az_oracle-database_cloud-vm-cluster
+          displayName: az oracle-database cloud-vm-cluster
+        - name: database-node
+          uid: az_oracle-database_cloud-vm-cluster_database-node
+          displayName: az oracle-database cloud-vm-cluster database-node
+          items: []
+      - name: database-system-shape
+        uid: az_oracle-database_database-system-shape
+        displayName: az oracle-database database-system-shape
+        items: []
+      - name: dns-private-view
+        uid: az_oracle-database_dns-private-view
+        displayName: az oracle-database dns-private-view
+        items: []
+      - name: dns-private-zone
+        uid: az_oracle-database_dns-private-zone
+        displayName: az oracle-database dns-private-zone
+        items: []
+      - name: gi-version
+        uid: az_oracle-database_gi-version
+        displayName: az oracle-database gi-version
+        items: []
   - name: Orbital
     items:
     - name: Commands
@@ -6532,6 +6758,10 @@
       - name: Commands
         uid: az_providerhub
         displayName: az providerhub
+      - name: authorized-application
+        uid: az_providerhub_authorized-application
+        displayName: az providerhub authorized-application
+        items: []
       - name: custom-rollout
         uid: az_providerhub_custom-rollout
         displayName: az providerhub custom-rollout
@@ -6553,17 +6783,35 @@
         displayName: az providerhub operation
         items: []
       - name: provider-registration
-        uid: az_providerhub_provider-registration
-        displayName: az providerhub provider-registration
-        items: []
+        items:
+        - name: Commands
+          uid: az_providerhub_provider-registration
+          displayName: az providerhub provider-registration
+        - name: resource-action
+          uid: az_providerhub_provider-registration_resource-action
+          displayName: az providerhub provider-registration resource-action
+          items: []
       - name: resource-type-registration
         uid: az_providerhub_resource-type-registration
         displayName: az providerhub resource-type-registration
         items: []
       - name: sku
-        uid: az_providerhub_sku
-        displayName: az providerhub sku
-        items: []
+        items:
+        - name: Commands
+          uid: az_providerhub_sku
+          displayName: az providerhub sku
+        - name: nested-resource-type-first
+          uid: az_providerhub_sku_nested-resource-type-first
+          displayName: az providerhub sku nested-resource-type-first
+          items: []
+        - name: nested-resource-type-second
+          uid: az_providerhub_sku_nested-resource-type-second
+          displayName: az providerhub sku nested-resource-type-second
+          items: []
+        - name: nested-resource-type-third
+          uid: az_providerhub_sku_nested-resource-type-third
+          displayName: az providerhub sku nested-resource-type-third
+          items: []
   - name: Purview
     items:
     - name: Commands
@@ -7665,6 +7913,10 @@
         uid: az_stack-hci-vm_disk
         displayName: az stack-hci-vm disk
         items: []
+      - name: gpu
+        uid: az_stack-hci-vm_gpu
+        displayName: az stack-hci-vm gpu
+        items: []
       - name: image
         uid: az_stack-hci-vm_image
         displayName: az stack-hci-vm image
@@ -7682,6 +7934,15 @@
           uid: az_stack-hci-vm_network_nic
           displayName: az stack-hci-vm network nic
           items: []
+        - name: nsg
+          items:
+          - name: Commands
+            uid: az_stack-hci-vm_network_nsg
+            displayName: az stack-hci-vm network nsg
+          - name: rule
+            uid: az_stack-hci-vm_network_nsg_rule
+            displayName: az stack-hci-vm network nsg rule
+            items: []
       - name: nic
         uid: az_stack-hci-vm_nic
         displayName: az stack-hci-vm nic
@@ -7758,9 +8019,17 @@
           uid: az_storage_account_keys
           displayName: az storage account keys
           items: []
+        - name: local-user
+          uid: az_storage_account_local-user
+          displayName: az storage account local-user
+          items: []
         - name: migration
           uid: az_storage_account_migration
           displayName: az storage account migration
+          items: []
+        - name: task-assignment
+          uid: az_storage_account_task-assignment
+          displayName: az storage account task-assignment
           items: []
       - name: azcopy
         items:
@@ -8354,6 +8623,10 @@
           uid: az_vmware_datastore_disk-pool-volume
           displayName: az vmware datastore disk-pool-volume
           items: []
+        - name: elastic-san-volume
+          uid: az_vmware_datastore_elastic-san-volume
+          displayName: az vmware datastore elastic-san-volume
+          items: []
         - name: netapp-volume
           uid: az_vmware_datastore_netapp-volume
           displayName: az vmware datastore netapp-volume
@@ -8365,6 +8638,10 @@
       - name: hcx-enterprise-site
         uid: az_vmware_hcx-enterprise-site
         displayName: az vmware hcx-enterprise-site
+        items: []
+      - name: iscsi-path
+        uid: az_vmware_iscsi-path
+        displayName: az vmware iscsi-path
         items: []
       - name: location
         uid: az_vmware_location

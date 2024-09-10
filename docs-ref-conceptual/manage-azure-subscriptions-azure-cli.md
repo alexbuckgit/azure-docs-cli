@@ -1,7 +1,6 @@
 ---
 title: How to manage Azure subscriptions – Azure CLI | Microsoft Docs
 description: Learn about Azure tenants, users, and subscriptions. Use Azure CLI to manage your subscriptions, create management groups, and lock subscriptions.
-manager: jasongroce
 author: dbradish-microsoft
 ms.author: dbradish
 ms.date: 01/12/2024
@@ -66,7 +65,7 @@ To switch tenants, you have two options.
 
 Most Azure CLI commands act within a subscription. You can specify which subscription to work in by using the `--subscription` parameter in your command. If you don't specify a subscription, the command uses your current, active subscription.
 
-To see the subscription you're currently using or to get a list of available subscriptions, run the [az account show](/cli/azure/account#az-account-show) or [az account list](/cli/azure/account#az-account-list) command. Go to [Learn to use Bash with the Azure CLI](azure-cli-learn-bash.md#querying-and-formatting-single-values-and-nested-values) to see more examples of ways to use these commands.
+To see the subscription you're currently using or to get a list of available subscriptions, run the [az account show](/cli/azure/account#az-account-show) or [az account list](/cli/azure/account#az-account-list) command. Go to [Learn to use Bash with the Azure CLI](use-azure-cli-successfully-bash.md#querying-and-formatting-single-values-and-nested-values) to see more examples of ways to use these commands.
 
 Here are examples showing how to get subscription information:
 
@@ -144,6 +143,18 @@ az account set --subscription $subscriptionId
 If you change to a subscription that is in a different tenant, you will also be changing the active tenant. To learn how to add a new subscription to your Microsoft Entra tenant, see [Associate or add an Azure subscription to your Microsoft Entra tenant](/azure/active-directory/active-directory-how-subscriptions-associated-directory).
 
 If you received a "The subscription of ... doesn't exist..." error, see [Troubleshooting](#troubleshooting) for possible solutions.
+
+## Clear your subscription cache
+
+To update your subscription list, use the [az account clear](/cli/azure/account#az-account-clear) command. You will need to sign in again to see an updated list.
+
+```Azure CLI
+az account clear
+
+az login
+```
+
+Clearing your subscription cache is not technically the same process as logging out of Azure. However, when you clear your subscription cache, you cannot run Azure CLI commands, including `az account set`, until you sign in again.
 
 ## Create Azure management groups
 
@@ -236,6 +247,11 @@ az account list --output table
 #   close and reopen your terminal window,
 #   or logout and then sign in again.
 az logout
+az login
+
+# You can also clear your cache to refresh the
+#    available subscription list
+az account clear
 az login
 
 # Did your available subscription list change?

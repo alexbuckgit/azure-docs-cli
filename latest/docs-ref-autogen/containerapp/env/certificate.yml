@@ -17,12 +17,13 @@ directCommands:
   status: Preview
   isPreview: true
   previewOrExperimentalInfo: 'This command is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus'
-  sourceType: Extension
+  sourceType: Core
+  editLink: https://github.com/Azure/azure-cli/blob/dev/src/azure-cli/azure/cli/command_modules/containerapp/_help.py
   syntax: >-
     az containerapp env certificate create --hostname
                                            --name
                                            --resource-group
-                                           --validation-method
+                                           --validation-method {CNAME, HTTP, TXT}
                                            [--certificate-name]
   examples:
   - summary: |-
@@ -43,8 +44,9 @@ directCommands:
       Name of resource group. You can configure the default group using `az configure --defaults group=<name>`.
   - isRequired: true
     name: --validation-method -v
+    parameterValueGroup: "CNAME, HTTP, TXT"
     summary: |-
-      Validation method of custom domain ownership. Supported methods are HTTP, CNAME and TXT.
+      Validation method of custom domain ownership.
   optionalParameters:
   - name: --certificate-name -c
     summary: |-
@@ -106,9 +108,7 @@ directCommands:
   extensionSuffix: containerapp
   summary: |-
     Delete a certificate from the Container Apps environment.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: 'This command is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus'
+  status: GA
   sourceType: Extension
   syntax: >-
     az containerapp env certificate delete [--certificate]
@@ -167,6 +167,8 @@ directCommands:
                                          --resource-group
                                          [--certificate]
                                          [--location]
+                                         [--managed-certificates-only]
+                                         [--private-key-certificates-only]
                                          [--thumbprint]
   examples:
   - summary: |-
@@ -181,6 +183,12 @@ directCommands:
   - summary: |-
       List certificates by certificate thumbprint.
     syntax: az containerapp env certificate list -g MyResourceGroup --name MyEnvironment --thumbprint MyCertificateThumbprint
+  - summary: |-
+      List managed certificates for an environment.
+    syntax: az containerapp env certificate list -g MyResourceGroup --name MyEnvironment --managed-certificates-only
+  - summary: |-
+      List private key certificates for an environment.
+    syntax: az containerapp env certificate list -g MyResourceGroup --name MyEnvironment --private-key-certificates-only
   requiredParameters:
   - isRequired: true
     name: --name -n
@@ -197,6 +205,16 @@ directCommands:
   - name: --location -l
     summary: |-
       Location of resource. Examples: eastus2, northeurope.
+  - name: --managed-certificates-only -m
+    defaultValue: "False"
+    summary: |-
+      List managed certificates only.
+    isPreview: true
+  - name: --private-key-certificates-only -p
+    defaultValue: "False"
+    summary: |-
+      List private-key certificates only.
+    isPreview: true
   - name: --thumbprint -t
     summary: |-
       Thumbprint of the certificate.
@@ -205,9 +223,7 @@ directCommands:
   extensionSuffix: containerapp
   summary: |-
     List certificates for an environment.
-  status: Preview
-  isPreview: true
-  previewOrExperimentalInfo: 'This command is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus'
+  status: GA
   sourceType: Extension
   syntax: >-
     az containerapp env certificate list --name

@@ -50,7 +50,7 @@ directCommands:
   - isRequired: true
     name: --subdomain -s
     summary: |-
-      Enter a unique URL. Your app will be accessible via https://<subdomain>.azureiotcentral.com/. Avoid special characters `-` instead, use lower case letters (a-z), numbers (0-9), and dashes (-).
+      Enter a unique URL. Your app will be accessible via https://{subdomain}.azureiotcentral.com/. Avoid special characters `-` instead, use lower case letters (a-z), numbers (0-9), and dashes (-).
   optionalParameters:
   - name: --display-name -d
     summary: |-
@@ -253,5 +253,5 @@ globalParameters:
   summary: |-
     Increase logging verbosity. Use --debug for full debug logs.
 metadata:
-  ms.date: 02/22/2024
+  ms.date: 05/21/2024
   description: Create, delete, view, and update your IoT Central apps.
